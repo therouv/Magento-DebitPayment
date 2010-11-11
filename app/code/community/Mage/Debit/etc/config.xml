@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @package    Mage_Debit
+ * @copyright  Copyright (c) 2010 ITABS GbR - Rouven Alexander Rieker
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+
+<config>
+    <global>
+        <models>
+            <debit>
+                <class>Mage_Debit_Model</class>
+            </debit>
+        </models>
+        <resources>
+            <debit_setup>
+                <setup>
+                    <module>Mage_Debit</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </debit_setup>
+            <debit_write>
+                <use>core_write</use>
+            </debit_write>
+            <debit_read>
+                <use>core_read</use>
+            </debit_read>
+        </resources>
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <debit_observer>
+                        <class>debit/observer</class>
+                        <method>saveAccountInfo</method>
+                    </debit_observer>
+                </observers>
+            </sales_order_save_after>
+        </events>
+    </global>
+    <default>
+        <payment>
+            <debit>
+                <active>0</active>
+                <model>debit/debit</model>
+                <sendmail>0</sendmail>
+                <sendmail_crypt>1</sendmail_crypt>
+                <order_status>1</order_status>
+                <title>Debit Payment</title>
+                <allowspecific>0</allowspecific>
+                <save_account_data>0</save_account_data>
+                <checkout_valid_blz>0</checkout_valid_blz>
+            </debit>
+         </payment>
+    </default>
+    <adminhtml>       
+        <translate>
+            <modules>
+                <Mage_Debit>
+                    <files>
+                        <default>Mage_Debit.csv</default>
+                    </files>
+                </Mage_Debit>
+            </modules>
+        </translate>
+    </adminhtml> 
+    <frontend>
+        <secure_url>
+            <debit_account>/debit/account</debit_account>
+            <debit_ajax>/debit/ajax</debit_ajax>
+        </secure_url>
+        <translate>
+            <modules>
+                <Mage_Debit>
+                    <files>
+                        <default>Mage_Debit.csv</default>
+                    </files>
+                </Mage_Debit>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <debit>
+                    <file>debit.xml</file>
+                </debit>
+            </updates>
+        </layout>
+        <routers>
+            <debit>
+                <use>standard</use>
+                <args>
+                    <module>Mage_Debit</module>
+                    <frontName>debit</frontName>
+                </args>
+            </debit>
+        </routers>
+    </frontend>
+</config>

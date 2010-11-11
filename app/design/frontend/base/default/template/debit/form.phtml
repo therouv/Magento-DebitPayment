@@ -1,0 +1,57 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @package    Mage_Debit
+ * @copyright  Copyright (c) 2010 ITABS GbR - Rouven Alexander Rieker
+ * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<script type="text/javascript">
+//<![CDATA[
+blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>','<?php echo $this->getCheckoutValidBlz() ?>');
+//]]>
+</script>
+
+<fieldset class="form-list">
+    <ul id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none">
+        <li>
+            <div class="input-box">
+                <?php if ($this->getMethod()->getCustomText()): ?>
+                    <?php echo $this->getMethod()->getCustomText() ?><br />
+                <?php endif; ?>
+            </div>
+        </li>
+        <li>
+            <div class="input-box">
+                <label for="kreditinstitut"><?php echo $this->__('Kreditinstitut') ?></label><br />
+                <span id="blz_bank_name" style="display: block; padding : 0 0 0 10px; float:left;"><?php echo $this->getBankName(); ?></span>
+            </div>
+        </li>
+        <li>
+            <div class="input-box" style="width: 500px; width: 500px; position: relative;">
+                <label for="bankleitzahl"><?php echo $this->__('Bankleitzahl') ?> <span class="required">*</span></label><br />
+                <input type="text" id="bankleitzahl" name="payment[cc_type]" title="<?php echo $this->__('Bankleitzahl') ?>" class="input-text required-entry validate-number validate-debit-blz" style="display: block; float: left;" value="<?php echo $this->getAccountBLZ() ?>" onchange="blzCheck.checkBlz(this); return false;"/>
+            </div>
+        </li>
+		<li>
+            <div class="input-box">
+                <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?> <span class="required">*</span></label><br />
+                <input type="text" id="kontoinhaber" name="payment[cc_owner]" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
+            </div>
+		</li>
+		<li>
+            <div class="input-box">
+                <label for="kontonummer"><?php echo $this->__('Konto-Nummer') ?> <span class="required">*</span></label><br />
+                <input type="text" id="kontonummer" name="payment[cc_number]" title="<?php echo $this->__('Konto-Nummer') ?>" maxlenth="10" class="input-text required-entry validate-number validate-debit-number" value="<?php echo $this->getAccountNumber() ?>" />
+            </div>
+		</li>
+    </ul>
+</fieldset>
