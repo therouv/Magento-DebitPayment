@@ -24,7 +24,6 @@ $attr_name = array(
     'position' => '100'
 );
 
-
 $attr_number = array(
 	'type' => 'varchar',
 	'input' => 'text',
@@ -46,7 +45,6 @@ $attr_blz = array(
 	'default' => '',
     'position' => '100'
 );
-
 
 $installer = $this;
 $installer->startSetup();

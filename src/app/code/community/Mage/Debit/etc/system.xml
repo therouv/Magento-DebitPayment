@@ -113,22 +113,22 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </save_account_data>
-                       <min_order_total translate="label">
-                           <label>Minimum Order Total</label>
-                           <frontend_type>text</frontend_type>
-                           <sort_order>11</sort_order>
-                           <show_in_default>1</show_in_default>
-                           <show_in_website>1</show_in_website>
-                           <show_in_store>1</show_in_store>
-                       </min_order_total>
-                       <max_order_total translate="label">
-                           <label>Maximum Order Total</label>
-                           <frontend_type>text</frontend_type>
-                           <sort_order>12</sort_order>
-                           <show_in_default>1</show_in_default>
-                           <show_in_website>1</show_in_website>
-                           <show_in_store>1</show_in_store>
-                       </max_order_total>
+                        <min_order_total translate="label">
+                            <label>Minimum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <label>Maximum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_order_total>
 						<checkout_valid_blz translate="label">
                             <label>Checkout only with valid BLZ</label>
                             <frontend_type>select</frontend_type>

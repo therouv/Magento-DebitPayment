@@ -29,10 +29,8 @@ class Mage_Debit_AjaxController extends Mage_Core_Controller_Front_Action
     public function checkblzAction()
     {
         $result = array();
-        
         $blz = $this->getRequest()->getPost('blz');
         $blz = Mage::helper('debit')->sanitizeData($blz);
-        
         if ($bank = Mage::helper('debit')->getBankByBlz($blz)) {
             $result['found'] = 1;
             $result['blz'] = $blz;

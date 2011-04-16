@@ -25,7 +25,6 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
     public function getBankByBlz($blz)
     {
         $data = $this->_loadBlzCache();
-
         if (!$data) {
             // open blz file handle
             $io = new Varien_Io_File();
@@ -40,7 +39,6 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
         } else {
             $data = unserialize($data);
         }
-
         return empty($data[$blz]) ? null : $data[$blz];
     }
 
@@ -122,13 +120,8 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
      */
     public function sanitizeData($data)
     {
-        $sanitized = str_replace(' ', '' , $data);
-        $sanitized = str_replace('-', '', $sanitized);
-        $sanitized = str_replace('_', '', $sanitized);
-        $sanitized = str_replace('.', '', $sanitized);
-        $sanitized = str_replace(':', '', $sanitized);
-        $sanitized = str_replace('/', '', $sanitized);
-        $sanitized = str_replace('|', '', $sanitized);
+        $bad = array(' ', '-', '_', '.', ';', '/', '|');
+        $sanitized = str_replace($bad, '' , $data);
         return $sanitized;
     }
 }

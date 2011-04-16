@@ -12,7 +12,6 @@
  * 
  * ============================================================================
  * 
- * 
  * Magento
  *
  * NOTICE OF LICENSE
@@ -123,7 +122,6 @@ class Mage_Customer_Model_Attribute_Data_Label extends Mage_Customer_Model_Attri
                 }
                 break;
         }
-
         return $output;
     }
 }

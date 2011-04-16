@@ -56,6 +56,9 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
     public function getAccountBLZ()
     {
     	if ($data = $this->getInfoData('cc_type')) {
+    	    if (!is_numeric($data)) {
+    	        $data = Mage::helper('core')->decrypt($data);
+    	    }
 	    	return $data;
 	    } elseif ($data = $this->_getAccountData('debit_payment_acount_blz')) {
 	    	return $data;
