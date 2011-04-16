@@ -8,8 +8,8 @@
  * http://opensource.org/licenses/osl-3.0.php
  *
  * @package    Mage_Debit
- * @copyright  Copyright (c) 2010 ITABS GbR - Rouven Alexander Rieker
- * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @copyright  2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright  2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -47,6 +47,7 @@ blzAjaxCheck.prototype = {
             this.isBlzValid = false;
         }
         $('blz_bank_name').update(response.bank);
+        $('bankleitzahl').value = response.blz;
     }
 }
 
