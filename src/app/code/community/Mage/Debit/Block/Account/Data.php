@@ -89,6 +89,9 @@ class Mage_Debit_Block_Account_Data
         if (strlen($data) == 0) {
             return '';
         }
+        if ($field != 'debit_payment_acount_name' && !is_numeric($data)) {
+            return '';
+        }
         return $this->htmlEscape($data);
     }
 }
