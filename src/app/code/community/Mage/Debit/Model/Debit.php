@@ -51,17 +51,32 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
 
         $info = $this->getInfoInstance();
 
-        $ccType = Mage::helper('debit')->sanitizeData($data->getCcType());
+        // Fetch routing number
+        $ccType = $data->getDebitCcType();
+        if (!$ccType) {
+            $ccType = $data->getCcType();
+        }
+        $ccType = Mage::helper('debit')->sanitizeData($ccType);
         $ccType = $info->encrypt($ccType);
 
-        $ccOwner = $data->getCcOwner();
+        // Fetch account holder
+        $ccOwner = $data->getDebitCcOwner();
+        if (!$ccOwner) {
+            $ccOwner = $data->getCcOwner();
+        }
 
-        $ccNumber = Mage::helper('debit')->sanitizeData($data->getCcNumber());
+        // Fetch account number
+        $ccNumber = $data->getDebitCcNumber();
+        if (!$ccNumber) {
+            $ccNumber = $data->getCcNumber();
+        }
+        $ccNumber = Mage::helper('debit')->sanitizeData($ccNumber);
         $ccNumber = $info->encrypt($ccNumber);
 
-        $info->setCcType($ccType)         // BLZ
-             ->setCcOwner($ccOwner)       // Kontoinhaber
-             ->setCcNumberEnc($ccNumber); // Kontonummer
+        // Set account data in payment info model
+        $info->setCcType($ccType)                     // BLZ
+             ->setCcOwner($ccOwner)                   // Kontoinhaber
+             ->setCcNumberEnc($ccNumber);             // Kontonummer
 
         return $this;
     }
