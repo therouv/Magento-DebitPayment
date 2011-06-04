@@ -54,6 +54,14 @@
             </debit_read>
         </resources>
         <events>
+            <payment_method_is_active>
+                <observers>
+                    <debit_observer>
+                        <class>debit/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </debit_observer>
+                </observers>
+            </payment_method_is_active>
             <sales_order_save_after>
                 <observers>
                     <debit_observer>
@@ -70,13 +78,17 @@
             <debit>
                 <active>0</active>
                 <model>debit/debit</model>
+                <title>Debit Payment</title>
+                <sort_order>10</sort_order>
                 <sendmail>0</sendmail>
                 <sendmail_crypt>1</sendmail_crypt>
                 <order_status>1</order_status>
-                <title>Debit Payment</title>
                 <allowspecific>0</allowspecific>
                 <save_account_data>0</save_account_data>
                 <checkout_valid_blz>0</checkout_valid_blz>
+                <specificgroup_all>1</specificgroup_all>
+                <specificgroup>0</specificgroup>
+                <orderscount>0</orderscount>
             </debit>
          </payment>
     </default>

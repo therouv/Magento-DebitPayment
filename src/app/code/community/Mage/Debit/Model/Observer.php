@@ -16,6 +16,64 @@
 class Mage_Debit_Model_Observer
 {
     /**
+     * paymentMethodIsActive
+     * 
+     * Checks if DebitPayment is allowed for specific customer groups and if a
+     * registered customer has the required minimum amount of orders to be allowed
+     * to order via DebitPayment.
+     * 
+     * @param Varien_Event_Observer $observer Observer
+     */
+    public function paymentMethodIsActive($observer)
+    {
+        $paymentMethodInstance = $observer->getEvent()->getMethodInstance();
+        $session = Mage::getSingleton('customer/session');
+
+        // Check if method is DebitPayment
+        if ($paymentMethodInstance->getCode() != 'debit') {
+            return;
+        }
+        // Check if payment method is active
+        if (!Mage::getStoreConfigFlag('payment/debit/active')) {
+            return;
+        }
+
+        // Check if payment is allowed only for specific customer groups
+        if (!Mage::getStoreConfigFlag('payment/debit/specificgroup_all')) {
+            $customerGroupId = Mage_Customer_Model_Group::NOT_LOGGED_IN_ID;
+            if ($session->isLoggedIn()) {
+                $customerGroupId = $session->getCustomerGroupId();    
+            }
+            $allowedGroupIds = explode(',', Mage::getStoreConfig('payment/debit/specificgroup'));
+            if (!in_array($customerGroupId, $allowedGroupIds)) {
+                $observer->getEvent()->getResult()->isAvailable = false;
+                return;
+            }
+        }
+
+        // Check minimum orders count
+        $minOrderCount = Mage::getStoreConfig('payment/debit/orderscount');
+        if ($minOrderCount > 0) {
+            $customerId = $session->getCustomerId();
+            if (is_null($customerId)) { // not logged in
+                $observer->getEvent()->getResult()->isAvailable = false;
+                return;
+            }
+            // Load orders and check
+            $orders = Mage::getResourceModel('sales/order_collection')
+                ->addAttributeToSelect('*')
+                ->addAttributeToFilter('customer_id', $customerId)
+                ->addAttributeToFilter('status', Mage_Sales_Model_Order::STATE_COMPLETE)
+                ->addAttributeToFilter('state', array('in' => Mage::getSingleton('sales/order_config')->getVisibleOnFrontStates()))            
+                ->load();
+            if (count($orders) < $minOrderCount) {
+                $observer->getEvent()->getResult()->isAvailable = false;
+                return;
+            }
+        }
+    }
+
+    /**
      * saveAccountInfo
      * 
      * Saves the account data after a successful order in the specific customer model.
