@@ -1,17 +1,37 @@
 <?php
 /**
- * Magento
+ * This file is part of the Mage_Debit module.
  *
+ * PHP version 5
+ * 
  * NOTICE OF LICENSE
- *
+ * 
  * This source file is subject to the Open Software License (OSL 3.0)
- * that is available through the world-wide-web at this URL:
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
  *
- * @package    Mage_Debit
- * @copyright  2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @copyright  2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category  Mage
+ * @package   Mage_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com/extension/676/
+ */
+/**
+ * Observer
+ * 
+ * @category  Mage
+ * @package   Mage_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com/extension/676/
  */
 class Mage_Debit_Model_Observer
 {
@@ -23,6 +43,8 @@ class Mage_Debit_Model_Observer
      * to order via DebitPayment.
      * 
      * @param Varien_Event_Observer $observer Observer
+     * 
+     * @return void
      */
     public function paymentMethodIsActive($observer)
     {
@@ -64,7 +86,12 @@ class Mage_Debit_Model_Observer
                 ->addAttributeToSelect('*')
                 ->addAttributeToFilter('customer_id', $customerId)
                 ->addAttributeToFilter('status', Mage_Sales_Model_Order::STATE_COMPLETE)
-                ->addAttributeToFilter('state', array('in' => Mage::getSingleton('sales/order_config')->getVisibleOnFrontStates()))            
+                ->addAttributeToFilter(
+                    'state',
+                    array(
+                        'in' => Mage::getSingleton('sales/order_config')->getVisibleOnFrontStates()
+                    )
+                )
                 ->load();
             if (count($orders) < $minOrderCount) {
                 $observer->getEvent()->getResult()->isAvailable = false;
@@ -80,6 +107,8 @@ class Mage_Debit_Model_Observer
      * Observer: sales_order_save_after
      * 
      * @param Varien_Event_Observer $observer Observer
+     * 
+     * @return void
      */
     public function saveAccountInfo($observer)
     {
@@ -116,7 +145,7 @@ class Mage_Debit_Model_Observer
                 return $customer;
             }
         } else {
-    		$customer = Mage::getSingleton('customer/session')->getCustomer();
+            $customer = Mage::getSingleton('customer/session')->getCustomer();
             if ($customer->getId()) {
                 return $customer;
             }

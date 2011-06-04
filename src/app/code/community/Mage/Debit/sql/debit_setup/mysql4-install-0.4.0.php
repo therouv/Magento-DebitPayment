@@ -1,48 +1,84 @@
 <?php
+/**
+ * This file is part of the Mage_Debit module.
+ *
+ * PHP version 5
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category  Mage
+ * @package   Mage_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com/extension/676/
+ */
+/**
+ * Setup script
+ * 
+ * @category  Mage
+ * @package   Mage_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com/extension/676/
+ */
 // load id for customer entity
 $read = Mage::getSingleton('core/resource')->getConnection('core_read');
-$eid = $read->fetchRow("select entity_type_id from {$this->getTable('eav_entity_type')} where entity_type_code = 'customer'");
+$eid = $read->fetchRow(
+    "select entity_type_id from {$this->getTable('eav_entity_type')} where entity_type_code = 'customer'"
+);
 $customer_type_id = $eid['entity_type_id'];
 
 $attr_date = array(
-	'type' => 'datetime',
-	'input' => 'label',
-	'label' => 'Account update date',
-	'global' => 1,
-	'required' => 0,
-	'default' => '',
+    'type' => 'datetime',
+    'input' => 'label',
+    'label' => 'Account update date',
+    'global' => 1,
+    'required' => 0,
+    'default' => '',
     'position' => '100'
 );
 
 $attr_name = array(
-	'type' => 'varchar',
-	'input' => 'text',
-	'label' => 'Account Name',
-	'global' => 1,
-	'required' => 0,
-	'default' => '',
+    'type' => 'varchar',
+    'input' => 'text',
+    'label' => 'Account Name',
+    'global' => 1,
+    'required' => 0,
+    'default' => '',
     'position' => '100'
 );
 
 $attr_number = array(
-	'type' => 'varchar',
-	'input' => 'text',
-	'label' => 'Account number',
+    'type' => 'varchar',
+    'input' => 'text',
+    'label' => 'Account number',
     'backend' => 'debit/entity_customer_attribute_backend_encrypted',
-	'global' => 1,
-	'required' => 0,
-	'default' => '',
+    'global' => 1,
+    'required' => 0,
+    'default' => '',
     'position' => '100'
 );
 
 $attr_blz = array(
-	'type' => 'varchar',
-	'input' => 'text',
-	'label' => 'Bank code',
+    'type' => 'varchar',
+    'input' => 'text',
+    'label' => 'Bank code',
     'backend' => 'debit/entity_customer_attribute_backend_encrypted',
-	'global' => 1,
-	'required' => 0,
-	'default' => '',
+    'global' => 1,
+    'required' => 0,
+    'default' => '',
     'position' => '100'
 );
 

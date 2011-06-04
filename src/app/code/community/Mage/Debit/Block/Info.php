@@ -1,18 +1,37 @@
 <?php
 /**
- * Magento
+ * This file is part of the Mage_Debit module.
  *
+ * PHP version 5
+ * 
  * NOTICE OF LICENSE
- *
+ * 
  * This source file is subject to the Open Software License (OSL 3.0)
- * that is available through the world-wide-web at this URL:
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
  *
- * @package    Mage_Debit
- * @copyright  2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @copyright  2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
- * @copyright  Copyright (c) 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category  Mage
+ * @package   Mage_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com/extension/676/
+ */
+/**
+ * Debit Info Block
+ * 
+ * @category  Mage
+ * @package   Mage_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com/extension/676/
  */
 class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
 {
@@ -20,6 +39,8 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
      * _construct
      * 
      * Construct payment info block and set template
+     * 
+     * @return void
      */
     protected function _construct()
     {
@@ -33,6 +54,8 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
      * Sets the template for PDF print-outs
      * 
      * @returns string Text for PDF
+     * 
+     * @return string Text for PDF print-out
      */
     public function toPdf()
     {
@@ -95,8 +118,7 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
             'bank_name'         =>  $payment->getAccountBankname()
         );
         // mask bank data
-        if (Mage::getStoreConfigFlag('payment/'.$this->getMethod()->getCode().'/sendmail_crypt'))
-        {
+        if (Mage::getStoreConfigFlag('payment/'.$this->getMethod()->getCode().'/sendmail_crypt')) {
             $data['account_number'] = $payment->maskString($payment->getAccountNumber());
             $data['account_blz'] = $payment->maskString($payment->getAccountBLZ());
             $data['bank_name'] = '';

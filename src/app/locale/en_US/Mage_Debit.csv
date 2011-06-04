@@ -24,3 +24,8 @@
 "Please enter a valid bank acount number.","Please enter a valid bank account number."
 "Save account data","Save account data"
 "Checkout only with valid BLZ","Checkout only with valid BLZ"
+"Enabled for all customer groups","Enabled for all customer groups"
+"Enabled only for specific customer groups","Enabled only for specific customer groups"
+"Set to ""no"" if you want to enable DebitPayment only for specific customer groups defined below.","Set to ""no"" if you want to enable DebitPayment only for specific customer groups defined below."
+"Minimum Orders Count","Minimum Orders Count"
+"Default: ""0"" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.","Default: ""0"" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method."

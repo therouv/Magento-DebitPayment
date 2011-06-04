@@ -1,17 +1,37 @@
 <?php
 /**
- * Magento
+ * This file is part of the Mage_Debit module.
  *
+ * PHP version 5
+ * 
  * NOTICE OF LICENSE
- *
+ * 
  * This source file is subject to the Open Software License (OSL 3.0)
- * that is available through the world-wide-web at this URL:
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
  *
- * @package    Mage_Debit
- * @copyright  2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @copyright  2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category  Mage
+ * @package   Mage_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com/extension/676/
+ */
+/**
+ * Debit Model
+ * 
+ * @category  Mage
+ * @package   Mage_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com/extension/676/
  */
 class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
 {
@@ -41,7 +61,9 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
      * 
      * Assigns data to the payment info instance
      * 
-     * @param Varien_Object|array $data
+     * @param Varien_Object|array $data Payment Data from checkout
+     * 
+     * @return Mage_Debit_Model_Debit Self.
      */
     public function assignData($data)
     {
@@ -117,14 +139,12 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     {
         $info = $this->getInfoInstance();
         $data = $info->getCcNumberEnc();
-        
-        if(!is_numeric($data)) {
+        if (!is_numeric($data)) {
             $data = $info->decrypt($data);
         }
-        if(!is_numeric($data)) {
+        if (!is_numeric($data)) {
             $data = $info->decrypt($data);
         }
-        
         return $data;
     }
 
@@ -139,11 +159,9 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     {
         $info = $this->getInfoInstance();
         $data = $info->getCcType();
-        
-        if(!is_numeric($data)) {
+        if (!is_numeric($data)) {
             $data = $info->decrypt($data);
         }
-        
         return $data;
     }
 
@@ -174,7 +192,7 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
      */
     public function maskString($data)
     {
-        $crypt = str_repeat('*', strlen($data)-3) . substr($data,-3);
+        $crypt = str_repeat('*', strlen($data)-3) . substr($data, -3);
         return $crypt;
     }
 }

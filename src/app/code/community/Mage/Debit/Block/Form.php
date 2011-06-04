@@ -1,17 +1,37 @@
 <?php
 /**
- * Magento
+ * This file is part of the Mage_Debit module.
  *
+ * PHP version 5
+ * 
  * NOTICE OF LICENSE
- *
+ * 
  * This source file is subject to the Open Software License (OSL 3.0)
- * that is available through the world-wide-web at this URL:
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
  *
- * @package    Mage_Debit
- * @copyright  2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @copyright  2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category  Mage
+ * @package   Mage_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com/extension/676/
+ */
+/**
+ * Debit Form Block
+ * 
+ * @category  Mage
+ * @package   Mage_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com/extension/676/
  */
 class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
 {
@@ -19,6 +39,8 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
      * _construct
      * 
      * Construct payment form block and set template
+     * 
+     * @return void
      */
     protected function _construct()
     {
@@ -55,16 +77,16 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
      */
     public function getAccountBLZ()
     {
-    	if ($data = $this->getInfoData('cc_type')) {
-    	    if (!is_numeric($data)) {
-    	        $data = Mage::helper('core')->decrypt($data);
-    	    }
-	    	return $data;
-	    } elseif ($data = $this->_getAccountData('debit_payment_acount_blz')) {
-	    	return $data;
-	    } else {
-	    	return '';
-	    }
+        if ($data = $this->getInfoData('cc_type')) {
+            if (!is_numeric($data)) {
+                $data = Mage::helper('core')->decrypt($data);
+            }
+            return $data;
+        } elseif ($data = $this->_getAccountData('debit_payment_acount_blz')) {
+            return $data;
+        } else {
+            return '';
+        }
     }
 
     /**
@@ -91,13 +113,13 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
      */
     public function getAccountNumber()
     {
-	    if ($data = $this->getInfoData('cc_number')) {
-	    	return $data;
-	    } elseif ($data = $this->_getAccountData('debit_payment_acount_number')) {
-	    	return $data;
-	    } else {
-	    	return '';
-	    }
+        if ($data = $this->getInfoData('cc_number')) {
+            return $data;
+        } elseif ($data = $this->_getAccountData('debit_payment_acount_number')) {
+            return $data;
+        } else {
+            return '';
+        }
     }
 
     /**
@@ -107,6 +129,8 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
      * customer model.
      * 
      * @param string $field Attribute to get
+     * 
+     * @return string Data
      */
     protected function _getAccountData($field)
     {
@@ -142,7 +166,8 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
      * 
      * @return boolean true/false
      */
-    public function getCheckoutValidBlz() {
-    	return Mage::getStoreConfigFlag('payment/debit/checkout_valid_blz');
+    public function getCheckoutValidBlz()
+    {
+        return Mage::getStoreConfigFlag('payment/debit/checkout_valid_blz');
     }
 }
