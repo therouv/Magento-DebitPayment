@@ -12,6 +12,8 @@
  * 
  * ============================================================================
  * 
+ * PHP version 5
+ * 
  * Magento
  *
  * NOTICE OF LICENSE
@@ -30,25 +32,30 @@
  * versions in the future. If you wish to customize Magento for your
  * needs please refer to http://www.magentocommerce.com for more information.
  *
- * @category    Mage
- * @package     Mage_Customer
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category  Mage
+ * @package   Mage_Customer
+ * @author    Magento Core Team <core@magentocommerce.com>
+ * @copyright 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      http://www.magentocommerce.com
  */
 /**
  * Customer Attribute Select Data Model
  *
- * @category    Mage
- * @package     Mage_Customer
- * @author      Magento Core Team <core@magentocommerce.com>
+ * @category Mage
+ * @package  Mage_Customer
+ * @author   Magento Core Team <core@magentocommerce.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link     http://www.magentocommerce.com
  */
 class Mage_Customer_Model_Attribute_Data_Label extends Mage_Customer_Model_Attribute_Data_Abstract
 {
     /**
      * Extract data from request and return value
      *
-     * @param Zend_Controller_Request_Http $request
-     * @return array|string
+     * @param Zend_Controller_Request_Http $request HTTP-Request
+     * 
+     * @return array|string Requested Value
      */
     public function extractValue(Zend_Controller_Request_Http $request)
     {
@@ -59,8 +66,9 @@ class Mage_Customer_Model_Attribute_Data_Label extends Mage_Customer_Model_Attri
      * Validate data
      * Return true or array of errors
      *
-     * @param array|string $value
-     * @return boolean|array
+     * @param array|string $value Value
+     * 
+     * @return boolean|array Return true or array of errors
      */
     public function validateValue($value)
     {
@@ -70,8 +78,9 @@ class Mage_Customer_Model_Attribute_Data_Label extends Mage_Customer_Model_Attri
     /**
      * Export attribute value to entity model
      *
-     * @param array|string $value
-     * @return Mage_Customer_Model_Attribute_Data_Text
+     * @param array|string $value Value
+     * 
+     * @return Mage_Customer_Model_Attribute_Data_Text Object
      */
     public function compactValue($value)
     {
@@ -84,8 +93,9 @@ class Mage_Customer_Model_Attribute_Data_Label extends Mage_Customer_Model_Attri
     /**
      * Restore attribute value from SESSION to entity model
      *
-     * @param array|string $value
-     * @return Mage_Customer_Model_Attribute_Data_Abstract
+     * @param array|string $value Value 
+     * 
+     * @return Mage_Customer_Model_Attribute_Data_Abstract Object
      */
     public function restoreValue($value)
     {
@@ -95,8 +105,9 @@ class Mage_Customer_Model_Attribute_Data_Label extends Mage_Customer_Model_Attri
     /**
      * Return a text for option value
      *
-     * @param int $value
-     * @return string
+     * @param int $value Option Value
+     * 
+     * @return string Text
      */
     protected function _getOptionText($value)
     {
@@ -106,7 +117,9 @@ class Mage_Customer_Model_Attribute_Data_Label extends Mage_Customer_Model_Attri
     /**
      * Return formated attribute value from entity model
      *
-     * @return string|array
+     * @param string $format Output format
+     *
+     * @return string|array Output
      */
     public function outputValue($format = Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT)
     {
