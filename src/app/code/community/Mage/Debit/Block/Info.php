@@ -79,12 +79,12 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
             if (Mage::app()->getStore()->isAdmin()) {
                 $action = Mage::app()->getRequest()->getActionName();
                 if ($action == 'email' || $action == 'save') {
-                    return true;                                         // Admin
+                    return true; // Admin
                 } else {
-                    return false;                                        // Admin View
+                    return false; // Admin View
                 }   
             } else {
-                return true;                                             // Frontend
+                return true; // Frontend
             }
         }
     }
@@ -98,7 +98,8 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
      */
     public function sendDataInEmail()
     {
-        return Mage::getStoreConfigFlag('payment/'.$this->getMethod()->getCode().'/sendmail');
+        $method = $this->getMethod()->getCode();
+        return Mage::getStoreConfigFlag('payment/'.$method.'/sendmail');
     }
 
     /**
@@ -111,6 +112,7 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
     public function getEmailData()
     {
         $payment = $this->getMethod();
+        $method  = $this->getMethod()->getCode();
         $data = array(
             'account_name'      =>  $payment->getAccountName(),
             'account_number'    =>  $payment->getAccountNumber(),
@@ -118,10 +120,12 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
             'bank_name'         =>  $payment->getAccountBankname()
         );
         // mask bank data
-        if (Mage::getStoreConfigFlag('payment/'.$this->getMethod()->getCode().'/sendmail_crypt')) {
-            $data['account_number'] = $payment->maskString($payment->getAccountNumber());
-            $data['account_blz'] = $payment->maskString($payment->getAccountBLZ());
-            $data['bank_name'] = '';
+        if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')) {
+            $number  = $payment->maskString($payment->getAccountNumber());
+            $routing = $payment->maskString($payment->getAccountBLZ());
+            $data['account_number'] = $number;
+            $data['account_blz']    = $routing;
+            $data['bank_name']      = '';
         }
         return $data;
     }

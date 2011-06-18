@@ -47,15 +47,16 @@ class Mage_Debit_Model_System_Config_Source_Customer_Group
     public function toOptionArray()
     {
         if (!$this->_options) {
-            $this->_options = Mage::getResourceModel('customer/group_collection')
+            $collection = Mage::getResourceModel('customer/group_collection')
                 ->loadData()
                 ->toOptionArray();
+            $this->_options = $collection;
 
             array_unshift(
                 $this->_options,
                 array(
-                    'value'=> '',
-                    'label'=> Mage::helper('adminhtml')->__('-- Please Select --')
+                    'value' => '',
+                    'label' => $this->__('-- Please Select --')
                 )
             );
         }

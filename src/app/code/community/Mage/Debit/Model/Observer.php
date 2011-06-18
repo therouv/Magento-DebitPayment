@@ -39,8 +39,10 @@ class Mage_Debit_Model_Observer
      * paymentMethodIsActive
      * 
      * Checks if DebitPayment is allowed for specific customer groups and if a
-     * registered customer has the required minimum amount of orders to be allowed
-     * to order via DebitPayment.
+     * registered customer has the required minimum amount of orders to be 
+     * allowed to order via DebitPayment.
+     * 
+     * Magento Event: payment_method_is_active
      * 
      * @param Varien_Event_Observer $observer Observer
      * 
@@ -48,11 +50,11 @@ class Mage_Debit_Model_Observer
      */
     public function paymentMethodIsActive($observer)
     {
-        $paymentMethodInstance = $observer->getEvent()->getMethodInstance();
+        $methodInstance = $observer->getEvent()->getMethodInstance();
         $session = Mage::getSingleton('customer/session');
 
         // Check if method is DebitPayment
-        if ($paymentMethodInstance->getCode() != 'debit') {
+        if ($methodInstance->getCode() != 'debit') {
             return;
         }
         // Check if payment method is active
@@ -103,8 +105,10 @@ class Mage_Debit_Model_Observer
     /**
      * saveAccountInfo
      * 
-     * Saves the account data after a successful order in the specific customer model.
-     * Observer: sales_order_save_after
+     * Saves the account data after a successful order in the specific
+     * customer model.
+     * 
+     * Magento Event: sales_order_save_after
      * 
      * @param Varien_Event_Observer $observer Observer
      * 
@@ -113,18 +117,18 @@ class Mage_Debit_Model_Observer
     public function saveAccountInfo($observer)
     {
         $order = $observer->getEvent()->getOrder();
-        $paymentMethodInstance = $order->getPayment()->getMethodInstance();
-        if ($paymentMethodInstance->getCode() != 'debit') {
+        $methodInstance = $order->getPayment()->getMethodInstance();
+        if ($methodInstance->getCode() != 'debit') {
             return;
         }
-        if (!$paymentMethodInstance->getConfigData('save_account_data')) {
+        if (!$methodInstance->getConfigData('save_account_data')) {
             return;
         }
         if ($customer = $this->_getOrderCustomer($order)) {
             $customer->setData('debit_payment_acount_data_update', now())
-                ->setData('debit_payment_acount_name', $paymentMethodInstance->getAccountName())
-                ->setData('debit_payment_acount_number', $paymentMethodInstance->getAccountNumber())
-                ->setData('debit_payment_acount_blz', $paymentMethodInstance->getAccountBLZ())
+                ->setData('debit_payment_acount_name', $methodInstance->getAccountName())
+                ->setData('debit_payment_acount_number', $methodInstance->getAccountNumber())
+                ->setData('debit_payment_acount_blz', $methodInstance->getAccountBLZ())
                 ->save();
         }
     }

@@ -28,4 +28,5 @@
 "Enabled only for specific customer groups","Enabled only for specific customer groups"
 "Set to ""no"" if you want to enable DebitPayment only for specific customer groups defined below.","Set to ""no"" if you want to enable DebitPayment only for specific customer groups defined below."
 "Minimum Orders Count","Minimum Orders Count"
+"-- Please Select --","-- Please Select --"
 "Default: ""0"" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.","Default: ""0"" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method."

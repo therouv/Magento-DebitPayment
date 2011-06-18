@@ -113,9 +113,10 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
      */
     public function getAccountNumber()
     {
+        $attribute = 'debit_payment_acount_number';
         if ($data = $this->getInfoData('cc_number')) {
             return $data;
-        } elseif ($data = $this->_getAccountData('debit_payment_acount_number')) {
+        } elseif ($data = $this->_getAccountData($attribute)) {
             return $data;
         } else {
             return '';

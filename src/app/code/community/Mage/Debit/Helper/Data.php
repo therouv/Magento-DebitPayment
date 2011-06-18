@@ -49,12 +49,15 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
         $data = $this->_loadBlzCache();
         if (!$data) {
             // open blz file handle
-            $io = new Varien_Io_File();
-            $io->open(array('path'=>Mage::getModuleDir('etc', 'Mage_Debit')));
-            $io->streamOpen('bankleitzahlen.csv', 'r');
-
+            $file = new Varien_Io_File();
+            $file->open(
+                array(
+                	'path' => Mage::getModuleDir('etc', 'Mage_Debit')
+                )
+            );
+            $file->streamOpen('bankleitzahlen.csv', 'r');
             // read csv stream
-            while (($line = $io->streamReadCsv(';')) !== false) {
+            while (($line = $file->streamReadCsv(';')) !== false) {
                 $data[$line[0]] = $line[1];
             }
             $this->_saveBlzCache(serialize($data));
