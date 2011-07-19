@@ -56,7 +56,7 @@ class Mage_Debit_Model_System_Config_Source_Customer_Group
                 $this->_options,
                 array(
                     'value' => '',
-                    'label' => $this->__('-- Please Select --')
+                    'label' => Mage::helper('debit')->__('-- Please Select --')
                 )
             );
         }
