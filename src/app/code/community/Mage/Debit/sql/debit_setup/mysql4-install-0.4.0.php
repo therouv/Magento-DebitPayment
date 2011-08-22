@@ -86,7 +86,7 @@ $installer = $this;
 $installer->startSetup();
 
 $setup = new Mage_Eav_Model_Entity_Setup('core_setup');
-$setup->addAttribute($customer_type_id, 'debit_payment_acount_data_update', $attr_date);
+$setup->addAttribute($customer_type_id, 'debit_payment_acount_update', $attr_date);
 $setup->addAttribute($customer_type_id, 'debit_payment_acount_name', $attr_name);
 $setup->addAttribute($customer_type_id, 'debit_payment_acount_number', $attr_number);
 $setup->addAttribute($customer_type_id, 'debit_payment_acount_blz', $attr_blz);
@@ -94,7 +94,7 @@ $setup->addAttribute($customer_type_id, 'debit_payment_acount_blz', $attr_blz);
 // Since 1.4.2.0 this is necessary! 
 $eavConfig = Mage::getSingleton('eav/config');
 
-$attribute = $eavConfig->getAttribute($customer_type_id, 'debit_payment_acount_data_update');
+$attribute = $eavConfig->getAttribute($customer_type_id, 'debit_payment_acount_update');
 $attribute->setData('used_in_forms', array('customer_account_edit', 'customer_account_create', 'adminhtml_customer'));
 $attribute->save();
 

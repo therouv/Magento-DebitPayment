@@ -125,7 +125,7 @@ class Mage_Debit_Model_Observer
             return;
         }
         if ($customer = $this->_getOrderCustomer($order)) {
-            $customer->setData('debit_payment_acount_data_update', now())
+            $customer->setData('debit_payment_acount_update', now())
                 ->setData('debit_payment_acount_name', $methodInstance->getAccountName())
                 ->setData('debit_payment_acount_number', $methodInstance->getAccountNumber())
                 ->setData('debit_payment_acount_blz', $methodInstance->getAccountBLZ())
