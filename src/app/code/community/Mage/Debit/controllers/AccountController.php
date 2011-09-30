@@ -88,7 +88,8 @@ class Mage_Debit_AccountController extends Mage_Core_Controller_Front_Action
             return;
         }
 
-        $customer->setData('debit_payment_acount_update', now());
+        $now = Mage::app()->getLocale()->date()->toString(Varien_Date::DATETIME_INTERNAL_FORMAT);
+        $customer->setData('debit_payment_acount_update', $now);
         $customer->setData('debit_payment_acount_name', $this->getRequest()->getPost('account_name'));
         $customer->setData('debit_payment_acount_number', $this->getRequest()->getPost('account_number'));
         $customer->setData('debit_payment_acount_blz', $this->getRequest()->getPost('account_blz'));

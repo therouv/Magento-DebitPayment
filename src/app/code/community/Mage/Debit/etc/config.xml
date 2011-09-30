@@ -24,7 +24,7 @@
 <config>
     <modules>
         <Mage_Debit>
-            <version>0.5.0</version>
+            <version>0.5.1</version>
         </Mage_Debit>
     </modules>
 
