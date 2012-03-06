@@ -59,7 +59,7 @@ class Mage_Debit_Block_Adminhtml_Order extends Mage_Adminhtml_Block_Widget_Grid_
             ));
         } else {
             Mage::getSingleton('adminhtml/session')->addError(
-                Mage::helper('debit')->__('Please enter bankaccount credentials of the store owner. Otherwise you will not be able to generate a valid export file.')
+                Mage::helper('debit')->__('Please enter bankaccount credentials of the store owner in the system configuration. Otherwise you will not be able to generate a valid export file.')
             );
         }
     }
