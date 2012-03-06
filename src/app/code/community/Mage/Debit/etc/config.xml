@@ -24,10 +24,9 @@
 <config>
     <modules>
         <Mage_Debit>
-            <version>0.5.1</version>
+            <version>0.5.2</version>
         </Mage_Debit>
     </modules>
-
     <global>
         <blocks>
             <debit>
@@ -42,7 +41,16 @@
         <models>
             <debit>
                 <class>Mage_Debit_Model</class>
+                <resourceModel>debit_mysql4</resourceModel>
             </debit>
+			<debit_mysql4>
+	            <class>Mage_Debit_Model_Mysql4</class>
+	            <entities>
+	                <order_grid>
+	                    <table>debit_order_grid</table>
+	                </order_grid>
+	            </entities>
+	        </debit_mysql4>
         </models>
         <resources>
             <debit_setup>
@@ -79,7 +87,6 @@
             </sales_order_save_after>
         </events>
     </global>
-
     <default>
         <payment>
             <debit>
@@ -99,19 +106,35 @@
             </debit>
          </payment>
     </default>
-
-    <adminhtml>       
-        <translate>
-            <modules>
-                <Mage_Debit>
-                    <files>
-                        <default>Mage_Debit.csv</default>
-                    </files>
-                </Mage_Debit>
-            </modules>
-        </translate>
+	<admin>
+        <routers>
+            <debit>
+                <use>admin</use>
+                <args>
+                    <module>Mage_Debit</module>
+                    <frontName>debit</frontName>
+                </args>
+            </debit>
+        </routers>
+	</admin>
+    <adminhtml>
+	    <layout>
+	        <updates>
+	            <debit>
+	                <file>debit.xml</file>
+	            </debit>
+	        </updates>
+	    </layout>   
+	    <translate>
+	        <modules>
+	            <Mage_Debit>
+	                <files>
+	                    <default>Mage_Debit.csv</default>
+	                </files>
+	            </Mage_Debit>
+	        </modules>
+	    </translate>
     </adminhtml>
-
     <frontend>
         <secure_url>
             <debit_account>/debit/account</debit_account>

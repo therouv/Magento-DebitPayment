@@ -14,7 +14,7 @@
 10030500;Bankhaus Löbbecke Berlin
 10030600;North Channel Bank Mainz
 10030700;Gries & Heissel Wiesbaden
-10033300;Santander Consumer B Berlin
+10033300;Santander Bank Berlin
 10040000;Commerzbank -West- Berlin
 10040048;Commerzbank BER GF-B48
 10040060;Commerzbank Gf 160 Berlin
@@ -69,6 +69,7 @@
 10120999;readybank Gf GAA Berlin
 10130600;Isbank Berlin
 10130800;BIW Bank
+10220600;Sydbank Berlin
 10310600;Tradegate Berlin
 12016836;KfW Berlin
 12030000;Deutsche Kreditbank Berlin
@@ -144,7 +145,6 @@
 17040000;Commerzbank Frankfurt Oder
 17052000;Sparkasse Barnim Eberswalde
 17052302;St Spk Schwedt
-17052472;St Spk Frankfurt Oder
 17054040;Spk Märkisch-Oderland
 17055050;Sparkasse Oder-Spree
 17056060;Spk Uckermark Prenzlau
@@ -162,7 +162,6 @@
 18080000;Commerzbank Cottbus
 18092684;Spreewaldbank Lübben
 18092744;Volksbank Spree-Neiße
-18092794;VR Bank Cottbus -alt-
 20000000;BBk Hamburg
 20010020;Postbank -Giro- Hamburg
 20010111;SEB Hamburg
@@ -172,7 +171,7 @@
 20020860;UniCredit ex-Hypo Hamburg
 20020900;Signal Iduna Bauspar
 20030000;UniCredit Bank-HypoVereinbk
-20030300;Donner & Reuschel
+20030300;DONNER & REUSCHEL
 20030400;Marcardbank Hamburg
 20030600;Sydbank Hamburg
 20030700;Merck Finck & Co Hamburg
@@ -196,7 +195,7 @@
 20069125;Kaltenkirchener Bank
 20069130;Raiffbk
 20069144;Raiffeisenbank Seestermühe
-20069177;Raiffbk Südstormarn
+20069177;Raiffbk Südstormarn Mölln
 20069232;Raiffbk Struvenhütten
 20069625;Volksbank Gnarrenburg
 20069641;Raiffeisenbank Owschlag
@@ -249,7 +248,7 @@
 20130400;GRENKE BANK
 20130412;GRENKE BANK Hamburg
 20130600;Barclaycard
-20133300;Santander Consumer Bank HH
+20133300;Santander Bank Hamburg
 20190003;Hamburger Volksbank
 20190109;VB Stormarn
 20190206;VB Hamburg Ost-West -alt-
@@ -257,7 +256,7 @@
 20190800;MKB Hamburg
 20210200;Bank Melli Iran Hamburg
 20210300;Bank Saderat Iran Hamburg
-20220100;DnB NOR Bank ASA Hamburg
+20220100;DNB Bank
 20220400;M.M. Warburg Hyp Hamburg
 20230300;Schröderbank Hamburg
 20230600;Isbank Hamburg
@@ -369,7 +368,6 @@
 21530080;UniCredit Bk ex VereinWest
 21540060;Commerzbank Flensburg
 21550050;Nord-Ostsee Spk Flensburg
-21563321;Raiffbk Flensburg -alt-
 21565316;Raiffbk Handewitt
 21566356;Volks- u Raiffeisenbank
 21567360;Raiffbk Kleinjörl -alt-
@@ -395,7 +393,7 @@
 21741825;Commerzbank Westerland
 21750000;Nord-Ostsee Spk Schleswig
 21751230;Spk Bredstedt
-21762550;Volksbank-Raiffbk Husum
+21762550;Husumer Volksbank
 21763542;VR Bank Niebüll
 21770011;Deutsche Bank Husum Nordsee
 21770024;Deutsche Bank PGK Husum
@@ -449,7 +447,7 @@
 23052750;Kr Spk Herzogtum Lauenburg
 23061220;Raiffeisenbank Leezen
 23062124;Raiffeisenbank Bargteheide
-23062807;Volks- u Raiffbk Mölln
+23062807;Volks- u Raiffbk Mölln -alt
 23063129;Raiffeisenbank Lauenburg
 23064107;Raiffeisenbank Büchen
 23070700;Deutsche Bank PGK Lübeck
@@ -463,7 +461,7 @@
 24030000;UniCredit Bk ex VereinWest
 24040000;Commerzbank Lüneburg
 24050110;Spk Lüneburg
-24060300;VB Nordheide
+24060300;VB Lüneburger Heide
 24061392;VB Bleckede-Dahlenbg -alt-
 24070024;Deutsche Bank PGK Lüneburg
 24070075;Deutsche Bank Lüneburg
@@ -588,15 +586,14 @@
 25841403;Commerzbank Lüchow
 25841708;Commerzbank Schneverdingen
 25850110;Sparkasse Uelzen Lüchow-Dbg
-25851335;Spk Uelzen Lüchow-Dannenber
+25851335;Spk Uelzen Lüchow-Dbg.-alt-
 25851660;Kr Spk Soltau
 25861395;Volksbank Dannenberg -alt-
 25861990;Volksbank Clenze-Hitzacker
 25862292;Volksbank Uelzen-Salzwedel
-25862393;Volksbank Hitzacker -alt-
 25863489;VB Osterbg-Lüchow-Dannenbg
 25891483;VB Osterbg-Lüchow-Dannenbg
-25891636;VB Lüneburger Heide
+25891636;VB Lüneburger Heide -alt-
 25900000;BBk Hannover eh Hildesheim
 25910111;SEB Hildesheim
 25930000;UniCredit Bk ex VereinWest
@@ -622,7 +619,7 @@
 26060184;Bankhaus Hallbaum
 26061291;Volksbank Mitte
 26061556;Volksbank Adelebsen
-26062433;Volksbank Dransfeld
+26062433;VR-Bank in Südniedersachsen
 26062575;Raiffeisenbank Rosdorf
 26070024;Deutsche Bank PGK Göttingen
 26070072;Deutsche Bank Göttingen
@@ -661,7 +658,6 @@
 26565928;VB GMHütte-Hagen-Bissendorf
 26566939;VB Osnabrücker Nd
 26567943;VR-Bank i.Altkr.Bersenbrück
-26568924;VB Hilter-Bad Laer -alt-
 26570024;Deutsche Bank PGK Osnabrück
 26570090;Deutsche Bank Osnabrück
 26580070;Commerzbank Osnabrück
@@ -816,7 +812,6 @@
 28262254;Volksbank Jever
 28262481;Raiffbk Sande-Wangerld alt
 28262673;Raiff-VB Varel-Nordenham
-28262794;Raiff-VB Aurich-Wittm -alt-
 28270024;Deutsche Bank PGK Wilhelmsh
 28270056;Deutsche Bank Wilhelmshaven
 28280012;Commerzbank Wilhelmshaven
@@ -832,7 +827,6 @@
 28450000;Sparkasse Emden
 28470024;Deutsche Bank PGK Emden
 28470091;Deutsche Bank Emden
-28490073;Raiff-VB Emden-Pewsum -alt-
 28500000;BBk Oldenburg eh Leer
 28520009;Oldb Landesbank Leer
 28521518;Oldb Landesbank Papenburg
@@ -842,7 +836,6 @@
 28562716;Raiffbk Flachsmeer Westover
 28562863;Raiffeisenbank Moormerland
 28563749;Raiffeisenbank Moormerland
-28563865;Ostfriesische VB Leer
 28570024;Deutsche Bank PGK Leer
 28570092;Deutsche Bank Leer
 28590075;Ostfriesische VB Leer
@@ -892,7 +885,6 @@
 29240024;Commerzbank Bremerhaven
 29250000;Spk Bremerhaven
 29250150;Kr Spk Wesermünde-Hadeln
-29262646;Spar-u Darlehnskasse
 29262722;Volksbank Geeste-Nord
 29265747;VB Bremerhaven-Cuxland
 29280011;Commerzbank Bremerhaven
@@ -907,6 +899,7 @@
 30020700;Mizuho Corp Bank Düsseldorf
 30020900;TARGOBANK Düsseldorf
 30022000;NRW.BANK Düsseldorf
+30025500;WestLB Düsseldorf
 30030100;S Broker Wiesbaden
 30030400;FXdirekt Bank Oberhausen
 30030500;C&A Bank Düsseldorf
@@ -921,7 +914,6 @@
 30040063;Commerzbank CC Düsseldorf
 30050000;WestLB Düsseldorf
 30050110;St Spk Düsseldorf
-30052525;NRW.BANK Düsseldorf
 30060010;WGZ Bank Düsseldorf
 30060601;apoBank Düsseldorf
 30060992;PSD Bank Rhein-Ruhr
@@ -1013,6 +1005,7 @@
 33010111;SEB Wuppertal
 33020000;akf bank Wuppertal
 33020190;UniCredit Bank-HypoVereinbk
+33030000;GEFA Wuppertal
 33040001;Commerzbank Wuppertal
 33040310;Commerzbank Zw 117
 33050000;St Spk Wuppertal
@@ -1064,8 +1057,8 @@
 35251000;Spk Dinslaken-Voerde-Hünxe
 35261248;Volksbank Dinslaken
 35450000;Sparkasse am Niederrhein
-35451460;Spk Neukirchen-Vluyn
-35451775;Spk Rheinberg
+35451460;Spk Neukirchen-Vluyn -alt-
+35451775;Spk Rheinberg -alt-
 35461106;Volksbank Niederrhein
 35600000;BBk Duisburg eh Wesel
 35640064;Commerzbank Wesel
@@ -1079,12 +1072,12 @@
 36010200;VON ESSEN Bankges Essen
 36010424;Aareal Bank Essen
 36010600;GALLINAT-BANK Essen
-36010699;Gallinat - Bank
+36010699;Gallinat - Bank Essen
 36010800;AKBANK N.V. Essen
 36020030;National-Bank Essen
 36020186;UniCredit Bank-HypoVereinbk
 36020700;Hanseatic Bank Essen
-36033300;Santander Consumer Bk Essen
+36033300;Santander Bank Essen
 36036000;VALBA
 36040039;Commerzbank Essen
 36040060;Commerzbank CC Essen
@@ -1181,7 +1174,7 @@
 37069577;Raiffbk Odenthal -alt-
 37069627;Raiffbk Rheinbach Voreifel
 37069639;Rosbacher Raiffeisenbank
-37069642;Raiffbk Simmerath Simmerath
+37069642;Raiffbk Simmerath
 37069707;Raiffbk Sankt Augustin
 37069720;VR-Bank Nordeifel Schleiden
 37069805;Volksbank Wachtberg
@@ -1272,7 +1265,6 @@
 39160191;Pax-Bank Aachen
 39161490;Volksbank Aachen Süd
 39162980;VR-Bank Würselen
-39360097;VB Stolberg-Eschweiler-alt-
 39362254;Raiffeisen-Bank Eschweiler
 39500000;BBk Aachen eh Düren
 39540052;Commerzbank Düren
@@ -1288,7 +1280,7 @@
 40040028;Commerzbank Münster Westf
 40050000;WestLB Münster
 40050150;Spk Münsterland Ost
-40052525;NRW.BANK Münster
+40055555;LBS West Münster
 40060000;WGZ Bank Münster
 40060265;DKM Darlehnskasse Münster
 40060300;WL BANK Münster
@@ -1305,7 +1297,6 @@
 40069408;Volksbank Baumberge
 40069462;Volksbank Sprakel
 40069477;Volksbank Wulfen -alt-
-40069545;VB Schönholthausen -alt-
 40069546;Volksbank Senden
 40069600;Volksbank Amelsbüren
 40069601;Volksbank Ascheberg-Herbern
@@ -1324,7 +1315,6 @@
 40154006;Spk Gronau
 40154476;St Spk Lengerich
 40154530;Sparkasse Westmünsterland
-40154680;St Spk Ochtrup -alt-
 40154702;St Spk Stadtlohn
 40160050;Volksbank Münster
 40163123;Volksbank Coesfeld -alt-
@@ -1530,10 +1520,10 @@
 46250049;Spk Olpe-Drolshagen-Wenden
 46251590;Spk Finnentrop
 46251630;Spk Attend-Lennest-Kirchhdm
-46260023;Volksbank Olpe
+46260023;Volksbank Olpe -alt-
 46261306;Volksbank Attendorn -alt-
 46261607;Volksbank Grevenbrück
-46261822;Volksbank Wenden-Drolshagen
+46261822;VB Olpe-Wenden-Drolshagen
 46262456;Volksbank Bigge-Lenne -alt-
 46400000;BBk Dortmund eh Arnsberg
 46441003;Commerzbank Meschede
@@ -1561,13 +1551,13 @@
 47262626;Volksbank Westenholz
 47262703;VB Delbrück-Hövelhof
 47263472;VB Westerloh-Westerwiehe
-47264367;VB Driburg-Brakel-Steinheim
+47264367;Vereinigte Volksbank
 47265383;VB Wewelsburg-Ahden
 47267216;Volksbank Borgentreich-alt-
 47270024;Deutsche Bank PGK Paderborn
 47270029;Deutsche Bank Paderborn
 47451235;St Spk Marsberg -alt-
-47460028;Volksbank Warburger Land
+47460028;VB Warburger Land -alt-
 47640051;Commerzbank Detmold
 47650130;Spk Detmold
 47651225;St Spk Blomberg
@@ -1642,7 +1632,7 @@
 49440043;Commerzbank Herford
 49450120;Sparkasse Herford
 49451210;Spk Bad Salzuflen -alt-
-49461323;Volksbank Enger-Spenge
+49461323;Volksbank Enger-Spenge -alt
 49490070;VB Bad Oeynhausen-Herford
 50000000;BBk Filiale Frankfurt Main
 50010060;Postbank Frankfurt Main
@@ -1661,7 +1651,7 @@
 50020700;Credit Europe Bank Ffm
 50020800;Intesa Sanpaolo Frankfurt
 50020900;COREALCREDIT BANK
-50021000;ING Bank Frankfurt
+50021000;ING Bank, Frankfurt
 50021100;Frankfurter Fondsbank
 50023400;Bank of Beirut Frankfurt
 50030000;Banque PSA Finance
@@ -1673,7 +1663,7 @@
 50030900;Lehman Brothers Frankfurt
 50031000;Triodos Bank Deutschland
 50031100;Bankhaus Main Frankfurt/M
-50033300;Santander Consumer Bk Ffm
+50033300;Santander Bank Frankfurt
 50040000;Commerzbank Frankfurt Main
 50040033;Commerzbank Gf BRS Ffm
 50040040;Commerzbank ZRK Frankfurt
@@ -1685,6 +1675,7 @@
 50040062;Commerzbank CC Ffm
 50040063;Commerzbank CC Ffm
 50040075;Commerzbank Gf ZCM Ffm
+50040088;Commerzbank INT 1 Ffm
 50040099;Commerzbank INT Ffm
 50042500;Commerzbank Frankfurt
 50044444;Commerzbank Vermverw Ffm
@@ -1704,7 +1695,6 @@
 50069187;Volksbank Egelsbach -alt-
 50069241;Raiffeisenkasse
 50069345;Raiffbk Grävenwiesbach
-50069384;Volksbank Heppenheim-Offst
 50069455;Hüttenberger Bk Hüttenberg
 50069464;VB Inheiden-Villingen -alt-
 50069477;Raiffeisenbank Kirtorf
@@ -1726,9 +1716,9 @@
 50080060;Commerzbank Gf DrKW Ffm
 50080061;Commerzbank Gf DrKWSL Ffm
 50080077;Commerzbk WBSPK, Frankfurt
+50080079;Commerzbank ESOP, Frankfurt
 50080080;Commerzbank Bs 80 Ffm
 50080082;Commerzbk Gf AVB Ffm
-50080085;Commerzbk CS Frankfurt
 50080086;Commerzbk ITGK Frankfurt
 50080087;Commerzbank ITGK4 FFM
 50080088;Commerzbank ITGK5 FFM
@@ -1756,11 +1746,12 @@
 50110500;NATIXIS Frankfurt am Main
 50110636;DTC SCB Germany Branch
 50110700;Frankfurter Bankgesellsch
-50110800;J.P. Morgan Frankfurt Main
+50110800;J.P. Morgan Frankfurt
+50110801;J.P. Morgan, IR, Ffm
 50110900;Bank of America N.A. Mil Bk
 50120000;MainFirst Bank Frankfurt
 50120100;ICICI Bank Frankfurt
-50120383;Delbrück Bethmann Maffei
+50120383;BETHMANN BANK Frankfurt
 50120500;CSD Frankfurt Main
 50120600;Bank of Communications
 50120900;VakifBank Frankfurt
@@ -1771,6 +1762,7 @@
 50130300;FIRST BANK Frankfurt
 50130400;Merck Finck & Co Frankfurt
 50130600;UBS Deutschland Frankfurt/M
+50131000;Vietinbank
 50150000;West LB Frankfurt Main
 50190000;Frankfurter Volksbank
 50190300;Volksbank Höchst
@@ -1838,12 +1830,14 @@
 50210188;SEB TZN MB Frankfurt
 50210189;SEB TZN MB Frankfurt
 50210200;Rabobank Frankfurt Main
+50210212;RaboDirect Frankfurt Main
 50210300;Eurohypo Eschborn
 50210400;Eurohypo ehem Rhein Hyp
 50210600;equinet Bank, Frankfurt
+50210800;ProCredit Bank, Frankfurt
 50210900;Citigroup GM Frankfurt
 50220085;UBS Deutschland Frankfurt/M
-50220200;LGT Bank Deutschland, Ffm
+50220200;Bethmann Bank (LGT Ffm)
 50220500;Bank of Scotland
 50220900;Hauck & Aufhäuser
 50230000;ABC International Bank Ffm
@@ -1869,7 +1863,8 @@
 50330300;The Bank of New York Mellon
 50330500;CHAABI BANK FRANKFURT
 50330600;Sepahbank Frankfurt, Main
-50330700;Valovis Commercial Bank
+50330700;Valovis Bank Neu-Isenburg
+50334400;BNY Mellon NL FFM
 50400000;BBk Zentrale Frankfurt Main
 50510111;SEB Offenbach Main
 50510120;SEB TZN MB
@@ -2051,6 +2046,7 @@
 51210700;NIBC Bank Frankfurt am Main
 51210800;SOGEBANK Frankfurt Main
 51220200;SEB Merchant Banking Ffm
+51220211;SEB Ffm SAP
 51220400;Bank Saderat Iran Frankfurt
 51220700;ZIRAAT BANK
 51220800;Banco do Brasil Frankfurt
@@ -2090,6 +2086,7 @@
 51420300;Bank Julius Bär Frankfurt
 51420600;Svenska Handelsbanken
 51430300;Nordea Bank Finland
+51430321;Nordea Bank Frankfurt
 51430400;Goldman, Sachs Ffm
 51540037;Commerzbank Wetzlar
 51550035;Sparkasse Wetzlar
@@ -2266,14 +2263,13 @@
 54690623;apoBank Neustadt, Weinstr
 54691200;VR Bank Mittelhaardt
 54750010;Kr u St Spk Speyer
-54751440;St Spk Schifferstadt
 54760900;EKK Speyer
-54761411;Raiffbk Schifferstadt
+54761411;Raiffbk Schifferstadt -alt-
 54790000;VB Kur- und Rheinpfalz
 54820674;UniCredit exHypo Ndl659LanP
 54850010;Spk Südl Weinstr in Landau
 54851440;Spk Kandel Pfalz
-54861190;Raiffbk Oberhaardt-Gäu
+54861190;Raiffbk Oberhaardt-Gäu-alt-
 54862390;Raiffeisenbank Herxheim
 54862500;VR Bank Südpfalz
 54891300;VR Bank Südl Weinstr
@@ -2291,13 +2287,12 @@
 55020700;SWK-Bank Bingen
 55030500;GE Capital Bank Mainz
 55030533;GE Capital Direkt
-55033300;Santander Consumer Bk Mainz
+55033300;Santander Bank Mainz
 55040022;Commerzbank Mainz
 55040060;Commerzbank CC Mainz
 55040061;Commerzbank CC Mainz
 55050000;ZV LBBW Mainz
 55050120;Sparkasse Mainz
-55051260;Kr Spk Alzey-alt-
 55060321;VR-Bank Mainz
 55060417;VR-Bank Mainz
 55060611;Genobank Mainz
@@ -2328,8 +2323,6 @@
 55350010;Sparkasse Worms-Alzey-Ried
 55360784;VB Rheindürkheim -alt-
 55361202;Raiffeisenbank Alsh-Gimbsh
-55361313;Raiffbk Gundersheim -alt-
-55361422;VB Wonnegau Osthofen -alt-
 55362071;Volksbank Bechtheim
 55390000;Volksbank Worms-Wonnegau
 56000000;BBk Mainz eh Bad Kreuznach
@@ -2532,6 +2525,7 @@
 60030100;Bankhaus Bauer, Stuttgart
 60030200;Ellwabank Stuttgart
 60030600;CreditPlus Bank
+60030666;CreditPlus Bank
 60030700;AKTIVBANK Pforzheim
 60030900;Isbank Stuttgart
 60033000;Wüstenrot Bausparkasse
@@ -2615,7 +2609,7 @@
 60069710;Raiffbk Gammesfeld
 60069714;Raiffeisenbank Kocher-Jagst
 60069716;Raiffbk Nattheim -alt-
-60069724;Raiffbk Heroldstatt
+60069724;Raiffbk Heroldstatt -alt-
 60069727;Raiffbk Oberstenfeld
 60069738;VB Freiberg und Umgebung
 60069766;Volks- u Raiffbk Boll -alt-
@@ -2661,7 +2655,7 @@
 60120200;BHF-BANK Stuttgart
 60120500;Bank für Sozialwirtschaft
 60130100;FFS Bank Stuttgart
-60133300;Santander Consumer Bk Stutt
+60133300;Santander Bank Stuttgart
 60200000;BBk Stuttgart eh Waiblingen
 60220030;BW Bank Waiblingen
 60241074;Commerzbank Backnang
@@ -2676,7 +2670,6 @@
 60270073;Deutsche Bank Waiblingen
 60290110;Volksbank Rems -alt-
 60291120;Volksbank Backnang
-60291410;Volksbank Schorndorf
 60291510;Volksbank Winnenden
 60300000;BBk Stuttgart eh Sindelfing
 60320030;BW Bank Sindelfingen
@@ -2811,7 +2804,7 @@
 63090100;Volksbank Ulm-Biberach
 63091010;Ehinger Volksbank
 63091200;Volksbank Blaubeuren
-63091300;Volksbank Laichingen
+63091300;Volksbank Laichinger Alb
 63220090;UniCredit Bank-HypoVereinbk
 63240016;Commerzbank Heidenheim
 63250030;Kr Spk Heidenheim
@@ -2889,7 +2882,6 @@
 65110200;Int Bkhaus Bodensee
 65120091;UniCredit Bank-HypoVereinbk
 65140072;Commerzbank Friedrichshafen
-65150040;Spk -alt-
 65161497;Genossenschaftsbank
 65162832;Raiffbk Oberteuringen
 65180005;Commerzbank Friedrichshfn
@@ -2933,14 +2925,14 @@
 66040018;Commerzbank Karlsruhe
 66040026;Commerzbank Karlsruhe
 66050000;Landesbank Baden-Württ
-66050101;Sparkasse Karlsruhe
-66051220;Sparkasse Ettlingen
+66050101;Spk Karlsruhe Ettlingen
+66051220;Sparkasse Ettlingen -alt-
 66060000;DZ BANK
 66060300;Spar- und Kreditbank
 66060800;EKK Karlsruhe
-66061059;VB Stutensee Hardt
+66061059;VB Stutensee Hardt -alt-
 66061407;Spar- u Kreditbk Rheinstett
-66061724;Volksbank Weingarten-Walzb
+66061724;VB Stutensee-Weingarten
 66062138;Spar- u Kreditbank Hardt
 66062366;Raiffbk Hardt-Bruhrain
 66069103;Raiffeisenbank Elztal
@@ -2986,7 +2978,7 @@
 66420020;BW Bank Offenburg
 66432700;Faißtbank Wolfach
 66440084;Commerzbank Offenburg
-66450050;Sparkasse Offenburg-Ortenau
+66450050;Sparkasse Offenburg/Ortenau
 66451346;Spk Gengenbach
 66451548;Spk Haslach-Zell
 66451862;Spk Hanauerland Kehl
@@ -2995,7 +2987,6 @@
 66470035;Deutsche Bank Offenburg
 66490000;Volksbank Offenburg
 66491800;Volksbank Bühl
-66492300;Renchtalbank Oppenau -alt-
 66492600;VB Appenweier -alt-
 66492700;VB Kinzigtal Wolfach
 66550070;Sparkasse Rastatt-Gernsbach
@@ -3025,15 +3016,12 @@
 67020020;BW Bank Mannheim
 67020190;UniCredit Bank-HypoVereinbk
 67020259;UniCredit exHypo Ndl681Mnh
-67020500;Oyak Anker Bank Mannheim
 67040031;Commerzbank Mannheim
 67040060;Commerzbank CC Mannheim
 67040061;Commerzbank CC Mannheim
 67050000;Landesbank Baden-Württ
-67050101;Spk Mannheim
 67050505;Spk Rhein Neckar Nord
 67051203;Spk Hockenheim
-67052385;Bez Spk Weinheim
 67060031;Volksbank Ma-Sandhofen
 67070010;Deutsche Bank Mannheim
 67070024;Deutsche Bank PGK Mannheim
@@ -3043,7 +3031,6 @@
 67089440;Commerzbank ITGK Mannheim
 67090000;VR Bank Rhein-Neckar
 67090617;apoBank Mannheim
-67091300;VB Bez Schwetzingen -alt-
 67091500;Volksbank Kurpfalz H+G Bank
 67092300;Volksbank Weinheim
 67210111;SEB Heidelberg
@@ -3054,7 +3041,6 @@
 67230001;MLP FDL Zw CS
 67240039;Commerzbank Heidelberg
 67250020;Spk Heidelberg
-67251918;Sparkasse Sinsheim -alt-
 67261909;Raiffbk Steinsberg -alt-
 67262243;Raiff Privatbk Wiesloch
 67262402;VB Schwarzbachtal -alt-
@@ -3074,8 +3060,6 @@
 67362560;Volksbank Tauber -alt-
 67390000;VB Main-Tauber
 67450048;Spk Neckartal-Odenwald
-67451475;Spk Buchen-Walldürn -alt-
-67451680;Spk Osterburken -alt-
 67460041;Volksbank Mosbach
 67461424;Volksbank Franken Buchen
 67461733;Volksbank Kirnau
@@ -3135,7 +3119,7 @@
 68462427;VB Klettgau-Wutöschingen
 68490000;Volksbank Rhein-Wehra
 68491500;Volksbank Jestetten
-68492200;VB Hochrhein Waldshut-Tieng
+68492200;Volksbank Hochrhein
 69000000;BBk Vill-Schwen eh Konstanz
 69010111;SEB Konstanz
 69020020;BW Bank Konstanz
@@ -3169,13 +3153,14 @@
 69451070;Spk Donaueschingen -alt-
 69470024;Deutsche Bank PGK Villingen
 69470039;Deutsche Bank Villingen Sch
-69490000;VB Villingen-Schwenningen
+69490000;Volksbank Villingen
 69491700;Volksbank Triberg
 70000000;BBk München
 70010080;Postbank -Giro- München
 70010111;SEB München
 70010424;Aareal Bank
 70010500;Deutsche Pfandbriefbank
+70010555;Deutsche Pfandbriefbank
 70011100;Deutsche Kontor Grünwald
 70011110;Kontor Sofort Bank Grünwald
 70011200;Bank Vontobel Europe
@@ -3190,11 +3175,16 @@
 70012100;VEM Aktienbank München
 70012200;Bank Sarasin
 70012300;V-Bank München
-70012500;HTB München
 70012600;Südt. Sparkasse München
 70013000;Ebase Aschheim
 70013100;Payment Services BV Werther
+70013155;Payment Services BV Werther
+70013199;Payment Services BV Werther
 70013500;Bankhaus Herzogpark München
+70015000;Transact Berlin
+70015015;transact Berlin 001
+70015025;transact Berlin 002
+70015035;transact Berlin 003
 70020001;UniCredit exHypo Ndl645 M
 70020270;UniCredit Bank-HypoVereinbk
 70020300;Commerz Finanz München
@@ -3205,9 +3195,9 @@
 70025175;UniCredit Bank-HypoVereinbk
 70030014;Fürst Fugger Privatbk MUC
 70030111;Flessabank München
-70030300;Reuschel & Co München
+70030300;Bankhaus Reuschel & Co
 70030400;Merck Finck & Co München
-70030800;Delbrück Bethmann Maffei
+70030800;Bethmann Bank
 70031000;Bankhaus Sperrer Freising
 70032500;SGKB Deutschland, München
 70033100;Baaderbank Unterschleißheim
@@ -3222,11 +3212,10 @@
 70050000;BayernLB München
 70051003;Sparkasse Freising
 70051540;Sparkasse Dachau
-70051805;Kreissparkasse
+70051805;Kr Spk München Starnbg Ebbg
 70051995;Spk Erding-Dorfen
 70052060;Spk Landsberg-Dießen
 70053070;Spk Fürstenfeldbruck
-70054080;Spk Starnberg -alt-
 70054306;Spk Bad Tölz-Wolfratshausen
 70070010;Deutsche Bank München
 70070024;Deutsche Bank PGK München
@@ -3244,7 +3233,7 @@
 70090500;Sparda-Bank München
 70090606;apoBank München
 70091500;VB Raiffbk Dachau
-70091600;Landsberg-Ammersee Bank
+70091600;VR-Bank Landsberg-Ammersee
 70091900;VR-Bank Erding
 70093200;VR-Bank Starnberg-Hg-Lbg
 70093400;Vb Raiffbk Ismaning
@@ -3260,7 +3249,7 @@
 70120900;UniCredit exHypo Ndl BACA
 70130700;Lenz Bank München
 70130800;Merkur Bank München
-70133300;Santander Consumer Bk Münch
+70133300;Santander Bank München
 70150000;St Spk München
 70160000;DZ BANK München
 70160300;Raiffbk München -alt-
@@ -3269,7 +3258,6 @@
 70169132;Raiffbk Griesstätt-Halfing
 70169165;Raiffbk Chiemgau-Nord-Obing
 70169168;VR-Bank Chiemgau-Süd -alt-
-70169179;VB Siegsdorf-Bergen -alt-
 70169186;Raiffbk Pfaffenhofen Glonn
 70169190;Raiffbk Tattenh Großkarol
 70169191;Raiffbk Rupertiwinkel
@@ -3334,7 +3322,7 @@
 70220800;VVB München
 70220900;Wüstenrot Bausparkasse
 70230600;Isbank München
-70250150;Kreissparkasse
+70250150;Kr Spk München Starnbg Ebbg
 70300000;BBk München eh Garmisch-Par
 70320090;UniCredit Bank-HypoVereinbk
 70320305;UniCredit exHypo Ndl635 Gar
@@ -3355,7 +3343,6 @@
 71051010;Kr Spk Altötting-Burgh-alt-
 71052050;Kr Spk Traunstein-Trostberg
 71061009;VR meine Raiffeisenbank
-71062194;VR Traunstein -alt-
 71062802;Raiffeisenbank Anger
 71090000;VB RB Oberbayern Südost
 71100000;BBk München eh Rosenheim
@@ -3453,7 +3440,7 @@
 72169013;Raiffbk Aresing-Hörz-Schilt
 72169080;Raiffbk Aresing-Gerolsbach
 72169111;Raiffbk Hohenwart -alt-
-72169218;Raiffbk Schrobenhausen
+72169218;Schrobenhausener Bank
 72169246;Raiffbk Schrobenhausener Ld
 72169380;Raiffeisenbank Beilngries
 72169733;Rbk Berg im Gau-L -alt-
@@ -3468,7 +3455,7 @@
 72180002;Commerzbank Ingolstadt
 72191300;Volksbank Eichstätt
 72191600;Hallertauer Volksbank
-72191800;Volksbank Schrobenhausen
+72191800;VB Schrobenhausen -alt-
 72220074;UniCredit Bank-HypoVereinbk
 72223182;UniCredit Bank-HypoVereinbk
 72250000;Sparkasse Nördlingen
@@ -3492,7 +3479,6 @@
 73191500;Illertisser Bank
 73300000;BBk Augsburg eh Kempten
 73311600;Hypo-Landesbk
-73311800;UniCredit Bank Austria
 73320073;UniCredit Bank-HypoVereinbk
 73320442;UniCredit exHypo Ndl669 Kpt
 73321177;UniCredit Bank-HypoVereinbk
@@ -3694,7 +3680,7 @@
 76060618;VR Bank Nürnberg
 76061025;Raiffbk Spar+Kreditbk Lauf
 76061482;Raiffeisenbank Hersbruck
-76069359;Raiffeisenbank Allersberg
+76069359;Raiffeisenbank am Rothsee
 76069369;Raiffbk Auerbach-Freihung
 76069372;Raiffbk Bad Windsheim
 76069378;Raiffeisenbank Bechhofen
@@ -3778,10 +3764,10 @@
 77060100;VR Bank Bamberg
 77061004;Raiffbk Obermain Nord
 77061425;Raiffeisen-Volksbank Ebern
-77062014;Raiffeisenbank Burgebrach
+77062014;RB Burgebrach-Stegaurach
 77062139;Raiff-VB Bad Staffelstein
 77063048;Raiffbk Hallstadt -alt-
-77065141;Raiffeisenbank Stegaurach
+77065141;Raiffbk Stegaurach -alt-
 77069042;Raiffbk Gößweinstein -alt-
 77069044;Raiffbk Küps-Mitwitz-Stockh
 77069051;Raiffbk Heiligenstadt
@@ -3798,7 +3784,7 @@
 77069782;Raiffeisenbank am Kulm
 77069836;Raiffbk Berg-Bad Steben
 77069868;Raiffeisenbank Oberland
-77069870;Raiffbk Frankenw. Ost-Oberk
+77069870;Raiffbk Hochfranken West
 77069879;Raiffbk Oberkotzau -alt-
 77069893;Raiffeisenbank Töpen -alt-
 77069906;Raiffbk Wüstenselbitz
@@ -3849,7 +3835,7 @@
 79032038;Bank Schilling Hammelburg
 79040047;Commerzbank Würzburg
 79050000;Spk Mainfranken Würzburg
-79061000;Raiffeisenbank Ochsenfurt
+79061000;Raiffbk Ochsenfurt -alt-
 79061153;Raiffeisenbank Lohr -alt-
 79062106;Raiffbk Hammelburg
 79063060;Raiffbk Estenfeld-Bergtheim
@@ -3860,7 +3846,6 @@
 79069001;Raiffbk Volkach-Wiesentheid
 79069010;VR-Bank Schweinfurt
 79069031;Raiffbk Bütthard-Gaukönigsh
-79069078;Raiffeisenbank Geiselwind
 79069090;Raiffbk Ulsenheim-Gollh-alt
 79069145;Raiffbk Kreuzw-Hasl -alt-
 79069150;Raiffbk Main-Spessart
@@ -4023,7 +4008,6 @@
 83094454;Volksbank Saaletal
 83094494;Volksbank Eisenberg
 83094495;EthikBank Zndl Vb Eisenberg
-83095424;Volksbank Altenburg -alt-
 84000000;BBk Meiningen
 84020086;UniCredit Bank-HypoVereinbk
 84020087;UniCredit Bank-HypoVereinbk
@@ -4051,6 +4035,7 @@
 85050100;Spk Oberlausitz-Niederschl.
 85050200;Kr Spk Riesa-Großenhain alt
 85050300;Ostsächsische Spk Dresden
+85050350;Ostsächsische Spk OSD.Net
 85055000;Spk Meißen
 85060000;VB Pirna
 85065028;Raiffbk Neustadt Sachs -alt
@@ -4079,7 +4064,7 @@
 86020500;Bank für Sozialwirtschaft
 86020600;Hanseatic Bank Leipzig
 86020880;UniCredit exHypo Ndl508 Lei
-86033300;Santander Consumer Bk Leipz
+86033300;Santander Bank Leipzig
 86040000;Commerzbank Leipzig
 86040060;Commerzbank CC Leipzig
 86040061;Commerzbank CC Leipzig
