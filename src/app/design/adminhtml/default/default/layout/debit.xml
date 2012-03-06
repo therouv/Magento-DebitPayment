@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+	<debit_adminhtml_order_index>
+        <reference name="content">
+            <block type="debit/adminhtml_order" name="debit.adminhtml.order" />
+        </reference>
+	</debit_adminhtml_order_index>
+</layout>
