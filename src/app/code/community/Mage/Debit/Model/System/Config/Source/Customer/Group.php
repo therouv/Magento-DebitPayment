@@ -17,7 +17,7 @@
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.magentocommerce.com/extension/676/
@@ -28,7 +28,7 @@
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2011 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.magentocommerce.com/extension/676/
  */
