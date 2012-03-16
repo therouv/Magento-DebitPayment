@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * Helper class for different helper functionalities..
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -37,11 +37,11 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
 {
     /**
      * getBankByBlz
-     * 
+     *
      * Returns the bankname by given blz
-     * 
+     *
      * @param string $blz BLZ
-     * 
+     *
      * @return null|string Bank Name
      */
     public function getBankByBlz($blz)
@@ -52,7 +52,7 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
             $file = new Varien_Io_File();
             $file->open(
                 array(
-                	'path' => Mage::getModuleDir('etc', 'Mage_Debit')
+                    'path' => Mage::getModuleDir('etc', 'Mage_Debit')
                 )
             );
             $file->streamOpen('bankleitzahlen.csv', 'r');
@@ -69,9 +69,9 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
 
     /**
      * _loadBlzCache
-     * 
+     *
      * Loads the blz data from cache
-     * 
+     *
      * @return mixed|false Cache data
      */
     protected function _loadBlzCache()
@@ -84,11 +84,11 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
 
     /**
      * _saveBlzCache
-     * 
+     *
      * Saves the blz data in the cache
-     * 
+     *
      * @param array $data Blz data
-     * 
+     *
      * @return Mage_Debit_Helper_Data Self.
      */
     protected function _saveBlzCache($data)
@@ -102,9 +102,9 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
 
     /**
      * _getCacheLifetime
-     * 
+     *
      * Returns the cache lifetime for the blz data.
-     * 
+     *
      * @return int Lifetime
      */
     protected function _getCacheLifetime()
@@ -114,9 +114,9 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
 
     /**
      * _getCacheKey
-     * 
+     *
      * Returns the cache key for the blz data.
-     * 
+     *
      * @return string Cache key
      */
     protected function _getCacheKey()
@@ -126,9 +126,9 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
 
     /**
      * _getCacheTags
-     * 
+     *
      * Returns the CONFIG cache tag
-     * 
+     *
      * @return array Cache tags
      */
     protected function _getCacheTags()
@@ -138,9 +138,9 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
 
     /**
      * sanitizeData
-     * 
+     *
      * @param string $data Data
-     * 
+     *
      * @return string The sanitized string
      */
     public function sanitizeData($data)

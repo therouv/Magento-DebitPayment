@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * Setup script
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -38,9 +38,9 @@ $read = Mage::getSingleton('core/resource')->getConnection('core_read');
 $eid = $read->fetchRow(
     "select entity_type_id from {$this->getTable('eav_entity_type')} where entity_type_code = 'customer'"
 );
-$customer_type_id = $eid['entity_type_id'];
+$customerTypeId = $eid['entity_type_id'];
 
-$attr_date = array(
+$attrDate = array(
     'type' => 'datetime',
     'input' => 'label',
     'label' => 'Account update date',
@@ -50,7 +50,7 @@ $attr_date = array(
     'position' => '100'
 );
 
-$attr_name = array(
+$attrName = array(
     'type' => 'varchar',
     'input' => 'text',
     'label' => 'Account Name',
@@ -60,7 +60,7 @@ $attr_name = array(
     'position' => '100'
 );
 
-$attr_number = array(
+$attrNumber = array(
     'type' => 'varchar',
     'input' => 'text',
     'label' => 'Account number',
@@ -71,7 +71,7 @@ $attr_number = array(
     'position' => '100'
 );
 
-$attr_blz = array(
+$attrBlz = array(
     'type' => 'varchar',
     'input' => 'text',
     'label' => 'Bank code',
@@ -86,27 +86,27 @@ $installer = $this;
 $installer->startSetup();
 
 $setup = new Mage_Eav_Model_Entity_Setup('core_setup');
-$setup->addAttribute($customer_type_id, 'debit_payment_acount_update', $attr_date);
-$setup->addAttribute($customer_type_id, 'debit_payment_acount_name', $attr_name);
-$setup->addAttribute($customer_type_id, 'debit_payment_acount_number', $attr_number);
-$setup->addAttribute($customer_type_id, 'debit_payment_acount_blz', $attr_blz);
+$setup->addAttribute($customerTypeId, 'debit_payment_acount_update', $attrDate);
+$setup->addAttribute($customerTypeId, 'debit_payment_acount_name', $attrName);
+$setup->addAttribute($customerTypeId, 'debit_payment_acount_number', $attrNumber);
+$setup->addAttribute($customerTypeId, 'debit_payment_acount_blz', $attrBlz);
 
-// Since 1.4.2.0 this is necessary! 
+// Since 1.4.2.0 this is necessary!
 $eavConfig = Mage::getSingleton('eav/config');
 
-$attribute = $eavConfig->getAttribute($customer_type_id, 'debit_payment_acount_update');
+$attribute = $eavConfig->getAttribute($customerTypeId, 'debit_payment_acount_update');
 $attribute->setData('used_in_forms', array('customer_account_edit', 'customer_account_create', 'adminhtml_customer'));
 $attribute->save();
 
-$attribute = $eavConfig->getAttribute($customer_type_id, 'debit_payment_acount_name');
+$attribute = $eavConfig->getAttribute($customerTypeId, 'debit_payment_acount_name');
 $attribute->setData('used_in_forms', array('customer_account_edit', 'customer_account_create', 'adminhtml_customer'));
 $attribute->save();
 
-$attribute = $eavConfig->getAttribute($customer_type_id, 'debit_payment_acount_number');
+$attribute = $eavConfig->getAttribute($customerTypeId, 'debit_payment_acount_number');
 $attribute->setData('used_in_forms', array('customer_account_edit', 'customer_account_create', 'adminhtml_customer'));
 $attribute->save();
 
-$attribute = $eavConfig->getAttribute($customer_type_id, 'debit_payment_acount_blz');
+$attribute = $eavConfig->getAttribute($customerTypeId, 'debit_payment_acount_blz');
 $attribute->setData('used_in_forms', array('customer_account_edit', 'customer_account_create', 'adminhtml_customer'));
 $attribute->save();
 

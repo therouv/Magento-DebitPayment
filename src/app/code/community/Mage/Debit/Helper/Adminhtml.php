@@ -62,7 +62,7 @@ class Mage_Debit_Helper_Adminhtml extends Mage_Debit_Helper_Data
     public function getBankAccount()
     {
         return array(
-			'name'           => Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_ACCOUNTOWNER),
+            'name'           => Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_ACCOUNTOWNER),
             'bank_code'      => Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_ROUTINGNUMBER),
             'account_number' => Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_ACCOUNTNUMBER)
         );
