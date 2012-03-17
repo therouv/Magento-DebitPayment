@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * AjaxController
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -36,10 +36,8 @@
 class Mage_Debit_AjaxController extends Mage_Core_Controller_Front_Action
 {
     /**
-     * checkblzAction
-     * 
      * Checks the BLZ if it exists and returns the bankname or an error message
-     * 
+     *
      * @return void
      */
     public function checkblzAction()

@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * Customer Attribute Backend Encrypted
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -37,12 +37,9 @@ class Mage_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
     extends Mage_Eav_Model_Entity_Attribute_Backend_Abstract
 {
     /**
-     * beforeSave
-     * 
      * Encrypts the value before saving
-     * 
+     *
      * @param <type> $object Object
-     * 
      * @return void
      */
     public function beforeSave($object)
@@ -54,12 +51,9 @@ class Mage_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
     }
 
     /**
-     * afterLoad
-     * 
      * Decrypts the value after load
-     * 
+     *
      * @param <type> $object Object
-     * 
      * @return void
      */
     public function afterLoad($object)

@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * Debit Form Block
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -36,10 +36,8 @@
 class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
 {
     /**
-     * _construct
-     * 
      * Construct payment form block and set template
-     * 
+     *
      * @return void
      */
     protected function _construct()
@@ -49,10 +47,8 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
     }
 
     /**
-     * getBankName
-     * 
      * Returns the account bankname if applicable from the payment info instance
-     * 
+     *
      * @return string Bankname/Error
      */
     public function getBankName()
@@ -69,10 +65,8 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
     }
 
     /**
-     * getAccountBLZ
-     * 
      * Returns the account blz from the payment info instance
-     * 
+     *
      * @return string BLZ
      */
     public function getAccountBLZ()
@@ -90,10 +84,8 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
     }
 
     /**
-     * getAccountName
-     * 
      * Returns the account name from the payment info instance
-     * 
+     *
      * @return string Name
      */
     public function getAccountName()
@@ -105,10 +97,8 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
     }
 
     /**
-     * getAccountNumber
-     * 
      * Returns the account number from the payment info instance
-     * 
+     *
      * @return string Number
      */
     public function getAccountNumber()
@@ -124,13 +114,10 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
     }
 
     /**
-     * _getAccountData
-     * 
      * Returns the specific value of the requested field from the
      * customer model.
-     * 
+     *
      * @param string $field Attribute to get
-     * 
      * @return string Data
      */
     protected function _getAccountData($field)
@@ -146,10 +133,8 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
     }
 
     /**
-     * getCustomer
-     * 
      * Returns the current customer
-     * 
+     *
      * @return Mage_Customer_Model_Customer Customer
      */
     public function getCustomer()
@@ -161,10 +146,8 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
     }
 
     /**
-     * getCheckoutValidBlz
-     * 
      * Returns the config setting if checkout is only allowed with a valid BLZ
-     * 
+     *
      * @return boolean true/false
      */
     public function getCheckoutValidBlz()

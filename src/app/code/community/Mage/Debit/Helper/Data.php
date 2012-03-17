@@ -36,12 +36,9 @@
 class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
 {
     /**
-     * getBankByBlz
-     *
      * Returns the bankname by given blz
      *
      * @param string $blz BLZ
-     *
      * @return null|string Bank Name
      */
     public function getBankByBlz($blz)
@@ -68,8 +65,6 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
     }
 
     /**
-     * _loadBlzCache
-     *
      * Loads the blz data from cache
      *
      * @return mixed|false Cache data
@@ -83,12 +78,9 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
     }
 
     /**
-     * _saveBlzCache
-     *
      * Saves the blz data in the cache
      *
      * @param array $data Blz data
-     *
      * @return Mage_Debit_Helper_Data Self.
      */
     protected function _saveBlzCache($data)
@@ -101,8 +93,6 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
     }
 
     /**
-     * _getCacheLifetime
-     *
      * Returns the cache lifetime for the blz data.
      *
      * @return int Lifetime
@@ -113,8 +103,6 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
     }
 
     /**
-     * _getCacheKey
-     *
      * Returns the cache key for the blz data.
      *
      * @return string Cache key
@@ -125,8 +113,6 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
     }
 
     /**
-     * _getCacheTags
-     *
      * Returns the CONFIG cache tag
      *
      * @return array Cache tags
@@ -140,7 +126,6 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
      * sanitizeData
      *
      * @param string $data Data
-     *
      * @return string The sanitized string
      */
     public function sanitizeData($data)

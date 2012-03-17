@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * Debit Form Block for customer account page
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -37,10 +37,8 @@ class Mage_Debit_Block_Account_Data
     extends Mage_Customer_Block_Account_Dashboard
 {
     /**
-     * getBankName
-     * 
      * Returns the bank name
-     * 
+     *
      * @return string Bankname
      */
     public function getBankName()
@@ -57,10 +55,8 @@ class Mage_Debit_Block_Account_Data
     }
 
     /**
-     * getAccountBLZ
-     * 
      * Returns the account blz of the specific account
-     * 
+     *
      * @return string BLZ
      */
     public function getAccountBLZ()
@@ -69,10 +65,8 @@ class Mage_Debit_Block_Account_Data
     }
 
     /**
-     * getAccountName
-     * 
      * Returns the account owner name of the specific account
-     * 
+     *
      * @return string Name
      */
     public function getAccountName()
@@ -81,10 +75,8 @@ class Mage_Debit_Block_Account_Data
     }
 
     /**
-     * getAccountNumber
-     * 
      * Returns the number of the specific account
-     * 
+     *
      * @return string Account Number
      */
     public function getAccountNumber()
@@ -93,13 +85,10 @@ class Mage_Debit_Block_Account_Data
     }
 
     /**
-     * _getAccountData
-     * 
      * Returns the specific value of the requested field from the
      * customer model.
-     * 
+     *
      * @param string $field Attribute to get
-     * 
      * @return string Data
      */
     protected function _getAccountData($field)

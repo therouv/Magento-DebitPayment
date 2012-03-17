@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * Debit Info Block
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -36,10 +36,8 @@
 class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
 {
     /**
-     * _construct
-     * 
      * Construct payment info block and set template
-     * 
+     *
      * @return void
      */
     protected function _construct()
@@ -49,12 +47,8 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
     }
 
     /**
-     * toPdf
-     * 
      * Sets the template for PDF print-outs
-     * 
-     * @returns string Text for PDF
-     * 
+     *
      * @return string Text for PDF print-out
      */
     public function toPdf()
@@ -64,10 +58,8 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
     }
 
     /**
-     * isEmailContext
-     * 
      * Checks if we are in the email context
-     * 
+     *
      * @return boolean true/false
      */
     public function isEmailContext()
@@ -82,7 +74,7 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
                     return true; // Admin
                 } else {
                     return false; // Admin View
-                }   
+                }
             } else {
                 return true; // Frontend
             }
@@ -90,10 +82,8 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
     }
 
     /**
-     * sendDataInEmail
-     * 
      * Returns the config setting if bank data should be send in the email
-     * 
+     *
      * @return boolean true/false
      */
     public function sendDataInEmail()
@@ -103,10 +93,8 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
     }
 
     /**
-     * getEmailData
-     * 
      * Returns email data and mask the data if necessary
-     * 
+     *
      * @return array Bank data
      */
     public function getEmailData()

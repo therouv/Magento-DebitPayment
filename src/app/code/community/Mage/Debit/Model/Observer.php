@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * Observer
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -37,15 +37,13 @@ class Mage_Debit_Model_Observer
 {
     /**
      * paymentMethodIsActive
-     * 
+     *
      * Checks if DebitPayment is allowed for specific customer groups and if a
-     * registered customer has the required minimum amount of orders to be 
+     * registered customer has the required minimum amount of orders to be
      * allowed to order via DebitPayment.
-     * 
-     * Magento Event: payment_method_is_active
-     * 
+     *
+     * @magentoEvent payment_method_is_active
      * @param Varien_Event_Observer $observer Observer
-     * 
      * @return void
      */
     public function paymentMethodIsActive($observer)
@@ -66,7 +64,7 @@ class Mage_Debit_Model_Observer
         if (!Mage::getStoreConfigFlag('payment/debit/specificgroup_all')) {
             $customerGroupId = Mage_Customer_Model_Group::NOT_LOGGED_IN_ID;
             if ($session->isLoggedIn()) {
-                $customerGroupId = $session->getCustomerGroupId();    
+                $customerGroupId = $session->getCustomerGroupId();
             }
             $allowedGroupIds = explode(',', Mage::getStoreConfig('payment/debit/specificgroup'));
             if (!in_array($customerGroupId, $allowedGroupIds)) {
@@ -103,15 +101,11 @@ class Mage_Debit_Model_Observer
     }
 
     /**
-     * saveAccountInfo
-     * 
      * Saves the account data after a successful order in the specific
      * customer model.
-     * 
-     * Magento Event: sales_order_save_after
-     * 
+     *
+     * @magentoEvent sales_order_save_after
      * @param Varien_Event_Observer $observer Observer
-     * 
      * @return void
      */
     public function saveAccountInfo($observer)
@@ -134,12 +128,9 @@ class Mage_Debit_Model_Observer
     }
 
     /**
-     * _getOrderCustoemr
-     * 
      * Checks the current order and returns the customer model
-     * 
+     *
      * @param Mage_Sales_Model_Order $order Current order
-     * 
      * @return Mage_Customer_Model_Customer|null Customer model or null
      */
     public function _getOrderCustomer($order)

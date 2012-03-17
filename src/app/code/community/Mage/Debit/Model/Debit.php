@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * Debit Model
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -44,25 +44,22 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
 
     /**
      * payment form block
-     * 
+     *
      * @var string MODULE/BLOCKNAME
      */
     protected $_formBlockType = 'debit/form';
 
     /**
      * payment info block
-     * 
+     *
      * @var string MODULE/BLOCKNAME
      */
     protected $_infoBlockType = 'debit/info';
 
     /**
-     * assignData
-     * 
      * Assigns data to the payment info instance
-     * 
+     *
      * @param Varien_Object|array $data Payment Data from checkout
-     * 
      * @return Mage_Debit_Model_Debit Self.
      */
     public function assignData($data)
@@ -104,10 +101,8 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * getCustomText
-     * 
      * Returns the custom text for this payment method
-     * 
+     *
      * @return string Custom text
      */
     public function getCustomText()
@@ -116,10 +111,8 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * getAccountName
-     * 
      * Returns the account name from the payment info instance
-     * 
+     *
      * @return string Name
      */
     public function getAccountName()
@@ -129,10 +122,8 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * getAccountNumber
-     * 
      * Returns the account number from the payment info instance
-     * 
+     *
      * @return string Number
      */
     public function getAccountNumber()
@@ -149,10 +140,8 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * getAccountBLZ
-     * 
      * Returns the account blz from the payment info instance
-     * 
+     *
      * @return string BLZ
      */
     public function getAccountBLZ()
@@ -166,10 +155,8 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * getAccountBankname
-     * 
      * Returns the account bankname if applicable from the payment info instance
-     * 
+     *
      * @return string Bankname/Error
      */
     public function getAccountBankname()
@@ -182,12 +169,9 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
-     * maskString
-     * 
      * Returns the encrypted data for mail
      *
      * @param string $data Data to crypt
-     * 
      * @return string Crypted data
      */
     public function maskString($data)

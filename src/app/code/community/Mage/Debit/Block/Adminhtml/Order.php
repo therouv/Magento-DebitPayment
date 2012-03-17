@@ -33,6 +33,11 @@
  */
 class Mage_Debit_Block_Adminhtml_Order extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
+    /**
+     * Class constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->_controller = 'adminhtml_order';

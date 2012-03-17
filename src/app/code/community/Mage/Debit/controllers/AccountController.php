@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * AccountController
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -36,8 +36,6 @@
 class Mage_Debit_AccountController extends Mage_Core_Controller_Front_Action
 {
     /**
-     * _getSession
-     * 
      * Retrieve customer session object
      *
      * @return Mage_Customer_Model_Session
@@ -49,7 +47,7 @@ class Mage_Debit_AccountController extends Mage_Core_Controller_Front_Action
 
     /**
      * preDispatch
-     * 
+     *
      * @return void
      */
     public function preDispatch()
@@ -63,7 +61,7 @@ class Mage_Debit_AccountController extends Mage_Core_Controller_Front_Action
 
     /**
      * editAction
-     * 
+     *
      * @return void
      */
     public function editAction()
@@ -75,10 +73,9 @@ class Mage_Debit_AccountController extends Mage_Core_Controller_Front_Action
 
     /**
      * saveAction
-     * 
+     *
      * @throws Mage_Core_Exception
      * @throws Exception
-     * 
      * @return void
      */
     public function saveAction()
