@@ -44,8 +44,8 @@ class Mage_Debit_AjaxController extends Mage_Core_Controller_Front_Action
     {
         $result = array();
         $blz = $this->getRequest()->getPost('blz');
-        $blz = Mage::helper('debit')->sanitizeData($blz);
-        if ($bank = Mage::helper('debit')->getBankByBlz($blz)) {
+        $blz = Mage::helper('Mage_Debit_Helper_Data')->sanitizeData($blz);
+        if ($bank = Mage::helper('Mage_Debit_Helper_Data')->getBankByBlz($blz)) {
             $result['found'] = 1;
             $result['blz'] = $blz;
             $result['bank'] = $bank;

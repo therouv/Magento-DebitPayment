@@ -57,7 +57,7 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
         if (empty($blz)) {
             return $this->__('-- will be filled in automatically --');
         }
-        $bankName = Mage::helper('debit')->getBankByBlz($blz);
+        $bankName = Mage::helper('Mage_Debit_Helper_Data')->getBankByBlz($blz);
         if ($bankName == null) {
             $bankName = $this->__('not available');
         }
@@ -140,9 +140,9 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
     public function getCustomer()
     {
         if (Mage::app()->getStore()->isAdmin()) {
-            return Mage::getSingleton('adminhtml/session_quote')->getCustomer();
+            return Mage::getSingleton('Mage_Adminhtml_Model_Session_Quote')->getCustomer();
         }
-        return Mage::getSingleton('customer/session')->getCustomer();
+        return Mage::getSingleton('Mage_Customer_Model_Session')->getCustomer();
     }
 
     /**

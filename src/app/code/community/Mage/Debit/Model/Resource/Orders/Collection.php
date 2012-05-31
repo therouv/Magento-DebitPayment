@@ -22,7 +22,7 @@
  * @link      http://www.magentocommerce.com/extension/676/
  */
 /**
- * Resource Model for Export Orders
+ * Resource Model Collection for Export Orders
  *
  * @category  Mage
  * @package   Mage_Debit
@@ -31,14 +31,14 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.magentocommerce.com/extension/676/
  */
-class Mage_Debit_Model_Mysql4_Orders extends Mage_Core_Model_Mysql4_Abstract
+class Mage_Debit_Model_Resource_Orders_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
     /**
      * (non-PHPdoc)
-     * @see Mage_Core_Model_Resource_Abstract::_construct()
+     * @see Mage_Core_Model_Resource_Db_Collection_Abstract::_construct()
      */
     protected function _construct()
     {
-        $this->_init('debit/order_grid', 'id');
+        $this->_init('Mage_Debit_Model_Orders', 'Mage_Debit_Model_Resource_Orders');
     }
 }

@@ -18,6 +18,7 @@
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.magentocommerce.com/extension/676/
  */
@@ -28,13 +29,96 @@
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.magentocommerce.com/extension/676/
  */
-
-/* @var $installer Mage_Sales_Model_Entity_Setup */
+/* @var $installer Mage_Core_Model_Resource_Setup */
 $installer = $this;
 $installer->startSetup();
+
+
+/*
+ * INSTALL ATTRIBUTES
+ */
+$read = Mage::getSingleton('Mage_Core_Model_Resource')->getConnection('core_read');
+$eid = $read->fetchRow(
+    "select entity_type_id from {$this->getTable('eav_entity_type')} where entity_type_code = 'customer'"
+);
+$customerTypeId = $eid['entity_type_id'];
+
+$attrDate = array(
+    'type' => 'datetime',
+    'input' => 'date',
+    'label' => 'Account update date',
+    'global' => 1,
+    'required' => 0,
+    'default' => '',
+    'position' => '100'
+);
+
+$attrName = array(
+    'type' => 'varchar',
+    'input' => 'text',
+    'label' => 'Account Name',
+    'global' => 1,
+    'required' => 0,
+    'default' => '',
+    'position' => '100'
+);
+
+$attrNumber = array(
+    'type' => 'varchar',
+    'input' => 'text',
+    'label' => 'Account number',
+    'backend' => 'Mage_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted',
+    'global' => 1,
+    'required' => 0,
+    'default' => '',
+    'position' => '100'
+);
+
+$attrBlz = array(
+    'type' => 'varchar',
+    'input' => 'text',
+    'label' => 'Bank code',
+    'backend' => 'Mage_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted',
+    'global' => 1,
+    'required' => 0,
+    'default' => '',
+    'position' => '100'
+);
+
+
+$setup = new Mage_Eav_Model_Entity_Setup('core_setup');
+$setup->addAttribute($customerTypeId, 'debit_payment_acount_update', $attrDate);
+$setup->addAttribute($customerTypeId, 'debit_payment_acount_name', $attrName);
+$setup->addAttribute($customerTypeId, 'debit_payment_acount_number', $attrNumber);
+$setup->addAttribute($customerTypeId, 'debit_payment_acount_blz', $attrBlz);
+
+// Since 1.4.2.0 this is necessary!
+$eavConfig = Mage::getSingleton('Mage_Eav_Model_Config');
+
+$attribute = $eavConfig->getAttribute($customerTypeId, 'debit_payment_acount_update');
+$attribute->setData('used_in_forms', array('customer_account_edit', 'customer_account_create', 'adminhtml_customer'));
+$attribute->save();
+
+$attribute = $eavConfig->getAttribute($customerTypeId, 'debit_payment_acount_name');
+$attribute->setData('used_in_forms', array('customer_account_edit', 'customer_account_create', 'adminhtml_customer'));
+$attribute->save();
+
+$attribute = $eavConfig->getAttribute($customerTypeId, 'debit_payment_acount_number');
+$attribute->setData('used_in_forms', array('customer_account_edit', 'customer_account_create', 'adminhtml_customer'));
+$attribute->save();
+
+$attribute = $eavConfig->getAttribute($customerTypeId, 'debit_payment_acount_blz');
+$attribute->setData('used_in_forms', array('customer_account_edit', 'customer_account_create', 'adminhtml_customer'));
+$attribute->save();
+
+
+/*
+ * INSTALL DATABASE TABLE
+ */
 
 $sql = "DROP TABLE IF EXISTS `{$installer->getTable('debit/order_grid')}`;
 	CREATE TABLE `{$installer->getTable('debit/order_grid')}` (
@@ -57,4 +141,6 @@ $sql = "DROP TABLE IF EXISTS `{$installer->getTable('debit/order_grid')}`;
 
 $installer->run($sql);
 
+
+// End setup
 $installer->endSetup();

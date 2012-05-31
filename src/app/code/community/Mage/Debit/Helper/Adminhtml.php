@@ -77,7 +77,7 @@ class Mage_Debit_Helper_Adminhtml extends Mage_Debit_Helper_Data
     public function getSyncedOrders()
     {
         $entityIds = array();
-        $collection = Mage::getModel('debit/orders')->getCollection();
+        $collection = Mage::getModel('Mage_Debit_Model_Orders')->getCollection();
         if ($collection->count() > 0) {
             foreach ($collection as $item) {
                 $entityIds[] = $item->getData('entity_id');
@@ -94,7 +94,7 @@ class Mage_Debit_Helper_Adminhtml extends Mage_Debit_Helper_Data
      */
     public function setStatusAsExported($id)
     {
-        $model = Mage::getModel('debit/orders')->load($id);
+        $model = Mage::getModel('Mage_Debit_Model_Orders')->load($id);
         $model->setData('status', 1);
         $model->save();
         return true;

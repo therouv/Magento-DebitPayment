@@ -47,14 +47,14 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
      *
      * @var string MODULE/BLOCKNAME
      */
-    protected $_formBlockType = 'debit/form';
+    protected $_formBlockType = 'Mage_Debit_Block_Form';
 
     /**
      * payment info block
      *
      * @var string MODULE/BLOCKNAME
      */
-    protected $_infoBlockType = 'debit/info';
+    protected $_infoBlockType = 'Mage_Debit_Block_Info';
 
     /**
      * Assigns data to the payment info instance
@@ -75,7 +75,7 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         if (!$ccType) {
             $ccType = $data->getCcType();
         }
-        $ccType = Mage::helper('debit')->sanitizeData($ccType);
+        $ccType = Mage::helper('Mage_Debit_Helper_Data')->sanitizeData($ccType);
         $ccType = $info->encrypt($ccType);
 
         // Fetch account holder
@@ -89,7 +89,7 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         if (!$ccNumber) {
             $ccNumber = $data->getCcNumber();
         }
-        $ccNumber = Mage::helper('debit')->sanitizeData($ccNumber);
+        $ccNumber = Mage::helper('Mage_Debit_Helper_Data')->sanitizeData($ccNumber);
         $ccNumber = $info->encrypt($ccNumber);
 
         // Set account data in payment info model
@@ -161,9 +161,9 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
      */
     public function getAccountBankname()
     {
-        $bankName = Mage::helper('debit')->getBankByBlz($this->getAccountBLZ());
+        $bankName = Mage::helper('Mage_Debit_Helper_Data')->getBankByBlz($this->getAccountBLZ());
         if ($bankName == null) {
-            $bankName = Mage::helper('debit')->__('not available');
+            $bankName = Mage::helper('Mage_Debit_Helper_Data')->__('not available');
         }
         return $bankName;
     }

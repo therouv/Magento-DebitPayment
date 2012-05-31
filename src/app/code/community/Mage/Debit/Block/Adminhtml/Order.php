@@ -41,30 +41,30 @@ class Mage_Debit_Block_Adminhtml_Order extends Mage_Adminhtml_Block_Widget_Grid_
     public function __construct()
     {
         $this->_controller = 'adminhtml_order';
-        $this->_blockGroup = 'debit';
-        $this->_headerText     = Mage::helper('debit')->__('Debit Payment Orders');
+        $this->_blockGroup = 'mage_debit';
+        $this->_headerText     = Mage::helper('Mage_Debit_Helper_Data')->__('Debit Payment Orders');
         parent::__construct();
         $this->_removeButton('add');
 
-        if (Mage::helper('debit/adminhtml')->hasExportRequirements()) {
+        if (Mage::helper('Mage_Debit_Helper_Adminhtml')->hasExportRequirements()) {
             $this->_addButton('sync', array(
-                'label'     => Mage::helper('debit')->__('Sync Orders'),
+                'label'     => Mage::helper('Mage_Debit_Helper_Data')->__('Sync Orders'),
                 'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/sync') .'\')',
                 'class'     => 'add',
             ));
             $this->_addButton('export_dtaus', array(
-                'label'     => Mage::helper('debit')->__('Export as DTAUS'),
+                'label'     => Mage::helper('Mage_Debit_Helper_Data')->__('Export as DTAUS'),
                 'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/exportdtaus') .'\')',
                 'class'     => '',
             ));
             $this->_addButton('export_csv', array(
-                'label'     => Mage::helper('debit')->__('Export as CSV'),
+                'label'     => Mage::helper('Mage_Debit_Helper_Data')->__('Export as CSV'),
                 'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/exportcsv') .'\')',
                 'class'     => '',
             ));
         } else {
-            Mage::getSingleton('adminhtml/session')->addError(
-                Mage::helper('debit')->__('Please enter bankaccount credentials of the store owner in the system configuration. Otherwise you will not be able to generate a valid export file.')
+            Mage::getSingleton('Mage_Adminhtml_Model_Session')->addError(
+                Mage::helper('Mage_Debit_Helper_Data')->__('Please enter bankaccount credentials of the store owner in the system configuration. Otherwise you will not be able to generate a valid export file.')
             );
         }
     }

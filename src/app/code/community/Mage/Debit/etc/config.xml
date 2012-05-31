@@ -41,38 +41,29 @@
         <models>
             <debit>
                 <class>Mage_Debit_Model</class>
-                <resourceModel>debit_mysql4</resourceModel>
+                <resourceModel>debit_resource</resourceModel>
             </debit>
-			<debit_mysql4>
-	            <class>Mage_Debit_Model_Mysql4</class>
+			<debit_resource>
+	            <class>Mage_Debit_Model_Resource</class>
 	            <entities>
 	                <order_grid>
 	                    <table>debit_order_grid</table>
 	                </order_grid>
 	            </entities>
-	        </debit_mysql4>
+	        </debit_resource>
         </models>
         <resources>
             <debit_setup>
                 <setup>
                     <module>Mage_Debit</module>
                 </setup>
-                <connection>
-                    <use>core_setup</use>
-                </connection>
             </debit_setup>
-            <debit_write>
-                <use>core_write</use>
-            </debit_write>
-            <debit_read>
-                <use>core_read</use>
-            </debit_read>
         </resources>
         <events>
             <payment_method_is_active>
                 <observers>
                     <debit_observer>
-                        <class>debit/observer</class>
+                        <class>Mage_Debit_Model_Observer</class>
                         <method>paymentMethodIsActive</method>
                     </debit_observer>
                 </observers>
@@ -80,7 +71,7 @@
             <sales_order_save_after>
                 <observers>
                     <debit_observer>
-                        <class>debit/observer</class>
+                        <class>Mage_Debit_Model_Observer</class>
                         <method>saveAccountInfo</method>
                     </debit_observer>
                 </observers>
@@ -91,7 +82,7 @@
         <payment>
             <debit>
                 <active>0</active>
-                <model>debit/debit</model>
+                <model>Mage_Debit_Model_Debit</model>
                 <title>Debit Payment</title>
                 <sort_order>10</sort_order>
                 <sendmail>0</sendmail>
@@ -120,8 +111,8 @@
     <adminhtml>
 	    <layout>
 	        <updates>
-	            <debit>
-	                <file>debit.xml</file>
+	            <debit module="Mage_Debit">
+	                <file>layout.xml</file>
 	            </debit>
 	        </updates>
 	    </layout>   
@@ -151,8 +142,8 @@
         </translate>
         <layout>
             <updates>
-                <debit>
-                    <file>debit.xml</file>
+                <debit module="Mage_Debit">
+                    <file>layout.xml</file>
                 </debit>
             </updates>
         </layout>

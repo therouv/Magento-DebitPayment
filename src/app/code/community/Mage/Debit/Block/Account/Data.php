@@ -47,7 +47,7 @@ class Mage_Debit_Block_Account_Data
         if (empty($blz)) {
             return $this->__('-- will be filled in automatically --');
         }
-        $bankName = Mage::helper('debit')->getBankByBlz($blz);
+        $bankName = Mage::helper('Mage_Debit_Helper_Data')->getBankByBlz($blz);
         if ($bankName == null) {
             $bankName = $this->__('not available');
         }
@@ -103,6 +103,6 @@ class Mage_Debit_Block_Account_Data
         if ($field != 'debit_payment_acount_name' && !is_numeric($data)) {
             return '';
         }
-        return $this->htmlEscape($data);
+        return $this->escapeHtml($data);
     }
 }

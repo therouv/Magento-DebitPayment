@@ -44,7 +44,7 @@ class Mage_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
      */
     public function beforeSave($object)
     {
-        $helper = Mage::helper('core');
+        $helper = Mage::helper('Mage_Core_Helper_Data');
         $attributeName = $this->getAttribute()->getName();
         $value = $helper->encrypt($object->getData($attributeName));
         $object->setData($attributeName, $value);
@@ -58,7 +58,7 @@ class Mage_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
      */
     public function afterLoad($object)
     {
-        $helper = Mage::helper('core');
+        $helper = Mage::helper('Mage_Core_Helper_Data');
         $attributeName = $this->getAttribute()->getName();
         $value = $helper->decrypt($object->getData($attributeName));
         $object->setData($attributeName, $value);

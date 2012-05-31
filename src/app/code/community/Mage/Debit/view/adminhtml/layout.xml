@@ -2,7 +2,7 @@
 <layout version="0.1.0">
 	<debit_adminhtml_order_index>
         <reference name="content">
-            <block type="debit/adminhtml_order" name="debit.adminhtml.order" />
+            <block type="Mage_Debit_Block_Adminhtml_Order" name="debit.adminhtml.order" />
         </reference>
 	</debit_adminhtml_order_index>
 </layout>

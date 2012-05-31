@@ -3,9 +3,9 @@
  * This file is part of the Mage_Debit module.
  *
  * PHP version 5
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
  */
 /**
  * System Config Customer Groups
- * 
+ *
  * @category  Mage
  * @package   Mage_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -34,20 +34,20 @@
  */
 class Mage_Debit_Model_System_Config_Source_Customer_Group
 {
-    /** 
+    /**
      * @var array Customer Groups
      */
     protected $_options;
 
     /**
      * Returns the customer groups as an array for system configuration
-     * 
+     *
      * @return array Customer Groups
      */
     public function toOptionArray()
     {
         if (!$this->_options) {
-            $collection = Mage::getResourceModel('customer/group_collection')
+            $collection = Mage::getResourceModel('Mage_Customer_Model_Resource_Group_Collection')
                 ->loadData()
                 ->toOptionArray();
             $this->_options = $collection;
@@ -56,7 +56,7 @@ class Mage_Debit_Model_System_Config_Source_Customer_Group
                 $this->_options,
                 array(
                     'value' => '',
-                    'label' => Mage::helper('debit')->__('-- Please Select --')
+                    'label' => Mage::helper('Mage_Debit_Helper_Data')->__('-- Please Select --')
                 )
             );
         }

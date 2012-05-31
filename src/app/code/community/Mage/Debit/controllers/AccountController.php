@@ -42,7 +42,7 @@ class Mage_Debit_AccountController extends Mage_Core_Controller_Front_Action
      */
     protected function _getSession()
     {
-        return Mage::getSingleton('customer/session');
+        return Mage::getSingleton('Mage_Customer_Model_Session');
     }
 
     /**
@@ -54,7 +54,7 @@ class Mage_Debit_AccountController extends Mage_Core_Controller_Front_Action
     {
         parent::preDispatch();
 
-        if (!Mage::getSingleton('customer/session')->authenticate($this)) {
+        if (!Mage::getSingleton('Mage_Customer_Model_Session')->authenticate($this)) {
             $this->setFlag('', 'no-dispatch', true);
         }
     }
@@ -80,7 +80,7 @@ class Mage_Debit_AccountController extends Mage_Core_Controller_Front_Action
      */
     public function saveAction()
     {
-        $customer = Mage::getSingleton('customer/session')->getCustomer();
+        $customer = Mage::getSingleton('Mage_Customer_Model_Session')->getCustomer();
         if (!$customer) {
             return;
         }

@@ -49,7 +49,7 @@ class Mage_Debit_Model_Observer
     public function paymentMethodIsActive($observer)
     {
         $methodInstance = $observer->getEvent()->getMethodInstance();
-        $session = Mage::getSingleton('customer/session');
+        $session = Mage::getSingleton('Mage_Customer_Model_Session');
 
         // Check if method is DebitPayment
         if ($methodInstance->getCode() != 'debit') {
@@ -82,14 +82,14 @@ class Mage_Debit_Model_Observer
                 return;
             }
             // Load orders and check
-            $orders = Mage::getResourceModel('sales/order_collection')
+            $orders = Mage::getResourceModel('Mage_Sales_Model_Resource_Order_Collection')
                 ->addAttributeToSelect('*')
                 ->addAttributeToFilter('customer_id', $customerId)
                 ->addAttributeToFilter('status', Mage_Sales_Model_Order::STATE_COMPLETE)
                 ->addAttributeToFilter(
                     'state',
                     array(
-                        'in' => Mage::getSingleton('sales/order_config')->getVisibleOnFrontStates()
+                        'in' => Mage::getSingleton('Mage_Sales_Model_Order_Config')->getVisibleOnFrontStates()
                     )
                 )
                 ->load();
@@ -140,7 +140,7 @@ class Mage_Debit_Model_Observer
                 return $customer;
             }
         } else {
-            $customer = Mage::getSingleton('customer/session')->getCustomer();
+            $customer = Mage::getSingleton('Mage_Customer_Model_Session')->getCustomer();
             if ($customer->getId()) {
                 return $customer;
             }

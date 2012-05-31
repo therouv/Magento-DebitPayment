@@ -25,7 +25,7 @@
 	<menu>
 		<sales>
 			<children>
-				<debitpayment translate="title" module="debit">
+				<debitpayment translate="title" module="Mage_Debit">
 					<title>Debit Payment Orders</title>
 					<action>debit/adminhtml_order</action>
 					<sort_order>11</sort_order>
@@ -41,7 +41,7 @@
                         <children>
                             <config>
                                 <children>
-                                    <debitpayment translate="title" module="debit">
+                                    <debitpayment translate="title" module="Mage_Debit">
                                         <title>Debit Payment</title>
                                     </debitpayment>
                                 </children>
