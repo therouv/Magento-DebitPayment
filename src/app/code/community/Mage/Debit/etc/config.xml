@@ -28,30 +28,6 @@
         </Mage_Debit>
     </modules>
     <global>
-        <blocks>
-            <debit>
-                <class>Mage_Debit_Block</class>
-            </debit>
-        </blocks>
-        <helpers>
-            <debit>
-                <class>Mage_Debit_Helper</class>
-            </debit>
-        </helpers>
-        <models>
-            <debit>
-                <class>Mage_Debit_Model</class>
-                <resourceModel>debit_resource</resourceModel>
-            </debit>
-			<debit_resource>
-	            <class>Mage_Debit_Model_Resource</class>
-	            <entities>
-	                <order_grid>
-	                    <table>debit_order_grid</table>
-	                </order_grid>
-	            </entities>
-	        </debit_resource>
-        </models>
         <resources>
             <debit_setup>
                 <setup>

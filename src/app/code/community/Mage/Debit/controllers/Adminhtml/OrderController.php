@@ -58,7 +58,7 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
         $syncedOrdersCount = 0;
 
         // Sync orders
-        $collection = Mage::getResourceModel('sales/order_grid_collection');
+        $collection = Mage::getResourceModel('Mage_Sales_Model_Resource_Order_Grid_Collection');
         if (count($syncedOrders) > 0) {
             $collection->addFieldToFilter('entity_id', array('nin' => $syncedOrders));
         }
@@ -76,7 +76,7 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
             }
 
             /* @var $model Mage_Debit_Model_Orders */
-            $model = Mage::getModel('debit/orders');
+            $model = Mage::getModel('Mage_Debit_Model_Orders');
             $model->addData($order->getData());
             $model->save();
 
@@ -115,7 +115,7 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
         // Add orders
         foreach ($collection as $order) {
             /* @var $orderModel Mage_Sales_Model_Order */
-            $orderModel = Mage::getModel('sales/order')->load($order->getData('entity_id'));
+            $orderModel = Mage::getModel('Mage_Sales_Model_Order')->load($order->getData('entity_id'));
             /* @var $payment Mage_Debit_Model_Debit */
             $paymentMethod = $orderModel->getPayment()->getMethodInstance();
 
@@ -170,7 +170,7 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
         // Add rows
         foreach ($collection as $order) {
             /* @var $orderModel Mage_Sales_Model_Order */
-            $orderModel = Mage::getModel('sales/order')->load($order->getData('entity_id'));
+            $orderModel = Mage::getModel('Mage_Sales_Model_Order')->load($order->getData('entity_id'));
             /* @var $payment Mage_Debit_Model_Debit */
             $paymentMethod = $orderModel->getPayment()->getMethodInstance();
 
@@ -202,7 +202,7 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
      */
     protected function _hasOrdersToExport()
     {
-        $collection = Mage::getModel('debit/orders')->getCollection()->addFieldToFilter('status', 0);
+        $collection = Mage::getModel('Mage_Debit_Model_Orders')->getCollection()->addFieldToFilter('status', 0);
         if ($collection->count() == 0) {
             $this->_getSession()->addError($this->_getDebitHelper()->__('No orders to export.'));
             return false;
@@ -217,6 +217,6 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
      */
     protected function _getDebitHelper()
     {
-        return Mage::helper('debit/adminhtml');
+        return Mage::helper('Mage_Debit_Helper_Adminhtml');
     }
 }

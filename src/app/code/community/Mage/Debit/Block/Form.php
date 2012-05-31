@@ -129,7 +129,7 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
         if (strlen($data) == 0) {
             return '';
         }
-        return $this->htmlEscape($data);
+        return $this->escapeHtml($data);
     }
 
     /**

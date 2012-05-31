@@ -39,6 +39,6 @@ class Mage_Debit_Model_Resource_Orders extends Mage_Core_Model_Resource_Db_Abstr
      */
     protected function _construct()
     {
-        $this->_init('debit/order_grid', 'id');
+        $this->_init('debit_order_grid', 'id');
     }
 }
