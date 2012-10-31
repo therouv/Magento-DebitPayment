@@ -1,5 +1,6 @@
 {
    "name": "therouv/debitpayment",
+   "version": "dev-master",
    "license": "OSL-3.0",
    "type": "magento-module",
    "description": "Provides the payment method DebitPayment",
