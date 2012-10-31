@@ -51,6 +51,7 @@ class Mage_Debit_Block_Account_Data
         if ($bankName == null) {
             $bankName = $this->__('not available');
         }
+
         return $bankName;
     }
 
@@ -88,7 +89,7 @@ class Mage_Debit_Block_Account_Data
      * Returns the specific value of the requested field from the
      * customer model.
      *
-     * @param string $field Attribute to get
+     * @param  string $field Attribute to get
      * @return string Data
      */
     protected function _getAccountData($field)
@@ -103,6 +104,7 @@ class Mage_Debit_Block_Account_Data
         if ($field != 'debit_payment_acount_name' && !is_numeric($data)) {
             return '';
         }
+
         return $this->htmlEscape($data);
     }
 }

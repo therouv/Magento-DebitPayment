@@ -59,7 +59,7 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     /**
      * Assigns data to the payment info instance
      *
-     * @param Varien_Object|array $data Payment Data from checkout
+     * @param  Varien_Object|array    $data Payment Data from checkout
      * @return Mage_Debit_Model_Debit Self.
      */
     public function assignData($data)
@@ -118,6 +118,7 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     public function getAccountName()
     {
         $info = $this->getInfoInstance();
+
         return $info->getCcOwner();
     }
 
@@ -136,6 +137,7 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         if (!is_numeric($data)) {
             $data = $info->decrypt($data);
         }
+
         return $data;
     }
 
@@ -151,6 +153,7 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         if (!is_numeric($data)) {
             $data = $info->decrypt($data);
         }
+
         return $data;
     }
 
@@ -165,18 +168,20 @@ class Mage_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         if ($bankName == null) {
             $bankName = Mage::helper('debit')->__('not available');
         }
+
         return $bankName;
     }
 
     /**
      * Returns the encrypted data for mail
      *
-     * @param string $data Data to crypt
+     * @param  string $data Data to crypt
      * @return string Crypted data
      */
     public function maskString($data)
     {
         $crypt = str_repeat('*', strlen($data)-3) . substr($data, -3);
+
         return $crypt;
     }
 }

@@ -43,7 +43,7 @@ class Mage_Debit_Model_Observer
      * allowed to order via DebitPayment.
      *
      * @magentoEvent payment_method_is_active
-     * @param Varien_Event_Observer $observer Observer
+     * @param  Varien_Event_Observer $observer Observer
      * @return void
      */
     public function paymentMethodIsActive($observer)
@@ -69,6 +69,7 @@ class Mage_Debit_Model_Observer
             $allowedGroupIds = explode(',', Mage::getStoreConfig('payment/debit/specificgroup'));
             if (!in_array($customerGroupId, $allowedGroupIds)) {
                 $observer->getEvent()->getResult()->isAvailable = false;
+
                 return;
             }
         }
@@ -79,6 +80,7 @@ class Mage_Debit_Model_Observer
             $customerId = $session->getCustomerId();
             if (is_null($customerId)) { // not logged in
                 $observer->getEvent()->getResult()->isAvailable = false;
+
                 return;
             }
             // Load orders and check
@@ -95,6 +97,7 @@ class Mage_Debit_Model_Observer
                 ->load();
             if (count($orders) < $minOrderCount) {
                 $observer->getEvent()->getResult()->isAvailable = false;
+
                 return;
             }
         }
@@ -105,7 +108,7 @@ class Mage_Debit_Model_Observer
      * customer model.
      *
      * @magentoEvent sales_order_save_after
-     * @param Varien_Event_Observer $observer Observer
+     * @param  Varien_Event_Observer $observer Observer
      * @return void
      */
     public function saveAccountInfo($observer)
@@ -130,7 +133,7 @@ class Mage_Debit_Model_Observer
     /**
      * Checks the current order and returns the customer model
      *
-     * @param Mage_Sales_Model_Order $order Current order
+     * @param  Mage_Sales_Model_Order            $order Current order
      * @return Mage_Customer_Model_Customer|null Customer model or null
      */
     public function _getOrderCustomer($order)
@@ -145,6 +148,7 @@ class Mage_Debit_Model_Observer
                 return $customer;
             }
         }
+
         return null;
     }
 }

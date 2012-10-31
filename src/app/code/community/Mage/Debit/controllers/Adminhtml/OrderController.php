@@ -105,6 +105,7 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
         $collection = $this->_hasOrdersToExport();
         if (!$collection) {
             $this->_redirect('*/*');
+
             return;
         }
 
@@ -147,6 +148,7 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
         $collection = $this->_hasOrdersToExport();
         if (!$collection) {
             $this->_redirect('*/*');
+
             return;
         }
 
@@ -205,8 +207,10 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
         $collection = Mage::getModel('debit/orders')->getCollection()->addFieldToFilter('status', 0);
         if ($collection->count() == 0) {
             $this->_getSession()->addError($this->_getDebitHelper()->__('No orders to export.'));
+
             return false;
         }
+
         return $collection;
     }
 

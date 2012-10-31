@@ -54,6 +54,7 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
     public function toPdf()
     {
         $this->setTemplate('debit/debit.phtml');
+
         return $this->toHtml();
     }
 
@@ -89,6 +90,7 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
     public function sendDataInEmail()
     {
         $method = $this->getMethod()->getCode();
+
         return Mage::getStoreConfigFlag('payment/'.$method.'/sendmail');
     }
 
@@ -115,6 +117,7 @@ class Mage_Debit_Block_Info extends Mage_Payment_Block_Info
             $data['account_blz']    = $routing;
             $data['bank_name']      = '';
         }
+
         return $data;
     }
 }

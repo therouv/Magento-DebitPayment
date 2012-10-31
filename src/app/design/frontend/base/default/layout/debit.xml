@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<!-- 
+<!--
 /**
  * This file is part of the Mage_Debit module.
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -28,7 +28,7 @@
             <action method="addLink" translate="label" module="debit" ifconfig="payment/debit/save_account_data"><name>debit_data</name><path>debit/account/edit</path><label>Debit Account Data</label></action>
         </reference>
     </customer_account>
-    
+
     <debit_account_edit translate="label">
 		<reference name="head">
 			<action method="addJs"><script>mage/debit/blzcheck.js</script></action>
@@ -39,13 +39,13 @@
             <block type="debit/account_data" name="debit.account.data" template="debit/account/data.phtml"/>
         </reference>
     </debit_account_edit>
-    
+
     <checkout_onepage_index>
 		<reference name="head">
 			<action method="addJs"><script>mage/debit/blzcheck.js</script></action>
 		</reference>
     </checkout_onepage_index>
-    
+
     <checkout_multishipping_billing>
 		<reference name="head">
 			<action method="addJs"><script>mage/debit/blzcheck.js</script></action>

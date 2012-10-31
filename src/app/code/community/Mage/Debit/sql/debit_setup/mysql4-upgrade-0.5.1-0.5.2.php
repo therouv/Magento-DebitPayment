@@ -37,22 +37,22 @@ $installer = $this;
 $installer->startSetup();
 
 $sql = "DROP TABLE IF EXISTS `{$installer->getTable('debit/order_grid')}`;
-	CREATE TABLE `{$installer->getTable('debit/order_grid')}` (
-	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
-	`entity_id` int(10) unsigned NOT NULL COMMENT 'Entity Id',
-  	`store_id` smallint(5) unsigned DEFAULT NULL COMMENT 'Store Id',
-  	`customer_id` int(10) unsigned DEFAULT NULL COMMENT 'Customer Id',
-  	`grand_total` decimal(12,4) DEFAULT NULL COMMENT 'Grand Total',
-  	`increment_id` varchar(50) DEFAULT NULL COMMENT 'Increment Id',
-  	`order_currency_code` varchar(255) DEFAULT NULL COMMENT 'Order Currency Code',
-  	`billing_name` varchar(255) DEFAULT NULL COMMENT 'Billing Name',
-  	`created_at` timestamp NULL DEFAULT NULL COMMENT 'Created At',
-  	`status` int(1) unsigned DEFAULT '0' COMMENT 'Status',
-  	PRIMARY KEY (`id`),
-  	UNIQUE KEY `UNQ_DEBITPAYMENT_ORDER_GRID_INCREMENT_ID` (`increment_id`),
-  	CONSTRAINT `FK_DEBITPAYMENT_ORDER_GRID_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID` FOREIGN KEY (`customer_id`) REFERENCES `{$installer->getTable('customer/entity')}` (`entity_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  	CONSTRAINT `FK_DEBITPAYMENT_GRID_ENTITY_ID_SALES_FLAT_ORDER_ENTITY_ID` FOREIGN KEY (`entity_id`) REFERENCES `{$installer->getTable('sales/order')}` (`entity_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  	CONSTRAINT `FK_DEBITPAYMENT_ORDER_GRID_STORE_ID_CORE_STORE_STORE_ID` FOREIGN KEY (`store_id`) REFERENCES `{$installer->getTable('core/store')}` (`store_id`) ON DELETE SET NULL ON UPDATE CASCADE
+    CREATE TABLE `{$installer->getTable('debit/order_grid')}` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+    `entity_id` int(10) unsigned NOT NULL COMMENT 'Entity Id',
+      `store_id` smallint(5) unsigned DEFAULT NULL COMMENT 'Store Id',
+      `customer_id` int(10) unsigned DEFAULT NULL COMMENT 'Customer Id',
+      `grand_total` decimal(12,4) DEFAULT NULL COMMENT 'Grand Total',
+      `increment_id` varchar(50) DEFAULT NULL COMMENT 'Increment Id',
+      `order_currency_code` varchar(255) DEFAULT NULL COMMENT 'Order Currency Code',
+      `billing_name` varchar(255) DEFAULT NULL COMMENT 'Billing Name',
+      `created_at` timestamp NULL DEFAULT NULL COMMENT 'Created At',
+      `status` int(1) unsigned DEFAULT '0' COMMENT 'Status',
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `UNQ_DEBITPAYMENT_ORDER_GRID_INCREMENT_ID` (`increment_id`),
+      CONSTRAINT `FK_DEBITPAYMENT_ORDER_GRID_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID` FOREIGN KEY (`customer_id`) REFERENCES `{$installer->getTable('customer/entity')}` (`entity_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+      CONSTRAINT `FK_DEBITPAYMENT_GRID_ENTITY_ID_SALES_FLAT_ORDER_ENTITY_ID` FOREIGN KEY (`entity_id`) REFERENCES `{$installer->getTable('sales/order')}` (`entity_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+      CONSTRAINT `FK_DEBITPAYMENT_ORDER_GRID_STORE_ID_CORE_STORE_STORE_ID` FOREIGN KEY (`store_id`) REFERENCES `{$installer->getTable('core/store')}` (`store_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Debit Payment Order Grid';";
 
 $installer->run($sql);

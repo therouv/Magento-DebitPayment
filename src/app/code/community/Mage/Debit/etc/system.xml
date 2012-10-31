@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<!-- 
+<!--
 /**
  * This file is part of the Mage_Debit module.
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -167,8 +167,8 @@
                         <orderscount translate="label comment">
                             <label>Minimum Orders Count</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>16</sort_order>                                                              
-                            <comment>Default: "0" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.</comment>                                                           
+                            <sort_order>16</sort_order>
+                            <comment>Default: "0" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.</comment>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>

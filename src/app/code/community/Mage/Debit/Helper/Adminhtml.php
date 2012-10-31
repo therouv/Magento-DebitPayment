@@ -51,6 +51,7 @@ class Mage_Debit_Helper_Adminhtml extends Mage_Debit_Helper_Data
         ) {
             return false;
         }
+
         return true;
     }
 
@@ -83,13 +84,14 @@ class Mage_Debit_Helper_Adminhtml extends Mage_Debit_Helper_Data
                 $entityIds[] = $item->getData('entity_id');
             }
         }
+
         return $entityIds;
     }
 
     /**
      * Updates the status of an export order item to "exported"..
      *
-     * @param int $id Export Order ID
+     * @param  int  $id Export Order ID
      * @return bool
      */
     public function setStatusAsExported($id)
@@ -97,6 +99,7 @@ class Mage_Debit_Helper_Adminhtml extends Mage_Debit_Helper_Data
         $model = Mage::getModel('debit/orders')->load($id);
         $model->setData('status', 1);
         $model->save();
+
         return true;
     }
 }

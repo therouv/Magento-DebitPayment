@@ -61,6 +61,7 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
         if ($bankName == null) {
             $bankName = $this->__('not available');
         }
+
         return $bankName;
     }
 
@@ -75,6 +76,7 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
             if (!is_numeric($data)) {
                 $data = Mage::helper('core')->decrypt($data);
             }
+
             return $data;
         } elseif ($data = $this->_getAccountData('debit_payment_acount_blz')) {
             return $data;
@@ -93,6 +95,7 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
         if ($data = $this->getInfoData('cc_owner')) {
             return $data;
         }
+
         return $this->_getAccountData('debit_payment_acount_name');
     }
 
@@ -117,7 +120,7 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
      * Returns the specific value of the requested field from the
      * customer model.
      *
-     * @param string $field Attribute to get
+     * @param  string $field Attribute to get
      * @return string Data
      */
     protected function _getAccountData($field)
@@ -129,6 +132,7 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
         if (strlen($data) == 0) {
             return '';
         }
+
         return $this->htmlEscape($data);
     }
 
@@ -142,6 +146,7 @@ class Mage_Debit_Block_Form extends Mage_Payment_Block_Form
         if (Mage::app()->getStore()->isAdmin()) {
             return Mage::getSingleton('adminhtml/session_quote')->getCustomer();
         }
+
         return Mage::getSingleton('customer/session')->getCustomer();
     }
 

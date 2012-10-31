@@ -38,7 +38,7 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
     /**
      * Returns the bankname by given blz
      *
-     * @param string $blz BLZ
+     * @param  string      $blz BLZ
      * @return null|string Bank Name
      */
     public function getBankByBlz($blz)
@@ -61,6 +61,7 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
         } else {
             $data = unserialize($data);
         }
+
         return empty($data[$blz]) ? null : $data[$blz];
     }
 
@@ -74,13 +75,14 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
         if (!Mage::app()->useCache('config')) {
             return false;
         }
+
         return Mage::app()->loadCache($this->_getCacheKey());
     }
 
     /**
      * Saves the blz data in the cache
      *
-     * @param array $data Blz data
+     * @param  array                  $data Blz data
      * @return Mage_Debit_Helper_Data Self.
      */
     protected function _saveBlzCache($data)
@@ -89,6 +91,7 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
             return false;
         }
         Mage::app()->saveCache($data, $this->_getCacheKey(), $this->_getCacheTags(), $this->_getCacheLifetime());
+
         return $this;
     }
 
@@ -125,13 +128,14 @@ class Mage_Debit_Helper_Data extends Mage_Payment_Helper_Data
     /**
      * sanitizeData
      *
-     * @param string $data Data
+     * @param  string $data Data
      * @return string The sanitized string
      */
     public function sanitizeData($data)
     {
         $bad = array(' ', '-', '_', '.', ';', '/', '|');
         $sanitized = str_replace($bad, '', $data);
+
         return $sanitized;
     }
 }
