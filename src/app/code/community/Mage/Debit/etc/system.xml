@@ -163,6 +163,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
+                            <depends>
+                            	<specificgroup_all>0</specificgroup_all>
+                            </depends>
                         </specificgroup>
                         <orderscount translate="label comment">
                             <label>Minimum Orders Count</label>
