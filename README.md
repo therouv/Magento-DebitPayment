@@ -26,7 +26,8 @@ Requirements
 
 Compatibility
 -------------
-- Magento >= 1.4
+- Magento >= 1.6
+- Versions below should work to version 1.4 without any problems but it is not actively tested.
 
 Installation Instructions
 -------------------------
