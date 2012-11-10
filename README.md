@@ -4,7 +4,7 @@ This extension allows shop owners to provide the payment method "DebitPayment" t
 
 Facts
 -----
-- version: 0.5.3
+- version: 0.5.4
 - extension key: DebitPayment
 - [extension on Magento Connect](http://www.magentocommerce.com/magento-connect/debitpayment.html)
 - Magento Connect 1.0 extension key: magento-community/DebitPayment
