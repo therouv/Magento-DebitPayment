@@ -55,11 +55,6 @@
  */
 
 /**
- * include PEAR_Exception class
- */
-require_once 'PEAR/Exception.php';
-
-/**
 * Payment_DTA_Exception is this packages' basic exception class.
 *
 * @category Payment
@@ -69,7 +64,7 @@ require_once 'PEAR/Exception.php';
 * @version  Release: 1.4.2
 * @link     http://pear.php.net/package/Payment_DTA
 */
-class Payment_DTA_Exception extends PEAR_Exception
+class Payment_DTA_Exception extends Exception
 {
 }
 
