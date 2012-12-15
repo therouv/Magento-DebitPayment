@@ -17,9 +17,9 @@
  * @category  Itabs
  * @package   Itabs_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @link      http://www.magentocommerce.com/extension/676/
+ * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * System Config Customer Groups
@@ -27,9 +27,9 @@
  * @category  Itabs
  * @package   Itabs_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @link      http://www.magentocommerce.com/extension/676/
+ * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Model_System_Config_Source_Customer_Group
 {
