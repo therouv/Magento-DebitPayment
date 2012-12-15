@@ -49,27 +49,40 @@ class Mage_Debit_Model_Observer
     public function paymentMethodIsActive($observer)
     {
         $methodInstance = $observer->getEvent()->getMethodInstance();
-        $session = Mage::getSingleton('customer/session');
 
         // Check if method is DebitPayment
         if ($methodInstance->getCode() != 'debit') {
             return;
         }
+
         // Check if payment method is active
         if (!Mage::getStoreConfigFlag('payment/debit/active')) {
             return;
         }
 
-        // Check if payment is allowed only for specific customer groups
-        if (!Mage::getStoreConfigFlag('payment/debit/specificgroup_all')) {
-            $customerGroupId = Mage_Customer_Model_Group::NOT_LOGGED_IN_ID;
+        // Get preconditions for checks
+        $customerGroupId = Mage_Customer_Model_Group::NOT_LOGGED_IN_ID;
+        if (Mage::app()->getStore()->isAdmin()) {
+            /* @var $session Mage_Adminhtml_Model_Session_Quote */
+            $session = Mage::getSingleton('adminhtml/session_quote');
+            /* @var $customer Mage_Customer_Model_Customer */
+            $customer = $session->getCustomer();
+            $customerGroupId = $session->getQuote()->getCustomerGroupId();
+        } else {
+            /* @var $session Mage_Customer_Model_Session */
+            $session = Mage::getSingleton('customer/session');
+            /* @var $customer Mage_Customer_Model_Customer */
+            $customer = $session->getCustomer();
             if ($session->isLoggedIn()) {
                 $customerGroupId = $session->getCustomerGroupId();
             }
+        }
+
+        // Check if payment is allowed only for specific customer groups
+        if (!Mage::getStoreConfigFlag('payment/debit/specificgroup_all')) {
             $allowedGroupIds = explode(',', Mage::getStoreConfig('payment/debit/specificgroup'));
             if (!in_array($customerGroupId, $allowedGroupIds)) {
                 $observer->getEvent()->getResult()->isAvailable = false;
-
                 return;
             }
         }
@@ -77,12 +90,12 @@ class Mage_Debit_Model_Observer
         // Check minimum orders count
         $minOrderCount = Mage::getStoreConfig('payment/debit/orderscount');
         if ($minOrderCount > 0) {
-            $customerId = $session->getCustomerId();
+            $customerId = $customer->getId();
             if (is_null($customerId)) { // not logged in
                 $observer->getEvent()->getResult()->isAvailable = false;
-
                 return;
             }
+
             // Load orders and check
             $orders = Mage::getResourceModel('sales/order_collection')
                 ->addAttributeToSelect('*')
@@ -95,9 +108,9 @@ class Mage_Debit_Model_Observer
                     )
                 )
                 ->load();
+
             if (count($orders) < $minOrderCount) {
                 $observer->getEvent()->getResult()->isAvailable = false;
-
                 return;
             }
         }
