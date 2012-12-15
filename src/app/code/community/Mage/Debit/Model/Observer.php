@@ -139,9 +139,15 @@ class Mage_Debit_Model_Observer
     public function _getOrderCustomer($order)
     {
         if (Mage::app()->getStore()->isAdmin()) {
+            
             if ($customer = $order->getCustomer()) {
-                return $customer;
+                
+                if ($customer->getId()) { 
+                    return $customer;
+                }                   
+                
             }
+            
         } else {
             $customer = Mage::getSingleton('customer/session')->getCustomer();
             if ($customer->getId()) {
