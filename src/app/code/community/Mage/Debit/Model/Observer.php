@@ -136,18 +136,14 @@ class Mage_Debit_Model_Observer
      * @param  Mage_Sales_Model_Order            $order Current order
      * @return Mage_Customer_Model_Customer|null Customer model or null
      */
-    public function _getOrderCustomer($order)
+    protected function _getOrderCustomer($order)
     {
         if (Mage::app()->getStore()->isAdmin()) {
-            
             if ($customer = $order->getCustomer()) {
-                
-                if ($customer->getId()) { 
+                if ($customer->getId()) {
                     return $customer;
-                }                   
-                
+                }
             }
-            
         } else {
             $customer = Mage::getSingleton('customer/session')->getCustomer();
             if ($customer->getId()) {
