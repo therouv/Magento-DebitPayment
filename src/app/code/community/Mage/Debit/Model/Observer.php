@@ -43,29 +43,43 @@ class Mage_Debit_Model_Observer
      * allowed to order via DebitPayment.
      *
      * @magentoEvent payment_method_is_active
-     * @param Varien_Event_Observer $observer Observer
+     * @param  Varien_Event_Observer $observer Observer
      * @return void
      */
     public function paymentMethodIsActive($observer)
     {
         $methodInstance = $observer->getEvent()->getMethodInstance();
-        $session = Mage::getSingleton('customer/session');
 
         // Check if method is DebitPayment
         if ($methodInstance->getCode() != 'debit') {
             return;
         }
+
         // Check if payment method is active
         if (!Mage::getStoreConfigFlag('payment/debit/active')) {
             return;
         }
 
-        // Check if payment is allowed only for specific customer groups
-        if (!Mage::getStoreConfigFlag('payment/debit/specificgroup_all')) {
-            $customerGroupId = Mage_Customer_Model_Group::NOT_LOGGED_IN_ID;
+        // Get preconditions for checks
+        $customerGroupId = Mage_Customer_Model_Group::NOT_LOGGED_IN_ID;
+        if (Mage::app()->getStore()->isAdmin()) {
+            /* @var $session Mage_Adminhtml_Model_Session_Quote */
+            $session = Mage::getSingleton('adminhtml/session_quote');
+            /* @var $customer Mage_Customer_Model_Customer */
+            $customer = $session->getCustomer();
+            $customerGroupId = $session->getQuote()->getCustomerGroupId();
+        } else {
+            /* @var $session Mage_Customer_Model_Session */
+            $session = Mage::getSingleton('customer/session');
+            /* @var $customer Mage_Customer_Model_Customer */
+            $customer = $session->getCustomer();
             if ($session->isLoggedIn()) {
                 $customerGroupId = $session->getCustomerGroupId();
             }
+        }
+
+        // Check if payment is allowed only for specific customer groups
+        if (!Mage::getStoreConfigFlag('payment/debit/specificgroup_all')) {
             $allowedGroupIds = explode(',', Mage::getStoreConfig('payment/debit/specificgroup'));
             if (!in_array($customerGroupId, $allowedGroupIds)) {
                 $observer->getEvent()->getResult()->isAvailable = false;
@@ -76,11 +90,12 @@ class Mage_Debit_Model_Observer
         // Check minimum orders count
         $minOrderCount = Mage::getStoreConfig('payment/debit/orderscount');
         if ($minOrderCount > 0) {
-            $customerId = $session->getCustomerId();
+            $customerId = $customer->getId();
             if (is_null($customerId)) { // not logged in
                 $observer->getEvent()->getResult()->isAvailable = false;
                 return;
             }
+
             // Load orders and check
             $orders = Mage::getResourceModel('sales/order_collection')
                 ->addAttributeToSelect('*')
@@ -93,6 +108,7 @@ class Mage_Debit_Model_Observer
                     )
                 )
                 ->load();
+
             if (count($orders) < $minOrderCount) {
                 $observer->getEvent()->getResult()->isAvailable = false;
                 return;
@@ -105,7 +121,7 @@ class Mage_Debit_Model_Observer
      * customer model.
      *
      * @magentoEvent sales_order_save_after
-     * @param Varien_Event_Observer $observer Observer
+     * @param  Varien_Event_Observer $observer Observer
      * @return void
      */
     public function saveAccountInfo($observer)
@@ -130,14 +146,16 @@ class Mage_Debit_Model_Observer
     /**
      * Checks the current order and returns the customer model
      *
-     * @param Mage_Sales_Model_Order $order Current order
+     * @param  Mage_Sales_Model_Order            $order Current order
      * @return Mage_Customer_Model_Customer|null Customer model or null
      */
-    public function _getOrderCustomer($order)
+    protected function _getOrderCustomer($order)
     {
         if (Mage::app()->getStore()->isAdmin()) {
             if ($customer = $order->getCustomer()) {
-                return $customer;
+                if ($customer->getId()) {
+                    return $customer;
+                }
             }
         } else {
             $customer = Mage::getSingleton('customer/session')->getCustomer();
@@ -145,6 +163,7 @@ class Mage_Debit_Model_Observer
                 return $customer;
             }
         }
+
         return null;
     }
 }

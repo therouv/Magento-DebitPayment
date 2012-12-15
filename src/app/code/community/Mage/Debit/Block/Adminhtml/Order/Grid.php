@@ -55,6 +55,7 @@ class Mage_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget_
     {
         $collection = Mage::getModel('debit/orders')->getCollection();
         $this->setCollection($collection);
+
         return parent::_prepareCollection();
     }
 
@@ -110,6 +111,7 @@ class Mage_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget_
                 ),
             )
         );
+
         return parent::_prepareColumns();
     }
 

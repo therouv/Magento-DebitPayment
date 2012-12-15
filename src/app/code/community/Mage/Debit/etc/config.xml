@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<!-- 
+<!--
 /**
  * This file is part of the Mage_Debit module.
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -24,7 +24,7 @@
 <config>
     <modules>
         <Mage_Debit>
-            <version>0.5.2</version>
+            <version>0.5.4</version>
         </Mage_Debit>
     </modules>
     <global>
@@ -124,7 +124,7 @@
 	                <file>debit.xml</file>
 	            </debit>
 	        </updates>
-	    </layout>   
+	    </layout>
 	    <translate>
 	        <modules>
 	            <Mage_Debit>

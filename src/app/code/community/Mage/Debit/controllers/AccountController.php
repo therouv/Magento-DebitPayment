@@ -96,13 +96,12 @@ class Mage_Debit_AccountController extends Mage_Core_Controller_Front_Action
             $this->_getSession()->setCustomer($customer)
                 ->addSuccess($this->__('Debit account information was successfully saved'));
             $this->_redirect('customer/account');
+
             return;
-        }
-        catch (Mage_Core_Exception $e) {
+        } catch (Mage_Core_Exception $e) {
             $this->_getSession()->setCustomerFormData($this->getRequest()->getPost())
                 ->addError($e->getMessage());
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $this->_getSession()->setCustomerFormData($this->getRequest()->getPost())
                 ->addException($e, $this->__('Can\'t save customer'));
         }

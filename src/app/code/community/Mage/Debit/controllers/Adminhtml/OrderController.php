@@ -62,8 +62,22 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
         if (count($syncedOrders) > 0) {
             $collection->addFieldToFilter('entity_id', array('nin' => $syncedOrders));
         }
-        $collection->getSelect()->joinLeft('sales_flat_order', 'sales_flat_order.entity_id = main_table.entity_id', array('customer_id'));
-        $collection->getSelect()->joinLeft('sales_flat_order_payment', 'sales_flat_order_payment.parent_id = main_table.entity_id', array('method'));
+
+        /* @var $resource Mage_Core_Model_Resource */
+        $resource = Mage::getSingleton('core/resource');
+        $salesFlatOrderTable = $resource->getTableName('sales_flat_order');
+        $salesFlatOrderPaymentTable = $resource->getTableName('sales_flat_order_payment');
+
+        $collection->getSelect()->joinLeft(
+            $salesFlatOrderTable,
+            $salesFlatOrderTable.'.entity_id = main_table.entity_id',
+            array('customer_id')
+        );
+        $collection->getSelect()->joinLeft(
+            $salesFlatOrderPaymentTable,
+            $salesFlatOrderPaymentTable.'.parent_id = main_table.entity_id',
+            array('method')
+        );
         $collection->getSelect()->where('method = ?', 'debit');
 
         foreach ($collection as $order) {
@@ -105,6 +119,7 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
         $collection = $this->_hasOrdersToExport();
         if (!$collection) {
             $this->_redirect('*/*');
+
             return;
         }
 
@@ -147,6 +162,7 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
         $collection = $this->_hasOrdersToExport();
         if (!$collection) {
             $this->_redirect('*/*');
+
             return;
         }
 
@@ -205,8 +221,10 @@ class Mage_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Act
         $collection = Mage::getModel('debit/orders')->getCollection()->addFieldToFilter('status', 0);
         if ($collection->count() == 0) {
             $this->_getSession()->addError($this->_getDebitHelper()->__('No orders to export.'));
+
             return false;
         }
+
         return $collection;
     }
 
