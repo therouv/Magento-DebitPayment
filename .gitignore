@@ -8,3 +8,6 @@
 .externalToolBuilders/**/*
 .idea
 .idea/**/*
+.vagrant
+.vagrant/**/*
+
