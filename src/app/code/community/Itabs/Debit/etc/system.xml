@@ -136,20 +136,11 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </max_order_total>
-						<checkout_valid_blz translate="label">
-                            <label>Checkout only with valid BLZ</label>
-                            <frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>13</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </checkout_valid_blz>
                         <specificgroup_all translate="label comment">
                             <label>Enabled for all customer groups</label>
                             <comment>Set to "no" if you want to enable DebitPayment only for specific customer groups defined below.</comment>
                             <frontend_type>select</frontend_type>
-                            <sort_order>14</sort_order>
+                            <sort_order>13</sort_order>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -158,7 +149,7 @@
                         <specificgroup translate="label">
                             <label>Enabled only for specific customer groups</label>
                             <frontend_type>multiselect</frontend_type>
-                            <sort_order>15</sort_order>
+                            <sort_order>14</sort_order>
                             <source_model>debit/system_config_source_customer_group</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -170,12 +161,34 @@
                         <orderscount translate="label comment">
                             <label>Minimum Orders Count</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>16</sort_order>
+                            <sort_order>15</sort_order>
                             <comment>Default: "0" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.</comment>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </orderscount>
+                        <debit_type translate="label">
+                            <label>Debit Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>debit/system_config_source_debit_type</source_model>
+                            <sort_order>16</sort_order>
+                            <comment></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </debit_type>
+                        <checkout_valid_blz translate="label">
+                            <label>Checkout only with valid BLZ</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <debit_type>bank</debit_type>
+                            </depends>
+                        </checkout_valid_blz>
                     </fields>
                 </debit>
             </groups>

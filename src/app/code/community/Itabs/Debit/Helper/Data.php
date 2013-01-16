@@ -33,6 +33,18 @@
  */
 class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
 {
+    const DEBIT_TYPE_BANK = 'bank';
+    const DEBIT_TYPE_SEPA = 'sepa';
+
+    /**
+     * Retrieve the cucrent debit type
+     * @return string
+     */
+    public function getDebitType()
+    {
+        return Mage::getStoreConfig('payment/debit/debit_type');
+    }
+
     /**
      * Returns the bankname by given blz
      *
