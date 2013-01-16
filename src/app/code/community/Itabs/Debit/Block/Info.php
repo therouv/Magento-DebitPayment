@@ -41,7 +41,14 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('debit/info.phtml');
+
+        /* @var $helper Itabs_Debit_Helper_Data */
+        $helper = Mage::helper('debit');
+        if ($helper->getDebitType() == Itabs_Debit_Helper_Data::DEBIT_TYPE_SEPA) {
+            $this->setTemplate('debit/sepa/info.phtml');
+        } else {
+            $this->setTemplate('debit/info.phtml');
+        }
     }
 
     /**
@@ -99,13 +106,18 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
      */
     public function getEmailData()
     {
+        $debitType = Mage::helper('debit')->getDebitType();
+
         $payment = $this->getMethod();
         $method  = $this->getMethod()->getCode();
         $data = array(
-            'account_name'      =>  $payment->getAccountName(),
-            'account_number'    =>  $payment->getAccountNumber(),
-            'account_blz'       =>  $payment->getAccountBLZ(),
-            'bank_name'         =>  $payment->getAccountBankname()
+            'account_name'   => $payment->getAccountName(),
+            'account_number' => $payment->getAccountNumber(),
+            'account_blz'    => $payment->getAccountBLZ(),
+            'bank_name'      => $payment->getAccountBankname(),
+            'account_swift'  => $payment->getAccountSwift(),
+            'account_iban'   => $payment->getAccountIban(),
+            'debit_type'     => $debitType
         );
         // mask bank data
         if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')) {

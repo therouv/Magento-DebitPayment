@@ -35,7 +35,7 @@
         <label>Debit Account Data</label>
         <update handle="customer_account"/>
         <reference name="content">
-            <block type="debit/account_data" name="debit.account.data" template="debit/account/data.phtml"/>
+            <block type="debit/account_data" name="debit.account.data" />
         </reference>
     </debit_account_edit>
 

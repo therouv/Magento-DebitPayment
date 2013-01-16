@@ -41,7 +41,14 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
     protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('debit/form.phtml');
+
+        /* @var $helper Itabs_Debit_Helper_Data */
+        $helper = Mage::helper('debit');
+        if ($helper->getDebitType() == Itabs_Debit_Helper_Data::DEBIT_TYPE_SEPA) {
+            $this->setTemplate('debit/sepa/form.phtml');
+        } else {
+            $this->setTemplate('debit/form.phtml');
+        }
     }
 
     /**
@@ -95,6 +102,26 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
         }
 
         return $this->_getAccountData('debit_payment_acount_name');
+    }
+
+    /**
+     * Returns the swift code of the specific account
+     *
+     * @return string
+     */
+    public function getAccountSwift()
+    {
+        return $this->_getAccountData('debit_payment_swift');
+    }
+
+    /**
+     * Returns the iban of the specific account
+     *
+     * @return string
+     */
+    public function getAccountIban()
+    {
+        return $this->_getAccountData('debit_payment_iban');
     }
 
     /**
