@@ -111,7 +111,7 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
      */
     public function getAccountSwift()
     {
-        return $this->_getAccountData('debit_payment_swift');
+        return $this->_getAccountData('debit_payment_account_swift');
     }
 
     /**
@@ -121,7 +121,7 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
      */
     public function getAccountIban()
     {
-        return $this->_getAccountData('debit_payment_iban');
+        return $this->_getAccountData('debit_payment_account_iban');
     }
 
     /**

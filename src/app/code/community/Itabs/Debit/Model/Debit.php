@@ -90,10 +90,24 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         $ccNumber = Mage::helper('debit')->sanitizeData($ccNumber);
         $ccNumber = $info->encrypt($ccNumber);
 
+        // Fetch the account swift
+        $swift = $data->getDebitSwift();
+        if ($swift) {
+            $swift = $info->encrypt($swift);
+        }
+
+        // Fetch the account iban
+        $iban = $data->getDebitIban();
+        if ($iban) {
+            $iban = $info->encrypt($iban);
+        }
+
         // Set account data in payment info model
         $info->setCcType($ccType)                     // BLZ
              ->setCcOwner($ccOwner)                   // Kontoinhaber
-             ->setCcNumberEnc($ccNumber);             // Kontonummer
+             ->setCcNumberEnc($ccNumber)              // Kontonummer
+             ->setDebitSwift($swift)                  // SWIFT Code
+             ->setDebitIban($iban);                   // IBAN
 
         return $this;
     }
@@ -168,6 +182,32 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         }
 
         return $bankName;
+    }
+
+    /**
+     * Returns the account swift code from the payment info instance
+     *
+     * @return string SWIFT
+     */
+    public function getAccountSwift()
+    {
+        $info = $this->getInfoInstance();
+        $data = $info->decrypt($info->getDebitSwift());
+
+        return $data;
+    }
+
+    /**
+     * Returns the account iban from the payment info instance
+     *
+     * @return string IBAN
+     */
+    public function getAccountIban()
+    {
+        $info = $this->getInfoInstance();
+        $data = $info->decrypt($info->getDebitIban());
+
+        return $data;
     }
 
     /**

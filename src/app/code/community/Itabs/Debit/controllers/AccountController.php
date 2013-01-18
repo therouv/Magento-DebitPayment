@@ -86,8 +86,18 @@ class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
         $now = Mage::app()->getLocale()->date()->toString(Varien_Date::DATETIME_INTERNAL_FORMAT);
         $customer->setData('debit_payment_acount_update', $now);
         $customer->setData('debit_payment_acount_name', $this->getRequest()->getPost('account_name'));
-        $customer->setData('debit_payment_acount_number', $this->getRequest()->getPost('account_number'));
-        $customer->setData('debit_payment_acount_blz', $this->getRequest()->getPost('account_blz'));
+        if ($accountNumber = $this->getRequest()->getPost('account_number')) {
+            $customer->setData('debit_payment_acount_number', $accountNumber);
+        }
+        if ($accountBlz = $this->getRequest()->getPost('account_blz')) {
+            $customer->setData('debit_payment_acount_blz', $accountBlz);
+        }
+        if ($accountSwift = $this->getRequest()->getPost('account_swift')) {
+            $customer->setData('debit_payment_account_swift', $accountSwift);
+        }
+        if ($accountIban = $this->getRequest()->getPost('account_iban')) {
+            $customer->setData('debit_payment_account_iban', $accountIban);
+        }
 
         try {
             $customer->save();

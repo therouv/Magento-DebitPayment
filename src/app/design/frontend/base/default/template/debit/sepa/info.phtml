@@ -21,44 +21,47 @@
  */
 ?>
 <?php
-/* @var $this Itabs_Debit_Block_Info */
+/**
+ * @see Itabs_Debit_Block_Info
+ * @var $this Itabs_Debit_Block_Info
+ */
 ?>
 <?php if ($_info = $this->getMethod()): ?>
-    <?php echo $this->htmlEscape($_info->getTitle()) ?><br />
+    <?php echo $this->escapeHtml($_info->getTitle()) ?><br />
 
     <?php if ($this->isEmailContext()): ?>
         <?php if ($this->sendDataInEmail()): ?>
             <?php $_data = $this->getEmailData() ?>
             <?php if ($_data['debit_type'] == Itabs_Debit_Helper_Data::DEBIT_TYPE_BANK): ?>
                 <?php if (!empty($_data['bank_name'])): ?>
-                    <?php echo $this->__('Bank name: %s', $this->htmlEscape($_data['bank_name'])) ?><br />
+                    <?php echo $this->__('Bank name: %s', $this->escapeHtml($_data['bank_name'])) ?><br />
                 <?php endif; ?>
 
-                <?php echo $this->__('Bank code: %s', $this->htmlEscape($_data['account_blz'])) ?><br />
-                <?php echo $this->__('Account holder: %s', $this->htmlEscape($_data['account_name'])) ?><br />
-                <?php echo $this->__('Account number: %s', $this->htmlEscape($_data['account_number'])) ?><br />
+                <?php echo $this->__('Bank code: %s', $this->escapeHtml($_data['account_blz'])) ?><br />
+                <?php echo $this->__('Account holder: %s', $this->escapeHtml($_data['account_name'])) ?><br />
+                <?php echo $this->__('Account number: %s', $this->escapeHtml($_data['account_number'])) ?><br />
             <?php else: ?>
-                <?php echo $this->__('Account holder: %s', $this->htmlEscape($_data['account_name'])) ?><br />
-                <?php echo $this->__('SWIFT Code: %s', $this->htmlEscape($_data['account_swift'])) ?><br />
-                <?php echo $this->__('IBAN: %s', $this->htmlEscape($_data['account_iban'])) ?><br />
+                <?php echo $this->__('Account holder: %s', $this->escapeHtml($_data['account_name'])) ?><br />
+                <?php echo $this->__('SWIFT Code: %s', $this->escapeHtml($_data['account_swift'])) ?><br />
+                <?php echo $this->__('IBAN: %s', $this->escapeHtml($_data['account_iban'])) ?><br />
             <?php endif; ?>
         <?php endif; ?>
 
     <?php else: ?>
         <?php if ($_data['debit_type'] == Itabs_Debit_Helper_Data::DEBIT_TYPE_BANK): ?>
-            <?php echo $this->__('Bank name: %s', $this->htmlEscape($_info->getAccountBankname())) ?><br />
-            <?php echo $this->__('Bank code: %s', $this->htmlEscape($_info->getAccountBLZ())) ?><br />
-            <?php echo $this->__('Account holder: %s', $this->htmlEscape($_info->getAccountName())) ?><br />
-            <?php echo $this->__('Account number: %s', $this->htmlEscape($_info->getAccountNumber())) ?><br />
+            <?php echo $this->__('Bank name: %s', $this->escapeHtml($_info->getAccountBankname())) ?><br />
+            <?php echo $this->__('Bank code: %s', $this->escapeHtml($_info->getAccountBLZ())) ?><br />
+            <?php echo $this->__('Account holder: %s', $this->escapeHtml($_info->getAccountName())) ?><br />
+            <?php echo $this->__('Account number: %s', $this->escapeHtml($_info->getAccountNumber())) ?><br />
         <?php else: ?>
-            <?php echo $this->__('Account holder: %s', $this->htmlEscape($_data['account_name'])) ?><br />
-            <?php echo $this->__('SWIFT Code: %s', $this->htmlEscape($_data['account_swift'])) ?><br />
-            <?php echo $this->__('IBAN: %s', $this->htmlEscape($_data['account_iban'])) ?><br />
+            <?php echo $this->__('Account holder: %s', $this->escapeHtml($_info->getAccountName())) ?><br />
+            <?php echo $this->__('SWIFT Code: %s', $this->escapeHtml($_info->getAccountSwift())) ?><br />
+            <?php echo $this->__('IBAN: %s', $this->escapeHtml($_info->getAccountIban())) ?><br />
         <?php endif; ?>
     <?php endif; ?>
 
     <?php if ($_customText = $_info->getCustomText()): ?>
         <br />
-        <?php echo $this->htmlEscape($_customText) ?><br />
+        <?php echo $this->escapeHtml($_customText) ?><br />
     <?php endif; ?>
 <?php endif; ?>

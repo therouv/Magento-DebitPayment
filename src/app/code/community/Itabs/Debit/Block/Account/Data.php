@@ -136,10 +136,14 @@ class Itabs_Debit_Block_Account_Data
         if (strlen($data) == 0) {
             return '';
         }
-        if ($field != 'debit_payment_acount_name' && !is_numeric($data)) {
+        if ($field != 'debit_payment_acount_name'
+            && $field != 'debit_payment_account_swift'
+            && $field != 'debit_payment_account_iban'
+            && !is_numeric($data)
+        ) {
             return '';
         }
 
-        return $this->htmlEscape($data);
+        return $this->escapeHtml($data);
     }
 }
