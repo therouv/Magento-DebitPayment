@@ -58,7 +58,13 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
      */
     public function toPdf()
     {
-        $this->setTemplate('debit/debit.phtml');
+        /* @var $helper Itabs_Debit_Helper_Data */
+        $helper = Mage::helper('debit');
+        if ($helper->getDebitType() == Itabs_Debit_Helper_Data::DEBIT_TYPE_SEPA) {
+            $this->setTemplate('debit/sepa/debit.phtml');
+        } else {
+            $this->setTemplate('debit/debit.phtml');
+        }
 
         return $this->toHtml();
     }
@@ -100,13 +106,23 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     }
 
     /**
+     * Retrieve the debit type
+     *
+     * @return string
+     */
+    public function getDebitType()
+    {
+        return Mage::helper('debit')->getDebitType();
+    }
+
+    /**
      * Returns email data and mask the data if necessary
      *
      * @return array Bank data
      */
     public function getEmailData()
     {
-        $debitType = Mage::helper('debit')->getDebitType();
+        $debitType = $this->getDebitType();
 
         $payment = $this->getMethod();
         $method  = $this->getMethod()->getCode();

@@ -27,10 +27,13 @@
  */
 ?>
 <?php if ($_info = $this->getMethod()): ?>
-    <?php echo $this->escapeHtml($_info->getTitle()) ?><br />
+    <?php echo $this->escapeHtml($_info->getTitle()) ?><br /><br />
 
-    <?php if ($this->isEmailContext()): ?>
-        <?php if ($this->sendDataInEmail()): ?>
+	<?php if ($this->isEmailContext()): ?>
+
+	    <?php // TO DO !!! ?>
+
+		<?php if ($this->sendDataInEmail()): ?>
             <?php $_data = $this->getEmailData() ?>
             <?php if ($_data['debit_type'] == Itabs_Debit_Helper_Data::DEBIT_TYPE_BANK): ?>
                 <?php if (!empty($_data['bank_name'])): ?>
@@ -49,7 +52,12 @@
 
     <?php else: ?>
         <?php if ($this->getDebitType() == Itabs_Debit_Helper_Data::DEBIT_TYPE_BANK): ?>
-            <?php echo $this->__('Bank name: %s', $this->escapeHtml($_info->getAccountBankname())) ?><br />
+            <?php if ($_info->getAccountBankname() == Mage::helper('debit')->__('not available')): ?>
+                <span style="color: #cc0000;font-weight:bold;"><?php echo $this->__('Fehler! Die eingegebenen Bankdaten können fehlerhaft sein!<br />Bitte setzen Sie sich mit dem Kunden in Verbindung!') ?></span><br /><br />
+            <?php else: ?>
+                <?php echo $this->__('Bank name: %s', $this->escapeHtml($_info->getAccountBankname())) ?><br />
+            <?php endif; ?>
+
             <?php echo $this->__('Bank code: %s', $this->escapeHtml($_info->getAccountBLZ())) ?><br />
             <?php echo $this->__('Account holder: %s', $this->escapeHtml($_info->getAccountName())) ?><br />
             <?php echo $this->__('Account number: %s', $this->escapeHtml($_info->getAccountNumber())) ?><br />
@@ -60,8 +68,5 @@
         <?php endif; ?>
     <?php endif; ?>
 
-    <?php if ($_customText = $_info->getCustomText()): ?>
-        <br />
-        <?php echo $this->escapeHtml($_customText) ?><br />
-    <?php endif; ?>
+    <br />
 <?php endif; ?>
