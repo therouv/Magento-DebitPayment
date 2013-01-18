@@ -43,14 +43,14 @@
                 <class>Itabs_Debit_Model</class>
                 <resourceModel>debit_mysql4</resourceModel>
             </debit>
-			<debit_mysql4>
-	            <class>Itabs_Debit_Model_Mysql4</class>
-	            <entities>
-	                <order_grid>
-	                    <table>debit_order_grid</table>
-	                </order_grid>
-	            </entities>
-	        </debit_mysql4>
+            <debit_mysql4>
+                <class>Itabs_Debit_Model_Mysql4</class>
+                <entities>
+                    <order_grid>
+                        <table>debit_order_grid</table>
+                    </order_grid>
+                </entities>
+            </debit_mysql4>
         </models>
         <resources>
             <debit_setup>
@@ -86,6 +86,24 @@
                 </observers>
             </sales_order_save_after>
         </events>
+        <fieldsets>
+            <sales_convert_quote_payment>
+                <debit_swift>
+                    <to_quote_payment>*</to_quote_payment>
+                </debit_swift>
+                <debit_iban>
+                    <to_quote_payment>*</to_quote_payment>
+                </debit_iban>
+            </sales_convert_quote_payment>
+            <sales_convert_order_payment>
+                <debit_swift>
+                    <to_quote_payment>*</to_quote_payment>
+                </debit_swift>
+                <debit_iban>
+                    <to_quote_payment>*</to_quote_payment>
+                </debit_iban>
+            </sales_convert_order_payment>
+        </fieldsets>
     </global>
     <default>
         <payment>

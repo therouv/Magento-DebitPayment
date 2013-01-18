@@ -107,7 +107,7 @@ class Itabs_Debit_Block_Account_Data
      */
     public function getAccountSwift()
     {
-        return $this->_getAccountData('debit_payment_swift');
+        return $this->_getAccountData('debit_payment_account_swift');
     }
 
     /**
@@ -117,7 +117,7 @@ class Itabs_Debit_Block_Account_Data
      */
     public function getAccountIban()
     {
-        return $this->_getAccountData('debit_payment_iban');
+        return $this->_getAccountData('debit_payment_account_iban');
     }
 
     /**
