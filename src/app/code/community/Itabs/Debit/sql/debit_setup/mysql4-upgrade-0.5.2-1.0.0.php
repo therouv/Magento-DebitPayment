@@ -102,6 +102,16 @@ $installer->getConnection()->addColumn(
 );
 
 $installer->getConnection()->addColumn(
+    $installer->getTable('sales/quote_payment'),
+    'debit_type',
+    array(
+        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
+        'lenght' => 4,
+        'comment' => 'Debit Type'
+    )
+);
+
+$installer->getConnection()->addColumn(
     $installer->getTable('sales/order_payment'),
     'debit_swift',
     array(
@@ -118,6 +128,16 @@ $installer->getConnection()->addColumn(
         'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
         'lenght' => 255,
         'comment' => 'Debit IBAN'
+    )
+);
+
+$installer->getConnection()->addColumn(
+    $installer->getTable('sales/order_payment'),
+    'debit_type',
+    array(
+        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
+        'lenght' => 4,
+        'comment' => 'Debit Type'
     )
 );
 

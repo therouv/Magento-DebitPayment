@@ -94,6 +94,9 @@
                 <debit_iban>
                     <to_order_payment>*</to_order_payment>
                 </debit_iban>
+                <debit_type>
+                    <to_order_payment>*</to_order_payment>
+                </debit_type>
             </sales_convert_quote_payment>
             <sales_convert_order_payment>
                 <debit_swift>
@@ -102,6 +105,9 @@
                 <debit_iban>
                     <to_quote_payment>*</to_quote_payment>
                 </debit_iban>
+                <debit_type>
+                    <to_quote_payment>*</to_quote_payment>
+                </debit_type>
             </sales_convert_order_payment>
         </fieldsets>
     </global>

@@ -107,7 +107,8 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
              ->setCcOwner($ccOwner)                   // Kontoinhaber
              ->setCcNumberEnc($ccNumber)              // Kontonummer
              ->setDebitSwift($swift)                  // SWIFT Code
-             ->setDebitIban($iban);                   // IBAN
+             ->setDebitIban($iban)                    // IBAN
+             ->setDebitType(Mage::helper('debit')->getDebitType());
 
         return $this;
     }
