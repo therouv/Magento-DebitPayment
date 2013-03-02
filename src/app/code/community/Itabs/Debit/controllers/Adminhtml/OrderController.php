@@ -78,7 +78,9 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
             $salesFlatOrderPaymentTable.'.parent_id = main_table.entity_id',
             array('method')
         );
-        $collection->getSelect()->where('method = ?', 'debit');
+        $collection->getSelect()
+            ->where('method = ?', 'debit')
+            ->where('debit_type = ?', 'bank');
 
         foreach ($collection as $order) {
             /* @var $order Mage_Sales_Model_Order */
