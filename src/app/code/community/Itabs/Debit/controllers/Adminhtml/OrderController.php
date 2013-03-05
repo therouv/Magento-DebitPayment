@@ -43,6 +43,9 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     {
         $this->loadLayout();
         $this->_setActiveMenu('sales/debitpayment');
+        $this->_getSession()->addNotice(
+            $this->_getDebitHelper()->__('Please note: SEPA orders will not be synced yet.')
+        );
         $this->renderLayout();
     }
 
