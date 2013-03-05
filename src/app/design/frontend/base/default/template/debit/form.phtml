@@ -1,9 +1,9 @@
 <?php
 /**
  * This file is part of the Itabs_Debit module.
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -37,27 +37,27 @@ blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>'
         </li>
         <li>
             <div class="input-box">
-                <label for="kreditinstitut"><?php echo $this->__('Kreditinstitut') ?></label><br />
-                <span id="kreditinstitut" style="display:block;padding:0 0 0 10px;float:left;"><?php echo $this->getBankName(); ?></span>
+                <label for="blz_bank_name"><?php echo $this->__('Kreditinstitut') ?></label><br />
+                <span id="blz_bank_name"><?php echo $this->getBankName(); ?></span>
             </div>
         </li>
         <li>
-            <div class="input-box" style="width:500px;width:500px;position:relative;">
+            <div class="input-box">
                 <label for="bankleitzahl"><?php echo $this->__('Bankleitzahl') ?> <span class="required">*</span></label><br />
                 <input type="text" id="bankleitzahl" name="payment[debit_cc_type]" title="<?php echo $this->__('Bankleitzahl') ?>" class="input-text required-entry validate-number validate-debit-blz" style="display: block; float: left;" value="<?php echo $this->getAccountBLZ() ?>" onchange="blzCheck.checkBlz(this); return false;"/>
             </div>
         </li>
-		<li>
+        <li>
             <div class="input-box">
                 <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?> <span class="required">*</span></label><br />
                 <input type="text" id="kontoinhaber" name="payment[debit_cc_owner]" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
             </div>
-		</li>
-		<li>
+        </li>
+        <li>
             <div class="input-box">
                 <label for="kontonummer"><?php echo $this->__('Konto-Nummer') ?> <span class="required">*</span></label><br />
                 <input type="text" id="kontonummer" name="payment[debit_cc_number]" title="<?php echo $this->__('Konto-Nummer') ?>" maxlength="11" class="input-text required-entry validate-number validate-debit-number" value="<?php echo $this->getAccountNumber() ?>" />
             </div>
-		</li>
+        </li>
     </ul>
 </fieldset>
