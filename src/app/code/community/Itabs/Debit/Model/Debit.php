@@ -55,6 +55,11 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     protected $_infoBlockType = 'debit/info';
 
     /**
+     * @var bool Allow capturing for this payment method
+     */
+    protected $_canCapture = true;
+
+    /**
      * Assigns data to the payment info instance
      *
      * @param  Varien_Object|array    $data Payment Data from checkout
