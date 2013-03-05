@@ -42,7 +42,32 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
      */
     public function getDebitType()
     {
-        return Mage::getStoreConfig('payment/debit/debit_type');
+        $type = Mage::getStoreConfig('payment/debit/debit_type');
+
+        /*
+         * Check if we are on a specific page in the backend view,
+         * then overwrite $type with the value of the order/..
+         */
+
+        if ($order = Mage::registry('current_order')) {
+            /* @var $order Mage_Sales_Model_Order */
+            $method = $order->getPayment()->getMethodInstance()->getInfoInstance();
+            $type = $method->getData('debit_type');
+        } elseif ($invoice = Mage::registry('current_invoice')) {
+            /* @var $invoice Mage_Sales_Model_Order_Invoice */
+            $method = $invoice->getOrder()->getPayment()->getMethodInstance()->getInfoInstance();
+            $type = $method->getData('debit_type');
+        } elseif ($shipment = Mage::registry('current_shipment')) {
+            /* @var $shipment Mage_Sales_Model_Order_Shipment */
+            $method = $shipment->getOrder()->getPayment()->getMethodInstance()->getInfoInstance();
+            $type = $method->getData('debit_type');
+        } elseif ($creditmemo = Mage::registry('current_creditmemo')) {
+            /* @var $creditmemo Mage_Sales_Model_Order_Creditmemo */
+            $method = $creditmemo->getOrder()->getPayment()->getMethodInstance()->getInfoInstance();
+            $type = $method->getData('debit_type');
+        }
+
+        return $type;
     }
 
     /**
