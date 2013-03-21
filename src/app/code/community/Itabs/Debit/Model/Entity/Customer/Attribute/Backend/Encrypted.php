@@ -37,7 +37,7 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
     /**
      * Encrypts the value before saving
      *
-     * @param  <type> $object Object
+     * @param  Mage_Core_Model_Abstract $object
      * @return void
      */
     public function beforeSave($object)
@@ -51,7 +51,7 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
     /**
      * Decrypts the value after load
      *
-     * @param  <type> $object Object
+     * @param  Mage_Core_Model_Abstract $object
      * @return void
      */
     public function afterLoad($object)
