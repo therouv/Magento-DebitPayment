@@ -1,0 +1,9 @@
+sanitize_strings:
+  -
+    space: "Test Space"
+    dash: "Test-Dash"
+    underscore: "Test_Underscore"
+    dot: "Test.Dot"
+    semicolon: "Test;Semicolon"
+    slash: "Test/Slash"
+    pipe: "Test|Pipe"
