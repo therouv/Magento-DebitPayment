@@ -15,15 +15,41 @@
 class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
 {
     /**
+     * Test if the getBankByBlz method returns a bank name
+     *
+     * @param array $data
+     * @dataProvider dataProvider
+     */
+    public function testGetBankByBlz($data)
+    {
+        /* @var $helper Itabs_Debit_Helper_Data */
+        $helper = Mage::helper('debit');
+
+        // Load all expectations
+        $dataSet = $this->readAttribute($this, 'dataName');
+
+        for ($i = 0; $i < count($data); $i++) {
+            $this->assertEquals(
+                $this->expected($dataSet)->getData('name_'.$i),
+                $helper->getBankByBlz($data[$i])
+            );
+        }
+    }
+
+    /**
+     * Test if the customer enters a faulty string that it
+     * gets sanitized correctly
+     *
      * @param array $data
      * @dataProvider dataProvider
      */
     public function testSanitizeData($data)
     {
-        $dataSet = $this->readAttribute($this, 'dataName');
-
         /* @var $helper Itabs_Debit_Helper_Data */
         $helper = Mage::helper('debit');
+
+        // Load all expectations
+        $dataSet = $this->readAttribute($this, 'dataName');
 
         foreach ($data as $key => $value) {
             $this->assertEquals(
