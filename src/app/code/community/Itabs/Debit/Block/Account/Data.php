@@ -35,6 +35,23 @@ class Itabs_Debit_Block_Account_Data
     extends Mage_Customer_Block_Account_Dashboard
 {
     /**
+     * Set the right template dependend on the debit type
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        parent::_construct();
+
+        /* @var $helper Itabs_Debit_Helper_Data */
+        $helper = Mage::helper('debit');
+        if ($helper->getDebitType() == Itabs_Debit_Helper_Data::DEBIT_TYPE_SEPA) {
+            $this->setTemplate('debit/sepa/account/data.phtml');
+        } else {
+            $this->setTemplate('debit/account/data.phtml');
+        }
+    }
+    /**
      * Returns the bank name
      *
      * @return string Bankname
@@ -84,6 +101,26 @@ class Itabs_Debit_Block_Account_Data
     }
 
     /**
+     * Returns the swift code of the specific account
+     *
+     * @return string
+     */
+    public function getAccountSwift()
+    {
+        return $this->_getAccountData('debit_payment_account_swift');
+    }
+
+    /**
+     * Returns the iban of the specific account
+     *
+     * @return string
+     */
+    public function getAccountIban()
+    {
+        return $this->_getAccountData('debit_payment_account_iban');
+    }
+
+    /**
      * Returns the specific value of the requested field from the
      * customer model.
      *
@@ -99,10 +136,14 @@ class Itabs_Debit_Block_Account_Data
         if (strlen($data) == 0) {
             return '';
         }
-        if ($field != 'debit_payment_acount_name' && !is_numeric($data)) {
+        if ($field != 'debit_payment_acount_name'
+            && $field != 'debit_payment_account_swift'
+            && $field != 'debit_payment_account_iban'
+            && !is_numeric($data)
+        ) {
             return '';
         }
 
-        return $this->htmlEscape($data);
+        return $this->escapeHtml($data);
     }
 }

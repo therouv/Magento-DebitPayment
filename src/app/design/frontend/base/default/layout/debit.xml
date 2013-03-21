@@ -29,25 +29,25 @@
     </customer_account>
 
     <debit_account_edit translate="label">
-		<reference name="head">
-			<action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
-		</reference>
+        <reference name="head">
+            <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+        </reference>
         <label>Debit Account Data</label>
         <update handle="customer_account"/>
         <reference name="content">
-            <block type="debit/account_data" name="debit.account.data" template="debit/account/data.phtml"/>
+            <block type="debit/account_data" name="debit.account.data" />
         </reference>
     </debit_account_edit>
 
     <checkout_onepage_index>
-		<reference name="head">
-			<action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
-		</reference>
+        <reference name="head">
+            <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+        </reference>
     </checkout_onepage_index>
 
     <checkout_multishipping_billing>
-		<reference name="head">
-			<action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
-		</reference>
+        <reference name="head">
+            <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+        </reference>
     </checkout_multishipping_billing>
 </layout>

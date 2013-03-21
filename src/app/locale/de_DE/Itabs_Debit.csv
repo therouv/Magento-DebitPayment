@@ -49,3 +49,4 @@
 "Account Owner","Kontoinhaber"
 "Routing Number","Bankleitzahl"
 "Please enter bankaccount credentials of the store owner in the system configuration. Otherwise you will not be able to generate a valid export file.","Bitte geben Sie in der System-Konfiguration die Bankverbindung des Shopbetreibers ein. Anderenfalls können Sie keine gültige Export-Datei erzeugen."
+"Please note: SEPA orders will not be synced yet.","Bitte beachten Sie: Bestellungen via SEPA-Lastschrift werden vorerst noch nicht synchronisiert."
