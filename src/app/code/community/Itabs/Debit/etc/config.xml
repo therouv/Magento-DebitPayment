@@ -190,4 +190,11 @@
             </debit>
         </routers>
     </frontend>
+    <phpunit>
+        <suite>
+            <modules>
+                <Itabs_Debit />
+            </modules>
+        </suite>
+    </phpunit>
 </config>
