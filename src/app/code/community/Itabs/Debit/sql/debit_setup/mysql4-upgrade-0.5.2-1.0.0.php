@@ -141,6 +141,18 @@ $installer->getConnection()->addColumn(
     )
 );
 
+// Add new field to the debit order grid
+$installer->getConnection()->addColumn(
+    $installer->getTable('debit/order_grid'),
+    'debit_type',
+    array(
+        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
+        'lenght' => 4,
+        'comment' => 'Debit Type'
+    )
+);
+
+
 // End setup
 $installer->endSetup();
 

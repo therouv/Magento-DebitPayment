@@ -21,7 +21,6 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-require_once (Mage::getBaseDir().'/lib/DTA/DTA.php');
 /**
  * Export Order Controller
  *
@@ -41,11 +40,12 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
      */
     public function indexAction()
     {
+        $this->_getSession()->addNotice(
+            $this->_getDebitHelper()->__('Please note: SEPA Debit Payment orders can only be exported as CSV for now.')
+        );
+
         $this->loadLayout();
         $this->_setActiveMenu('sales/debitpayment');
-        $this->_getSession()->addNotice(
-            $this->_getDebitHelper()->__('Please note: SEPA orders will not be synced yet.')
-        );
         $this->renderLayout();
     }
 
@@ -79,11 +79,10 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
         $collection->getSelect()->joinLeft(
             $salesFlatOrderPaymentTable,
             $salesFlatOrderPaymentTable.'.parent_id = main_table.entity_id',
-            array('method')
+            array('method', 'debit_type')
         );
         $collection->getSelect()
-            ->where('method = ?', 'debit')
-            ->where('debit_type = ?', 'bank');
+            ->where('method = ?', 'debit');
 
         foreach ($collection as $order) {
             /* @var $order Mage_Sales_Model_Order */
@@ -115,46 +114,52 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     }
 
     /**
+     * Update order status action
+     *
+     * @return void
+     */
+    public function massStatusAction()
+    {
+        $orderIds = (array) $this->getRequest()->getParam('orders');
+        $status   = (int) $this->getRequest()->getParam('status');
+
+        try {
+            foreach ($orderIds as $orderId) {
+                $order = Mage::getModel('debit/orders')->load($orderId);
+                $order->setData('status', $status);
+                $order->save();
+            }
+
+            $this->_getSession()->addSuccess(
+                $this->_getDebitHelper()->__(
+                    'Total of %d record(s) have been updated.',
+                    count($orderIds)
+                )
+            );
+        }
+        catch (Mage_Core_Model_Exception $e) {
+            $this->_getSession()->addError($e->getMessage());
+        } catch (Mage_Core_Exception $e) {
+            $this->_getSession()->addError($e->getMessage());
+        } catch (Exception $e) {
+            $this->_getSession()
+                ->addException(
+                    $e,
+                    $this->__('An error occurred while updating the status.')
+                );
+        }
+
+        $this->_redirect('*/*/');
+    }
+
+    /**
      * Export the order list as DTA file
      *
      * @return void|Mage_Core_Controller_Varien_Action
      */
     public function exportdtausAction()
     {
-        $collection = $this->_hasOrdersToExport();
-        if (!$collection) {
-            $this->_redirect('*/*');
-
-            return;
-        }
-
-        // Create new object and set store owner bank account data
-        $file = new DTA(DTA_DEBIT);
-        $file->setAccountFileSender($this->_getDebitHelper()->getBankAccount());
-
-        // Add orders
-        foreach ($collection as $order) {
-            /* @var $orderModel Mage_Sales_Model_Order */
-            $orderModel = Mage::getModel('sales/order')->load($order->getData('entity_id'));
-            /* @var $payment Itabs_Debit_Model_Debit */
-            $paymentMethod = $orderModel->getPayment()->getMethodInstance();
-
-            $file->addExchange(
-                array(
-                    'name'           => $paymentMethod->getAccountName(),
-                    'bank_code'      => $paymentMethod->getAccountBLZ(),
-                    'account_number' => $paymentMethod->getAccountNumber(),
-                ),
-                round($order->getData('grand_total'), 2),
-                array(
-                    'Bestellung Nr. '.$order->getData('increment_id')
-                )
-            );
-
-            $this->_getDebitHelper()->setStatusAsExported($order->getId());
-        }
-
-        return $this->_prepareDownloadResponse('EXPORT'.date('YmdHis'), $file->getFileContent());
+        return $this->_export('dtaus');
     }
 
     /**
@@ -164,73 +169,25 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
      */
     public function exportcsvAction()
     {
-        $collection = $this->_hasOrdersToExport();
-        if (!$collection) {
-            $this->_redirect('*/*');
-
-            return;
-        }
-
-        $fileName = 'EXPORT'.date('YmdHis').'.csv';
-
-        // Open file
-        $io = new Varien_Io_File();
-        $io->open(array('path' => Mage::getBaseDir('var')));
-        $io->streamOpen($fileName);
-
-        // Add headline
-        $row = array(
-            'Kundenname',
-            'BLZ',
-            'Kontonummer',
-            'Betrag',
-            'Verwendungszweck'
-        );
-        $io->streamWriteCsv($row);
-
-        // Add rows
-        foreach ($collection as $order) {
-            /* @var $orderModel Mage_Sales_Model_Order */
-            $orderModel = Mage::getModel('sales/order')->load($order->getData('entity_id'));
-            /* @var $payment Itabs_Debit_Model_Debit */
-            $paymentMethod = $orderModel->getPayment()->getMethodInstance();
-
-            $row = array(
-                'name'           => $paymentMethod->getAccountName(),
-                'bank_code'      => $paymentMethod->getAccountBLZ(),
-                'account_number' => $paymentMethod->getAccountNumber(),
-                'amount'         => number_format($order->getData('grand_total'), 2, ',', '.').' '.$order->getData('order_currency_code'),
-                'purpose'        => 'Bestellung Nr. '.$order->getData('increment_id')
-            );
-            $io->streamWriteCsv($row);
-
-            $this->_getDebitHelper()->setStatusAsExported($order->getId());
-        }
-
-        // Close file, get file contents and delete temporary file
-        $io->close();
-        $filePath = Mage::getBaseDir('var') . DS . $fileName;
-        $fileContents = file_get_contents($filePath);
-        $io->rm($fileName);
-
-        return $this->_prepareDownloadResponse($fileName, $fileContents);
+        return $this->_export('csv');
     }
 
     /**
-     * Check if there are orders available for export..
-     *
-     * @return void
+     * @param string $type
+     * @return Mage_Core_Controller_Varien_Action
      */
-    protected function _hasOrdersToExport()
+    protected function _export($type)
     {
-        $collection = Mage::getModel('debit/orders')->getCollection()->addFieldToFilter('status', 0);
-        if ($collection->count() == 0) {
-            $this->_getSession()->addError($this->_getDebitHelper()->__('No orders to export.'));
-
-            return false;
+        $response = Mage::getModel('debit/export_'.$type)->export();
+        if (!$response) {
+            $this->_redirect('*/*');
+            return;
         }
 
-        return $collection;
+        return $this->_prepareDownloadResponse(
+            $response['file_name'],
+            $response['file_content']
+        );
     }
 
     /**

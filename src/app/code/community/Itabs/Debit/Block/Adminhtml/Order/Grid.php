@@ -98,6 +98,24 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
                 'currency' => 'order_currency_code',
             )
         );
+
+        $types = Mage::getModel('debit/system_config_source_debit_type')
+            ->toOptionHash();
+
+        $this->addColumn(
+            'debit_type',
+            array(
+                'header' => $this->_getHelper()->__('Debit Type'),
+                'index'  => 'debit_type',
+                'type'   => 'options',
+                'options' => $types,
+                'width'   => '100px',
+            )
+        );
+
+        $statuses = Mage::getSingleton('debit/system_config_source_debit_status')
+            ->toOptionHash();
+
         $this->addColumn(
             'status',
             array(
@@ -105,14 +123,39 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
                 'index'   => 'status',
                 'type'    => 'options',
                 'width'   => '150px',
-                'options' => array(
-                    0 => $this->_getHelper()->__('Not exported'),
-                    1 => $this->_getHelper()->__('Exported')
-                ),
+                'options' => $statuses
             )
         );
 
         return parent::_prepareColumns();
+    }
+
+    protected function _prepareMassaction()
+    {
+        $this->setMassactionIdField('id');
+        $this->getMassactionBlock()->setFormFieldName('orders');
+
+        $values = Mage::getSingleton('debit/system_config_source_debit_status')
+            ->toOptionArray();
+
+        $this->getMassactionBlock()->addItem(
+            'status',
+            array(
+                'label' => Mage::helper('catalog')->__('Change status'),
+                'url'   => $this->getUrl('*/*/massStatus', array('_current'=>true)),
+                'additional' => array(
+                    'visibility' => array(
+                        'name'   => 'status',
+                        'type'   => 'select',
+                        'class'  => 'required-entry',
+                        'label'  => $this->_getHelper()->__('Status'),
+                        'values' => $values
+                    )
+                )
+            )
+        );
+
+        return $this;
     }
 
     /**

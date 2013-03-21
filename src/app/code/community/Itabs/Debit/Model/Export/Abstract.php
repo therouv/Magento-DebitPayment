@@ -22,7 +22,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Debit Types
+ * Abstract Export Model
  *
  * @category  Itabs
  * @package   Itabs_Debit
@@ -31,50 +31,61 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_Model_System_Config_Source_Debit_Type
+class Itabs_Debit_Model_Export_Abstract extends Varien_Object
 {
     /**
-     * @var array Debit Types
+     * @var string File Extension
      */
-    protected $_options;
+    protected $_fileExt = '';
 
     /**
-     * Returns the debit types as an array for system configuration
-     *
-     * @return array Debit Types
+     * @var array
      */
-    public function toOptionArray()
-    {
-        if (!$this->_options) {
-            $this->_options = array(
-                array(
-                    'value' => 'bank',
-                    'label' => Mage::helper('debit')->__('Bank Account & Routing Number')
-                ),
-                array(
-                    'value' => 'sepa',
-                    'label' => Mage::helper('debit')->__('SEPA')
-                )
-            );
-        }
+    protected $_orderFilter = false;
 
-        return $this->_options;
+    /**
+     * Retrieve the helper class
+     *
+     * @return Itabs_Debit_Helper_Adminhtml
+     */
+    protected function _getDebitHelper()
+    {
+        return Mage::helper('debit/adminhtml');
     }
 
     /**
-     * Returns the debit types as option hash for grid view
+     * Retrieve the filename for the export file
      *
-     * @return array
+     * @return string
      */
-    public function toOptionHash()
+    public function getFileName()
     {
-        $options = $this->toOptionArray();
+        return 'EXPORT'.date('YmdHis') . $this->_fileExt;
+    }
 
-        $hash = array();
-        foreach ($options as $option) {
-            $hash[$option['value']] = $option['label'];
+    /**
+     * Check if there are orders available for export..
+     *
+     * @return void
+     */
+    protected function _hasOrdersToExport()
+    {
+        /* @var $collection Itabs_Debit_Model_Mysql4_Orders_Collection */
+        $collection = Mage::getModel('debit/orders')->getCollection()
+            ->addFieldToFilter('status', 0);
+
+        // Apply custom filters if applicable
+        if ($this->_orderFilter) {
+            foreach ($this->_orderFilter as $field => $condition) {
+                $collection->addFieldToFilter($field, $condition);
+            }
         }
 
-        return $hash;
+        // Check if collection coontains orders
+        if ($collection->count() == 0) {
+            $this->_getSession()->addError($this->_getDebitHelper()->__('No orders to export.'));
+            return false;
+        }
+        return $collection;
     }
 }

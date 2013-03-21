@@ -22,7 +22,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Debit Types
+ * Export Model Interface
  *
  * @category  Itabs
  * @package   Itabs_Debit
@@ -31,50 +31,14 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_Model_System_Config_Source_Debit_Type
+interface Itabs_Debit_Model_Export_Interface
 {
     /**
-     * @var array Debit Types
-     */
-    protected $_options;
-
-    /**
-     * Returns the debit types as an array for system configuration
+     * Export function:
+     * - Returns false, if an error occured or if there are no orders to export
+     * - Returns array, containing the filename and the file contents
      *
-     * @return array Debit Types
+     * @return bool|array
      */
-    public function toOptionArray()
-    {
-        if (!$this->_options) {
-            $this->_options = array(
-                array(
-                    'value' => 'bank',
-                    'label' => Mage::helper('debit')->__('Bank Account & Routing Number')
-                ),
-                array(
-                    'value' => 'sepa',
-                    'label' => Mage::helper('debit')->__('SEPA')
-                )
-            );
-        }
-
-        return $this->_options;
-    }
-
-    /**
-     * Returns the debit types as option hash for grid view
-     *
-     * @return array
-     */
-    public function toOptionHash()
-    {
-        $options = $this->toOptionArray();
-
-        $hash = array();
-        foreach ($options as $option) {
-            $hash[$option['value']] = $option['label'];
-        }
-
-        return $hash;
-    }
+    public function export();
 }

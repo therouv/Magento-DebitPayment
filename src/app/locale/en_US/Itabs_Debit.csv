@@ -49,4 +49,4 @@
 "Account Owner","Account Owner"
 "Routing Number","Routing Number"
 "Please enter bankaccount credentials of the store owner in the system configuration. Otherwise you will not be able to generate a valid export file.","Please enter bankaccount credentials of the store owner in the system configuration. Otherwise you will not be able to generate a valid export file."
-"Please note: SEPA orders will not be synced yet.","Please note: SEPA orders will not be synced yet."
+"Please note: SEPA Debit Payment orders can only be exported as CSV for now.","Please note: SEPA Debit Payment orders can only be exported as CSV for now."

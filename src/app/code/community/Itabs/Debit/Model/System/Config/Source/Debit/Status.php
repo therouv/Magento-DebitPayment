@@ -22,7 +22,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Debit Types
+ * Export Order Statuses
  *
  * @category  Itabs
  * @package   Itabs_Debit
@@ -31,29 +31,29 @@
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_Model_System_Config_Source_Debit_Type
+class Itabs_Debit_Model_System_Config_Source_Debit_Status
 {
     /**
-     * @var array Debit Types
+     * @var array Statuses
      */
     protected $_options;
 
     /**
-     * Returns the debit types as an array for system configuration
+     * Returns the statuses as option array
      *
-     * @return array Debit Types
+     * @return array Statuses
      */
     public function toOptionArray()
     {
         if (!$this->_options) {
             $this->_options = array(
                 array(
-                    'value' => 'bank',
-                    'label' => Mage::helper('debit')->__('Bank Account & Routing Number')
+                    'value' => 0,
+                    'label' => Mage::helper('debit/adminhtml')->__('Not exported')
                 ),
                 array(
-                    'value' => 'sepa',
-                    'label' => Mage::helper('debit')->__('SEPA')
+                    'value' => 1,
+                    'label' => Mage::helper('debit/adminhtml')->__('Exported')
                 )
             );
         }
@@ -62,7 +62,7 @@ class Itabs_Debit_Model_System_Config_Source_Debit_Type
     }
 
     /**
-     * Returns the debit types as option hash for grid view
+     * Returns the statuses as option hash
      *
      * @return array
      */
