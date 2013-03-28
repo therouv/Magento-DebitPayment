@@ -180,7 +180,7 @@
                 </debit>
             </groups>
         </payment>
-		<debitpayment translate="label" module="moneybookers">
+		<debitpayment translate="label" module="debit">
             <label>Debit Payment</label>
             <tab>sales</tab>
             <frontend_type>text</frontend_type>
