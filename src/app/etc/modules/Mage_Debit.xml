@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * This file is part of the Mage_Debit module.
+ * This file is part of the Itabs_Debit module.
  *
  * NOTICE OF LICENSE
  *
@@ -13,23 +13,24 @@
  * obtain it through the world-wide-web, please send an email
  * to license@magentocommerce.com so we can send you a copy immediately.
  *
- * @category  Mage
- * @package   Mage_Debit
+ * @category  Itabs
+ * @package   Itabs_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @link      http://www.magentocommerce.com/extension/676/
+ * @version   1.0.0
+ * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
  -->
 <config>
     <modules>
         <Mage_Debit>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>
             <depends>
                 <Mage_Payment />
             </depends>
+            <version>0.5.5</version>
         </Mage_Debit>
     </modules>
 </config>

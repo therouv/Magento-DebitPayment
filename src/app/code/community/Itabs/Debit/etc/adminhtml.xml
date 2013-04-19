@@ -22,10 +22,35 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
  -->
-<layout version="0.1.0">
-	<debit_adminhtml_order_index>
-        <reference name="content">
-            <block type="debit/adminhtml_order" name="debit.adminhtml.order" />
-        </reference>
-	</debit_adminhtml_order_index>
-</layout>
+<config>
+	<menu>
+		<sales>
+			<children>
+				<debitpayment translate="title" module="debit">
+					<title>Debit Payment Orders</title>
+					<action>debit/adminhtml_order</action>
+					<sort_order>11</sort_order>
+				</debitpayment>
+			</children>
+		</sales>
+	</menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <debitpayment translate="title" module="debit">
+                                        <title>Debit Payment</title>
+                                    </debitpayment>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

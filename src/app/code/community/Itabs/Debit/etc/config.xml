@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * This file is part of the Itabs_Debit module.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category  Itabs
+ * @package   Itabs_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
+ * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
+ */
+ -->
+<config>
+    <modules>
+        <Itabs_Debit>
+            <version>1.0.0</version>
+        </Itabs_Debit>
+    </modules>
+    <global>
+        <blocks>
+            <debit>
+                <class>Itabs_Debit_Block</class>
+            </debit>
+        </blocks>
+        <helpers>
+            <debit>
+                <class>Itabs_Debit_Helper</class>
+            </debit>
+        </helpers>
+        <models>
+            <debit>
+                <class>Itabs_Debit_Model</class>
+                <resourceModel>debit_mysql4</resourceModel>
+            </debit>
+            <debit_mysql4>
+                <class>Itabs_Debit_Model_Mysql4</class>
+                <entities>
+                    <order_grid>
+                        <table>debit_order_grid</table>
+                    </order_grid>
+                </entities>
+            </debit_mysql4>
+        </models>
+        <resources>
+            <debit_setup>
+                <setup>
+                    <module>Itabs_Debit</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </debit_setup>
+            <debit_write>
+                <use>core_write</use>
+            </debit_write>
+            <debit_read>
+                <use>core_read</use>
+            </debit_read>
+        </resources>
+        <events>
+            <payment_method_is_active>
+                <observers>
+                    <debit_observer>
+                        <class>debit/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </debit_observer>
+                </observers>
+            </payment_method_is_active>
+            <sales_order_save_after>
+                <observers>
+                    <debit_observer>
+                        <class>debit/observer</class>
+                        <method>saveAccountInfo</method>
+                    </debit_observer>
+                </observers>
+            </sales_order_save_after>
+        </events>
+        <fieldsets>
+            <sales_convert_quote_payment>
+                <debit_swift>
+                    <to_order_payment>*</to_order_payment>
+                </debit_swift>
+                <debit_iban>
+                    <to_order_payment>*</to_order_payment>
+                </debit_iban>
+                <debit_type>
+                    <to_order_payment>*</to_order_payment>
+                </debit_type>
+            </sales_convert_quote_payment>
+            <sales_convert_order_payment>
+                <debit_swift>
+                    <to_quote_payment>*</to_quote_payment>
+                </debit_swift>
+                <debit_iban>
+                    <to_quote_payment>*</to_quote_payment>
+                </debit_iban>
+                <debit_type>
+                    <to_quote_payment>*</to_quote_payment>
+                </debit_type>
+            </sales_convert_order_payment>
+        </fieldsets>
+    </global>
+    <default>
+        <payment>
+            <debit>
+                <active>0</active>
+                <model>debit/debit</model>
+                <title>Debit Payment</title>
+                <sort_order>10</sort_order>
+                <sendmail>0</sendmail>
+                <sendmail_crypt>1</sendmail_crypt>
+                <order_status>1</order_status>
+                <allowspecific>0</allowspecific>
+                <save_account_data>0</save_account_data>
+                <checkout_valid_blz>0</checkout_valid_blz>
+                <specificgroup_all>1</specificgroup_all>
+                <specificgroup>0</specificgroup>
+                <orderscount>0</orderscount>
+                <customer_order_amount>0</customer_order_amount>
+            </debit>
+         </payment>
+    </default>
+	<admin>
+        <routers>
+            <debit>
+                <use>admin</use>
+                <args>
+                    <module>Itabs_Debit</module>
+                    <frontName>debit</frontName>
+                </args>
+            </debit>
+        </routers>
+	</admin>
+    <adminhtml>
+	    <layout>
+	        <updates>
+	            <debit>
+	                <file>debit.xml</file>
+	            </debit>
+	        </updates>
+	    </layout>
+	    <translate>
+	        <modules>
+	            <Itabs_Debit>
+	                <files>
+	                    <default>Itabs_Debit.csv</default>
+	                </files>
+	            </Itabs_Debit>
+	        </modules>
+	    </translate>
+    </adminhtml>
+    <frontend>
+        <secure_url>
+            <debit_account>/debit/account</debit_account>
+            <debit_ajax>/debit/ajax</debit_ajax>
+        </secure_url>
+        <translate>
+            <modules>
+                <Itabs_Debit>
+                    <files>
+                        <default>Itabs_Debit.csv</default>
+                    </files>
+                </Itabs_Debit>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <debit>
+                    <file>debit.xml</file>
+                </debit>
+            </updates>
+        </layout>
+        <routers>
+            <debit>
+                <use>standard</use>
+                <args>
+                    <module>Itabs_Debit</module>
+                    <frontName>debit</frontName>
+                </args>
+            </debit>
+        </routers>
+    </frontend>
+    <phpunit>
+        <suite>
+            <modules>
+                <Itabs_Debit />
+            </modules>
+        </suite>
+    </phpunit>
+</config>

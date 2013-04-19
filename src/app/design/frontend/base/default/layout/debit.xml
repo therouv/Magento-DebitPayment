@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * This file is part of the Mage_Debit module.
+ * This file is part of the Itabs_Debit module.
  *
  * NOTICE OF LICENSE
  *
@@ -13,13 +13,13 @@
  * obtain it through the world-wide-web, please send an email
  * to license@magentocommerce.com so we can send you a copy immediately.
  *
- * @category  Mage
- * @package   Mage_Debit
+ * @category  Itabs
+ * @package   Itabs_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @copyright 2010 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @link      http://www.magentocommerce.com/extension/676/
+ * @version   1.0.0
+ * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
  -->
 <layout version="0.1.0">
@@ -30,25 +30,25 @@
     </customer_account>
 
     <debit_account_edit translate="label">
-		<reference name="head">
-			<action method="addJs"><script>mage/debit/blzcheck.js</script></action>
-		</reference>
+        <reference name="head">
+            <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+        </reference>
         <label>Debit Account Data</label>
         <update handle="customer_account"/>
         <reference name="content">
-            <block type="debit/account_data" name="debit.account.data" template="debit/account/data.phtml"/>
+            <block type="debit/account_data" name="debit.account.data" />
         </reference>
     </debit_account_edit>
 
     <checkout_onepage_index>
-		<reference name="head">
-			<action method="addJs"><script>mage/debit/blzcheck.js</script></action>
-		</reference>
+        <reference name="head">
+            <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+        </reference>
     </checkout_onepage_index>
 
     <checkout_multishipping_billing>
-		<reference name="head">
-			<action method="addJs"><script>mage/debit/blzcheck.js</script></action>
-		</reference>
+        <reference name="head">
+            <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+        </reference>
     </checkout_multishipping_billing>
 </layout>

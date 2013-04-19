@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <!--
 /**
  * This file is part of the Itabs_Debit module.
@@ -22,10 +22,14 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
  -->
-<layout version="0.1.0">
-	<debit_adminhtml_order_index>
-        <reference name="content">
-            <block type="debit/adminhtml_order" name="debit.adminhtml.order" />
-        </reference>
-	</debit_adminhtml_order_index>
-</layout>
+<config>
+    <modules>
+        <Itabs_Debit>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Payment />
+            </depends>
+        </Itabs_Debit>
+    </modules>
+</config>
