@@ -218,22 +218,38 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </account_owner>
-                        <routing_number translate="label">
-                            <label>Routing Number</label>
+                        <account_number translate="label">
+                            <label>Accountnumber</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>2</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </routing_number>
-                        <account_number translate="label">
-                            <label>Accountnumber</label>
+                        </account_number>
+                        <account_iban translate="label">
+                            <label>IBAN</label>
                             <frontend_type>text</frontend_type>
                             <sort_order>3</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </account_number>
+                        </account_iban>
+                        <routing_number translate="label">
+                            <label>Routing Number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </routing_number>
+                        <swift_bic translate="label">
+                            <label>BIC/Swift-Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </swift_bic>
 					</fields>
 				</bankaccount>
 			</groups>
