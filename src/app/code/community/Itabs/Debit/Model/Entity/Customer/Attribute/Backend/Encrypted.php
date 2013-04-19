@@ -19,6 +19,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -29,6 +30,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
@@ -37,7 +39,7 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
     /**
      * Encrypts the value before saving
      *
-     * @param  <type> $object Object
+     * @param  Mage_Core_Model_Abstract $object
      * @return void
      */
     public function beforeSave($object)
@@ -51,7 +53,7 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
     /**
      * Decrypts the value after load
      *
-     * @param  <type> $object Object
+     * @param  Mage_Core_Model_Abstract $object
      * @return void
      */
     public function afterLoad($object)

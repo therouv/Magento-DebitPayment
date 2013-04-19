@@ -23,7 +23,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Helper/Data.php Test Class
+ * Abstract Export Model
  *
  * @category  Itabs
  * @package   Itabs_Debit
@@ -33,50 +33,61 @@
  * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
+class Itabs_Debit_Model_Export_Abstract extends Varien_Object
 {
     /**
-     * Test if the getBankByBlz method returns a bank name
-     *
-     * @param array $data
-     * @dataProvider dataProvider
+     * @var string File Extension
      */
-    public function testGetBankByBlz($data)
+    protected $_fileExt = '';
+
+    /**
+     * @var array
+     */
+    protected $_orderFilter = false;
+
+    /**
+     * Retrieve the helper class
+     *
+     * @return Itabs_Debit_Helper_Adminhtml
+     */
+    protected function _getDebitHelper()
     {
-        /* @var $helper Itabs_Debit_Helper_Data */
-        $helper = Mage::helper('debit');
-
-        // Load all expectations
-        $dataSet = $this->readAttribute($this, 'dataName');
-
-        for ($i = 0; $i < count($data); $i++) {
-            $this->assertEquals(
-                $this->expected($dataSet)->getData('name_'.$i),
-                $helper->getBankByBlz($data[$i])
-            );
-        }
+        return Mage::helper('debit/adminhtml');
     }
 
     /**
-     * Test if the customer enters a faulty string that it
-     * gets sanitized correctly
+     * Retrieve the filename for the export file
      *
-     * @param array $data
-     * @dataProvider dataProvider
+     * @return string
      */
-    public function testSanitizeData($data)
+    public function getFileName()
     {
-        /* @var $helper Itabs_Debit_Helper_Data */
-        $helper = Mage::helper('debit');
+        return 'EXPORT'.date('YmdHis') . $this->_fileExt;
+    }
 
-        // Load all expectations
-        $dataSet = $this->readAttribute($this, 'dataName');
+    /**
+     * Check if there are orders available for export..
+     *
+     * @return void
+     */
+    protected function _hasOrdersToExport()
+    {
+        /* @var $collection Itabs_Debit_Model_Mysql4_Orders_Collection */
+        $collection = Mage::getModel('debit/orders')->getCollection()
+            ->addFieldToFilter('status', 0);
 
-        foreach ($data as $key => $value) {
-            $this->assertEquals(
-                $this->expected($dataSet)->getData($key),
-                $helper->sanitizeData($value)
-            );
+        // Apply custom filters if applicable
+        if ($this->_orderFilter) {
+            foreach ($this->_orderFilter as $field => $condition) {
+                $collection->addFieldToFilter($field, $condition);
+            }
         }
+
+        // Check if collection coontains orders
+        if ($collection->count() == 0) {
+            $this->_getSession()->addError($this->_getDebitHelper()->__('No orders to export.'));
+            return false;
+        }
+        return $collection;
     }
 }

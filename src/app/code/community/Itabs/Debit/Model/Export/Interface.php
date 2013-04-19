@@ -1,7 +1,8 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
  * This file is part of the Itabs_Debit module.
+ *
+ * PHP version 5
  *
  * NOTICE OF LICENSE
  *
@@ -21,15 +22,25 @@
  * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
- -->
-<config>
-    <modules>
-        <Itabs_Debit>
-            <active>true</active>
-            <codePool>community</codePool>
-            <depends>
-                <Mage_Payment />
-            </depends>
-        </Itabs_Debit>
-    </modules>
-</config>
+/**
+ * Export Model Interface
+ *
+ * @category  Itabs
+ * @package   Itabs_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
+ * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
+ */
+interface Itabs_Debit_Model_Export_Interface
+{
+    /**
+     * Export function:
+     * - Returns false, if an error occured or if there are no orders to export
+     * - Returns array, containing the filename and the file contents
+     *
+     * @return bool|array
+     */
+    public function export();
+}

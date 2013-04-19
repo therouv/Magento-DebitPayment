@@ -23,7 +23,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Helper/Data.php Test Class
+ * Export Order Statuses
  *
  * @category  Itabs
  * @package   Itabs_Debit
@@ -33,50 +33,50 @@
  * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
+class Itabs_Debit_Model_System_Config_Source_Debit_Status
 {
     /**
-     * Test if the getBankByBlz method returns a bank name
-     *
-     * @param array $data
-     * @dataProvider dataProvider
+     * @var array Statuses
      */
-    public function testGetBankByBlz($data)
+    protected $_options;
+
+    /**
+     * Returns the statuses as option array
+     *
+     * @return array Statuses
+     */
+    public function toOptionArray()
     {
-        /* @var $helper Itabs_Debit_Helper_Data */
-        $helper = Mage::helper('debit');
-
-        // Load all expectations
-        $dataSet = $this->readAttribute($this, 'dataName');
-
-        for ($i = 0; $i < count($data); $i++) {
-            $this->assertEquals(
-                $this->expected($dataSet)->getData('name_'.$i),
-                $helper->getBankByBlz($data[$i])
+        if (!$this->_options) {
+            $this->_options = array(
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('debit/adminhtml')->__('Not exported')
+                ),
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('debit/adminhtml')->__('Exported')
+                )
             );
         }
+
+        return $this->_options;
     }
 
     /**
-     * Test if the customer enters a faulty string that it
-     * gets sanitized correctly
+     * Returns the statuses as option hash
      *
-     * @param array $data
-     * @dataProvider dataProvider
+     * @return array
      */
-    public function testSanitizeData($data)
+    public function toOptionHash()
     {
-        /* @var $helper Itabs_Debit_Helper_Data */
-        $helper = Mage::helper('debit');
+        $options = $this->toOptionArray();
 
-        // Load all expectations
-        $dataSet = $this->readAttribute($this, 'dataName');
-
-        foreach ($data as $key => $value) {
-            $this->assertEquals(
-                $this->expected($dataSet)->getData($key),
-                $helper->sanitizeData($value)
-            );
+        $hash = array();
+        foreach ($options as $option) {
+            $hash[$option['value']] = $option['label'];
         }
+
+        return $hash;
     }
 }

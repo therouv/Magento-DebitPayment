@@ -19,6 +19,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -29,6 +30,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 
@@ -50,9 +52,15 @@ $sql = "DROP TABLE IF EXISTS `{$installer->getTable('debit/order_grid')}`;
       `status` int(1) unsigned DEFAULT '0' COMMENT 'Status',
       PRIMARY KEY (`id`),
       UNIQUE KEY `UNQ_DEBITPAYMENT_ORDER_GRID_INCREMENT_ID` (`increment_id`),
-      CONSTRAINT `FK_DEBITPAYMENT_ORDER_GRID_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID` FOREIGN KEY (`customer_id`) REFERENCES `{$installer->getTable('customer/entity')}` (`entity_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-      CONSTRAINT `FK_DEBITPAYMENT_GRID_ENTITY_ID_SALES_FLAT_ORDER_ENTITY_ID` FOREIGN KEY (`entity_id`) REFERENCES `{$installer->getTable('sales/order')}` (`entity_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-      CONSTRAINT `FK_DEBITPAYMENT_ORDER_GRID_STORE_ID_CORE_STORE_STORE_ID` FOREIGN KEY (`store_id`) REFERENCES `{$installer->getTable('core/store')}` (`store_id`) ON DELETE SET NULL ON UPDATE CASCADE
+      CONSTRAINT `FK_DEBITPAYMENT_ORDER_GRID_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID`
+          FOREIGN KEY (`customer_id`)
+          REFERENCES `{$installer->getTable('customer/entity')}` (`entity_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+      CONSTRAINT `FK_DEBITPAYMENT_GRID_ENTITY_ID_SALES_FLAT_ORDER_ENTITY_ID`
+          FOREIGN KEY (`entity_id`)
+          REFERENCES `{$installer->getTable('sales/order')}` (`entity_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+      CONSTRAINT `FK_DEBITPAYMENT_ORDER_GRID_STORE_ID_CORE_STORE_STORE_ID`
+          FOREIGN KEY (`store_id`)
+          REFERENCES `{$installer->getTable('core/store')}` (`store_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Debit Payment Order Grid';";
 
 $installer->run($sql);

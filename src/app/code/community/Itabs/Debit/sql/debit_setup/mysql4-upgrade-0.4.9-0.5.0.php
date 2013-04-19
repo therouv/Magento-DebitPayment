@@ -19,6 +19,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -29,6 +30,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 $installer = $this;
@@ -36,7 +38,11 @@ $installer->startSetup();
 
 $write = Mage::getSingleton('core/resource')->getConnection('core_write');
 $write->query('SET FOREIGN_KEY_CHECKS=0;');
-$write->query("UPDATE {$this->getTable('eav_attribute')} SET attribute_code = 'debit_payment_acount_update' WHERE attribute_code = 'debit_payment_acount_data_update';");
+$write->query("
+    UPDATE {$this->getTable('eav_attribute')}
+    SET attribute_code = 'debit_payment_acount_update'
+    WHERE attribute_code = 'debit_payment_acount_data_update';
+");
 $write->query('SET FOREIGN_KEY_CHECKS=1;');
 
 $installer->endSetup();

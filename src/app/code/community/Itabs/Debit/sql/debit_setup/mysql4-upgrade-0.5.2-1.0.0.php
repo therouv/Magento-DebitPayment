@@ -19,6 +19,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -29,6 +30,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 // load id for customer entity
@@ -140,6 +142,18 @@ $installer->getConnection()->addColumn(
         'comment' => 'Debit Type'
     )
 );
+
+// Add new field to the debit order grid
+$installer->getConnection()->addColumn(
+    $installer->getTable('debit/order_grid'),
+    'debit_type',
+    array(
+        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
+        'lenght' => 4,
+        'comment' => 'Debit Type'
+    )
+);
+
 
 // End setup
 $installer->endSetup();

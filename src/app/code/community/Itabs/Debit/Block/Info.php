@@ -19,6 +19,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -29,6 +30,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
@@ -124,6 +126,7 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     {
         $debitType = $this->getDebitType();
 
+        /* @var $payment Itabs_Debit_Model_Debit */
         $payment = $this->getMethod();
         $method  = $this->getMethod()->getCode();
         $data = array(
@@ -135,8 +138,11 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
             'account_iban'   => $payment->getAccountIban(),
             'debit_type'     => $debitType
         );
+
         // mask bank data
-        if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')) {
+        if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')
+            && $debitType == 'bank'
+        ) {
             $number  = $payment->maskString($payment->getAccountNumber());
             $routing = $payment->maskString($payment->getAccountBLZ());
             $data['account_number'] = $number;

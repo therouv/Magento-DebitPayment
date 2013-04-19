@@ -19,16 +19,18 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * System Config Customer Groups
+ * Debit Types
  *
  * @category  Itabs
  * @package   Itabs_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Model_System_Config_Source_Debit_Type
@@ -59,5 +61,22 @@ class Itabs_Debit_Model_System_Config_Source_Debit_Type
         }
 
         return $this->_options;
+    }
+
+    /**
+     * Returns the debit types as option hash for grid view
+     *
+     * @return array
+     */
+    public function toOptionHash()
+    {
+        $options = $this->toOptionArray();
+
+        $hash = array();
+        foreach ($options as $option) {
+            $hash[$option['value']] = $option['label'];
+        }
+
+        return $hash;
     }
 }
