@@ -1,8 +1,8 @@
 /**
  * This file is part of the Itabs_Debit module.
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
@@ -16,6 +16,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 
@@ -61,7 +62,7 @@ Event.observe(window, 'load', function() {
     Validation.add('validate-debit-blz', Translator.translate('Please enter a valid bank code.'), function(v) {
 
         blzCheck.checkBlz();
-        if(blzCheck.checkoutValidBlz == 1) {       
+        if(blzCheck.checkoutValidBlz == 1) {
             if (!blzCheck.isBlzValid) {
                 return false;
             }
