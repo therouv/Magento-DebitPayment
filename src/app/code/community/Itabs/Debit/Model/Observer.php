@@ -19,6 +19,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -29,6 +30,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Model_Observer
@@ -58,60 +60,9 @@ class Itabs_Debit_Model_Observer
             return;
         }
 
-        // Get preconditions for checks
-        $customerGroupId = Mage_Customer_Model_Group::NOT_LOGGED_IN_ID;
-        if (Mage::app()->getStore()->isAdmin()) {
-            /* @var $session Mage_Adminhtml_Model_Session_Quote */
-            $session = Mage::getSingleton('adminhtml/session_quote');
-            /* @var $customer Mage_Customer_Model_Customer */
-            $customer = $session->getCustomer();
-            $customerGroupId = $session->getQuote()->getCustomerGroupId();
-        } else {
-            /* @var $session Mage_Customer_Model_Session */
-            $session = Mage::getSingleton('customer/session');
-            /* @var $customer Mage_Customer_Model_Customer */
-            $customer = $session->getCustomer();
-            if ($session->isLoggedIn()) {
-                $customerGroupId = $session->getCustomerGroupId();
-            }
-        }
-
-        // Check if payment is allowed only for specific customer groups
-        if (!Mage::getStoreConfigFlag('payment/debit/specificgroup_all')) {
-            $allowedGroupIds = explode(',', Mage::getStoreConfig('payment/debit/specificgroup'));
-            if (!in_array($customerGroupId, $allowedGroupIds)) {
-                $observer->getEvent()->getResult()->isAvailable = false;
-                return;
-            }
-        }
-
-        // Check minimum orders count
-        $minOrderCount = Mage::getStoreConfig('payment/debit/orderscount');
-        if ($minOrderCount > 0) {
-            $customerId = $customer->getId();
-            if (is_null($customerId)) { // not logged in
-                $observer->getEvent()->getResult()->isAvailable = false;
-                return;
-            }
-
-            // Load orders and check
-            $orders = Mage::getResourceModel('sales/order_collection')
-                ->addAttributeToSelect('*')
-                ->addAttributeToFilter('customer_id', $customerId)
-                ->addAttributeToFilter('status', Mage_Sales_Model_Order::STATE_COMPLETE)
-                ->addAttributeToFilter(
-                    'state',
-                    array(
-                        'in' => Mage::getSingleton('sales/order_config')->getVisibleOnFrontStates()
-                    )
-                )
-                ->load();
-
-            if (count($orders) < $minOrderCount) {
-                $observer->getEvent()->getResult()->isAvailable = false;
-                return;
-            }
-        }
+        /* @var $validationModel Itabs_Debit_Model_Validation */
+        $validationModel = Mage::getModel('debit/validation');
+        $observer->getEvent()->getResult()->isAvailable = $validationModel->isValid();
     }
 
     /**
