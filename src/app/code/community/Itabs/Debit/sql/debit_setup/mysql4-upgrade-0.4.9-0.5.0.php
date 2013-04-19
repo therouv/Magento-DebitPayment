@@ -36,7 +36,11 @@ $installer->startSetup();
 
 $write = Mage::getSingleton('core/resource')->getConnection('core_write');
 $write->query('SET FOREIGN_KEY_CHECKS=0;');
-$write->query("UPDATE {$this->getTable('eav_attribute')} SET attribute_code = 'debit_payment_acount_update' WHERE attribute_code = 'debit_payment_acount_data_update';");
+$write->query("
+    UPDATE {$this->getTable('eav_attribute')}
+    SET attribute_code = 'debit_payment_acount_update'
+    WHERE attribute_code = 'debit_payment_acount_data_update';
+");
 $write->query('SET FOREIGN_KEY_CHECKS=1;');
 
 $installer->endSetup();

@@ -99,7 +99,11 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
             /* @var $order Mage_Sales_Model_Order */
 
             // Remove some values from the data array
-            $unsetData = array('status', 'base_grand_total', 'base_total_paid', 'total_paid', 'updated_at', 'method', 'shipping_name', 'base_currency_code', 'store_name');
+            $unsetData = array(
+                'status', 'base_grand_total', 'base_total_paid', 'total_paid',
+                'updated_at', 'method', 'shipping_name', 'base_currency_code',
+                'store_name'
+            );
             foreach ($unsetData as $key) {
                 $order->unsetData($key);
             }

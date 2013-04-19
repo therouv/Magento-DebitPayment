@@ -48,5 +48,5 @@
 "Store Owner Bank Account","Store Owner Bank Account"
 "Account Owner","Account Owner"
 "Routing Number","Routing Number"
-"Please enter bankaccount credentials of the store owner in the system configuration. Otherwise you will not be able to generate a valid export file.","Please enter bankaccount credentials of the store owner in the system configuration. Otherwise you will not be able to generate a valid export file."
+"Please enter bankaccount credentials of the store owner in the system configuration.","Please enter bankaccount credentials of the store owner in the system configuration. Otherwise you will not be able to generate a valid export file."
 "Please note: SEPA Debit Payment orders can only be exported as CSV for now.","Please note: SEPA Debit Payment orders can only be exported as CSV for now."

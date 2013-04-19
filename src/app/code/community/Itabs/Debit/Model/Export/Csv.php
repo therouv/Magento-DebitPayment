@@ -80,13 +80,16 @@ class Itabs_Debit_Model_Export_Csv
             /* @var $paymentMethod Itabs_Debit_Model_Debit */
             $paymentMethod = $orderModel->getPayment()->getMethodInstance();
 
+            // Format order amount
+            $amount = number_format($order->getData('grand_total'), 2, ',', '.');
+
             $row = array(
                 'name'           => $paymentMethod->getAccountName(),
                 'bank_code'      => $paymentMethod->getAccountBLZ(),
                 'account_number' => $paymentMethod->getAccountNumber(),
                 'account_swift'  => $paymentMethod->getAccountSwift(),
                 'account_iban'   => $paymentMethod->getAccountIban(),
-                'amount'         => number_format($order->getData('grand_total'), 2, ',', '.').' '.$order->getData('order_currency_code'),
+                'amount'         => $amount.' '.$order->getData('order_currency_code'),
                 'purpose'        => 'Bestellung Nr. '.$order->getData('increment_id')
             );
             $io->streamWriteCsv($row);
