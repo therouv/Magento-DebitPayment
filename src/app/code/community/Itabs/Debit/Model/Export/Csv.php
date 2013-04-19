@@ -57,9 +57,9 @@ class Itabs_Debit_Model_Export_Csv
         $fileName = $this->getFileName();
 
         // Open file
-        $io = new Varien_Io_File();
-        $io->open(array('path' => Mage::getBaseDir('var')));
-        $io->streamOpen($fileName);
+        $file = new Varien_Io_File();
+        $file->open(array('path' => Mage::getBaseDir('var')));
+        $file->streamOpen($fileName);
 
         // Add headline
         $row = array(
@@ -71,7 +71,7 @@ class Itabs_Debit_Model_Export_Csv
             'Betrag',
             'Verwendungszweck'
         );
-        $io->streamWriteCsv($row);
+        $file->streamWriteCsv($row);
 
         // Add rows
         foreach ($collection as $order) {
@@ -92,16 +92,16 @@ class Itabs_Debit_Model_Export_Csv
                 'amount'         => $amount.' '.$order->getData('order_currency_code'),
                 'purpose'        => 'Bestellung Nr. '.$order->getData('increment_id')
             );
-            $io->streamWriteCsv($row);
+            $file->streamWriteCsv($row);
 
             $this->_getDebitHelper()->setStatusAsExported($order->getId());
         }
 
         // Close file, get file contents and delete temporary file
-        $io->close();
+        $file->close();
         $filePath = Mage::getBaseDir('var') . DS . $fileName;
         $fileContents = file_get_contents($filePath);
-        $io->rm($fileName);
+        $file->rm($fileName);
 
         $response = array(
             'file_name' => $fileName,

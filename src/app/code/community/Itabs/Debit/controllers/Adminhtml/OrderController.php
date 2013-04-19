@@ -79,21 +79,20 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
 
         /* @var $resource Mage_Core_Model_Resource */
         $resource = Mage::getSingleton('core/resource');
-        $salesFlatOrderTable = $resource->getTableName('sales_flat_order');
-        $salesFlatOrderPaymentTable = $resource->getTableName('sales_flat_order_payment');
+        $orderTable = $resource->getTableName('sales_flat_order');
+        $orderPaymentTable = $resource->getTableName('sales_flat_order_payment');
 
         $collection->getSelect()->joinLeft(
-            $salesFlatOrderTable,
-            $salesFlatOrderTable.'.entity_id = main_table.entity_id',
+            $orderTable,
+            $orderTable.'.entity_id = main_table.entity_id',
             array('customer_id')
         );
         $collection->getSelect()->joinLeft(
-            $salesFlatOrderPaymentTable,
-            $salesFlatOrderPaymentTable.'.parent_id = main_table.entity_id',
+            $orderPaymentTable,
+            $orderPaymentTable.'.parent_id = main_table.entity_id',
             array('method', 'debit_type')
         );
-        $collection->getSelect()
-            ->where('method = ?', 'debit');
+        $collection->getSelect()->where('method = ?', 'debit');
 
         foreach ($collection as $order) {
             /* @var $order Mage_Sales_Model_Order */

@@ -91,12 +91,12 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
     /**
      * Updates the status of an export order item to "exported"..
      *
-     * @param  int  $id Export Order ID
+     * @param  int  $orderId Export Order ID
      * @return bool
      */
-    public function setStatusAsExported($id)
+    public function setStatusAsExported($orderId)
     {
-        $model = Mage::getModel('debit/orders')->load($id);
+        $model = Mage::getModel('debit/orders')->load($orderId);
         $model->setData('status', 1);
         $model->save();
 
