@@ -32,8 +32,6 @@
 
 	<?php if ($this->isEmailContext()): ?>
 
-	    <?php // TO DO !!! ?>
-
 		<?php if ($this->sendDataInEmail()): ?>
             <?php $_data = $this->getEmailData() ?>
             <?php if ($_data['debit_type'] == Itabs_Debit_Helper_Data::DEBIT_TYPE_BANK): ?>

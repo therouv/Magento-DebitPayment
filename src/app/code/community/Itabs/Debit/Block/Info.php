@@ -126,6 +126,7 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     {
         $debitType = $this->getDebitType();
 
+        /* @var $payment Itabs_Debit_Model_Debit */
         $payment = $this->getMethod();
         $method  = $this->getMethod()->getCode();
         $data = array(
@@ -137,8 +138,11 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
             'account_iban'   => $payment->getAccountIban(),
             'debit_type'     => $debitType
         );
+
         // mask bank data
-        if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')) {
+        if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')
+            && $debitType == 'bank'
+        ) {
             $number  = $payment->maskString($payment->getAccountNumber());
             $routing = $payment->maskString($payment->getAccountBLZ());
             $data['account_number'] = $number;
