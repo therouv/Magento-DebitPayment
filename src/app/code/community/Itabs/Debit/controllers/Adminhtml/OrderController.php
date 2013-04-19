@@ -45,7 +45,18 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
         );
 
         $this->loadLayout();
-        $this->_setActiveMenu('sales/debitpayment');
+        $this->_setActiveMenu('sales/debitpayment')
+            ->_addBreadcrumb(
+                $this->_getHelper()->__('Sales'),
+                $this->_getHelper()->__('Sales')
+            )
+            ->_addBreadcrumb(
+                $this->_getDebitHelper()->__('Debit Payment Orders'),
+                $this->_getDebitHelper()->__('Debit Payment Orders')
+            )
+            ->_title($this->_getHelper()->__('Sales'))
+            ->_title($this->_getDebitHelper()->__('Debit Payment Orders'));
+
         $this->renderLayout();
     }
 
