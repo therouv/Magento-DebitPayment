@@ -9,5 +9,8 @@
             "name": "Rouven Alexander Rieker",
             "email": "therouv@googlemail.com"
         }
-   ]
+   ],
+   "require":{
+        "magento-hackathon/magento-composer-installer":"*"
+    }
 }
