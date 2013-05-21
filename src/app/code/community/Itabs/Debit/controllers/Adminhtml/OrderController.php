@@ -75,9 +75,9 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
 
         // Sync orders
         $collection = Mage::getResourceModel('sales/order_grid_collection');
-        $collection->addFieldToFilter('status', array('nin' => array('canceled', 'fraud', 'holded')));
+        $collection->addFieldToFilter('main_table.status', array('nin' => array('canceled', 'fraud', 'holded')));
         if (count($syncedOrders) > 0) {
-            $collection->addFieldToFilter('entity_id', array('nin' => $syncedOrders));
+            $collection->addFieldToFilter('main_table.entity_id', array('nin' => $syncedOrders));
         }
 
         /* @var $resource Mage_Core_Model_Resource */
