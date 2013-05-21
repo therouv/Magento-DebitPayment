@@ -102,14 +102,7 @@ class Itabs_Debit_Model_Observer
      */
     protected function _getOrderCustomer($order)
     {
-        if (Mage::app()->getStore()->isAdmin()) {
-            if ($customer = $order->getCustomer()) {
-                if ($customer->getId()) {
-                    return $customer;
-                }
-            }
-        } else {
-            $customer = Mage::getSingleton('customer/session')->getCustomer();
+        if ($customer = $order->getCustomer()) {
             if ($customer->getId()) {
                 return $customer;
             }
