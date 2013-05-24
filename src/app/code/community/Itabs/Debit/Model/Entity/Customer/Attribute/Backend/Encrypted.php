@@ -43,11 +43,14 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
      * @return void
      */
     public function beforeSave($object)
-    {
+    {0:2:18cfab927435b8c7:8AXDB5QVG6enH+bon8d2nGtjaLpeI260hAhD80e4xF0=
         $helper = Mage::helper('core');
         $attributeName = $this->getAttribute()->getName();
-        $value = $helper->encrypt($object->getData($attributeName));
-        $object->setData($attributeName, $value);
+
+        if ($object->getData($attributeName) != '') {
+            $value = $helper->encrypt($object->getData($attributeName));
+            $object->setData($attributeName, $value);
+        }
     }
 
     /**
@@ -60,7 +63,10 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
     {
         $helper = Mage::helper('core');
         $attributeName = $this->getAttribute()->getName();
-        $value = $helper->decrypt($object->getData($attributeName));
-        $object->setData($attributeName, $value);
+
+        if ($object->getData($attributeName) != '') {
+            $value = $helper->decrypt($object->getData($attributeName));
+            $object->setData($attributeName, $value);
+        }
     }
 }

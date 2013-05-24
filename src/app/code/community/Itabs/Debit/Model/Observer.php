@@ -108,6 +108,6 @@ class Itabs_Debit_Model_Observer
             }
         }
 
-        return null;
+        return false;
     }
 }
