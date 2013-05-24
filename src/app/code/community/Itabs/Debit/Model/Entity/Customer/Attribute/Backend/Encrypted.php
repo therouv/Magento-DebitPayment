@@ -43,7 +43,7 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
      * @return void
      */
     public function beforeSave($object)
-    {0:2:18cfab927435b8c7:8AXDB5QVG6enH+bon8d2nGtjaLpeI260hAhD80e4xF0=
+    {
         $helper = Mage::helper('core');
         $attributeName = $this->getAttribute()->getName();
 
