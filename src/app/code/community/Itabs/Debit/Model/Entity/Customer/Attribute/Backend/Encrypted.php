@@ -19,7 +19,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.1
+ * @version   1.0.2
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -30,7 +30,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.1
+ * @version   1.0.2
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
@@ -46,8 +46,11 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
     {
         $helper = Mage::helper('core');
         $attributeName = $this->getAttribute()->getName();
-        $value = $helper->encrypt($object->getData($attributeName));
-        $object->setData($attributeName, $value);
+
+        if ($object->getData($attributeName) != '') {
+            $value = $helper->encrypt($object->getData($attributeName));
+            $object->setData($attributeName, $value);
+        }
     }
 
     /**
@@ -60,7 +63,10 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
     {
         $helper = Mage::helper('core');
         $attributeName = $this->getAttribute()->getName();
-        $value = $helper->decrypt($object->getData($attributeName));
-        $object->setData($attributeName, $value);
+
+        if ($object->getData($attributeName) != '') {
+            $value = $helper->decrypt($object->getData($attributeName));
+            $object->setData($attributeName, $value);
+        }
     }
 }
