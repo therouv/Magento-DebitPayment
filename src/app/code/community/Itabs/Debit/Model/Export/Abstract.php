@@ -68,7 +68,7 @@ class Itabs_Debit_Model_Export_Abstract extends Varien_Object
     /**
      * Check if there are orders available for export..
      *
-     * @return void
+     * @return Itabs_Debit_Model_Mysql4_Orders_Collection|false
      */
     protected function _hasOrdersToExport()
     {
@@ -85,9 +85,13 @@ class Itabs_Debit_Model_Export_Abstract extends Varien_Object
 
         // Check if collection coontains orders
         if ($collection->count() == 0) {
-            $this->_getSession()->addError($this->_getDebitHelper()->__('No orders to export.'));
+            Mage::getSingleton('adminhtml/session')->addError(
+                $this->_getDebitHelper()->__('No orders to export.')
+            );
+
             return false;
         }
+
         return $collection;
     }
 }

@@ -25,7 +25,7 @@
 <config>
     <modules>
         <Itabs_Debit>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </Itabs_Debit>
     </modules>
     <global>
