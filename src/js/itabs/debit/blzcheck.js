@@ -22,13 +22,13 @@
 
 var blzAjaxCheck = Class.create();
 blzAjaxCheck.prototype = {
-    initialize: function(checkBlzUrl, checkoutValidBlz){
+    initialize: function(checkBlzUrl, checkoutValidBlz) {
         this.checkBlzUrl = checkBlzUrl;
         this.isBlzValid = false;
         this.checkoutValidBlz = checkoutValidBlz;
     },
     checkBlz: function() {
-        var request = new Ajax.Request(
+        new Ajax.Request(
             this.checkBlzUrl,
             {
                 method:'post',
@@ -39,21 +39,22 @@ blzAjaxCheck.prototype = {
         );
     },
     setStatus: function(transport) {
-        if (transport && transport.responseText){
-            $('blz_bank_name').update('');
-            try{
+        if (transport && transport.responseText) {
+            $('kreditinstitut').update('');
+            try {
                 response = eval('(' + transport.responseText + ')');
-            }
-            catch (e) {
+            } catch (e) {
                 response = {};
             }
         }
+
         if (response.found && response.found == 1) {
             this.isBlzValid = true;
         } else {
             this.isBlzValid = false;
         }
-        $('blz_bank_name').update(response.bank);
+
+        $('kreditinstitut').update(response.bank);
         $('bankleitzahl').value = response.blz;
     }
 }
@@ -62,7 +63,7 @@ Event.observe(window, 'load', function() {
     Validation.add('validate-debit-blz', Translator.translate('Please enter a valid bank code.'), function(v) {
 
         blzCheck.checkBlz();
-        if(blzCheck.checkoutValidBlz == 1) {
+        if (blzCheck.checkoutValidBlz == 1) {
             if (!blzCheck.isBlzValid) {
                 return false;
             }
