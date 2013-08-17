@@ -93,16 +93,16 @@ class Itabs_Debit_Adminhtml_BankdataController extends Mage_Adminhtml_Controller
                     }
 
                     // Check if routing number already exists
-                    $routingNumber = trim($line[0]);
-                    if (array_key_exists($routingNumber, $import)) {
+                    $swiftCode = trim($line[2]);
+                    if (array_key_exists($swiftCode, $import) || empty($swiftCode)) {
                         continue;
                     }
 
                     // Add bank to array
-                    $import[$routingNumber] = array(
-                        'routing_number' => $routingNumber,
-                        'swift_code' => trim($line[2]),
-                        'bank_name' => utf8_encode(trim($line[1]))
+                    $import[$swiftCode] = array(
+                        'routing_number' => trim($line[0]),
+                        'swift_code' => $swiftCode,
+                        'bank_name' => trim($line[1])
                     );
                 }
 
