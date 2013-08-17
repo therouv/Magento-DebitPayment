@@ -57,3 +57,6 @@
 "SEPA","SEPA"
 "Bank Account & Routing Number","Bankverbindung"
 "Total of %d record(s) have been updated.","Insgesamt %d Einträge wurden erfolgreich aktualisiert."
+"Country","Land"
+"Bank Name","Name der Bank"
+"Debit Payment Bank Data","Lastschrift: Banken"

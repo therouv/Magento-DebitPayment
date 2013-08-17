@@ -38,7 +38,7 @@
                 <convert>
                     <children>
                         <debitpayment translate="title" module="debit">
-                            <title>Bank Data</title>
+                            <title>Debit Payment Bank Data</title>
                             <action>debit/adminhtml_bankdata</action>
                             <sort_order>1500</sort_order>
                         </debitpayment>
