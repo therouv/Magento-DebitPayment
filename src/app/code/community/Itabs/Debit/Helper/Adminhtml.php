@@ -40,6 +40,11 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
     const XML_PATH_BANKACCOUNT_ACCOUNTNUMBER = 'debitpayment/bankaccount/account_number';
 
     /**
+     * @var Mage_Directory_Model_Resource_Country_Collection
+     */
+    protected $_countryCollection;
+
+    /**
      * Check if the export requirements are reached for export. Store owner
      * has to enter his bank account data.
      *
@@ -103,5 +108,59 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
         $model->save();
 
         return true;
+    }
+
+    public function getCountryOptionsHash()
+    {
+        $options = array();
+
+        $allOptions = $this->getCountryOptions();
+        array_shift($allOptions);
+        foreach ($allOptions as $option) {
+            $options[$option['value']] = $option['label'];
+        }
+
+        return $options;
+    }
+
+    /**
+     * Retrieve all countries
+     *
+     * @return bool|array
+     */
+    public function getCountryOptions()
+    {
+        $options = false;
+        $useCache = Mage::app()->useCache('config');
+        if ($useCache) {
+            $cacheId = 'DIRECTORY_COUNTRY_SELECT_STORE_' . Mage::app()->getStore()->getCode();
+            $cacheTags = array('config');
+            if ($optionsCache = Mage::app()->loadCache($cacheId)) {
+                $options = unserialize($optionsCache);
+            }
+        }
+
+        if ($options == false) {
+            $options = $this->getCountryCollection()->toOptionArray();
+            if ($useCache) {
+                Mage::app()->saveCache(serialize($options), $cacheId, $cacheTags);
+            }
+        }
+
+        return $options;
+    }
+
+    /**
+     * @return Mage_Directory_Model_Resource_Country_Collection
+     */
+    public function getCountryCollection()
+    {
+        if (!$this->_countryCollection) {
+            $this->_countryCollection = Mage::getSingleton('directory/country')
+                ->getResourceCollection()
+                ->loadByStore();
+        }
+
+        return $this->_countryCollection;
     }
 }

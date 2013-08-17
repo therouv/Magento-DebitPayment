@@ -33,6 +33,19 @@
 				</debitpayment>
 			</children>
 		</sales>
+        <system>
+            <children>
+                <convert>
+                    <children>
+                        <debitpayment translate="title" module="debit">
+                            <title>Bank Data</title>
+                            <action>debit/adminhtml_bankdata</action>
+                            <sort_order>1500</sort_order>
+                        </debitpayment>
+                    </children>
+                </convert>
+			</children>
+		</system>
 	</menu>
     <acl>
         <resources>
@@ -40,6 +53,13 @@
                 <children>
                     <system>
                         <children>
+                            <convert>
+                                <children>
+                                    <debitpayment translate="title" module="debit">
+                                        <title>Debit Payment</title>
+                                    </debitpayment>
+                                </children>
+                            </convert>
                             <config>
                                 <children>
                                     <debitpayment translate="title" module="debit">
