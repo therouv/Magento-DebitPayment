@@ -59,7 +59,6 @@ $table = $installer->getConnection()->newTable($tableName)
     ->addColumn('swift_code', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(), 'SWIFT Code')
     ->addColumn('bank_name', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(), 'Bank Name')
     ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => false), 'Created At')
-    ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array('nullable' => false), 'Updated At')
     ->setComment('Debit Payment Bank Data');
 $installer->getConnection()->createTable($table);
 
