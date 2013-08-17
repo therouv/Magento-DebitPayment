@@ -105,6 +105,7 @@ class Itabs_Debit_Adminhtml_BankdataController extends Mage_Adminhtml_Controller
                         'bank_name' => trim($line[1])
                     );
                 }
+                $ioHandler->streamClose();
 
                 // Delete all banks by the given country_id
                 /* @var $model Itabs_Debit_Model_Bankdata */
