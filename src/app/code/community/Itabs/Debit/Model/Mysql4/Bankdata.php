@@ -43,4 +43,16 @@ class Itabs_Debit_Model_Mysql4_Bankdata extends Mage_Core_Model_Mysql4_Abstract
     {
         $this->_init('debit/bankdata', 'id');
     }
+
+    /**
+     * Delete all entries by the given country id
+     *
+     * @param  string $countryId
+     * @return Itabs_Debit_Model_Bankdata
+     */
+    public function deleteByCountryId($countryId)
+    {
+        $condition = $this->_getWriteAdapter()->quoteInto('country_id = ?', $countryId);
+        $this->_getWriteAdapter()->delete($this->getMainTable(), $condition);
+    }
 }
