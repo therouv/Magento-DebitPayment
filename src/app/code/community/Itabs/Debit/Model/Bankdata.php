@@ -25,6 +25,9 @@
 /**
  * Model for Bank Data
  *
+ * @method Itabs_Debit_Model_Mysql4_Bankdata getResource()
+ * @method Itabs_Debit_Model_Mysql4_Bankdata _getResource()
+ *
  * @category  Itabs
  * @package   Itabs_Debit
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -54,5 +57,18 @@ class Itabs_Debit_Model_Bankdata extends Mage_Core_Model_Abstract
     {
         $this->_getResource()->deleteByCountryId($countryId);
         return $this;
+    }
+
+    /**
+     * Retrieve the bank by the given data
+     *
+     * @param  string $country
+     * @param  string $identifier (Routing or Swift)
+     * @param  string $value
+     * @return bool|string
+     */
+    public function loadByIdentifier($country, $identifier, $value)
+    {
+        return $this->_getResource()->loadByIdentifier($country, $identifier, $value);
     }
 }

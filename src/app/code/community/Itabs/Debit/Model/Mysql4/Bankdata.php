@@ -55,4 +55,37 @@ class Itabs_Debit_Model_Mysql4_Bankdata extends Mage_Core_Model_Mysql4_Abstract
         $condition = $this->_getWriteAdapter()->quoteInto('country_id = ?', $countryId);
         $this->_getWriteAdapter()->delete($this->getMainTable(), $condition);
     }
+
+    /**
+     * Retrieve the bank by the given data
+     *
+     * @param  string $country
+     * @param  string $identifier (Routing or Swift)
+     * @param  string $value
+     * @return bool|string
+     */
+    public function loadByIdentifier($country, $identifier, $value)
+    {
+        /* @var $adapter Varien_Db_Adapter_Pdo_Mysql */
+        $adapter = $this->_getReadAdapter();
+
+        if ($identifier == 'routing') {
+            $field = 'routing_number';
+        } else {
+            $field = 'swift_code';
+        }
+
+        $select = $adapter->select()
+            ->from($this->getMainTable(), 'bank_name')
+            ->where('country_id=?', $country)
+            ->where($field.'=?', $value)
+            ->limit(1);
+
+        $result = $adapter->fetchOne($select);
+        if (!$result) {
+            return false;
+        }
+
+        return $result;
+    }
 }
