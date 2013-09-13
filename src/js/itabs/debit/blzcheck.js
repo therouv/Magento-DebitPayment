@@ -75,7 +75,7 @@ Event.observe(window, 'load', function() {
     });
 
     Validation.add('validate-debit-number',  Translator.translate('Please enter a valid bank acount number.'), function(v) {
-        if (v.length > 4 && v.length < 11) {
+        if (v.length > 4 && v.length <= 11) {
             return true;
         }
         return false;
