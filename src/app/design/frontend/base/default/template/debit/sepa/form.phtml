@@ -29,30 +29,31 @@
 ?>
 <fieldset class="form-list">
     <ul id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none">
+        <?php if ($this->getMethod()->getCustomText()): ?>
         <li>
             <div class="input-box">
-                <?php if ($this->getMethod()->getCustomText()): ?>
-                    <?php echo $this->getMethod()->getCustomText() ?><br />
-                <?php endif; ?>
+                <?php echo $this->getMethod()->getCustomText() ?><br />
             </div>
         </li>
-		<li>
+        <?php endif; ?>
+
+        <li>
             <div class="input-box">
                 <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?> <span class="required">*</span></label><br />
                 <input type="text" id="kontoinhaber" name="payment[debit_cc_owner]" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
             </div>
-		</li>
-        <li>
-              <div class="input-box">
-                  <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?> <span class="required">*</span></label><br />
-                  <input type="text" id="swiftcode" name="payment[debit_swift]" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry" value="<?php echo $this->getAccountSwift() ?>" />
-              </div>
         </li>
-		<li>
+        <li>
+            <div class="input-box">
+                <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?> <span class="required">*</span></label><br />
+                <input type="text" id="swiftcode" name="payment[debit_swift]" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry" value="<?php echo $this->getAccountSwift() ?>" />
+            </div>
+        </li>
+        <li>
             <div class="input-box">
                 <label for="iban"><?php echo $this->__('IBAN') ?> <span class="required">*</span></label><br />
                 <input type="text" id="iban" name="payment[debit_iban]" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry" value="<?php echo $this->getAccountIban() ?>" />
             </div>
-		</li>
+        </li>
     </ul>
 </fieldset>
