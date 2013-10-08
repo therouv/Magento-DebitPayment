@@ -87,8 +87,8 @@ $installer->getConnection()->addColumn(
     $installer->getTable('sales/quote_payment'),
     'debit_swift',
     array(
-        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 255,
+        'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR,
+        'length' => 255,
         'comment' => 'Debit Swift Code'
     )
 );
@@ -97,8 +97,8 @@ $installer->getConnection()->addColumn(
     $installer->getTable('sales/quote_payment'),
     'debit_iban',
     array(
-        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 255,
+        'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR,
+        'length' => 255,
         'comment' => 'Debit IBAN'
     )
 );
@@ -107,8 +107,8 @@ $installer->getConnection()->addColumn(
     $installer->getTable('sales/quote_payment'),
     'debit_type',
     array(
-        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 4,
+        'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR,
+        'length' => 4,
         'comment' => 'Debit Type'
     )
 );
@@ -117,8 +117,8 @@ $installer->getConnection()->addColumn(
     $installer->getTable('sales/order_payment'),
     'debit_swift',
     array(
-        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 255,
+        'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR,
+        'length' => 255,
         'comment' => 'Debit Swift Code'
     )
 );
@@ -127,8 +127,8 @@ $installer->getConnection()->addColumn(
     $installer->getTable('sales/order_payment'),
     'debit_iban',
     array(
-        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 255,
+        'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR,
+        'length' => 255,
         'comment' => 'Debit IBAN'
     )
 );
@@ -137,8 +137,8 @@ $installer->getConnection()->addColumn(
     $installer->getTable('sales/order_payment'),
     'debit_type',
     array(
-        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 4,
+        'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR,
+        'length' => 4,
         'comment' => 'Debit Type'
     )
 );
@@ -148,8 +148,8 @@ $installer->getConnection()->addColumn(
     $installer->getTable('debit/order_grid'),
     'debit_type',
     array(
-        'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 4,
+        'type' => Varien_Db_Ddl_Table::TYPE_VARCHAR,
+        'length' => 4,
         'comment' => 'Debit Type'
     )
 );
