@@ -29,13 +29,13 @@ blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>'
 
 <fieldset class="form-list">
     <ul id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none">
-        <li>
-            <div class="input-box">
-                <?php if ($this->getMethod()->getCustomText()): ?>
+        <?php if ($this->getMethod()->getCustomText()): ?>
+            <li>
+                <div class="input-box">
                     <?php echo $this->getMethod()->getCustomText() ?><br />
-                <?php endif; ?>
-            </div>
-        </li>
+                </div>
+            </li>
+        <?php endif; ?>
         <li>
             <div class="input-box">
                 <label for="kreditinstitut"><?php echo $this->__('Kreditinstitut') ?></label><br />
