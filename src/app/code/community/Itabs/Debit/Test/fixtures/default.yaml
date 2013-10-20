@@ -1,0 +1,52 @@
+config:
+  default/debitpayment/bankaccount/account_owner: Test Tester
+  default/debitpayment/sepa/creditor_identification_number: DE123456789
+  default/debitpayment/sepa/mandate_text: Lorem ipsum dolor sit amet.
+
+eav:
+  customer:
+    - entity_id: 1
+      website_id: 1
+      email: test@example.org
+      firstname: Test
+      lastname: Tester
+      group_id: 1
+      store_id: 1
+      is_active: 1
+      attribute_set_id: 0
+      default_billing: 1
+      default_shipping: 1
+
+  customer_address:
+    - entity_id: 1
+      attribute_set_id: 0
+      parent_id: 1
+      firstname: Test
+      lastname: Tester
+      city: Teststadt
+      postcode: 99999
+      street: Teststraße 99
+      company: Testcompany
+      country_id: DE
+
+tables:
+  sales/quote:
+    - entity_id: 1
+      store_id: 1
+      customer_id: 1
+      base_currency_code: EUR
+      is_virtual: 0
+      customer_email: test@example.org
+      customer_firstname: Test
+      customer_lastname: Tester
+      created_at: "2013-12-11 10:09:08"
+
+    - entity_id: 2
+      store_id: 1
+      customer_id: 0
+      base_currency_code: EUR
+      is_virtual: 0
+      customer_email: test2@example.org
+      customer_firstname: Test
+      customer_lastname: Tester
+      created_at: "2013-12-11 10:09:08"
