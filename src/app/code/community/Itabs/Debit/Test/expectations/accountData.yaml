@@ -1,0 +1,9 @@
+account:
+  debit_payment_acount_name: Test Tester
+  debit_payment_account_swift: XXXXXXXXXXX
+  debit_payment_account_iban: DE99999999999999999999
+  debit_company: Testfirma GmbH
+  debit_street: Teststraße 99
+  debit_city: 99999 Teststadt
+  debit_email: test@example.org
+  debit_country: DE

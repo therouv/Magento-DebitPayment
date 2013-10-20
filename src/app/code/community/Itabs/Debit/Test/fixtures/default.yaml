@@ -1,4 +1,6 @@
 config:
+  default/payment/debit/checkout_valid_blz: 1
+  default/payment/debit/save_account_data: 1
   default/debitpayment/bankaccount/account_owner: Test Tester
   default/debitpayment/sepa/creditor_identification_number: DE123456789
   default/debitpayment/sepa/mandate_text: Lorem ipsum dolor sit amet.
@@ -16,6 +18,14 @@ eav:
       attribute_set_id: 0
       default_billing: 1
       default_shipping: 1
+      debit_payment_acount_name: Test Tester
+      debit_payment_account_swift: XXXXXXXXXXX
+      debit_payment_account_iban: DE99999999999999999999
+      debit_company: Testfirma GmbH
+      debit_street: Teststraße 99
+      debit_city: 99999 Teststadt
+      debit_email: test@example.org
+      debit_country: DE
 
   customer_address:
     - entity_id: 1
