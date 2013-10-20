@@ -232,6 +232,14 @@ Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, 
                     </debit_observer>
                 </observers>
             </controller_action_predispatch_checkout_onepage_saveOrder>
+            <checkout_type_onepage_save_order_after>
+                <observers>
+                    <debit_observer>
+                        <class>debit/observer</class>
+                        <method>checkoutTypeOnepageSaveOrderAfter</method>
+                    </debit_observer>
+                </observers>
+            </checkout_type_onepage_save_order_after>
         </events>
     </frontend>
     <phpunit>

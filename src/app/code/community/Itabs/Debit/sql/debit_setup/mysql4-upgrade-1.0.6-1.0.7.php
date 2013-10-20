@@ -44,31 +44,34 @@ if ($installer->getConnection()->isTableExists($tableName)) {
 
 $table = $installer->getConnection()->newTable($tableName)
     ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
-        'identity'  => true,
-        'unsigned'  => true,
-        'nullable'  => false,
-        'primary'   => true,
+        'identity' => true,
+        'unsigned' => true,
+        'nullable' => false,
+        'primary' => true,
         ), 'ID')
     ->addColumn('order_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 11, array(
-            'nullable'  => false,
-            ), 'Order ID')
+        'nullable' => false,
+        'unsigned' => true,
+        ), 'Order ID')
     ->addColumn('website_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 11, array(
-            'nullable'  => false,
-            ), 'Website ID')
+        'nullable' => false,
+        'unsigned' => true,
+        ), 'Website ID')
     ->addColumn('store_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 11, array(
-        'nullable'  => false,
+        'nullable' => false,
+        'unsigned' => true,
         ), 'Store ID')
     ->addColumn('increment_id', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
-        'nullable'  => false,
+        'nullable' => true,
         ), 'Increment ID')
     ->addColumn('filename', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
-        'nullable'  => false,
+        'nullable' => true,
         ), 'Filename')
     ->addColumn('mandate_city', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
-        'nullable'  => false,
+        'nullable' => true,
         ), 'City of mandate signature')
     ->addColumn('is_generated', Varien_Db_Ddl_Table::TYPE_TINYINT, 1, array(
-        'nullable'  => false,
+        'nullable' => false,
         'default' => 0
         ), 'Is Generated')
     ->setComment('Debit SEPA direct debit mandates');

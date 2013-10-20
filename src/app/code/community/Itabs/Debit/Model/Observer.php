@@ -146,4 +146,39 @@ class Itabs_Debit_Model_Observer
 
         return $this;
     }
+
+    /**
+     * Save the mandate reference in the database for further processing.
+     *
+     * @param  Varien_Event_Observer $observer
+     * @return Itabs_Debit_Model_Observer
+     */
+    public function checkoutTypeOnepageSaveOrderAfter(Varien_Event_Observer $observer)
+    {
+        /* @var $order Mage_Sales_Model_Order */
+        $order = $observer->getEvent()->getOrder();
+
+        $method = $order->getPayment()->getMethodInstance()->getCode();
+        if ($method != 'debit') {
+            return $this;
+        }
+
+        $data = array(
+            'order_id' => $order->getId(),
+            'website_id' => $order->getStore()->getWebsiteId(),
+            'store_id' => $order->getStoreId(),
+            'increment_id' => $order->getIncrementId(),
+            'mandate_city' => Mage::app()->getRequest()->getParam('mandate_city'),
+            'is_generated' => 0
+        );
+
+        try {
+            /* @var $mandate Itabs_Debit_Model_Mandates */
+            $mandate = Mage::getModel('debit/mandates');
+            $mandate->addData($data);
+            $mandate->save();
+        } catch (Exception $e) {
+            Mage::logException($e);
+        }
+    }
 }
