@@ -42,32 +42,24 @@
         <models>
             <debit>
                 <class>Itabs_Debit_Model</class>
-                <resourceModel>debit_mysql4</resourceModel>
+                <resourceModel>debit_resource</resourceModel>
             </debit>
-            <debit_mysql4>
-                <class>Itabs_Debit_Model_Mysql4</class>
+            <debit_resource>
+                <class>Itabs_Debit_Model_Resource</class>
+                <deprecatedNode>debit_mysql4</deprecatedNode>
                 <entities>
                     <order_grid>
                         <table>debit_order_grid</table>
                     </order_grid>
                 </entities>
-            </debit_mysql4>
+            </debit_resource>
         </models>
         <resources>
             <debit_setup>
                 <setup>
                     <module>Itabs_Debit</module>
                 </setup>
-                <connection>
-                    <use>core_setup</use>
-                </connection>
             </debit_setup>
-            <debit_write>
-                <use>core_write</use>
-            </debit_write>
-            <debit_read>
-                <use>core_read</use>
-            </debit_read>
         </resources>
         <events>
             <payment_method_is_active>
