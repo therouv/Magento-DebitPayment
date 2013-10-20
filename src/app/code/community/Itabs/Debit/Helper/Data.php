@@ -175,4 +175,19 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
 
         return $sanitized;
     }
+
+    /**
+     * Generate a unique mandate reference
+     *
+     * @param  int $customerId
+     * @param  int $quoteId
+     * @return string
+     */
+    public function getMandateReference($customerId, $quoteId)
+    {
+        $customer = str_pad($customerId, 12, '0', STR_PAD_RIGHT);
+        $quote    = str_pad($quoteId, 12, '0', STR_PAD_RIGHT);
+
+        return 'DP'.$customer.$quote;
+    }
 }

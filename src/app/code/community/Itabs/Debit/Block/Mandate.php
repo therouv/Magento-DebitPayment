@@ -77,10 +77,7 @@ class Itabs_Debit_Block_Mandate extends Mage_Core_Block_Template
             $customerId = 0;
         }
 
-        $customer = str_pad($customerId, 12, '0', STR_PAD_RIGHT);
-        $quote    = str_pad($this->getQuote()->getId(), 12, '0', STR_PAD_RIGHT);
-
-        return 'DP'.$customer.$quote;
+        return Mage::helper('debit')->getMandateReference($customerId, $this->getQuote()->getId());
     }
 
     /**

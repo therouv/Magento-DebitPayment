@@ -64,9 +64,9 @@ $table = $installer->getConnection()->newTable($tableName)
     ->addColumn('increment_id', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
         'nullable' => true,
         ), 'Increment ID')
-    ->addColumn('filename', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
+    ->addColumn('mandate_reference', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
         'nullable' => true,
-        ), 'Filename')
+        ), 'Mandate Reference')
     ->addColumn('mandate_city', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
         'nullable' => true,
         ), 'City of mandate signature')

@@ -163,11 +163,17 @@ class Itabs_Debit_Model_Observer
             return $this;
         }
 
+        $customerId = $order->getCustomerId();
+        if (null === $customerId) {
+            $customerId = 0;
+        }
+
         $data = array(
             'order_id' => $order->getId(),
             'website_id' => $order->getStore()->getWebsiteId(),
             'store_id' => $order->getStoreId(),
             'increment_id' => $order->getIncrementId(),
+            'mandate_reference' => Mage::helper('debit')->getMandateReference($customerId, $order->getQuoteId()),
             'mandate_city' => Mage::app()->getRequest()->getParam('mandate_city'),
             'is_generated' => 0
         );
