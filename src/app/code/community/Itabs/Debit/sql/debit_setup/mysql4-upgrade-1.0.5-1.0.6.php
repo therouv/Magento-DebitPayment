@@ -85,8 +85,10 @@ $attributes = array(
     ),
     'debit_country' => array(
         'type' => 'varchar',
-        'input' => 'text',
+        'input' => 'select',
         'label' => 'Debit Account Country',
+        'source' => 'customer/entity_address_attribute_source_country',
+        'frontend_class' => 'countries input-text',
         'global' => 1,
         'required' => 0,
         'default' => '',
