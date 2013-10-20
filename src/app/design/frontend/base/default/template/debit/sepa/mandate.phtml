@@ -10,7 +10,7 @@
     <div class="mandate-content">
         <p><strong><?php echo $this->__('SEPA direct debit mandate')?></strong></p>
         <p>
-            <?php echo $this->__('Payee')?>: XXX<br />
+            <?php echo $this->__('Payee')?>: <?php echo $this->getPayee()?><br />
             <?php echo $this->__('Creditor Identification Number')?>: <?php echo $this->getCreditorIdentificationNumber()?><br />
             <?php echo $this->__('Mandate Reference')?>: <?php echo $this->getMandateReference()?>
         </p>
