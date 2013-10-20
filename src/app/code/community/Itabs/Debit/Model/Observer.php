@@ -165,6 +165,7 @@ class Itabs_Debit_Model_Observer
 
         $data = array(
             'order_id' => $order->getId(),
+            'quote_id' => $observer->getEvent()->getQuote()->getId(),
             'website_id' => $order->getStore()->getWebsiteId(),
             'store_id' => $order->getStoreId(),
             'increment_id' => $order->getIncrementId(),

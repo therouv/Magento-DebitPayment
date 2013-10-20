@@ -53,6 +53,10 @@ $table = $installer->getConnection()->newTable($tableName)
         'nullable' => false,
         'unsigned' => true,
         ), 'Order ID')
+    ->addColumn('quote_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 11, array(
+        'nullable' => false,
+        'unsigned' => true,
+        ), 'Quote ID')
     ->addColumn('website_id', Varien_Db_Ddl_Table::TYPE_INTEGER, 11, array(
         'nullable' => false,
         'unsigned' => true,
