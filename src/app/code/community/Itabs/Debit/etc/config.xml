@@ -242,10 +242,22 @@ Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, 
             </checkout_type_onepage_save_order_after>
         </events>
     </frontend>
+    <crontab>
+        <jobs>
+            <debit_mandates_generation>
+                <schedule>
+                    <cron_expr>*/30 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>debit/cron::generate</model>
+                </run>
+            </debit_mandates_generation>
+        </jobs>
+    </crontab>
     <phpunit>
         <suite>
             <modules>
-                <Itabs_Debit />
+                <Itabs_Debit/>
             </modules>
         </suite>
     </phpunit>

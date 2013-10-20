@@ -44,4 +44,15 @@ class Itabs_Debit_Model_Resource_Mandates_Collection
     {
         $this->_init('debit/mandates');
     }
+
+    /**
+     * Add filter for all non-generated mandates
+     *
+     * @return Itabs_Debit_Model_Resource_Mandates_Collection
+     */
+    public function addNotGeneratedFilter()
+    {
+        $this->getSelect()->where('is_generated = ?', 0);
+        return $this;
+    }
 }
