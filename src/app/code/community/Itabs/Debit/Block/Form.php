@@ -251,7 +251,7 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
     {
         return Mage::getBlockSingleton('directory/data')->getCountryHtmlSelect(
             $this->getAccountCountry(),
-            'debit_country',
+            'payment[debit_country]',
             'debit_country',
             $this->helper('customer')->__('Country')
         );
