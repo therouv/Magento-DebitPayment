@@ -39,15 +39,35 @@ class Itabs_Debit_Block_Mandate extends Mage_Core_Block_Template
      */
     public function getMandateReference()
     {
-        return 'lala';
+        $customerId = Mage::getSingleton('customer/session')->getCustomerId();
+        if (null === $customerId) {
+            $customerId = 0;
+        }
+
+        $customer = str_pad($customerId, 12, '0', STR_PAD_RIGHT);
+        $quote    = str_pad($this->getQuote()->getId(), 12, '0', STR_PAD_RIGHT);
+
+        return 'DP'.$customer.$quote;
     }
 
     /**
+     * Retrieve the current quote
+     *
+     * @return Mage_Sales_Model_Quote
+     */
+    public function getQuote()
+    {
+        return Mage::getSingleton('checkout/session')->getQuote();
+    }
+
+    /**
+     * Retrieve the payment method instance
+     *
      * @return Itabs_Debit_Model_Debit
      */
     public function getPayment()
     {
-        return Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethodInstance();
+        return $this->getQuote()->getPayment()->getMethodInstance();
     }
 
     /**
