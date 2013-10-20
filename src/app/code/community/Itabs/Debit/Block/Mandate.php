@@ -17,7 +17,7 @@ class Itabs_Debit_Block_Mandate extends Mage_Core_Block_Template
      *
      * @return string
      */
-    public function getCreditorIdentificatioNumber()
+    public function getCreditorIdentificationNumber()
     {
         return Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number');
     }
@@ -57,7 +57,7 @@ class Itabs_Debit_Block_Mandate extends Mage_Core_Block_Template
      */
     public function getCurrentDate()
     {
-        $this->helper('core')->formatDate(null, Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
+        return $this->helper('core')->formatDate(null, Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
     }
 
     /**
