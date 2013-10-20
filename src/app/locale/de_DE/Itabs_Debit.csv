@@ -60,3 +60,6 @@
 "Creditor Identification Number","Gläubiger-Identifikationsnummer"
 "This is a necessary field for the SEPA direct debit mandate!","Diese Angabe ist für das SEPA-Lastschriftmandat zwingend erforderlich!"
 "This text will be printed on the SEPA direct debit mandate!","Dieser Text wird für das SEPA-Lastschriftmandat verwendet!"
+"Postcode/City","PLZ/Ort"
+"Bank Details","Kontoverbindung"
+"Account Holder","Kontoinhaber"

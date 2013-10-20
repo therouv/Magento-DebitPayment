@@ -127,6 +127,61 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
     }
 
     /**
+     * Returns the company name of the specific account
+     *
+     * @return string
+     */
+    public function getAccountCompany()
+    {
+        return $this->_getAccountData('debit_company');
+    }
+
+    /**
+     * Returns the street of the specific account
+     *
+     * @return string
+     */
+    public function getAccountStreet()
+    {
+        return $this->_getAccountData('debit_street');
+    }
+
+    /**
+     * Returns the city of the specific account
+     *
+     * @return string
+     */
+    public function getAccountCity()
+    {
+        return $this->_getAccountData('debit_city');
+    }
+
+    /**
+     * Returns the email address of the specific account
+     *
+     * @return string
+     */
+    public function getAccountEmail()
+    {
+        return $this->_getAccountData('debit_email');
+    }
+
+    /**
+     * Returns the country_id of the specific account
+     *
+     * @return string
+     */
+    public function getAccountCountry()
+    {
+        $country = $this->_getAccountData('debit_country');
+        if ($country == '') {
+            return null;
+        }
+
+        return $country;
+    }
+
+    /**
      * Returns the account number from the payment info instance
      *
      * @return string Number
@@ -185,5 +240,20 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
     public function getCheckoutValidBlz()
     {
         return Mage::getStoreConfigFlag('payment/debit/checkout_valid_blz');
+    }
+
+    /**
+     * Retrieve the country html select field
+     *
+     * @return string
+     */
+    public function getCountryHtmlSelect()
+    {
+        return Mage::getBlockSingleton('directory/data')->getCountryHtmlSelect(
+            $this->getAccountCountry(),
+            'debit_country',
+            'debit_country',
+            $this->helper('customer')->__('Country')
+        );
     }
 }
