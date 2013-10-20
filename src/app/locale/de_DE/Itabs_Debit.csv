@@ -57,3 +57,6 @@
 "SEPA","SEPA"
 "Bank Account & Routing Number","Bankverbindung"
 "Total of %d record(s) have been updated.","Insgesamt %d Einträge wurden erfolgreich aktualisiert."
+"Creditor Identification Number","Gläubiger-Identifikationsnummer"
+"This is a necessary field for the SEPA direct debit mandate!","Diese Angabe ist für das SEPA-Lastschriftmandat zwingend erforderlich!"
+"This text will be printed on the SEPA direct debit mandate!","Dieser Text wird für das SEPA-Lastschriftmandat verwendet!"

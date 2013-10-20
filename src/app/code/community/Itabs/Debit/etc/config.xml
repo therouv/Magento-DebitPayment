@@ -130,9 +130,16 @@
                 <orderscount>0</orderscount>
                 <customer_order_amount>0</customer_order_amount>
             </debit>
-         </payment>
+        </payment>
+        <debitpayment>
+            <sepa>
+                <mandate_text><![CDATA[Ich ermächtige den Zahlungsempfänger, Zahlungen von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von dem Zahlungsempfänger auf mein Konto gezogenen Lastschriften einzulösen.
+
+Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen]]></mandate_text>
+            </sepa>
+        </debitpayment>
     </default>
-	<admin>
+    <admin>
         <routers>
             <debit>
                 <use>admin</use>
@@ -142,24 +149,24 @@
                 </args>
             </debit>
         </routers>
-	</admin>
+    </admin>
     <adminhtml>
-	    <layout>
-	        <updates>
-	            <debit>
-	                <file>debit.xml</file>
-	            </debit>
-	        </updates>
-	    </layout>
-	    <translate>
-	        <modules>
-	            <Itabs_Debit>
-	                <files>
-	                    <default>Itabs_Debit.csv</default>
-	                </files>
-	            </Itabs_Debit>
-	        </modules>
-	    </translate>
+        <layout>
+            <updates>
+                <debit>
+                    <file>debit.xml</file>
+                </debit>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Itabs_Debit>
+                    <files>
+                        <default>Itabs_Debit.csv</default>
+                    </files>
+                </Itabs_Debit>
+            </modules>
+        </translate>
     </adminhtml>
     <frontend>
         <secure_url>

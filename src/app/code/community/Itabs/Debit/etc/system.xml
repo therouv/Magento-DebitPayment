@@ -71,16 +71,16 @@
                         <sendmail translate="label">
                             <label>Send bank data via mail</label>
                             <frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>5</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </sendmail>
-						<sendmail_crypt translate="label">
+                        <sendmail_crypt translate="label">
                             <label>Encrypt bank data in mail</label>
                             <frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>6</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -112,10 +112,10 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </customtext>
-						<save_account_data translate="label">
+                        <save_account_data translate="label">
                             <label>Save account data</label>
                             <frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -156,7 +156,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                             <depends>
-                            	<specificgroup_all>0</specificgroup_all>
+                                <specificgroup_all>0</specificgroup_all>
                             </depends>
                         </specificgroup>
                         <orderscount translate="label comment">
@@ -202,7 +202,7 @@
                 </debit>
             </groups>
         </payment>
-		<debitpayment translate="label" module="debit">
+        <debitpayment translate="label" module="debit">
             <label>Debit Payment</label>
             <tab>sales</tab>
             <frontend_type>text</frontend_type>
@@ -259,9 +259,37 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </swift_bic>
-					</fields>
-				</bankaccount>
-			</groups>
-		</debitpayment>
+                    </fields>
+                </bankaccount>
+                <sepa translate="label">
+                    <label>SEPA</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <creditor_identification_number translate="label comment">
+                            <label>Creditor Identification Number</label>
+                            <comment><![CDATA[This is a necessary field for the SEPA direct debit mandate!]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </creditor_identification_number>
+                        <mandate_text translate="label">
+                            <label>Mandate Text</label>
+                            <comment><![CDATA[This text will be printed on the SEPA direct debit mandate!]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mandate_text>
+                    </fields>
+                </sepa>
+            </groups>
+        </debitpayment>
     </sections>
 </config>
