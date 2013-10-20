@@ -110,4 +110,40 @@ class Itabs_Debit_Model_Observer
 
         return false;
     }
+
+    /**
+     * Stop save order process if customer didn't fill in the required sepa
+     * information if debit payment is the selected payment method.
+     *
+     * @param  Varien_Event_Observer $observer
+     * @return Itabs_Debit_Model_Observer
+     */
+    public function controllerActionPredispatchCheckoutOnepageSaveOrder(Varien_Event_Observer $observer)
+    {
+        $payment = Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethodInstance();
+        if ($payment->getCode() != 'debit') {
+            return $this;
+        }
+
+        $request = Mage::app()->getRequest();
+        $controller = $observer->getEvent()->getControllerAction();
+
+        if ($request->getParam('mandate_city') == ''
+            || !$request->getParam('mandate_accept', false)
+            || $request->getParam('mandate_accept') != 1
+        ) {
+            $result['success'] = false;
+            $result['error'] = true;
+            $result['error_messages'] = Mage::helper('debit')->__('Please agree to grant us the SEPA direct debit mandate or fill in the city of mandate signature. Thank you.');
+            Mage::app()->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
+
+            $controller->setFlag(
+                $controller->getRequest()->getActionName(),
+                Mage_Core_Controller_Varien_Action::FLAG_NO_DISPATCH,
+                true
+            );
+        }
+
+        return $this;
+    }
 }
