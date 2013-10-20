@@ -115,6 +115,11 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
              ->setCcNumberEnc($ccNumber)              // Kontonummer
              ->setDebitSwift($swift)                  // SWIFT Code
              ->setDebitIban($iban)                    // IBAN
+             ->setDebitCompany($data->getDebitCompany()) // Company
+             ->setDebitStreet($data->getDebitStreet())  // Street
+             ->setDebitCity($data->getDebitCity())  // City
+             ->setDebitCountry($data->getDebitCountry())  // Country
+             ->setDebitEmail($data->getDebitEmail())  // Email
              ->setDebitType(Mage::helper('debit')->getDebitType());
 
         return $this;
@@ -216,6 +221,61 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         $data = $info->decrypt($info->getDebitIban());
 
         return $data;
+    }
+
+    /**
+     * Returns the account company for the payment info instance
+     *
+     * @return string Company
+     */
+    public function getAccountCompany()
+    {
+        return $this->getInfoInstance()->getDebitCompany();
+    }
+
+    /**
+     * Returns the account street for the payment info instance
+     *
+     * @return string Street
+     */
+    public function getAccountStreet()
+    {
+        return $this->getInfoInstance()->getDebitStreet();
+    }
+
+    /**
+     * Returns the account city for the payment info instance
+     *
+     * @return string City
+     */
+    public function getAccountCity()
+    {
+        return $this->getInfoInstance()->getDebitCity();
+    }
+
+    /**
+     * Retrieve the account country for the payment info instance
+     *
+     * @return string Country
+     */
+    public function getAccountCountry()
+    {
+        $country = $this->getInfoInstance()->getDebitCountry();
+        if ($country != '') {
+            return Mage::getModel('directory/country')->setId($country)->getName();
+        }
+
+        return '';
+    }
+
+    /**
+     * Returns the account street for the payment info instance
+     *
+     * @return string Email
+     */
+    public function getAccountEmail()
+    {
+        return $this->getInfoInstance()->getDebitEmail();
     }
 
     /**

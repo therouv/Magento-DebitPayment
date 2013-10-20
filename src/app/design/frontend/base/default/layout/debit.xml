@@ -30,10 +30,10 @@
     </customer_account>
 
     <debit_account_edit translate="label">
+        <label>Debit Account Data</label>
         <reference name="head">
             <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
         </reference>
-        <label>Debit Account Data</label>
         <update handle="customer_account"/>
         <reference name="content">
             <block type="debit/account_data" name="debit.account.data" />
@@ -43,8 +43,24 @@
     <checkout_onepage_index>
         <reference name="head">
             <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+            <action method="addCss"><stylesheet>css/debit.css</stylesheet></action>
         </reference>
     </checkout_onepage_index>
+
+    <checkout_onepage_review>
+        <reference name="checkout.onepage.agreements">
+            <action method="setTemplate"><template>debit/sepa/rewrite/checkout/agreements.phtml</template></action>
+            <block type="debit/mandate" name="checkout.onepage.debit.mandate" as="debitMandate" template="debit/sepa/mandate.phtml"/>
+        </reference>
+        <reference name="germansetup.checkout.agreements">
+            <action method="setTemplate"><template>debit/sepa/rewrite/germansetup/agreements.phtml</template></action>
+            <block type="debit/mandate" name="checkout.onepage.debit.mandate" as="debitMandate" template="debit/sepa/mandate.phtml"/>
+        </reference>
+        <reference name="magesetup.checkout.agreements">
+            <action method="setTemplate"><template>debit/sepa/rewrite/magesetup/agreements.phtml</template></action>
+            <block type="debit/mandate" name="checkout.onepage.debit.mandate" as="debitMandate" template="debit/sepa/mandate.phtml"/>
+        </reference>
+    </checkout_onepage_review>
 
     <checkout_multishipping_billing>
         <reference name="head">

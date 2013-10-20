@@ -1,0 +1,4 @@
+.debit-sepa-information{border:1px solid #d9dde3;border-width:1px 1px 0;padding:15px 30px;}
+.debit-sepa-information .mandate-content{height:150px;overflow:auto;border:1px solid #ccc;padding:10px;background:#fff;margin-bottom:10px}
+.debit-sepa-information .mandate-content .data-table{margin-bottom:10px}
+.debit-sepa-information .mandate-content .data-table td.col-1{width:200px}

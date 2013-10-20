@@ -1,0 +1,82 @@
+<?php
+/**
+ * @var $this Itabs_Debit_Block_Mandate
+ */
+?>
+<div class="debit-sepa-information">
+    <h4><?php echo $this->__('SEPA direct debit')?></h4>
+    <p>Damit wir die SEPA-Lastschrift von Ihrem Konto einziehen können, benötigen wir von Ihnen ein SEPA-Lastschriftmandat. Das Mandat wird bei uns als PDF zu Ihren Zahldaten hinterlegt. Sie erhalten das Mandat als PDF an die von Ihnen angegebene E-Mail-Adresse.</p>
+
+    <div class="mandate-content">
+        <p><strong><?php echo $this->__('SEPA direct debit mandate')?></strong></p>
+        <p>
+            <?php echo $this->__('Payee')?>: XXX<br />
+            <?php echo $this->__('Creditor Identification Number')?>: <?php echo $this->getCreditorIdentificatioNumber()?><br />
+            <?php echo $this->__('Mandate Reference')?>: <?php echo $this->getMandateReference()?>
+        </p>
+
+        <p><?php echo nl2br($this->getMandateText())?></p>
+
+        <table class="data-table">
+            <col width="200"/>
+            <col/>
+            <tbody>
+                <tr>
+                    <td><?php echo $this->__('Name of the Payer')?></td>
+                    <td><?php echo $this->getPayment()->getAccountName()?></td>
+                </tr>
+                <?php if ($company = $this->getPayment()->getAccountCompany()): ?>
+                <tr>
+                    <td><?php echo $this->helper('customer')->__('Company')?></td>
+                    <td><?php echo $company?></td>
+                </tr>
+                <?php endif; ?>
+                <tr>
+                    <td><?php echo $this->__('Street and Housenumber')?></td>
+                    <td><?php echo $this->getPayment()->getAccountStreet()?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->__('Postcode/City')?></td>
+                    <td><?php echo $this->getPayment()->getAccountCity()?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->helper('customer')->__('Country')?></td>
+                    <td><?php echo $this->getPayment()->getAccountCountry()?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->helper('customer')->__('Email Address')?></td>
+                    <td><?php echo $this->getPayment()->getAccountEmail()?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->__('SWIFT Code')?></td>
+                    <td><?php echo $this->getPayment()->getAccountSwift()?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->__('IBAN')?></td>
+                    <td><?php echo $this->getPayment()->getAccountIban()?></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><span id="mandate_city_text"></span>, <?php echo $this->getCurrentDate()?>, <?php echo $this->getPayment()->getAccountName()?></p>
+    </div>
+
+    <ul class="form-list">
+        <li>
+            <label for="mandate_city"><?php echo $this->__('City of mandate signature')?></label>
+            <div class="input-box">
+                <input id="mandate_city" type="text" name="mandate_city" value="" class="input-text required-entry" />
+            </div>
+        </li>
+        <li>
+            <input type="checkbox" name="mandate_accept" value="1" class="input-text required-entry" />
+            <label for="mandate_accept"><?php echo $this->__('I want to place the mandate (electronic transmission)')?></label>
+        </li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $('mandate_city').observe('keyup', function (event) {
+        $('mandate_city_text').update(event.element().value);
+    });
+</script>
