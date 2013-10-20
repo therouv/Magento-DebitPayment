@@ -25,7 +25,7 @@
 <config>
     <modules>
         <Itabs_Debit>
-            <version>1.0.6</version>
+            <version>1.0.7</version>
         </Itabs_Debit>
     </modules>
     <global>
@@ -51,6 +51,9 @@
                     <order_grid>
                         <table>debit_order_grid</table>
                     </order_grid>
+                    <mandates>
+                        <table>debit_mandates</table>
+                    </mandates>
                 </entities>
             </debit_resource>
         </models>
