@@ -46,7 +46,6 @@
             </debit>
             <debit_resource>
                 <class>Itabs_Debit_Model_Resource</class>
-                <deprecatedNode>debit_mysql4</deprecatedNode>
                 <entities>
                     <order_grid>
                         <table>debit_order_grid</table>
