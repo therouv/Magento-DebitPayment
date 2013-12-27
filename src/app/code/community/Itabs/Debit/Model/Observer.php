@@ -81,6 +81,7 @@ class Itabs_Debit_Model_Observer
     {
         $order = $observer->getEvent()->getOrder();
 
+        /* @var $methodInstance Itabs_Debit_Model_Debit */
         $methodInstance = $order->getPayment()->getMethodInstance();
         if ($methodInstance->getCode() != 'debit') {
             return $this;
@@ -94,6 +95,11 @@ class Itabs_Debit_Model_Observer
                 ->setData('debit_payment_acount_name', $methodInstance->getAccountName())
                 ->setData('debit_payment_account_swift', $methodInstance->getAccountSwift())
                 ->setData('debit_payment_account_iban', $methodInstance->getAccountIban())
+                ->setData('debit_company', $methodInstance->getAccountCompany())
+                ->setData('debit_street', $methodInstance->getAccountStreet())
+                ->setData('debit_city', $methodInstance->getAccountCity())
+                ->setData('debit_country', $methodInstance->getAccountCountryId())
+                ->setData('debit_email', $methodInstance->getAccountEmail())
                 ->save();
         }
 

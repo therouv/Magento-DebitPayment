@@ -201,6 +201,16 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
+     * Retrieve the account country id for the payment info instance
+     *
+     * @return string Country
+     */
+    public function getAccountCountryId()
+    {
+        return $this->getInfoInstance()->getDebitCountry();
+    }
+
+    /**
      * Returns the account street for the payment info instance
      *
      * @return string Email
