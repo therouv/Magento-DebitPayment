@@ -287,6 +287,24 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </mandate_text>
+                        <hint_iban_field translate="label">
+                            <label>Hint for IBAN field</label>
+                            <comment><![CDATA[This text will be shown below the IBAN field during the checkout.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hint_iban_field>
+                        <hint_bic_field translate="label">
+                            <label>Hint for BIC field</label>
+                            <comment><![CDATA[This text will be shown below the BIC field during the checkout.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hint_bic_field>
                     </fields>
                 </sepa>
             </groups>

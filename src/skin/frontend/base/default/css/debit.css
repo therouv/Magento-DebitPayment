@@ -26,3 +26,5 @@
 .debit-sepa-information .mandate-content .data-table td.col-1{width:200px}
 .debit-sepa-information .form-list li.mandate-accept label{float:none !important;}
 .debit-sepa-information .form-list li.mandate-accept input.input-text{width:20px !important;}
+
+.opc .debit-hint{font-size:11px;line-height:14px;padding:10px 0 0;}

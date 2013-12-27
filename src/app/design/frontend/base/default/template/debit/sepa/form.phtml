@@ -30,35 +30,41 @@
 <fieldset class="form-list">
     <ul id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none">
         <?php if ($this->getMethod()->getCustomText()): ?>
-        <li>
-            <div class="input-box">
-                <?php echo $this->getMethod()->getCustomText() ?><br />
-            </div>
-        </li>
+        <li><div class="input-box"><?php echo $this->getMethod()->getCustomText() ?><br /></div></li>
         <?php endif; ?>
+
         <li class="fields">
             <div class="field"><strong><?php echo $this->__('Bank Details')?></strong></div>
-            <div class="field"><strong><?php echo $this->__('Account Holder')?></strong></div>
         </li>
         <li class="fields">
             <div class="field">
                 <label for="iban"><?php echo $this->__('IBAN') ?> <span class="required">*</span></label><br />
                 <div class="input-box">
                     <input type="text" id="iban" name="payment[debit_iban]" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry" value="<?php echo $this->getAccountIban() ?>" />
+                    <?php if ($hint = $this->getHintForIbanField()): ?>
+                        <p class="debit-hint"><?php echo $hint?></p>
+                    <?php endif; ?>
                 </div>
             </div>
-            <div class="field">
-                <label for="kontoinhaber"><?php echo $this->__('Name') ?> <span class="required">*</span></label><br />
-                <div class="input-box">
-                    <input type="text" id="kontoinhaber" name="payment[debit_cc_owner]" title="<?php echo $this->__('Name') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
-                </div>
-            </div>
-        </li>
-        <li class="fields">
             <div class="field">
                 <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?> <span class="required">*</span></label><br />
                 <div class="input-box">
                     <input type="text" id="swiftcode" name="payment[debit_swift]" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry" value="<?php echo $this->getAccountSwift() ?>" />
+                    <?php if ($hint = $this->getHintForBicField()): ?>
+                        <p class="debit-hint"><?php echo $hint?></p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </li>
+
+        <li class="fields">
+            <div class="field"><strong><?php echo $this->__('Account Holder')?></strong></div>
+        </li>
+        <li class="fields">
+            <div class="field">
+                <label for="kontoinhaber"><?php echo $this->__('Name') ?> <span class="required">*</span></label><br />
+                <div class="input-box">
+                    <input type="text" id="kontoinhaber" name="payment[debit_cc_owner]" title="<?php echo $this->__('Name') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
                 </div>
             </div>
             <div class="field">
@@ -69,16 +75,12 @@
             </div>
         </li>
         <li class="fields">
-            <div class="field">&nbsp;</div>
             <div class="field">
                 <label for="debit_street"><?php echo $this->__('Street and Housenumber') ?> <span class="required">*</span></label><br />
                 <div class="input-box">
                     <input type="text" id="debit_street" name="payment[debit_street]" title="<?php echo $this->__('Street') ?>" class="input-text required-entry" value="<?php echo $this->getAccountStreet() ?>" />
                 </div>
             </div>
-        </li>
-        <li class="fields">
-            <div class="field">&nbsp;</div>
             <div class="field">
                 <label for="debit_city"><?php echo $this->__('Postcode/City') ?> <span class="required">*</span></label><br />
                 <div class="input-box">
@@ -87,16 +89,12 @@
             </div>
         </li>
         <li class="fields">
-            <div class="field">&nbsp;</div>
             <div class="field">
                 <label for="debit_country"><?php echo $this->helper('customer')->__('Country') ?> <span class="required">*</span></label><br />
                 <div class="input-box">
                     <?php echo $this->getCountryHtmlSelect()?>
                 </div>
             </div>
-        </li>
-        <li class="fields">
-            <div class="field">&nbsp;</div>
             <div class="field">
                 <label for="debit_email"><?php echo $this->helper('customer')->__('Email Address') ?> <span class="required">*</span></label><br />
                 <div class="input-box">

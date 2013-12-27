@@ -72,3 +72,7 @@
 "City of mandate signature","Ort der Mandatserteilung"
 "I want to place the mandate (electronic transmission)","Ich möchte das Mandat erteilen (elektronische Übermittlung)"
 "Please agree to grant us the SEPA direct debit mandate or fill in the city of mandate signature. Thank you.","Bitte erteilen Sie uns das SEPA-Lastschriftmandat oder füllen Sie den Ort der Mandatserteilung aus. Vielen Dank."
+"Hint for IBAN field","Hinweis-Text für IBAN Feld"
+"This text will be shown below the IBAN field during the checkout.","Dieser Text wird unter dem IBAN Feld während des Bezahlvorgangs angezeigt."
+"Hint for BIC field","Hinweis-Text für BIC Feld"
+"This text will be shown below the BIC field during the checkout.","Dieser Text wird unter dem BIC Feld während des Bezahlvorgangs angezeigt."

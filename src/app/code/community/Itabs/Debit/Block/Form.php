@@ -256,4 +256,34 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
             $this->helper('customer')->__('Country')
         );
     }
+
+    /**
+     * Retrieve the hint for the IBAN field
+     *
+     * @return string|bool
+     */
+    public function getHintForIbanField()
+    {
+        $field = Mage::getStoreConfig('debitpayment/sepa/hint_iban_field');
+        if ($field == '') {
+            return false;
+        }
+
+        return $field;
+    }
+
+    /**
+     * Retrieve the hint for the BIC field
+     *
+     * @return string|bool
+     */
+    public function getHintForBicField()
+    {
+        $field = Mage::getStoreConfig('debitpayment/sepa/hint_bic_field');
+        if ($field == '') {
+            return false;
+        }
+
+        return $field;
+    }
 }
