@@ -39,7 +39,8 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
 
     /**
      * Retrieve the cucrent debit type
-     * @return string
+     *
+     * @return string Debit Type
      */
     public function getDebitType()
     {
@@ -88,9 +89,9 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
     /**
      * Generate a unique mandate reference
      *
-     * @param  int $customerId
-     * @param  int $quoteId
-     * @return string
+     * @param  int $customerId Customer Id
+     * @param  int $quoteId    Quote Id
+     * @return string Mandate Reference
      */
     public function getMandateReference($customerId, $quoteId)
     {

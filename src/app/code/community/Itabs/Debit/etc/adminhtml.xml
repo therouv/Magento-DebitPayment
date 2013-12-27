@@ -38,12 +38,19 @@
         <resources>
             <admin>
                 <children>
+                    <sales>
+                        <children>
+                            <debitpayment translate="title" module="debit">
+                                <title>Debit Payment: Orders</title>
+                            </debitpayment>
+                        </children>
+                    </sales>
                     <system>
                         <children>
                             <config>
                                 <children>
                                     <debitpayment translate="title" module="debit">
-                                        <title>Debit Payment</title>
+                                        <title>Debit Payment: Config</title>
                                     </debitpayment>
                                 </children>
                             </config>

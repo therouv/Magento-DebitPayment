@@ -64,7 +64,7 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     /**
      * Assigns data to the payment info instance
      *
-     * @param  Varien_Object|array    $data Payment Data from checkout
+     * @param  Varien_Object|array $data Payment Data from checkout
      * @return Itabs_Debit_Model_Debit Self.
      */
     public function assignData($data)

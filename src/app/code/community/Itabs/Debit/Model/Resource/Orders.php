@@ -33,11 +33,11 @@
  * @version   1.0.2
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_Model_Resource_Orders extends Mage_Core_Model_Resource_Db_Abstract
+class Itabs_Debit_Model_Resource_Orders
+    extends Mage_Core_Model_Resource_Db_Abstract
 {
     /**
-     * (non-PHPdoc)
-     * @see Mage_Core_Model_Resource_Abstract::_construct()
+     * Init the main table and the id field name
      */
     protected function _construct()
     {

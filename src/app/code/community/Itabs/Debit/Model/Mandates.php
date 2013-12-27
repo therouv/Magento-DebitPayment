@@ -36,8 +36,7 @@
 class Itabs_Debit_Model_Mandates extends Mage_Core_Model_Abstract
 {
     /**
-     * (non-PHPdoc)
-     * @see Varien_Object::_construct()
+     * Init the resource model
      */
     protected function _construct()
     {

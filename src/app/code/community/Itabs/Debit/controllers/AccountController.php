@@ -40,7 +40,7 @@ class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
      *
      * @return Mage_Customer_Model_Session
      */
-    protected function _getSession()
+    public function getSession()
     {
         return Mage::getSingleton('customer/session');
     }
@@ -97,16 +97,16 @@ class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
 
         try {
             $customer->save();
-            $this->_getSession()->setCustomer($customer)
+            $this->getSession()->setCustomer($customer)
                 ->addSuccess($this->__('Debit account information was successfully saved'));
             $this->_redirect('customer/account');
 
             return;
         } catch (Mage_Core_Exception $e) {
-            $this->_getSession()->setCustomerFormData($this->getRequest()->getPost())
+            $this->getSession()->setCustomerFormData($this->getRequest()->getPost())
                 ->addError($e->getMessage());
         } catch (Exception $e) {
-            $this->_getSession()->setCustomerFormData($this->getRequest()->getPost())
+            $this->getSession()->setCustomerFormData($this->getRequest()->getPost())
                 ->addException($e, $this->__('Can\'t save customer'));
         }
     }

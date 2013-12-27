@@ -53,7 +53,7 @@ class Itabs_Debit_Model_Validation
         return $this->hasSpecificCustomerGroup()
             && $this->hasMinimumOrderCount()
             && $this->hasMinimumOrderAmount()
-            ;
+        ;
     }
 
     /**
@@ -214,6 +214,7 @@ class Itabs_Debit_Model_Validation
                     )
                 )
                 ->load();
+
             $this->_customerOrders = $orders;
         }
 

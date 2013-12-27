@@ -39,8 +39,8 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
     /**
      * Encrypts the value before saving
      *
-     * @param  Mage_Core_Model_Abstract $object
-     * @return void
+     * @param  Mage_Core_Model_Abstract $object Attribute Object
+     * @return Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
      */
     public function beforeSave($object)
     {
@@ -51,13 +51,15 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
             $value = $helper->encrypt($object->getData($attributeName));
             $object->setData($attributeName, $value);
         }
+
+        return $this;
     }
 
     /**
      * Decrypts the value after load
      *
-     * @param  Mage_Core_Model_Abstract $object
-     * @return void
+     * @param  Mage_Core_Model_Abstract $object Attribute Object
+     * @return Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
      */
     public function afterLoad($object)
     {
@@ -68,5 +70,7 @@ class Itabs_Debit_Model_Entity_Customer_Attribute_Backend_Encrypted
             $value = $helper->decrypt($object->getData($attributeName));
             $object->setData($attributeName, $value);
         }
+
+        return $this;
     }
 }

@@ -193,7 +193,7 @@ Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, 
     </adminhtml>
     <frontend>
         <secure_url>
-            <debit_account>/debit/account</debit_account>
+            <debit_account>/debit/account/</debit_account>
         </secure_url>
         <translate>
             <modules>

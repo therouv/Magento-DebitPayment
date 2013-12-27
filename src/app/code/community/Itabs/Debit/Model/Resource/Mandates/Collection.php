@@ -37,8 +37,7 @@ class Itabs_Debit_Model_Resource_Mandates_Collection
     extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
     /**
-     * (non-PHPdoc)
-     * @see Mage_Core_Model_Resource_Db_Collection_Abstract::_construct()
+     * Init the object model and resource model
      */
     protected function _construct()
     {

@@ -42,7 +42,8 @@ class Itabs_Debit_Model_Observer
      * registered customer has the required minimum amount of orders to be
      * allowed to order via DebitPayment.
      *
-     * @magentoEvent payment_method_is_active
+     * Event: <payment_method_is_active>
+     *
      * @param  Varien_Event_Observer $observer Observer
      * @return void
      */
@@ -69,13 +70,15 @@ class Itabs_Debit_Model_Observer
      * Saves the account data after a successful order in the specific
      * customer model.
      *
-     * @magentoEvent sales_order_save_after
+     * Event: <sales_order_save_after>
+     *
      * @param  Varien_Event_Observer $observer Observer
      * @return void
      */
     public function saveAccountInfo($observer)
     {
         $order = $observer->getEvent()->getOrder();
+
         $methodInstance = $order->getPayment()->getMethodInstance();
         if ($methodInstance->getCode() != 'debit') {
             return;

@@ -43,7 +43,7 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     public function indexAction()
     {
         $this->_getSession()->addNotice(
-            $this->_getDebitHelper()->__('Please note: SEPA Debit Payment orders can only be exported as CSV for now.')
+            $this->getDebitHelper()->__('Please note: SEPA Debit Payment orders can only be exported as CSV for now.')
         );
 
         $this->loadLayout();
@@ -53,11 +53,11 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
                 $this->_getHelper()->__('Sales')
             )
             ->_addBreadcrumb(
-                $this->_getDebitHelper()->__('Debit Payment Orders'),
-                $this->_getDebitHelper()->__('Debit Payment Orders')
+                $this->getDebitHelper()->__('Debit Payment Orders'),
+                $this->getDebitHelper()->__('Debit Payment Orders')
             )
             ->_title($this->_getHelper()->__('Sales'))
-            ->_title($this->_getDebitHelper()->__('Debit Payment Orders'));
+            ->_title($this->getDebitHelper()->__('Debit Payment Orders'));
 
         $this->renderLayout();
     }
@@ -70,7 +70,7 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
      */
     public function syncAction()
     {
-        $syncedOrders = $this->_getDebitHelper()->getSyncedOrders();
+        $syncedOrders = $this->getDebitHelper()->getSyncedOrders();
         $syncedOrdersCount = 0;
 
         // Sync orders
@@ -120,11 +120,11 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
 
         if ($syncedOrdersCount > 0) {
             $this->_getSession()->addSuccess(
-                $this->_getDebitHelper()->__('Orders successfully synced for export.')
+                $this->getDebitHelper()->__('Orders successfully synced for export.')
             );
         } else {
             $this->_getSession()->addError(
-                $this->_getDebitHelper()->__('No orders available for sync.')
+                $this->getDebitHelper()->__('No orders available for sync.')
             );
         }
         $this->_redirect('*/*');
@@ -148,13 +148,12 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
             }
 
             $this->_getSession()->addSuccess(
-                $this->_getDebitHelper()->__(
+                $this->getDebitHelper()->__(
                     'Total of %d record(s) have been updated.',
                     count($orderIds)
                 )
             );
-        }
-        catch (Mage_Core_Model_Exception $e) {
+        } catch (Mage_Core_Model_Exception $e) {
             $this->_getSession()->addError($e->getMessage());
         } catch (Mage_Core_Exception $e) {
             $this->_getSession()->addError($e->getMessage());
@@ -180,7 +179,9 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     }
 
     /**
-     * @param string $type
+     * Process the debit orders export
+     *
+     * @param  string $type
      * @return Mage_Core_Controller_Varien_Action
      */
     protected function _export($type)
@@ -200,9 +201,9 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     /**
      * Retrieve the helper class
      *
-     * @return Itabs_Debit_Helper_Adminhtml Helper
+     * @return Itabs_Debit_Helper_Adminhtml Helper Class
      */
-    protected function _getDebitHelper()
+    public function getDebitHelper()
     {
         return Mage::helper('debit/adminhtml');
     }
