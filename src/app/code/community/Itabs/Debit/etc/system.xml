@@ -259,9 +259,46 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </swift_bic>
-					</fields>
-				</bankaccount>
-			</groups>
-		</debitpayment>
+                    </fields>
+                </bankaccount>
+                <sepa translate="label">
+                    <label>SEPA</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <creditor_identification_number translate="label comment">
+                            <label>Creditor Identification Number</label>
+                            <comment><![CDATA[This text will be shown during the checkout to the customer.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </creditor_identification_number>
+                        <hint_iban_field translate="label comment">
+                            <label>Hint for IBAN field</label>
+                            <comment><![CDATA[This text will be shown below the IBAN field during the checkout.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hint_iban_field>
+                        <hint_bic_field translate="label comment">
+                            <label>Hint for BIC field</label>
+                            <comment><![CDATA[This text will be shown below the BIC field during the checkout.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hint_bic_field>
+                    </fields>
+                </sepa>
+            </groups>
+        </debitpayment>
     </sections>
 </config>

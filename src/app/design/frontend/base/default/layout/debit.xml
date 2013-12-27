@@ -32,6 +32,7 @@
     <debit_account_edit translate="label">
         <reference name="head">
             <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+            <action method="addCss"><stylesheet>css/debit.css</stylesheet></action>
         </reference>
         <label>Debit Account Data</label>
         <update handle="customer_account"/>
@@ -43,12 +44,14 @@
     <checkout_onepage_index>
         <reference name="head">
             <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+            <action method="addCss"><stylesheet>css/debit.css</stylesheet></action>
         </reference>
     </checkout_onepage_index>
 
     <checkout_multishipping_billing>
         <reference name="head">
             <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+            <action method="addCss"><stylesheet>css/debit.css</stylesheet></action>
         </reference>
     </checkout_multishipping_billing>
 </layout>

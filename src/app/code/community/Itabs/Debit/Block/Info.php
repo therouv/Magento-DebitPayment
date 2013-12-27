@@ -143,11 +143,22 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
         if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')
             && $debitType == 'bank'
         ) {
-            $number  = $payment->maskString($payment->getAccountNumber());
-            $routing = $payment->maskString($payment->getAccountBLZ());
+            $number  = $payment->maskBankData($payment->getAccountNumber());
+            $routing = $payment->maskBankData($payment->getAccountBLZ());
             $data['account_number'] = $number;
             $data['account_blz']    = $routing;
             $data['bank_name']      = '';
+        }
+
+        // mask sepa data
+        if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')
+            && $debitType == 'sepa'
+        ) {
+            $swift = $payment->maskSepaData($payment->getAccountSwift(), 4, 'X');
+            $iban  = $payment->maskSepaData($payment->getAccountIban(), 4, 'X');
+            $data['account_swift'] = $swift;
+            $data['account_iban']  = $iban;
+            $data['bank_name']     = '';
         }
 
         return $data;

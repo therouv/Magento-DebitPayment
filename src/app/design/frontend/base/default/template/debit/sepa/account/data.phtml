@@ -38,25 +38,36 @@ blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>'
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <form action="<?php echo $this->getUrl('debit/account/save') ?>" method="post" id="form-validate">
     <div class="fieldset">
-    <?php echo $this->getBlockHtml('formkey')?>
+        <?php echo $this->getBlockHtml('formkey')?>
         <h2 class="legend"><?php echo $this->__('Debit Account Data') ?></h2>
+        <?php if ($cin = $this->getCreditorIdentificationNumber()): ?>
+        <p class="debit-cin"><?php echo $this->__('Our Creditor Identification Number: %s', $cin); ?></p>
+        <?php endif; ?>
         <ul class="form-list">
             <li>
+                <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?></label><br />
                 <div class="input-box">
-                    <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?></label><br />
                     <input type="text" id="kontoinhaber" name="account_name" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
                 </div>
             </li>
-            <li>
-                <div class="input-box">
+            <li class="fields">
+                <div class="field">
                     <label for="iban"><?php echo $this->__('IBAN') ?></label><br />
-                    <input type="text" id="iban" name="account_iban" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry validate-debit-iban" value="<?php echo $this->getAccountIban() ?>" />
+                    <div class="input-box">
+                        <input type="text" id="iban" name="account_iban" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry validate-debit-iban" value="<?php echo $this->getAccountIban() ?>" />
+                        <?php if ($hint = $this->getHintForIbanField()): ?>
+                            <p class="debit-hint"><?php echo $hint?></p>
+                        <?php endif; ?>
+                    </div>
                 </div>
-            </li>
-            <li>
-                <div class="input-box">
+                <div class="field">
                     <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?></label><br />
-                    <input type="text" id="swiftcode" name="account_swift" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry validate-debit-swift"  value="<?php echo $this->getAccountSwift() ?>" />
+                    <div class="input-box">
+                        <input type="text" id="swiftcode" name="account_swift" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry validate-debit-swift"  value="<?php echo $this->getAccountSwift() ?>" />
+                        <?php if ($hint = $this->getHintForBicField()): ?>
+                            <p class="debit-hint"><?php echo $hint?></p>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </li>
         </ul>

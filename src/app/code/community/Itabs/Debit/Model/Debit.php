@@ -224,9 +224,22 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
      * @param  string $data Data to crypt
      * @return string Crypted data
      */
-    public function maskString($data)
+    public function maskBankData($data)
     {
         $crypt = str_repeat('*', strlen($data)-3) . substr($data, -3);
+
+        return $crypt;
+    }
+
+    /**
+     * Returns the encrypted data for mail
+     *
+     * @param  string $data Data to crypt
+     * @return string Crypted data
+     */
+    public function maskSepaData($data)
+    {
+        $crypt = substr($data, 0, 3) . str_repeat('X',  strlen($data)-7) . substr($data, -4);
 
         return $crypt;
     }

@@ -148,4 +148,44 @@ class Itabs_Debit_Block_Account_Data
 
         return $this->escapeHtml($data);
     }
+
+    /**
+     * Retrieve the creditor identification number
+     *
+     * @return string
+     */
+    public function getCreditorIdentificationNumber()
+    {
+        return Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number');
+    }
+
+    /**
+     * Retrieve the hint for the IBAN field
+     *
+     * @return string|bool
+     */
+    public function getHintForIbanField()
+    {
+        $field = Mage::getStoreConfig('debitpayment/sepa/hint_iban_field');
+        if ($field == '') {
+            return false;
+        }
+
+        return $field;
+    }
+
+    /**
+     * Retrieve the hint for the BIC field
+     *
+     * @return string|bool
+     */
+    public function getHintForBicField()
+    {
+        $field = Mage::getStoreConfig('debitpayment/sepa/hint_bic_field');
+        if ($field == '') {
+            return false;
+        }
+
+        return $field;
+    }
 }
