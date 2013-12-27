@@ -110,17 +110,17 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         }
 
         // Set account data in payment info model
-        $info->setCcType($ccType)                     // BLZ
-             ->setCcOwner($ccOwner)                   // Kontoinhaber
-             ->setCcNumberEnc($ccNumber)              // Kontonummer
-             ->setDebitSwift($swift)                  // SWIFT Code
-             ->setDebitIban($iban)                    // IBAN
-             ->setDebitCompany($data->getDebitCompany()) // Company
-             ->setDebitStreet($data->getDebitStreet())  // Street
-             ->setDebitCity($data->getDebitCity())  // City
-             ->setDebitCountry($data->getDebitCountry())  // Country
-             ->setDebitEmail($data->getDebitEmail())  // Email
-             ->setDebitType(Mage::helper('debit')->getDebitType());
+        $info->setCcType($ccType)                                       // BLZ
+            ->setCcOwner($ccOwner)                                      // Kontoinhaber
+            ->setCcNumberEnc($ccNumber)                                 // Kontonummer
+            ->setDebitSwift($swift)                                     // SWIFT Code
+            ->setDebitIban($iban)                                       // IBAN
+            ->setDebitCompany($data->getDebitCompany())                 // Company
+            ->setDebitStreet($data->getDebitStreet())                   // Street
+            ->setDebitCity($data->getDebitCity())                       // City
+            ->setDebitCountry($data->getDebitCountry())                 // Country
+            ->setDebitEmail($data->getDebitEmail())                     // Email
+            ->setDebitType(Itabs_Debit_Helper_Data::DEBIT_TYPE_SEPA);   // Debit Type
 
         return $this;
     }

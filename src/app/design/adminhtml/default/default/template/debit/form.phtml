@@ -21,6 +21,12 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 ?>
+<?php
+/**
+ * @see Itabs_Debit_Block_Form
+ * @var $this Itabs_Debit_Block_Form
+ */
+?>
 <ul id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none">
     <li>
         <div class="input-box">
@@ -31,20 +37,20 @@
     </li>
     <li>
         <div class="input-box">
-            <label for="bankleitzahl"><?php echo $this->__('Bankleitzahl') ?> <span class="required">*</span></label><br />
-            <input type="text" id="bankleitzahl" name="payment[debit_cc_type]" title="<?php echo $this->__('Bankleitzahl') ?>" class="input-text required-entry validate-number validate-debit-blz" value="<?php echo $this->getAccountBLZ() ?>" />
-        </div>
-    </li>
-	<li>
-        <div class="input-box">
             <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?> <span class="required">*</span></label><br />
             <input type="text" id="kontoinhaber" name="payment[debit_cc_owner]" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
         </div>
-	</li>
-	<li>
+    </li>
+    <li>
         <div class="input-box">
-            <label for="kontonummer"><?php echo $this->__('Konto-Nummer') ?> <span class="required">*</span></label><br />
-            <input type="text" id="kontonummer" name="payment[debit_cc_number]" title="<?php echo $this->__('Konto-Nummer') ?>" class="input-text required-entry validate-number" value="<?php echo $this->getAccountNumber() ?>" />
+            <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?> <span class="required">*</span></label><br />
+            <input type="text" id="swiftcode" name="payment[debit_swift]" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry" value="<?php echo $this->getAccountSwift() ?>" />
         </div>
-	</li>
+    </li>
+  	<li>
+        <div class="input-box">
+            <label for="iban"><?php echo $this->__('IBAN') ?> <span class="required">*</span></label><br />
+            <input type="text" id="iban" name="payment[debit_iban]" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry" value="<?php echo $this->getAccountIban() ?>" />
+        </div>
+    </li>
 </ul>

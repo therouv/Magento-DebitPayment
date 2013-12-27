@@ -21,6 +21,12 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 ?>
+<?php
+/**
+ * @see Itabs_Debit_Block_Account_Data
+ * @var $this Itabs_Debit_Block_Account_Data
+ */
+?>
 <div class="page-title">
     <h1><?php echo $this->__('Edit Debit Account Data') ?></h1>
 </div>
@@ -32,26 +38,20 @@
         <ul class="form-list">
             <li>
                 <div class="input-box">
-                    <label for="kreditinstitut"><?php echo $this->__('Kreditinstitut') ?></label><br />
-                    <span id="kreditinstitut" style="display: block; padding : 0 0 0 10px; float:left;"><?php echo $this->getBankName(); ?></span>
-                </div>
-            </li>
-            <li>
-                <div class="input-box">
-                    <label for="bankleitzahl"><?php echo $this->__('Bankleitzahl') ?></label><br />
-                    <input type="text" id="bankleitzahl" name="account_blz" title="<?php echo $this->__('Bankleitzahl') ?>" class="input-text required-entry validate-number validate-debit-blz" value="<?php echo $this->getAccountBLZ() ?>" onchange="blzCheck.checkBlz(this); return false;" />
-                </div>
-            </li>
-            <li>
-                <div class="input-box">
                     <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?></label><br />
                     <input type="text" id="kontoinhaber" name="account_name" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
                 </div>
             </li>
             <li>
                 <div class="input-box">
-                    <label for="kontonummer"><?php echo $this->__('Konto-Nummer') ?></label><br />
-                    <input type="text" id="kontonummer" name="account_number" title="<?php echo $this->__('Konto-Nummer') ?>" class="input-text required-entry validate-number validate-debit-number" value="<?php echo $this->getAccountNumber() ?>" />
+                    <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?></label><br />
+                    <input type="text" id="swiftcode" name="account_swift" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry" value="<?php echo $this->getAccountSwift() ?>" />
+                </div>
+            </li>
+            <li>
+                <div class="input-box">
+                    <label for="iban"><?php echo $this->__('IBAN') ?></label><br />
+                    <input type="text" id="iban" name="account_iban" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry" value="<?php echo $this->getAccountIban() ?>" />
                 </div>
             </li>
         </ul>
@@ -65,7 +65,7 @@
 
 <script type="text/javascript">
 //<![CDATA[
-    blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>','1');
     var dataForm = new VarienForm('form-validate', true);
 //]]>
 </script>
+

@@ -49,16 +49,16 @@
 
     <checkout_onepage_review>
         <reference name="checkout.onepage.agreements">
-            <action method="setTemplate"><template>debit/sepa/rewrite/checkout/agreements.phtml</template></action>
-            <block type="debit/mandate" name="checkout.onepage.debit.mandate" as="debitMandate" template="debit/sepa/mandate.phtml"/>
+            <action method="setTemplate"><template>debit/rewrite/checkout/agreements.phtml</template></action>
+            <block type="debit/mandate" name="checkout.onepage.debit.mandate" as="debitMandate" template="debit/mandate.phtml"/>
         </reference>
         <reference name="germansetup.checkout.agreements">
-            <action method="setTemplate"><template>debit/sepa/rewrite/germansetup/agreements.phtml</template></action>
-            <block type="debit/mandate" name="checkout.onepage.debit.mandate" as="debitMandate" template="debit/sepa/mandate.phtml"/>
+            <action method="setTemplate"><template>debit/rewrite/germansetup/agreements.phtml</template></action>
+            <block type="debit/mandate" name="checkout.onepage.debit.mandate" as="debitMandate" template="debit/mandate.phtml"/>
         </reference>
         <reference name="magesetup.checkout.agreements">
-            <action method="setTemplate"><template>debit/sepa/rewrite/magesetup/agreements.phtml</template></action>
-            <block type="debit/mandate" name="checkout.onepage.debit.mandate" as="debitMandate" template="debit/sepa/mandate.phtml"/>
+            <action method="setTemplate"><template>debit/rewrite/magesetup/agreements.phtml</template></action>
+            <block type="debit/mandate" name="checkout.onepage.debit.mandate" as="debitMandate" template="debit/mandate.phtml"/>
         </reference>
     </checkout_onepage_review>
 

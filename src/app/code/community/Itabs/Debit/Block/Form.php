@@ -43,14 +43,7 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
     protected function _construct()
     {
         parent::_construct();
-
-        /* @var $helper Itabs_Debit_Helper_Data */
-        $helper = Mage::helper('debit');
-        if ($helper->getDebitType() == Itabs_Debit_Helper_Data::DEBIT_TYPE_SEPA) {
-            $this->setTemplate('debit/sepa/form.phtml');
-        } else {
-            $this->setTemplate('debit/form.phtml');
-        }
+        $this->setTemplate('debit/form.phtml');
     }
 
     /**
@@ -230,16 +223,6 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
         }
 
         return Mage::getSingleton('customer/session')->getCustomer();
-    }
-
-    /**
-     * Returns the config setting if checkout is only allowed with a valid BLZ
-     *
-     * @return boolean true/false
-     */
-    public function getCheckoutValidBlz()
-    {
-        return Mage::getStoreConfigFlag('payment/debit/checkout_valid_blz');
     }
 
     /**

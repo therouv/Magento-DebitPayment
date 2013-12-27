@@ -142,13 +142,4 @@ class Itabs_Debit_Test_Block_Form extends EcomDev_PHPUnit_Test_Case_Controller
             $this->_block->getCustomer()
         );
     }
-
-    /**
-     * @test
-     * @loadFixture ~Itabs_Debit/default
-     */
-    public function getCheckoutValidBlz()
-    {
-        $this->assertTrue($this->_block->getCheckoutValidBlz());
-    }
 }

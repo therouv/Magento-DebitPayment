@@ -37,22 +37,14 @@ class Itabs_Debit_Block_Account_Data
     extends Mage_Customer_Block_Account_Dashboard
 {
     /**
-     * Set the right template depending on the debit type
-     *
-     * @return void
+     * Set the right template
      */
     protected function _construct()
     {
         parent::_construct();
-
-        /* @var $helper Itabs_Debit_Helper_Data */
-        $helper = Mage::helper('debit');
-        if ($helper->getDebitType() == Itabs_Debit_Helper_Data::DEBIT_TYPE_SEPA) {
-            $this->setTemplate('debit/sepa/account/data.phtml');
-        } else {
-            $this->setTemplate('debit/account/data.phtml');
-        }
+        $this->setTemplate('debit/account/data.phtml');
     }
+
     /**
      * Returns the bank name
      *
@@ -64,6 +56,7 @@ class Itabs_Debit_Block_Account_Data
         if (empty($blz)) {
             return $this->__('-- will be filled in automatically --');
         }
+
         $bankName = Mage::helper('debit')->getBankByBlz($blz);
         if ($bankName == null) {
             $bankName = $this->__('not available');
@@ -134,10 +127,12 @@ class Itabs_Debit_Block_Account_Data
         if (!Mage::getStoreConfigFlag('payment/debit/save_account_data')) {
             return '';
         }
+
         $data = $this->getCustomer()->getData($field);
         if (strlen($data) == 0) {
             return '';
         }
+
         if ($field != 'debit_payment_acount_name'
             && $field != 'debit_payment_account_swift'
             && $field != 'debit_payment_account_iban'

@@ -1,5 +1,4 @@
 config:
-  default/payment/debit/checkout_valid_blz: 1
   default/payment/debit/save_account_data: 1
   default/debitpayment/bankaccount/account_owner: Test Tester
   default/debitpayment/sepa/creditor_identification_number: DE123456789

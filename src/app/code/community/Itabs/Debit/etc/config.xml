@@ -149,7 +149,6 @@
                 <order_status>1</order_status>
                 <allowspecific>0</allowspecific>
                 <save_account_data>0</save_account_data>
-                <checkout_valid_blz>0</checkout_valid_blz>
                 <specificgroup_all>1</specificgroup_all>
                 <specificgroup>0</specificgroup>
                 <orderscount>0</orderscount>
