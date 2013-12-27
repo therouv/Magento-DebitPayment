@@ -16,10 +16,10 @@ Description
 This extension allows shop owners to provide the payment method "DebitPayment" to their customers.
 This includes:
 - Complete order via DebitPayment
-- Choose between DebitPayment via normal bank data or via SEPA data
-- Find the correct German bank name given by the entered routing number
+- All direct debit orders are completed with SEPA data.
+- You can choose if you just want to allow direct debit orders of if you want to generate unique mandates within Magento.
 - Save account data encrypted in database to pre-fill checkout fields on further checkouts
-- Export all DebitPayment orders as CSV file or DTAUS file
+- Export all DebitPayment orders as CSV file
 
 Requirements
 ------------
@@ -45,6 +45,14 @@ To uninstall this extension you need to run the following SQL after removing the
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_name';
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_number';
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_blz';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_account_swift';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_account_iban';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_company';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_street';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_city';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_country';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_email';
+  DROP TABLE `debit_mandates`;
   DROP TABLE `debit_order_grid`;
 ```
 
@@ -68,4 +76,4 @@ Licence
 
 Copyright
 ---------
-(c) 2008-2013 Rouven Alexander Rieker
+(c) 2008-2014 Rouven Alexander Rieker
