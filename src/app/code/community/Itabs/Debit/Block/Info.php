@@ -104,17 +104,14 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
         $payment = $this->getMethod();
         $method  = $this->getMethod()->getCode();
         $data = array(
-            'account_name'   => $payment->getAccountName(),
-            'account_number' => $payment->getAccountNumber(),
-            'account_blz'    => $payment->getAccountBLZ(),
-            'bank_name'      => $payment->getAccountBankname(),
-            'account_swift'  => $payment->getAccountSwift(),
-            'account_iban'   => $payment->getAccountIban()
+            'account_name' => $payment->getAccountName(),
+            'account_swift' => $payment->getAccountSwift(),
+            'account_iban' => $payment->getAccountIban()
         );
 
         // mask bank data
         if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')) {
-
+            // @TODO: Mask swift / iban
         }
 
         return $data;

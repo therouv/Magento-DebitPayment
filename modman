@@ -7,6 +7,5 @@ src/app/design/adminhtml/default/default/template/debit/    app/design/adminhtml
 src/app/design/frontend/base/default/layout/debit.xml       app/design/frontend/base/default/layout/debit.xml
 src/app/design/frontend/base/default/template/debit/        app/design/frontend/base/default/template/debit/
 src/js/itabs/debit/blzcheck.js                              js/itabs/debit/blzcheck.js
-src/lib/DTA/                                                lib/DTA/
 src/skin/frontend/base/default/css/debit.css                skin/frontend/base/default/css/debit.css
 src/var/debit/                                              var/debit/

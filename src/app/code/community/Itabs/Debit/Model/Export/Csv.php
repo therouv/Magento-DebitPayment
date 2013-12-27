@@ -66,8 +66,6 @@ class Itabs_Debit_Model_Export_Csv
         // Add headline
         $row = array(
             'Kundenname',
-            'BLZ',
-            'Kontonummer',
             'BIC/Swift-Code',
             'IBAN',
             'Betrag',
@@ -87,8 +85,6 @@ class Itabs_Debit_Model_Export_Csv
 
             $row = array(
                 'name'           => $paymentMethod->getAccountName(),
-                'bank_code'      => $paymentMethod->getAccountBLZ(),
-                'account_number' => $paymentMethod->getAccountNumber(),
                 'account_swift'  => $paymentMethod->getAccountSwift(),
                 'account_iban'   => $paymentMethod->getAccountIban(),
                 'amount'         => $amount.' '.$order->getData('order_currency_code'),

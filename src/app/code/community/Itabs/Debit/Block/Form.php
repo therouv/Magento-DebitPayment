@@ -47,45 +47,6 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
     }
 
     /**
-     * Returns the account bankname if applicable from the payment info instance
-     *
-     * @return string Bankname/Error
-     */
-    public function getBankName()
-    {
-        $blz = $this->getAccountBLZ();
-        if (empty($blz)) {
-            return $this->__('-- will be filled in automatically --');
-        }
-        $bankName = Mage::helper('debit')->getBankByBlz($blz);
-        if ($bankName == null) {
-            $bankName = $this->__('not available');
-        }
-
-        return $bankName;
-    }
-
-    /**
-     * Returns the account blz from the payment info instance
-     *
-     * @return string BLZ
-     */
-    public function getAccountBLZ()
-    {
-        if ($data = $this->getInfoData('cc_type')) {
-            if (!is_numeric($data)) {
-                $data = Mage::helper('core')->decrypt($data);
-            }
-
-            return $data;
-        } elseif ($data = $this->_getAccountData('debit_payment_acount_blz')) {
-            return $data;
-        } else {
-            return '';
-        }
-    }
-
-    /**
      * Returns the account name from the payment info instance
      *
      * @return string Name

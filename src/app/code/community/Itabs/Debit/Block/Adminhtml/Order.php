@@ -37,8 +37,6 @@ class Itabs_Debit_Block_Adminhtml_Order extends Mage_Adminhtml_Block_Widget_Grid
 {
     /**
      * Class constructor
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -56,11 +54,6 @@ class Itabs_Debit_Block_Adminhtml_Order extends Mage_Adminhtml_Block_Widget_Grid
                 'label'     => $helper->__('Sync Orders'),
                 'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/sync') .'\')',
                 'class'     => 'add',
-            ));
-            $this->_addButton('export_dtaus', array(
-                'label'     => $helper->__('Export as DTAUS'),
-                'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/exportdtaus') .'\')',
-                'class'     => '',
             ));
             $this->_addButton('export_csv', array(
                 'label'     => $helper->__('Export as CSV'),

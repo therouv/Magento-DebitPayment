@@ -194,7 +194,6 @@ Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, 
     <frontend>
         <secure_url>
             <debit_account>/debit/account</debit_account>
-            <debit_ajax>/debit/ajax</debit_ajax>
         </secure_url>
         <translate>
             <modules>

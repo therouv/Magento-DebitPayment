@@ -46,36 +46,6 @@ class Itabs_Debit_Block_Account_Data
     }
 
     /**
-     * Returns the bank name
-     *
-     * @return string Bankname
-     */
-    public function getBankName()
-    {
-        $blz = $this->getAccountBLZ();
-        if (empty($blz)) {
-            return $this->__('-- will be filled in automatically --');
-        }
-
-        $bankName = Mage::helper('debit')->getBankByBlz($blz);
-        if ($bankName == null) {
-            $bankName = $this->__('not available');
-        }
-
-        return $bankName;
-    }
-
-    /**
-     * Returns the account blz of the specific account
-     *
-     * @return string BLZ
-     */
-    public function getAccountBLZ()
-    {
-        return $this->_getAccountData('debit_payment_acount_blz');
-    }
-
-    /**
      * Returns the account owner name of the specific account
      *
      * @return string Name
@@ -83,16 +53,6 @@ class Itabs_Debit_Block_Account_Data
     public function getAccountName()
     {
         return $this->_getAccountData('debit_payment_acount_name');
-    }
-
-    /**
-     * Returns the number of the specific account
-     *
-     * @return string Account Number
-     */
-    public function getAccountNumber()
-    {
-        return $this->_getAccountData('debit_payment_acount_number');
     }
 
     /**

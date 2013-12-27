@@ -75,27 +75,11 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
 
         $info = $this->getInfoInstance();
 
-        // Fetch routing number
-        $ccType = $data->getDebitCcType();
-        if (!$ccType) {
-            $ccType = $data->getCcType();
-        }
-        $ccType = Mage::helper('debit')->sanitizeData($ccType);
-        $ccType = $info->encrypt($ccType);
-
         // Fetch account holder
         $ccOwner = $data->getDebitCcOwner();
         if (!$ccOwner) {
             $ccOwner = $data->getCcOwner();
         }
-
-        // Fetch account number
-        $ccNumber = $data->getDebitCcNumber();
-        if (!$ccNumber) {
-            $ccNumber = $data->getCcNumber();
-        }
-        $ccNumber = Mage::helper('debit')->sanitizeData($ccNumber);
-        $ccNumber = $info->encrypt($ccNumber);
 
         // Fetch the account swift
         $swift = $data->getDebitSwift();
@@ -110,9 +94,7 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         }
 
         // Set account data in payment info model
-        $info->setCcType($ccType)                                       // BLZ
-            ->setCcOwner($ccOwner)                                      // Kontoinhaber
-            ->setCcNumberEnc($ccNumber)                                 // Kontonummer
+        $info->setCcOwner($ccOwner)                                      // Kontoinhaber
             ->setDebitSwift($swift)                                     // SWIFT Code
             ->setDebitIban($iban)                                       // IBAN
             ->setDebitCompany($data->getDebitCompany())                 // Company
@@ -145,56 +127,6 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         $info = $this->getInfoInstance();
 
         return $info->getCcOwner();
-    }
-
-    /**
-     * Returns the account number from the payment info instance
-     *
-     * @return string Number
-     */
-    public function getAccountNumber()
-    {
-        $info = $this->getInfoInstance();
-        $data = $info->getCcNumberEnc();
-        if (!is_numeric($data)) {
-            $data = $info->decrypt($data);
-        }
-        if (!is_numeric($data)) {
-            $data = $info->decrypt($data);
-        }
-
-        return $data;
-    }
-
-    /**
-     * Returns the account blz from the payment info instance
-     *
-     * @return string BLZ
-     */
-    public function getAccountBLZ()
-    {
-        $info = $this->getInfoInstance();
-        $data = $info->getCcType();
-        if (!is_numeric($data)) {
-            $data = $info->decrypt($data);
-        }
-
-        return $data;
-    }
-
-    /**
-     * Returns the account bankname if applicable from the payment info instance
-     *
-     * @return string Bankname/Error
-     */
-    public function getAccountBankname()
-    {
-        $bankName = Mage::helper('debit')->getBankByBlz($this->getAccountBLZ());
-        if ($bankName == null) {
-            $bankName = Mage::helper('debit')->__('not available');
-        }
-
-        return $bankName;
     }
 
     /**

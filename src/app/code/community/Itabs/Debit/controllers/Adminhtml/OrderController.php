@@ -170,16 +170,6 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     }
 
     /**
-     * Export the order list as DTA file
-     *
-     * @return void|Mage_Core_Controller_Varien_Action
-     */
-    public function exportdtausAction()
-    {
-        return $this->_export('dtaus');
-    }
-
-    /**
      * Export the order list as CSV
      *
      * @return void|Mage_Core_Controller_Varien_Action

@@ -36,39 +36,25 @@
 class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
 {
     const XML_PATH_BANKACCOUNT_ACCOUNTOWNER  = 'debitpayment/bankaccount/account_owner';
-    const XML_PATH_BANKACCOUNT_ROUTINGNUMBER = 'debitpayment/bankaccount/routing_number';
-    const XML_PATH_BANKACCOUNT_ACCOUNTNUMBER = 'debitpayment/bankaccount/account_number';
+    const XML_PATH_BANKACCOUNT_SWIFT = 'debitpayment/bankaccount/account_swift';
+    const XML_PATH_BANKACCOUNT_IBAN = 'debitpayment/bankaccount/account_iban';
 
     /**
      * Check if the export requirements are reached for export. Store owner
      * has to enter his bank account data.
      *
-     * @return bool
+     * @return bool Result
      */
     public function hasExportRequirements()
     {
         if (Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_ACCOUNTOWNER) == ''
-            || Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_ROUTINGNUMBER) == ''
-            || Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_ACCOUNTNUMBER) == ''
+            || Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_IBAN) == ''
+            || Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_SWIFT) == ''
         ) {
             return false;
         }
 
         return true;
-    }
-
-    /**
-     * Retrieve the bank account data of the store owenr as array
-     *
-     * @return array Bank account
-     */
-    public function getBankAccount()
-    {
-        return array(
-            'name'           => Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_ACCOUNTOWNER),
-            'bank_code'      => Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_ROUTINGNUMBER),
-            'account_number' => Mage::getStoreConfig(self::XML_PATH_BANKACCOUNT_ACCOUNTNUMBER)
-        );
     }
 
     /**
@@ -80,7 +66,9 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
     public function getSyncedOrders()
     {
         $entityIds = array();
-        $collection = Mage::getModel('debit/orders')->getCollection();
+
+        /* @var $collection Itabs_Debit_Model_Resource_Orders_Collection */
+        $collection = Mage::getResourceModel('debit/orders_collection');
         if ($collection->count() > 0) {
             foreach ($collection as $item) {
                 $entityIds[] = $item->getData('entity_id');
@@ -93,8 +81,8 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
     /**
      * Updates the status of an export order item to "exported"..
      *
-     * @param  int  $orderId Export Order ID
-     * @return bool
+     * @param  int $orderId Export Order ID
+     * @return bool Result
      */
     public function setStatusAsExported($orderId)
     {

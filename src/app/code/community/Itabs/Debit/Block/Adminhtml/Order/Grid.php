@@ -37,8 +37,6 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
 {
     /**
      * Class Constructor
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -50,8 +48,9 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Mage_Adminhtml_Block_Widget_Grid::_prepareCollection()
+     * Prepare the grid collection
+     *
+     * @return Itabs_Debit_Block_Adminhtml_Order_Grid
      */
     protected function _prepareCollection()
     {
@@ -62,8 +61,9 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Mage_Adminhtml_Block_Widget_Grid::_prepareColumns()
+     * Prepare the grid columns
+     *
+     * @return Itabs_Debit_Block_Adminhtml_Order_Grid
      */
     protected function _prepareColumns()
     {
@@ -132,6 +132,11 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
         return parent::_prepareColumns();
     }
 
+    /**
+     * Prepare the massaction fields
+     *
+     * @return Itabs_Debit_Block_Adminhtml_Order_Grid
+     */
     protected function _prepareMassaction()
     {
         $this->setMassactionIdField('id');
@@ -161,8 +166,10 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Mage_Adminhtml_Block_Widget_Grid::getRowUrl()
+     * Retrieve the row url
+     *
+     * @param  Varien_Object $row Database Entry
+     * @return bool|string Row URL
      */
     public function getRowUrl($row)
     {
@@ -172,7 +179,7 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
     /**
      * Retrieve the helper class
      *
-     * @return Itabs_Debit_Helper_Adminhtml Helper
+     * @return Itabs_Debit_Helper_Adminhtml Helper Class
      */
     protected function _getHelper()
     {
