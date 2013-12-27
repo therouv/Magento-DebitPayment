@@ -23,7 +23,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Helper/Data.php Test Class
+ * Config Test Class
  *
  * @category  Itabs
  * @package   Itabs_Debit
