@@ -1,6 +1,10 @@
 config:
   default/payment/debit/save_account_data: 1
+  default/payment/debit/sendmail: 1
   default/debitpayment/bankaccount/account_owner: Test Tester
+  default/debitpayment/bankaccount/account_swift: XXXXXXXXXXX
+  default/debitpayment/bankaccount/account_iban: DE99999999999999999999
+  default/debitpayment/sepa/generate_mandate: 1
   default/debitpayment/sepa/creditor_identification_number: DE123456789
   default/debitpayment/sepa/mandate_text: Lorem ipsum dolor sit amet.
 
@@ -59,3 +63,11 @@ tables:
       customer_firstname: Test
       customer_lastname: Tester
       created_at: "2013-12-11 10:09:08"
+
+  sales/order:
+    - entity_id: 1
+      store_id: 1
+      customer_id: 1
+    - entity_id: 2
+      store_id: 1
+      customer_id: 1

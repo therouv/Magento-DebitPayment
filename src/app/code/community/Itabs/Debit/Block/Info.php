@@ -84,9 +84,7 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
      */
     public function sendDataInEmail()
     {
-        $method = $this->getMethod()->getCode();
-
-        return Mage::getStoreConfigFlag('payment/'.$method.'/sendmail');
+        return Mage::getStoreConfigFlag('payment/debit/sendmail');
     }
 
     /**

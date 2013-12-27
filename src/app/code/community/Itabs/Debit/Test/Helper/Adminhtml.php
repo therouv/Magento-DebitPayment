@@ -27,10 +27,10 @@
  *
  * @group Itabs_Debit
  */
-class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
+class Itabs_Debit_Test_Helper_Adminhtml extends EcomDev_PHPUnit_Test_Case_Controller
 {
     /**
-     * @var Itabs_Debit_Helper_Data
+     * @var Itabs_Debit_Helper_Adminhtml
      */
     protected $_helper;
 
@@ -40,47 +40,37 @@ class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
     protected function setUp()
     {
         parent::setUp();
-        $this->_helper = Mage::helper('debit');
+        $this->_helper = Mage::helper('debit/adminhtml');
     }
 
     /**
-     * Test if the customer enters a faulty string that it
-     * gets sanitized correctly
-     *
-     * @dataProvider dataProvider
+     * @test
      */
-    public function testSanitizeData($data)
+    public function hasNotExportRequirements()
     {
-        // Load all expectations
-        $dataSet = $this->readAttribute($this, 'dataName');
-
-        foreach ($data as $key => $value) {
-            $this->assertEquals(
-                $this->expected($dataSet)->getData($key),
-                $this->_helper->sanitizeData($value)
-            );
-        }
+        $this->assertFalse($this->_helper->hasExportRequirements());
     }
 
     /**
      * @test
      * @loadFixture ~Itabs_Debit/default
      */
-    public function isGenerateMandate()
+    public function hasExportRequirements()
     {
-        $this->assertTrue($this->_helper->isGenerateMandate());
+        $this->assertTrue($this->_helper->hasExportRequirements());
+        $this->reset();
     }
 
     /**
      * @test
-     * @dataProvider dataProvider
-     * @loadExpectations
+     * @loadFixture ~Itabs_Debit/default
+     * @loadFixture
      */
-    public function getMandateReference($customerId, $quoteId)
+    public function getSyncedOrders()
     {
         $this->assertEquals(
-            $this->expected('auto')->getResult(),
-            $this->_helper->getMandateReference($customerId, $quoteId)
+            $this->expected('orders')->getResult(),
+            $this->_helper->getSyncedOrders()
         );
     }
 }
