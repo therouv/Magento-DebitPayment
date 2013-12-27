@@ -44,8 +44,8 @@ class Itabs_Debit_Model_Observer
      *
      * Event: <payment_method_is_active>
      *
-     * @param  Varien_Event_Observer $observer Observer
-     * @return void
+     * @param  Varien_Event_Observer $observer Observer Instance
+     * @return Itabs_Debit_Model_Observer Self.
      */
     public function paymentMethodIsActive($observer)
     {
@@ -53,17 +53,19 @@ class Itabs_Debit_Model_Observer
 
         // Check if method is DebitPayment
         if ($methodInstance->getCode() != 'debit') {
-            return;
+            return $this;
         }
 
         // Check if payment method is active
         if (!Mage::getStoreConfigFlag('payment/debit/active')) {
-            return;
+            return $this;
         }
 
         /* @var $validationModel Itabs_Debit_Model_Validation */
         $validationModel = Mage::getModel('debit/validation');
         $observer->getEvent()->getResult()->isAvailable = $validationModel->isValid();
+
+        return $this;
     }
 
     /**
@@ -72,7 +74,7 @@ class Itabs_Debit_Model_Observer
      *
      * Event: <sales_order_save_after>
      *
-     * @param  Varien_Event_Observer $observer Observer Observer Instance.
+     * @param  Varien_Event_Observer $observer Observer Observer Instance
      * @return Itabs_Debit_Model_Observer Self.
      */
     public function saveAccountInfo($observer)
@@ -119,6 +121,8 @@ class Itabs_Debit_Model_Observer
      * Stop save order process if customer didn't fill in the required sepa
      * information if debit payment is the selected payment method.
      *
+     * Event: <controller_action_predispatch_checkout_onepage_saveOrder>
+     *
      * @param  Varien_Event_Observer $observer Observer Instance
      * @return Itabs_Debit_Model_Observer Self.
      */
@@ -160,6 +164,8 @@ class Itabs_Debit_Model_Observer
 
     /**
      * Save the mandate reference in the database for further processing.
+     *
+     * Event: <checkout_type_onepage_save_order_after>
      *
      * @param  Varien_Event_Observer $observer Observer Instance
      * @return Itabs_Debit_Model_Observer Self.
