@@ -74,5 +74,6 @@
 "Please agree to grant us the SEPA direct debit mandate or fill in the city of mandate signature. Thank you.","Bitte erteilen Sie uns das SEPA-Lastschriftmandat oder füllen Sie den Ort der Mandatserteilung aus. Vielen Dank."
 "Hint for IBAN field","Hinweis-Text für IBAN Feld"
 "This text will be shown below the IBAN field during the checkout.","Dieser Text wird unter dem IBAN Feld während des Bezahlvorgangs angezeigt."
-"Hint for BIC field","Hinweis-Text für BIC Feld"
-"This text will be shown below the BIC field during the checkout.","Dieser Text wird unter dem BIC Feld während des Bezahlvorgangs angezeigt."
+"Hint for SWIFT-Code field","Hinweis-Text für SWIFT-Code Feld"
+"This text will be shown below the SWIFT-Code field during the checkout.","Dieser Text wird unter dem SWIFT-Code Feld während des Bezahlvorgangs angezeigt."
+"Generate SEPA Mandate?","Erstelle SEPA-Mandat?"

@@ -232,42 +232,57 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <creditor_identification_number translate="label comment">
-                            <label>Creditor Identification Number</label>
-                            <comment><![CDATA[This is a necessary field for the SEPA direct debit mandate!]]></comment>
-                            <frontend_type>text</frontend_type>
+                        <generate_mandate translate="label" module="payment">
+                            <label>Generate SEPA Mandate?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>1</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                        </generate_mandate>
+                        <creditor_identification_number translate="label comment">
+                            <label>Creditor Identification Number</label>
+                            <comment><![CDATA[This is a necessary field for the SEPA direct debit mandate!]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <generate_mandate>1</generate_mandate>
+                            </depends>
                         </creditor_identification_number>
                         <mandate_text translate="label">
                             <label>Mandate Text</label>
                             <comment><![CDATA[This text will be printed on the SEPA direct debit mandate!]]></comment>
                             <frontend_type>textarea</frontend_type>
-                            <sort_order>5</sort_order>
+                            <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends>
+                                <generate_mandate>1</generate_mandate>
+                            </depends>
                         </mandate_text>
                         <hint_iban_field translate="label">
                             <label>Hint for IBAN field</label>
                             <comment><![CDATA[This text will be shown below the IBAN field during the checkout.]]></comment>
                             <frontend_type>textarea</frontend_type>
-                            <sort_order>10</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </hint_iban_field>
-                        <hint_bic_field translate="label">
-                            <label>Hint for BIC field</label>
-                            <comment><![CDATA[This text will be shown below the BIC field during the checkout.]]></comment>
-                            <frontend_type>textarea</frontend_type>
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </hint_bic_field>
+                        </hint_iban_field>
+                        <hint_swift_field translate="label">
+                            <label>Hint for SWIFT-Code field</label>
+                            <comment><![CDATA[This text will be shown below the SWIFT-Code field during the checkout.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hint_swift_field>
                     </fields>
                 </sepa>
             </groups>

@@ -156,6 +156,7 @@
         </payment>
         <debitpayment>
             <sepa>
+                <generate_mandate>0</generate_mandate>
                 <mandate_text><![CDATA[Ich ermächtige den Zahlungsempfänger, Zahlungen von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von dem Zahlungsempfänger auf mein Konto gezogenen Lastschriften einzulösen.
 
 Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen]]></mandate_text>

@@ -217,13 +217,13 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
     }
 
     /**
-     * Retrieve the hint for the BIC field
+     * Retrieve the hint for the BIC/SWIFT-Code field
      *
      * @return string|bool
      */
-    public function getHintForBicField()
+    public function getHintForSwiftField()
     {
-        $field = Mage::getStoreConfig('debitpayment/sepa/hint_bic_field');
+        $field = Mage::getStoreConfig('debitpayment/sepa/hint_swift_field');
         if ($field == '') {
             return false;
         }

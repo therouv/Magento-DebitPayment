@@ -50,7 +50,7 @@
                 <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?> <span class="required">*</span></label><br />
                 <div class="input-box">
                     <input type="text" id="swiftcode" name="payment[debit_swift]" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry" value="<?php echo $this->getAccountSwift() ?>" />
-                    <?php if ($hint = $this->getHintForBicField()): ?>
+                    <?php if ($hint = $this->getHintForSwiftField()): ?>
                         <p class="debit-hint"><?php echo $hint?></p>
                     <?php endif; ?>
                 </div>
@@ -67,6 +67,10 @@
                     <input type="text" id="kontoinhaber" name="payment[debit_cc_owner]" title="<?php echo $this->__('Name') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
                 </div>
             </div>
+        </li>
+
+        <?php if ($this->helper('debit')->isGenerateMandate()): ?>
+        <li class="fields">
             <div class="field">
                 <label for="debit_company"><?php echo $this->helper('customer')->__('Company') ?></label><br />
                 <div class="input-box">
@@ -102,5 +106,6 @@
                 </div>
             </div>
         </li>
+        <?php endif; ?>
     </ul>
 </fieldset>

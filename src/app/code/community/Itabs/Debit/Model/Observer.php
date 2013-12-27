@@ -72,8 +72,8 @@ class Itabs_Debit_Model_Observer
      *
      * Event: <sales_order_save_after>
      *
-     * @param  Varien_Event_Observer $observer Observer
-     * @return void
+     * @param  Varien_Event_Observer $observer Observer Observer Instance.
+     * @return Itabs_Debit_Model_Observer Self.
      */
     public function saveAccountInfo($observer)
     {
@@ -81,11 +81,12 @@ class Itabs_Debit_Model_Observer
 
         $methodInstance = $order->getPayment()->getMethodInstance();
         if ($methodInstance->getCode() != 'debit') {
-            return;
+            return $this;
         }
         if (!$methodInstance->getConfigData('save_account_data')) {
-            return;
+            return $this;
         }
+
         if ($customer = $this->_getOrderCustomer($order)) {
             $customer->setData('debit_payment_acount_update', now())
                 ->setData('debit_payment_acount_name', $methodInstance->getAccountName())
@@ -93,6 +94,8 @@ class Itabs_Debit_Model_Observer
                 ->setData('debit_payment_account_iban', $methodInstance->getAccountIban())
                 ->save();
         }
+
+        return $this;
     }
 
     /**
@@ -116,13 +119,20 @@ class Itabs_Debit_Model_Observer
      * Stop save order process if customer didn't fill in the required sepa
      * information if debit payment is the selected payment method.
      *
-     * @param  Varien_Event_Observer $observer
-     * @return Itabs_Debit_Model_Observer
+     * @param  Varien_Event_Observer $observer Observer Instance
+     * @return Itabs_Debit_Model_Observer Self.
      */
     public function controllerActionPredispatchCheckoutOnepageSaveOrder(Varien_Event_Observer $observer)
     {
         $payment = Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethodInstance();
+
+        // Don't validate if payment method is not debit payment
         if ($payment->getCode() != 'debit') {
+            return $this;
+        }
+
+        // Don't validate if mandate generation is disabled
+        if (!Mage::helper('debit')->isGenerateMandate()) {
             return $this;
         }
 
@@ -151,19 +161,26 @@ class Itabs_Debit_Model_Observer
     /**
      * Save the mandate reference in the database for further processing.
      *
-     * @param  Varien_Event_Observer $observer
-     * @return Itabs_Debit_Model_Observer
+     * @param  Varien_Event_Observer $observer Observer Instance
+     * @return Itabs_Debit_Model_Observer Self.
      */
     public function checkoutTypeOnepageSaveOrderAfter(Varien_Event_Observer $observer)
     {
         /* @var $order Mage_Sales_Model_Order */
         $order = $observer->getEvent()->getOrder();
-
         $method = $order->getPayment()->getMethodInstance()->getCode();
+
+        // Don't validate if payment method is not debit payment
         if ($method != 'debit') {
             return $this;
         }
 
+        // Don't validate if mandate generation is disabled
+        if (!Mage::helper('debit')->isGenerateMandate()) {
+            return $this;
+        }
+
+        // Set the correct customer id
         $customerId = $order->getCustomerId();
         if (null === $customerId) {
             $customerId = 0;

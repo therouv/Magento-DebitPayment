@@ -73,6 +73,16 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
     }
 
     /**
+     * Check if we need to generate a SEPA mandate in Magento.
+     *
+     * @return bool
+     */
+    public function isGenerateMandate()
+    {
+        return Mage::getStoreConfigFlag('debitpayment/sepa/generate_mandate');
+    }
+
+    /**
      * sanitizeData
      *
      * @param  string $data Data

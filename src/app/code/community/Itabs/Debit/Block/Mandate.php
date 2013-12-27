@@ -122,6 +122,10 @@ class Itabs_Debit_Block_Mandate extends Mage_Core_Block_Template
             return '';
         }
 
+        if (!$this->helper('debit')->isGenerateMandate()) {
+            return '';
+        }
+
         return parent::_toHtml();
     }
 }
