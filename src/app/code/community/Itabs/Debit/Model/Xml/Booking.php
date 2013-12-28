@@ -23,13 +23,13 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Class Itabs_Debit_Model_Xml_Payment
+ * Class Itabs_Debit_Model_Xml_Booking
  *
  * @category Itabs
  * @package  Itabs_Debit
  * @author   Rouven Alexander Rieker <rouven.rieker@itabs.de>
  */
-class Itabs_Debit_Model_Xml_Payment
+class Itabs_Debit_Model_Xml_Booking
 {
     /**
      * @var string
