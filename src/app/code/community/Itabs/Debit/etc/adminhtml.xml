@@ -26,11 +26,22 @@
 	<menu>
 		<sales>
 			<children>
-				<debitpayment translate="title" module="debit">
-					<title>Debit Payment Orders</title>
-					<action>debit/adminhtml_order</action>
-					<sort_order>11</sort_order>
-				</debitpayment>
+                <debitpayment translate="title" module="debit">
+                    <title>Debit Payment</title>
+                    <sort_order>11</sort_order>
+                    <children>
+                        <orders translate="title" module="debit">
+                            <title>Debit Payment Orders</title>
+                            <action>debit/adminhtml_order</action>
+                            <sort_order>10</sort_order>
+                        </orders>
+                        <mandates translate="title" module="debit">
+                            <title>Debit Payment Mandates</title>
+                            <action>debit/adminhtml_mandates</action>
+                            <sort_order>20</sort_order>
+                        </mandates>
+                    </children>
+                </debitpayment>
 			</children>
 		</sales>
 	</menu>
@@ -41,7 +52,15 @@
                     <sales>
                         <children>
                             <debitpayment translate="title" module="debit">
-                                <title>Debit Payment: Orders</title>
+                                <title>Debit Payment</title>
+                                <children>
+                                    <orders translate="title" module="debit">
+                                        <title>Debit Payment Orders</title>
+                                    </orders>
+                                    <mandates translate="title" module="debit">
+                                        <title>Debit Payment Mandates</title>
+                                    </mandates>
+                                </children>
                             </debitpayment>
                         </children>
                     </sales>

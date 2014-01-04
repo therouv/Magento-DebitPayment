@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?php
 /**
  * This file is part of the Itabs_Debit module.
+ *
+ * PHP version 5
  *
  * NOTICE OF LICENSE
  *
@@ -21,17 +22,30 @@
  * @version   1.0.7
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
- -->
-<layout version="0.1.0">
-	<debit_adminhtml_order_index>
-        <reference name="content">
-            <block type="debit/adminhtml_order" name="debit.adminhtml.order" />
-        </reference>
-	</debit_adminhtml_order_index>
+/**
+ * Renderer for Mandate PDF
+ *
+ * @category Itabs
+ * @package  Itabs_Debit
+ * @author   Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ */
+class Itabs_Debit_Block_Adminhtml_Mandates_Renderer_Pdf
+    extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
+{
+    /**
+     * Renders grid column
+     *
+     * @param  Varien_Object $row
+     * @return string
+     */
+    public function render(Varien_Object $row)
+    {
+        $filePath = Mage::getBaseDir('media') . DS . 'debit' . DS . $row->getData('mandate_reference') . '.pdf';
+        if (file_exists($filePath)) {
+            $fileUrl = Mage::getBaseUrl('media') . 'debit' . DS . $row->getData('mandate_reference') . '.pdf';
+            return '<a target="_blank" href="'.$fileUrl.'">'.$row->getData('mandate_reference').'.pdf</a>';
+        }
 
-    <debit_adminhtml_mandates_index>
-       <reference name="content">
-           <block type="debit/adminhtml_mandates" name="debit.adminhtml.mandates" />
-       </reference>
-   	</debit_adminhtml_mandates_index>
-</layout>
+        return '';
+    }
+}

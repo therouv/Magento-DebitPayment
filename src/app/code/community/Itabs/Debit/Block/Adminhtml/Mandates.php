@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?php
 /**
  * This file is part of the Itabs_Debit module.
+ *
+ * PHP version 5
  *
  * NOTICE OF LICENSE
  *
@@ -21,17 +22,27 @@
  * @version   1.0.7
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
- -->
-<layout version="0.1.0">
-	<debit_adminhtml_order_index>
-        <reference name="content">
-            <block type="debit/adminhtml_order" name="debit.adminhtml.order" />
-        </reference>
-	</debit_adminhtml_order_index>
+/**
+ * Backend View for Mandates list
+ *
+ * @category Itabs
+ * @package  Itabs_Debit
+ * @author   Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ */
+class Itabs_Debit_Block_Adminhtml_Mandates extends Mage_Adminhtml_Block_Widget_Grid_Container
+{
+    /**
+     * Class constructor
+     */
+    public function __construct()
+    {
+        /* @var $helper Itabs_Debit_Helper_Data */
+        $helper = Mage::helper('debit');
 
-    <debit_adminhtml_mandates_index>
-       <reference name="content">
-           <block type="debit/adminhtml_mandates" name="debit.adminhtml.mandates" />
-       </reference>
-   	</debit_adminhtml_mandates_index>
-</layout>
+        $this->_controller = 'adminhtml_mandates';
+        $this->_blockGroup = 'debit';
+        $this->_headerText = $helper->__('Debit Payment Mandates');
+        parent::__construct();
+        $this->_removeButton('add');
+    }
+}
