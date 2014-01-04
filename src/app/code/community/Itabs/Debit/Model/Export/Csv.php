@@ -61,11 +61,16 @@ class Itabs_Debit_Model_Export_Csv
 
         // Add headline
         $row = array(
+            'Store ID',
             'Kundenname',
             'BIC/Swift-Code',
             'IBAN',
             'Betrag',
-            'Verwendungszweck'
+            'Verwendungszweck',
+            'Bestelldatum',
+            'SEPA: Mandatsreferenz',
+            'SEPA: Ort der Mandatserteilung',
+            'SEPA: Datum der Mandatserteilung'
         );
         $file->streamWriteCsv($row);
 
@@ -80,15 +85,29 @@ class Itabs_Debit_Model_Export_Csv
             $amount = number_format($order->getData('grand_total'), 2, ',', '.');
 
             $row = array(
-                'name'           => $paymentMethod->getAccountName(),
-                'account_swift'  => $paymentMethod->getAccountSwift(),
-                'account_iban'   => $paymentMethod->getAccountIban(),
-                'amount'         => $amount.' '.$order->getData('order_currency_code'),
-                'purpose'        => 'Bestellung Nr. '.$order->getData('increment_id')
+                'store' => $orderModel->getStoreId(),
+                'name' => $paymentMethod->getAccountName(),
+                'account_swift' => $paymentMethod->getAccountSwift(),
+                'account_iban' => $paymentMethod->getAccountIban(),
+                'amount' => $amount.' '.$order->getData('order_currency_code'),
+                'purpose' => 'Bestellung '.$order->getData('increment_id'),
+                'order_date' => $orderModel->getCreatedAtStoreDate(),
+                'mandate_reference' => '',
+                'mandate_city' => '',
+                'mandate_date' => ''
             );
+
+            /* @var $mandate Itabs_Debit_Model_Mandates */
+            $mandate = Mage::getModel('debit/mandates')->loadByOrder($order->getData('entity_id'));
+            if ($mandate) {
+                $row['mandate_reference'] = $mandate->getData('mandate_reference');
+                $row['mandate_city'] = $mandate->getData('mandate_city');
+                $row['mandate_date'] = $orderModel->getCreatedAtStoreDate()->toString('YYYY-MM-dd');
+            }
+
             $file->streamWriteCsv($row);
 
-            $this->_getDebitHelper()->setStatusAsExported($order->getId());
+            //$this->_getDebitHelper()->setStatusAsExported($order->getId());
         }
 
         // Close file, get file contents and delete temporary file
