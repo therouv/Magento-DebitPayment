@@ -72,7 +72,7 @@ class Itabs_Debit_Model_Xml_Validation
         $dom = new DOMDocument();
 
         // Check if the xml document is well formed
-        $result = $dom->load($this->xml);
+        $result = $dom->loadXML($this->xml);
         if ($result === false) {
             $this->addError('Document is not well formed.');
             return false;
@@ -101,6 +101,28 @@ class Itabs_Debit_Model_Xml_Validation
         }
 
         return true;
+    }
+
+    /**
+     * Set the sepa xml string
+     *
+     * @param  string $xml
+     * @return Itabs_Debit_Model_Xml_Validation Self.
+     */
+    public function setXml($xml)
+    {
+        $this->xml = $xml;
+        return $this;
+    }
+
+    /**
+     * Get the sepa xml string
+     *
+     * @return string
+     */
+    public function getXml()
+    {
+        return $this->xml;
     }
 
     /**

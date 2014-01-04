@@ -94,7 +94,7 @@ class Itabs_Debit_Model_Xml_Booking
      */
     public function setAccountOwner($accountOwner)
     {
-        $this->accountOwner = $this->_helper()->removeAccents($accountOwner, true);
+        $this->accountOwner = $this->_helper()->removeAccents($accountOwner);
         return $this;
     }
 
@@ -138,7 +138,7 @@ class Itabs_Debit_Model_Xml_Booking
      */
     public function setBookingText($bookingText)
     {
-        $this->bookingText = $this->_helper()->removeAccents($bookingText, true);
+        $this->bookingText = $this->_helper()->removeAccents($bookingText);
         return $this;
     }
 
@@ -160,7 +160,7 @@ class Itabs_Debit_Model_Xml_Booking
      */
     public function setEndToEnd($endToEnd)
     {
-        $this->endToEnd = $this->_helper()->removeAccents($endToEnd, true);
+        $this->endToEnd = $this->_helper()->removeAccents($endToEnd);
         return $this;
     }
 
@@ -182,6 +182,9 @@ class Itabs_Debit_Model_Xml_Booking
      */
     public function setIban($iban)
     {
+        $iban = strtoupper($iban);
+        $iban = str_replace(' ', '', $iban);
+
         $this->iban = $iban;
         return $this;
     }

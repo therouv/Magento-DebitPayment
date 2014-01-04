@@ -59,6 +59,16 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     }
 
     /**
+     * Loads the grid for grid ajax
+     */
+    public function gridAction()
+    {
+        /* @var $block Itabs_Debit_Block_Adminhtml_Order_Grid */
+        $block = $this->getLayout()->createBlock('debit/adminhtml_order_grid');
+        $this->getResponse()->setBody($block->toHtml());
+    }
+
+    /**
      * Fetch all orders with the payment method "Debit Payment" and import them
      * into the export list (table: debit_order_grid)
      *
@@ -172,6 +182,16 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     public function exportcsvAction()
     {
         return $this->_export('csv');
+    }
+
+    /**
+     * Export the order list as XML
+     *
+     * @return void|Mage_Core_Controller_Varien_Action
+     */
+    public function exportxmlAction()
+    {
+        return $this->_export('xml');
     }
 
     /**

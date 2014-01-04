@@ -41,6 +41,7 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
         $this->setDefaultSort('increment_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
+        $this->setUseAjax(true);
     }
 
     /**
@@ -71,6 +72,16 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
                 'index'  => 'increment_id'
             )
         );
+        if (!Mage::app()->isSingleStoreMode()) {
+            $this->addColumn('store_id', array(
+                'header' => Mage::helper('sales')->__('Purchased From (Store)'),
+                'index' => 'store_id',
+                'type' => 'store',
+                'store_view'=> true,
+                'display_deleted' => true,
+                'width' => 125
+            ));
+        }
         $this->addColumn(
             'created_at',
             array(
@@ -125,6 +136,9 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
             )
         );
 
+        $this->addExportType('*/*/exportcsv', 'CSV');
+        $this->addExportType('*/*/exportxml', 'SEPA-XML');
+
         return parent::_prepareColumns();
     }
 
@@ -170,6 +184,16 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
     public function getRowUrl($row)
     {
         return false;
+    }
+
+    /**
+     * Retrieve the grid url
+     *
+     * @return string
+     */
+    public function getGridUrl()
+    {
+        return $this->getUrl('*/*/grid', array('_current' => true));
     }
 
     /**

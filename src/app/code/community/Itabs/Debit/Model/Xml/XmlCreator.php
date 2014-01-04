@@ -34,27 +34,12 @@ class Itabs_Debit_Model_Xml_XmlCreator
     /**
      * @var array
      */
-    protected $bookings;
-
-    /**
-     * @var string
-     */
-    protected $creditorId;
+    protected $payments = array();
 
     /**
      * @var string
      */
     protected $creditorName;
-
-    /**
-     * @var string
-     */
-    protected $creditorIban;
-
-    /**
-     * @var string
-     */
-    protected $creditorSwift;
 
     /**
      * @var int
@@ -77,17 +62,11 @@ class Itabs_Debit_Model_Xml_XmlCreator
     protected $recurringSequence = false;
 
     /**
-     * @param string $creditorId
      * @param string $creditorName
-     * @param string $creditorIban
-     * @param string $creditorSwift
      */
-    public function __construct($creditorId, $creditorName, $creditorIban, $creditorSwift)
+    public function __construct($creditorName)
     {
-        $this->setCreditorId($creditorId);
         $this->setCreditorName($creditorName);
-        $this->setCreditorIban($creditorIban);
-        $this->setCreditorSwift($creditorSwift);
     }
 
     /**
@@ -98,6 +77,7 @@ class Itabs_Debit_Model_Xml_XmlCreator
     public function generateXml()
     {
         $dom = new DOMDocument('1.0', 'utf-8');
+        $dom->formatOutput = true;
 
         // Build Document-Root
         $document = $dom->createElement('Document');
@@ -117,152 +97,182 @@ class Itabs_Debit_Model_Xml_XmlCreator
         $creationTime = time();
 
         // Add the message id
-        $header->appendChild($dom->createElement('MsgId', $this->accountBic . '00' . date('YmdHis', $creationTime)));
+        $header->appendChild($dom->createElement('MsgId', '00' . date('YmdHis', $creationTime)));
         $header->appendChild($dom->createElement('CreDtTm', date('Y-m-d', $creationTime) . 'T' . date('H:i:s', $creationTime) . '.000Z'));
-        $header->appendChild($dom->createElement('NbOfTxs', count($this->getBookings())));
-        $header->appendChild($initatorName = $dom->createElement('InitgPty'));
+        $header->appendChild($dom->createElement('NbOfTxs', $this->getNumberOfTransactions()));
+        $header->appendChild($dom->createElement('CtrlSum', $this->getControlSum()));
+        $initatorName = $dom->createElement('InitgPty');
         $initatorName->appendChild($dom->createElement('Nm', $this->getCreditorName()));
+        $header->appendChild($initatorName);
 
         // Add the payment info
-        $paymentInfo = $dom->createElement('PmtInf');
-        $content->appendChild($paymentInfo);
+        $paymentIterator = 0;
+        foreach ($this->getPayments() as $payment) {
+            /* @var $payment Itabs_Debit_Model_Xml_Payment */
 
-        $paymentInfo->appendChild($dom->createElement('PmtInfId', 'PMT-ID0-' . date('YmdHis', $creationTime)));
-        $paymentInfo->appendChild($dom->createElement('PmtMtd', 'DD'));
-        $paymentInfo->appendChild($dom->createElement('BtchBookg', 'true'));
-        $paymentInfo->appendChild($dom->createElement('NbOfTxs', count($this->getBookings())));
-        $paymentInfo->appendChild($dom->createElement('CtrlSum', $this->getControlSum()));
+            $paymentInfo = $dom->createElement('PmtInf');
+            $content->appendChild($paymentInfo);
 
-        // Add the payment transaction info
-        $pmtTpInf = $dom->createElement('PmtTpInf');
-        $paymentInfo->appendChild($pmtTpInf);
+            $paymentInfo->appendChild($dom->createElement('PmtInfId', 'PMT-ID'.$paymentIterator.'-'.date('YmdHis', $creationTime)));
+            $paymentInfo->appendChild($dom->createElement('PmtMtd', 'DD'));
+            $paymentInfo->appendChild($dom->createElement('BtchBookg', 'true'));
+            $paymentInfo->appendChild($dom->createElement('NbOfTxs', count($payment->getBookings())));
+            $paymentInfo->appendChild($dom->createElement('CtrlSum', $payment->getControlSum()));
 
-        // Add the service level
-        $svcLvl = $dom->createElement('SvcLvl');
-        $svcLvl->appendChild($dom->createElement('Cd', 'SEPA'));
-        $pmtTpInf->appendChild($svcLvl);
+            // Add the payment transaction info
+            $pmtTpInf = $dom->createElement('PmtTpInf');
+            $paymentInfo->appendChild($pmtTpInf);
 
-        // Add the local instrument
-        $lclInstrm = $dom->createElement('LclInstrm');
-        $lclInstrm->appendChild($dom->createElement('Cd', 'CORE'));
-        $pmtTpInf->appendChild($lclInstrm);
+            // Add the service level
+            $svcLvl = $dom->createElement('SvcLvl');
+            $svcLvl->appendChild($dom->createElement('Cd', 'SEPA'));
+            $pmtTpInf->appendChild($svcLvl);
 
-        // Add the recurring sequence
-        if ($this->getRecurringSequence()) {
-            $pmtTpInf->appendChild($dom->createElement('SeqTp', 'RCUR'));
-        } else {
-            $pmtTpInf->appendChild($dom->createElement('SeqTp', 'FRST'));
-        }
+            // Add the local instrument
+            $lclInstrm = $dom->createElement('LclInstrm');
+            $lclInstrm->appendChild($dom->createElement('Cd', 'CORE'));
+            $pmtTpInf->appendChild($lclInstrm);
 
-        // Add the transaction date
-        $paymentInfo->appendChild($dom->createElement('ReqdColltnDt', $this->getTransactionDate()));
-
-        // Add the creditor name
-        $cdtr = $dom->createElement('Cdtr');
-        $cdtr->appendChild($dom->createElement('Nm', $this->getCreditorName()));
-
-        // Add the creditor iban
-        $cdtrAcct = $dom->createElement('CdtrAcct');
-        $cdtrAcctId = $dom->createElement('Id');
-        $cdtrAcctId->appendChild($dom->createElement('IBAN', $this->getCreditorIban()));
-        $cdtrAcct->appendChild($cdtrAcctId);
-
-        // Add the creditor swift code
-        $cdtrAgt = $dom->createElement('CdtrAgt');
-        $finInstnId = $dom->createElement('FinInstnId');
-        $finInstnId->appendChild($dom->createElement('BIC', $this->getCreditorSwift()));
-        $cdtrAgt->appendChild($cdtrAgt);
-
-        // Add the ...
-        $paymentInfo->appendChild($dom->createElement('ChrgBr', 'SLEV'));
-
-        // Add the creditor scheme id
-        $cdtrSchmeId = $dom->createElement('CdtrSchmeId');
-
-        $cdtrSchmeIdId = $dom->createElement('Id');
-        $cdtrSchmeIdIdPrvtId = $dom->createElement('PrvtId');
-        $cdtrSchmeIdIdPrvtIdOthr = $dom->createElement('Othr');
-
-        $cdtrSchmeIdIdPrvtIdOthr->appendChild($dom->createElement('Id', $this->getCreditorId()));
-
-        $cdtrSchmeIdIdPrvtIdOthrSchmeNm = $dom->createElement('SchmeNm');
-        $cdtrSchmeIdIdPrvtIdOthrSchmeNm->appendChild($dom->createElement('Prtry', 'SEPA'));
-        $cdtrSchmeIdIdPrvtIdOthr->appendChild($cdtrSchmeIdIdPrvtIdOthrSchmeNm);
-
-        $cdtrSchmeIdIdPrvtId->appendChild($cdtrSchmeIdIdPrvtIdOthr);
-        $cdtrSchmeIdId->appendChild($cdtrSchmeIdIdPrvtId);
-        $cdtrSchmeId->appendChild($cdtrSchmeIdId);
-
-        $paymentInfo->appendChild($cdtrSchmeId);
-
-
-        $bookings = $this->getBookings();
-        foreach ($bookings as $booking) {
-            /* @var $booking Itabs_Debit_Model_Xml_Payment */
-
-            $transaction = $dom->createElement('DrctDbtTxInf');
-
-            // Add end2end
-            if ($endToEnd = $booking->getEndToEnd()) {
-                $txPmtId = $dom->createElement('PmtId');
-                $txPmtId->appendChild($dom->createElement('EndToEndId', $endToEnd));
-                $transaction->appendChild($txPmtId);
-            }
-
-            // Add the amount
-            $instdAmt = $dom->createElement('InstdAmt', $booking->getAmount());
-            $instdAmt->setAttribute('Ccy', $this->getCurrency());
-            $transaction->appendChild($instdAmt);
-
-            // Add the mandate information
-            $drctDbtTx = $dom->createElement('DrctDbtTx');
-            $drctDbtTxMndtRltdInf = $dom->createElement('MndtRltdInf');
-            $drctDbtTxMndtRltdInf->appendChild($dom->createElement('MndtId', $booking->getMandateId()));
-            $drctDbtTxMndtRltdInf->appendChild($dom->createElement('DtOfSgntr', $booking->getMandateDate()));
-            if ($booking->getMandateChange()) {
-                $drctDbtTxMndtRltdInf->appendChild($dom->createElement('AmdmntInd', 'true'));
+            // Add the recurring sequence
+            if ($payment->getRecurringSequence()) {
+                $pmtTpInf->appendChild($dom->createElement('SeqTp', 'RCUR'));
             } else {
-                $drctDbtTxMndtRltdInf->appendChild($dom->createElement('AmdmntInd', 'false'));
-            }
-            $drctDbtTx->appendChild($drctDbtTxMndtRltdInf);
-            $transaction->appendChild($drctDbtTx);
-
-            // Add the debitor swift code
-            $dbtrAgt = $dom->createElement('DbtrAgt');
-            $dbtrAgtFinInstnId = $dom->createElement('FinInstnId');
-            $dbtrAgtFinInstnId->appendChild($dom->createElement('BIC', $booking->getSwift()));
-            $dbtrAgt->appendChild($dbtrAgtFinInstnId);
-            $transaction->appendChild($dbtrAgt);
-
-            // Add the debitor name
-            $dbtr = $dom->createElement('Dbtr');
-            $dbtr->appendChild($dom->createElement('Nm', $booking->getAccountOwner()));
-            $transaction->appendChild($dbtr);
-
-            // Add the debitor iban
-            $dbtrAcct = $dom->createElement('DbtrAcct');
-            $dbtrAcctId = $dom->createElement('Id');
-            $dbtrAcctId->appendChild($dom->createElement('IBAN', $booking->getIban()));
-            $dbtrAcct->appendChild($dbtrAcctId);
-            $transaction->appendChild($dbtrAcct);
-
-            // Add the account owner
-            $ultmtDbtr = $dom->createElement('UltmtDbtr');
-            $ultmtDbtr->appendChild($dom->createElement('Nm', $booking->getAccountOwner()));
-            $transaction->appendChild($ultmtDbtr);
-
-            // Add the booking text
-            if ($bookingText = $booking->getBookingText()) {
-                $rmtInf = $dom->createElement('RmtInf');
-                $rmtInf->appendChild($dom->createElement('Ustrd', $bookingText));
-                $transaction->appendChild($rmtInf);
+                $pmtTpInf->appendChild($dom->createElement('SeqTp', 'FRST'));
             }
 
-            // Add the transaction xml to the payment info
-            $paymentInfo->appendChild($transaction);
+            // Add the transaction date
+            $paymentInfo->appendChild($dom->createElement('ReqdColltnDt', $payment->getTransactionDate()));
+
+            // Add the creditor name
+            $cdtr = $dom->createElement('Cdtr');
+            $cdtr->appendChild($dom->createElement('Nm', $payment->getCreditorName()));
+            $paymentInfo->appendChild($cdtr);
+
+            // Add the creditor iban
+            $cdtrAcct = $dom->createElement('CdtrAcct');
+            $cdtrAcctId = $dom->createElement('Id');
+            $cdtrAcctId->appendChild($dom->createElement('IBAN', $payment->getCreditorIban()));
+            $cdtrAcct->appendChild($cdtrAcctId);
+            $paymentInfo->appendChild($cdtrAcct);
+
+            // Add the creditor swift code
+            $cdtrAgt = $dom->createElement('CdtrAgt');
+            $finInstnId = $dom->createElement('FinInstnId');
+            $finInstnId->appendChild($dom->createElement('BIC', $payment->getCreditorSwift()));
+            $cdtrAgt->appendChild($finInstnId);
+            $paymentInfo->appendChild($cdtrAgt);
+
+            // Add the ...
+            $paymentInfo->appendChild($dom->createElement('ChrgBr', 'SLEV'));
+
+            // Add the creditor scheme id
+            $cdtrSchmeId = $dom->createElement('CdtrSchmeId');
+
+            $cdtrSchmeIdId = $dom->createElement('Id');
+            $cdtrSchmeIdIdPrvtId = $dom->createElement('PrvtId');
+            $cdtrSchmeIdIdPrvtIdOthr = $dom->createElement('Othr');
+
+            $cdtrSchmeIdIdPrvtIdOthr->appendChild($dom->createElement('Id', $payment->getCreditorId()));
+
+            $cdtrSchmeIdIdPrvtIdOthrSchmeNm = $dom->createElement('SchmeNm');
+            $cdtrSchmeIdIdPrvtIdOthrSchmeNm->appendChild($dom->createElement('Prtry', 'SEPA'));
+            $cdtrSchmeIdIdPrvtIdOthr->appendChild($cdtrSchmeIdIdPrvtIdOthrSchmeNm);
+
+            $cdtrSchmeIdIdPrvtId->appendChild($cdtrSchmeIdIdPrvtIdOthr);
+            $cdtrSchmeIdId->appendChild($cdtrSchmeIdIdPrvtId);
+            $cdtrSchmeId->appendChild($cdtrSchmeIdId);
+
+            $paymentInfo->appendChild($cdtrSchmeId);
+
+            $bookings = $payment->getBookings();
+            foreach ($bookings as $booking) {
+                /* @var $booking Itabs_Debit_Model_Xml_Booking */
+
+                $transaction = $dom->createElement('DrctDbtTxInf');
+
+                // Add end2end
+                if ($endToEnd = $booking->getEndToEnd()) {
+                    $txPmtId = $dom->createElement('PmtId');
+                    $txPmtId->appendChild($dom->createElement('EndToEndId', $endToEnd));
+                    $transaction->appendChild($txPmtId);
+                }
+
+                // Add the amount
+                $instdAmt = $dom->createElement('InstdAmt', $booking->getAmount());
+                $instdAmt->setAttribute('Ccy', $this->getCurrency());
+                $transaction->appendChild($instdAmt);
+
+                // Add the mandate information
+                $drctDbtTx = $dom->createElement('DrctDbtTx');
+                $drctDbtTxMndtRltdInf = $dom->createElement('MndtRltdInf');
+                $drctDbtTxMndtRltdInf->appendChild($dom->createElement('MndtId', $booking->getMandateId()));
+                $drctDbtTxMndtRltdInf->appendChild($dom->createElement('DtOfSgntr', $booking->getMandateDate()));
+                if ($booking->getMandateChange()) {
+                    $drctDbtTxMndtRltdInf->appendChild($dom->createElement('AmdmntInd', 'true'));
+                } else {
+                    $drctDbtTxMndtRltdInf->appendChild($dom->createElement('AmdmntInd', 'false'));
+                }
+                $drctDbtTx->appendChild($drctDbtTxMndtRltdInf);
+                $transaction->appendChild($drctDbtTx);
+
+                // Add the debitor swift code
+                $dbtrAgt = $dom->createElement('DbtrAgt');
+                $dbtrAgtFinInstnId = $dom->createElement('FinInstnId');
+                $dbtrAgtFinInstnId->appendChild($dom->createElement('BIC', $booking->getSwift()));
+                $dbtrAgt->appendChild($dbtrAgtFinInstnId);
+                $transaction->appendChild($dbtrAgt);
+
+                // Add the debitor name
+                $dbtr = $dom->createElement('Dbtr');
+                $dbtr->appendChild($dom->createElement('Nm', $booking->getAccountOwner()));
+                $transaction->appendChild($dbtr);
+
+                // Add the debitor iban
+                $dbtrAcct = $dom->createElement('DbtrAcct');
+                $dbtrAcctId = $dom->createElement('Id');
+                $dbtrAcctId->appendChild($dom->createElement('IBAN', $booking->getIban()));
+                $dbtrAcct->appendChild($dbtrAcctId);
+                $transaction->appendChild($dbtrAcct);
+
+                // Add the account owner
+                $ultmtDbtr = $dom->createElement('UltmtDbtr');
+                $ultmtDbtr->appendChild($dom->createElement('Nm', $booking->getAccountOwner()));
+                $transaction->appendChild($ultmtDbtr);
+
+                // Add the booking text
+                if ($bookingText = $booking->getBookingText()) {
+                    $rmtInf = $dom->createElement('RmtInf');
+                    $rmtInf->appendChild($dom->createElement('Ustrd', $bookingText));
+                    $transaction->appendChild($rmtInf);
+                }
+
+                // Add the transaction xml to the payment info
+                $paymentInfo->appendChild($transaction);
+            }
+
+            $paymentIterator++;
         }
 
         return $dom->saveXML();
+    }
+
+    /**
+     * Retrieve the number of transactions
+     *
+     * @return int
+     */
+    public function getNumberOfTransactions()
+    {
+        $transactions = 0;
+
+        $payments = $this->getPayments();
+        foreach ($payments as $payment) {
+            /* @var $payment Itabs_Debit_Model_Xml_Payment */
+            $bookings = $payment->getBookings();
+            $transactions += count($bookings);
+        }
+
+        return $transactions;
     }
 
     /**
@@ -274,24 +284,29 @@ class Itabs_Debit_Model_Xml_XmlCreator
     {
         $controlSum = 0;
 
-        $bookings = $this->getBookings();
-        foreach ($bookings as $booking) {
-            /* @var $booking Itabs_Debit_Model_Xml_Payment */
-            $controlSum += $booking->getAmount();
+        $payments = $this->getPayments();
+        foreach ($payments as $payment) {
+            /* @var $payment Itabs_Debit_Model_Xml_Payment */
+            $bookings = $payment->getBookings();
+
+            foreach ($bookings as $booking) {
+                /* @var $booking Itabs_Debit_Model_Xml_Booking */
+                $controlSum += $booking->getAmount();
+            }
         }
 
         return number_format($controlSum, 2, '.', '');
     }
 
     /**
-     * Add a booking
+     * Add a payment
      *
-     * @param  Itabs_Debit_Model_Xml_Payment $booking
+     * @param  Itabs_Debit_Model_Xml_Payment $payment
      * @return Itabs_Debit_Model_Xml_XmlCreator Self.
      */
-    public function addBooking(Itabs_Debit_Model_Xml_Payment $booking)
+    public function addPayment(Itabs_Debit_Model_Xml_Payment $payment)
     {
-        $this->bookings[] = $booking;
+        $this->payments[] = $payment;
         return $this;
     }
 
@@ -300,53 +315,9 @@ class Itabs_Debit_Model_Xml_XmlCreator
      *
      * @return array
      */
-    public function getBookings()
+    public function getPayments()
     {
-        return $this->bookings;
-    }
-
-    /**
-     * Set the creditor iban
-     *
-     * @param  string $creditorIban
-     * @return Itabs_Debit_Model_Xml_XmlCreator Self.
-     */
-    public function setCreditorIban($creditorIban)
-    {
-        $this->creditorIban = $creditorIban;
-        return $this;
-    }
-
-    /**
-     * Get the creditor iban
-     *
-     * @return string
-     */
-    public function getCreditorIban()
-    {
-        return $this->creditorIban;
-    }
-
-    /**
-     * Set the creditor id
-     *
-     * @param  string $creditorId
-     * @return Itabs_Debit_Model_Xml_XmlCreator Self.
-     */
-    public function setCreditorId($creditorId)
-    {
-        $this->creditorId = $creditorId;
-        return $this;
-    }
-
-    /**
-     * Get the creditor id
-     *
-     * @return string
-     */
-    public function getCreditorId()
-    {
-        return $this->creditorId;
+        return $this->payments;
     }
 
     /**
@@ -369,28 +340,6 @@ class Itabs_Debit_Model_Xml_XmlCreator
     public function getCreditorName()
     {
         return $this->creditorName;
-    }
-
-    /**
-     * Set the creditor swift
-     *
-     * @param  string $creditorSwift
-     * @return Itabs_Debit_Model_Xml_XmlCreator Self.
-     */
-    public function setCreditorSwift($creditorSwift)
-    {
-        $this->creditorSwift = $creditorSwift;
-        return $this;
-    }
-
-    /**
-     * Get the creditor swift
-     *
-     * @return string
-     */
-    public function getCreditorSwift()
-    {
-        return $this->creditorSwift;
     }
 
     /**

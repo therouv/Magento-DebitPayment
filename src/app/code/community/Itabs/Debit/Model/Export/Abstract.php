@@ -79,6 +79,18 @@ class Itabs_Debit_Model_Export_Abstract extends Varien_Object
             }
         }
 
+        $filter = Mage::app()->getRequest()->getParam('filter', null);
+        $data = false;
+        if (is_string($filter)) {
+            $data = Mage::helper('adminhtml')->prepareFilterString($filter);
+        } elseif ($filter && is_array($filter)) {
+            $data = $filter;
+        }
+
+        if ($data && isset($data['store_id'])) {
+            $collection->addFieldToFilter('store_id', $data['store_id']);
+        }
+
         // Check if collection coontains orders
         if ($collection->count() == 0) {
             Mage::getSingleton('adminhtml/session')->addError(

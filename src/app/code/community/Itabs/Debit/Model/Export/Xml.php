@@ -59,44 +59,71 @@ class Itabs_Debit_Model_Export_Xml
             return false;
         }
 
-        $creditorId = '';
-        $creditorName = '';
-        $creditorIban = '';
-        $creditorSwift = '';
+        $creditorName = Mage::getStoreConfig('debitpayment/bankaccount/account_owner', 0);
 
-        $xml = new Itabs_Debit_Model_Xml_XmlCreator($creditorId, $creditorName, $creditorIban, $creditorSwift);
+        $xml = new Itabs_Debit_Model_Xml_XmlCreator($creditorName);
         $xml->setOffset($this->getOffset());
 
-        foreach ($collection as $order) {
-            /* @var $order Itabs_Debit_Model_Orders */
+        $stores = Mage::app()->getStores();
+        foreach ($stores as $store) {
+            $creditorName = Mage::getStoreConfig('debitpayment/bankaccount/account_owner', $store->getId());
+            $creditorId = Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number', $store->getId());
+            $creditorIban = Mage::getStoreConfig('debitpayment/bankaccount/account_iban', $store->getId());
+            $creditorSwift = Mage::getStoreConfig('debitpayment/bankaccount/account_swift', $store->getId());
 
-            /* @var $mandate Itabs_Debit_Model_Mandates */
-            $mandate = Mage::getModel('debit/mandates')->loadByOrder($order->getData('entity_id'));
-            if (!$mandate) {
-                continue;
+            $payment = new Itabs_Debit_Model_Xml_Payment($creditorId, $creditorName, $creditorIban, $creditorSwift);
+            foreach ($collection as $order) {
+                /* @var $order Itabs_Debit_Model_Orders */
+                if ($order->getStoreId() != $store->getId()) {
+                    continue;
+                }
+
+                /* @var $mandate Itabs_Debit_Model_Mandates */
+                $mandate = Mage::getModel('debit/mandates')->loadByOrder($order->getData('entity_id'));
+                if (!$mandate || !$mandate->getId()) {
+                    continue;
+                }
+
+                /* @var $orderModel Mage_Sales_Model_Order */
+                $orderModel = Mage::getModel('sales/order')->load($order->getData('entity_id'));
+                /* @var $paymentMethod Itabs_Debit_Model_Debit */
+                $paymentMethod = $orderModel->getPayment()->getMethodInstance();
+
+                $booking = new Itabs_Debit_Model_Xml_Booking();
+                $booking->setAccountOwner($paymentMethod->getAccountName());
+                $booking->setIban($paymentMethod->getAccountIban());
+                $booking->setSwift($paymentMethod->getAccountSwift());
+                $booking->setAmount($order->getData('grand_total'));
+                $booking->setBookingText('Bestellung '.$mandate->getData('increment_id'));
+                $booking->setMandateId($mandate->getData('mandate_reference'));
+
+                $payment->addBooking($booking);
+
+                //$this->_getDebitHelper()->setStatusAsExported($order->getId());
             }
 
-            /* @var $orderModel Mage_Sales_Model_Order */
-            $orderModel = Mage::getModel('sales/order')->load($order->getData('entity_id'));
-            /* @var $paymentMethod Itabs_Debit_Model_Debit */
-            $paymentMethod = $orderModel->getPayment()->getMethodInstance();
+            if (count($payment->getBookings()) > 0) {
+                $xml->addPayment($payment);
+            }
+        }
 
-            $booking = new Itabs_Debit_Model_Xml_Booking();
-            $booking->setAccountOwner($paymentMethod->getAccountName());
-            $booking->setIban($paymentMethod->getAccountIban());
-            $booking->setSwift($paymentMethod->getAccountSwift());
-            $booking->setAmount($order->getData('grand_total'));
-            $booking->setBookingText('Order '.$mandate->getData('increment_id'));
-            $booking->setMandateId($mandate->getData('mandate_reference')); // @todo: join table
+        $sepaXml = $xml->generateXml();
 
-            $xml->addBooking($booking);
+        $xmlValidation = new Itabs_Debit_Model_Xml_Validation();
+        $xmlValidation->setXml($sepaXml);
+        $result = $xmlValidation->validate();
+        if (!$result) {
+            $errors = $xmlValidation->getErrors();
+            foreach ($errors as $error) {
+                Mage::getSingleton('adminhtml/session')->addError(nl2br($error));
+            }
 
-            $this->_getDebitHelper()->setStatusAsExported($order->getId());
+            return false;
         }
 
         $response = array(
             'file_name' => $this->getFileName(),
-            'file_content' => $xml->generateXml()
+            'file_content' => $sepaXml
         );
         return $response;
     }
