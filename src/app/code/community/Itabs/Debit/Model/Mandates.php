@@ -25,6 +25,9 @@
 /**
  * Model for Export Orders
  *
+ * @method Itabs_Debit_Model_Resource_Mandates getResource()
+ * @method Itabs_Debit_Model_Resource_Mandates _getResource()
+ *
  * @category Itabs
  * @package  Itabs_Debit
  * @author   Rouven Alexander Rieker <rouven.rieker@itabs.de>
@@ -37,5 +40,17 @@ class Itabs_Debit_Model_Mandates extends Mage_Core_Model_Abstract
     protected function _construct()
     {
         $this->_init('debit/mandates');
+    }
+
+    /**
+     * Load by order id
+     *
+     * @param  int $orderId
+     * @return Itabs_Debit_Model_Mandates|bool
+     */
+    public function loadByOrder($orderId)
+    {
+        $this->_getResource()->loadByOrder($this, $orderId);
+        return $this;
     }
 }

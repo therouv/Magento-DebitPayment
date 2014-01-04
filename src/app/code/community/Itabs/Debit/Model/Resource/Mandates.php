@@ -39,4 +39,29 @@ class Itabs_Debit_Model_Resource_Mandates
     {
         $this->_init('debit/mandates', 'id');
     }
+
+    /**
+     * Load sepa mandate by order id
+     *
+     * @param  Itabs_Debit_Model_Mandates $mandates
+     * @param  int                        $orderId
+     * @return Itabs_Debit_Model_Resource_Mandates
+     */
+    public function loadByOrder(Itabs_Debit_Model_Mandates $mandates, $orderId)
+    {
+        $adapter = $this->_getReadAdapter();
+        $bind    = array('order_id' => $orderId);
+        $select  = $adapter->select()
+            ->from($this->getMainTable(), array($this->getIdFieldName()))
+            ->where('order_id = :order_id');
+
+        $mandateId = $adapter->fetchOne($select, $bind);
+        if ($mandateId) {
+            $this->load($mandates, $mandateId);
+        } else {
+            $mandates->setData(array());
+        }
+
+        return $this;
+    }
 }
