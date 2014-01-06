@@ -277,11 +277,23 @@
                                 <generate_mandate>1</generate_mandate>
                             </depends>
                         </offset_days>
+                        <email_template translate="label">
+                            <label>Mandate Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <generate_mandate>1</generate_mandate>
+                            </depends>
+                        </email_template>
                         <hint_iban_field translate="label">
                             <label>Hint for IBAN field</label>
                             <comment><![CDATA[This text will be shown below the IBAN field during the checkout.]]></comment>
                             <frontend_type>textarea</frontend_type>
-                            <sort_order>20</sort_order>
+                            <sort_order>25</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -290,7 +302,7 @@
                             <label>Hint for SWIFT-Code field</label>
                             <comment><![CDATA[This text will be shown below the SWIFT-Code field during the checkout.]]></comment>
                             <frontend_type>textarea</frontend_type>
-                            <sort_order>25</sort_order>
+                            <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>

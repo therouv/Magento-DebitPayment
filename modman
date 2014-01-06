@@ -1,7 +1,9 @@
 src/app/code/community/Itabs/Debit                          app/code/community/Itabs/Debit
 src/app/etc/modules/Itabs_Debit.xml                         app/etc/modules/Itabs_Debit.xml
 src/app/locale/de_DE/Itabs_Debit.csv                        app/locale/de_DE/Itabs_Debit.csv
+src/app/locale/de_DE/template/email/*                       app/locale/de_DE/template/email/
 src/app/locale/en_US/Itabs_Debit.csv                        app/locale/en_US/Itabs_Debit.csv
+src/app/locale/en_US/template/email/*                       app/locale/en_US/template/email/
 src/app/design/adminhtml/default/default/layout/debit.xml   app/design/adminhtml/default/default/layout/debit.xml
 src/app/design/adminhtml/default/default/template/debit/    app/design/adminhtml/default/default/template/debit/
 src/app/design/frontend/base/default/layout/debit.xml       app/design/frontend/base/default/layout/debit.xml
