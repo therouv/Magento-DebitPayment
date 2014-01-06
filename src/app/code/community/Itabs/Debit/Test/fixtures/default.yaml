@@ -68,6 +68,24 @@ tables:
     - entity_id: 1
       store_id: 1
       customer_id: 1
+      increment_id: 100000001
     - entity_id: 2
       store_id: 1
       customer_id: 1
+      increment_id: 100000002
+
+  debit/mandates:
+    - id: 1
+      order_id: 1
+      website_id: 1
+      store_id: 1
+      increment_id: 100000001
+      mandate_reference: DP100000000000100000000000
+      is_generated: 1
+    - id: 2
+      order_id: 2
+      website_id: 1
+      store_id: 1
+      increment_id: 100000002
+      mandate_reference: DP100000000000200000000000
+      is_generated: 0

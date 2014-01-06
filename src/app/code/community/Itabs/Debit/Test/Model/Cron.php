@@ -23,30 +23,42 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Model/Debit.php Test Class
+ * Model/Cron.php Test Class
  *
  * @group Itabs_Debit
  */
-class Itabs_Debit_Test_Model_Debit extends EcomDev_PHPUnit_Test_Case
+class Itabs_Debit_Test_Model_Cron extends EcomDev_PHPUnit_Test_Case
 {
     /**
-     * Test if you mask a string that you get the correct result
-     *
-     * @dataProvider dataProvider
+     * @var Itabs_Debit_Model_Cron
      */
-    public function testMaskString($data)
+    protected $_model;
+
+    /**
+     * Set up test class
+     */
+    protected function setUp()
     {
-        /* @var $model Itabs_Debit_Model_Debit */
-        $model = Mage::getModel('debit/debit');
+        parent::setUp();
+        $this->_model = Mage::getModel('debit/cron');
+    }
 
-        // Load all expectations
-        $dataSet = $this->readAttribute($this, 'dataName');
+    /**
+     * Test the mandates collection
+     *
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetMandates()
+    {
+        $this->assertInstanceOf(
+            'Itabs_Debit_Model_Resource_Mandates_Collection',
+            $this->_model->getMandates()
+        );
 
-        for ($i = 0; $i < count($data); $i++) {
-            $this->assertEquals(
-                $this->expected($dataSet)->getData('string_'.$i),
-                $model->maskString($data[$i])
-            );
-        }
+        // Test that only not generated mandates are returned
+        $this->assertEquals(
+            $this->expected('collection')->getResult(),
+            $this->_model->getMandates()->getAllIds()
+        );
     }
 }
