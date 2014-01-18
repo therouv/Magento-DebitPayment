@@ -51,7 +51,7 @@
 		<li>
             <div class="input-box">
                 <label for="iban"><?php echo $this->__('IBAN') ?> <span class="required">*</span></label><br />
-                <input type="text" id="iban" name="payment[debit_iban]" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry" value="<?php echo $this->getAccountIban() ?>" />
+                <input type="text" id="iban" name="payment[debit_iban]" title="<?php echo $this->__('IBAN') ?>" class="input-text validate-debit-iban" value="<?php echo $this->getAccountIban() ?>" />
             </div>
 		</li>
     </ul>
