@@ -56,6 +56,31 @@ blzAjaxCheck.prototype = {
 
         $('kreditinstitut').update(response.bank);
         $('bankleitzahl').value = response.blz;
+    },
+    validateIban: function(iban){
+            if(iban != $('iban').value){
+                iban = $('iban').value
+            }
+            iban = iban.replace(/\s/g, "")
+            var newIban = iban.toUpperCase(),
+               modulo = function(divident, divisor)
+               {
+                        var m = 0;
+                for (var i = 0; i < divident.length; ++i)
+                        m = (m * 10 + parseInt(divident.charAt(i))) % divisor;
+                return m;
+            };
+
+            if (newIban.search(/^[A-Z]{2}/gi) < 0) {
+                return false;
+            }
+
+            newIban = newIban.substring(4) + newIban.substring(0, 4);
+
+            newIban = newIban.replace(/[A-Z]/g, function (match) {
+                return match.charCodeAt(0) - 55;
+            });
+            return (parseInt(modulo(newIban, 97)) === 1);
     }
 }
 
@@ -77,6 +102,13 @@ Event.observe(window, 'load', function() {
 
     Validation.add('validate-debit-number',  Translator.translate('Please enter a valid bank acount number.'), function(v) {
         if (v.length > 4 && v.length <= 11) {
+            return true;
+        }
+        return false;
+    });
+
+    Validation.add('validate-debit-iban',  Translator.translate('Please enter a valid international bank account number.'), function(v) {
+        if(blzCheck.validateIban()){
             return true;
         }
         return false;
