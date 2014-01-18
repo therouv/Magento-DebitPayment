@@ -68,8 +68,8 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
             'increment_id',
             array(
                 'header' => $this->_getHelper()->__('Order #'),
-                'width'  => '90px',
-                'index'  => 'increment_id'
+                'width' => '90px',
+                'index' => 'increment_id'
             )
         );
         if (!Mage::app()->isSingleStoreMode()) {
@@ -86,55 +86,73 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
             'created_at',
             array(
                 'header' => $this->_getHelper()->__('Purchased On'),
-                'index'  => 'created_at',
-                'type'   => 'datetime',
-                'width'  => '100px',
+                'index' => 'created_at',
+                'type' => 'datetime',
+                'width' => '100px',
             )
         );
         $this->addColumn(
             'billing_name',
             array(
                 'header' => $this->_getHelper()->__('Bill to Name'),
-                'index'  => 'billing_name',
+                'index' => 'billing_name',
             )
         );
         $this->addColumn(
             'grand_total',
             array(
-                'header'   => $this->_getHelper()->__('Grand Total'),
-                'index'    => 'grand_total',
-                'type'     => 'currency',
+                'header' => $this->_getHelper()->__('Grand Total'),
+                'index' => 'grand_total',
+                'type' => 'currency',
                 'currency' => 'order_currency_code',
             )
         );
 
-        $types = Mage::getModel('debit/system_config_source_debit_type')
-            ->toOptionHash();
-
+        $types = Mage::getModel('debit/system_config_source_debit_type')->toOptionHash();
         $this->addColumn(
             'debit_type',
             array(
                 'header' => $this->_getHelper()->__('Debit Type'),
-                'index'  => 'debit_type',
-                'type'   => 'options',
+                'index' => 'debit_type',
+                'type' => 'options',
                 'options' => $types,
-                'width'   => '100px',
+                'width' => '100px',
             )
         );
 
-        $statuses = Mage::getSingleton('debit/system_config_source_debit_status')
-            ->toOptionHash();
-
+        $statuses = Mage::getSingleton('debit/system_config_source_debit_status')->toOptionHash();
         $this->addColumn(
             'status',
             array(
-                'header'  => $this->_getHelper()->__('Status'),
-                'index'   => 'status',
-                'type'    => 'options',
-                'width'   => '150px',
+                'header' => $this->_getHelper()->__('Status'),
+                'index' => 'status',
+                'type' => 'options',
+                'width' => '150px',
                 'options' => $statuses
             )
         );
+
+        if (Mage::getSingleton('admin/session')->isAllowed('sales/order/actions/view')) {
+            $this->addColumn('action',
+                array(
+                    'header' => Mage::helper('sales')->__('Action'),
+                    'width' => '50px',
+                    'type' => 'action',
+                    'getter' => 'getEntityId',
+                    'actions' => array(
+                        array(
+                            'caption' => Mage::helper('sales')->__('View'),
+                            'url' => array('base' => 'adminhtml/sales_order/view'),
+                            'field' => 'order_id'
+                        )
+                    ),
+                    'filter' => false,
+                    'sortable' => false,
+                    'index' => 'stores',
+                    'is_system' => true,
+                )
+            );
+        }
 
         $this->addExportType('*/*/exportcsv', 'CSV');
         $this->addExportType('*/*/exportxml', 'SEPA-XML');
