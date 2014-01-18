@@ -42,14 +42,23 @@ class Itabs_Debit_Model_Validation
     protected $_customerOrdersEmail = null;
 
     /**
+     * Check if debit payment is allowed
+     *
      * @return bool
      */
     public function isValid()
     {
-        return $this->hasSpecificCustomerGroup()
+        $isValid = $this->hasSpecificCustomerGroup()
             && $this->hasMinimumOrderCount()
             && $this->hasMinimumOrderAmount()
         ;
+
+        $checkResult = new StdClass;
+        $checkResult->isValid = $isValid;
+
+        Mage::dispatchEvent('itabs_debit_validation_result', array('result' => $checkResult));
+
+        return $checkResult->isValid;
     }
 
     /**
