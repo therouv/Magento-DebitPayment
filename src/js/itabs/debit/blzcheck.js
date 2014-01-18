@@ -108,7 +108,7 @@ Event.observe(window, 'load', function() {
     });
 
     Validation.add('validate-debit-iban',  Translator.translate('Please enter a valid international bank account number.'), function(v) {
-        if(blzCheck.checkIban()){
+        if(blzCheck.validateIban()){
             return true;
         }
         return false;
