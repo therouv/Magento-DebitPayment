@@ -40,10 +40,11 @@ class Itabs_Debit_Block_Adminhtml_Mandates_Renderer_Pdf
      */
     public function render(Varien_Object $row)
     {
-        $filePath = Mage::getBaseDir('media') . DS . 'debit' . DS . $row->getData('mandate_reference') . '.pdf';
+        $fileName = $row->getData('mandate_reference') . '.pdf';
+        $filePath = Mage::getBaseDir('var') . DS . 'debit' . DS . $fileName;
         if (file_exists($filePath)) {
-            $fileUrl = Mage::getBaseUrl('media') . 'debit' . DS . $row->getData('mandate_reference') . '.pdf';
-            return '<a target="_blank" href="'.$fileUrl.'">'.$row->getData('mandate_reference').'.pdf</a>';
+            $fileUrl = $this->getUrl('*/*/download', array('mandate' => $row->getId()));
+            return '<a href="'.$fileUrl.'">'.$fileName.'</a>';
         }
 
         return '';

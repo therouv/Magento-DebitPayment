@@ -10,4 +10,4 @@ src/app/design/frontend/base/default/layout/debit.xml       app/design/frontend/
 src/app/design/frontend/base/default/template/debit/        app/design/frontend/base/default/template/debit/
 src/js/itabs/debit/blzcheck.js                              js/itabs/debit/blzcheck.js
 src/skin/frontend/base/default/css/debit.css                skin/frontend/base/default/css/debit.css
-src/media/debit/                                            media/debit/
+src/var/debit/                                              var/debit/

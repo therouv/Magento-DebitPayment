@@ -33,8 +33,6 @@ class Itabs_Debit_Adminhtml_MandatesController extends Mage_Adminhtml_Controller
 {
     /**
      * Loads the grid layout with the debit payment orders..
-     *
-     * @return void
      */
     public function indexAction()
     {
@@ -62,6 +60,23 @@ class Itabs_Debit_Adminhtml_MandatesController extends Mage_Adminhtml_Controller
         /* @var $block Itabs_Debit_Block_Adminhtml_Mandates_Grid */
         $block = $this->getLayout()->createBlock('debit/adminhtml_mandates_grid');
         $this->getResponse()->setBody($block->toHtml());
+    }
+
+    /**
+     * Downloads the given mandate
+     */
+    public function downloadAction()
+    {
+        if ($mandateId = $this->getRequest()->getParam('mandate', false)) {
+            $mandate = Mage::getModel('debit/mandates')->load($mandateId);
+            if ($mandate->getId()) {
+                $fileName = $mandate->getData('mandate_reference') . '.pdf';
+                $filePath = Mage::getBaseDir('var') . DS . 'debit' . DS . $fileName;
+                return $this->_prepareDownloadResponse($fileName, file_get_contents($filePath), 'application/pdf');
+            }
+        }
+
+        return $this->_redirect('*/*');
     }
 
     /**
