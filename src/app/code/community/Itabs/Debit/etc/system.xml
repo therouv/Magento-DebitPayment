@@ -289,11 +289,20 @@
                                 <generate_mandate>1</generate_mandate>
                             </depends>
                         </email_template>
+                        <booking_text translate="label">
+                            <label>Booking Text</label>
+                            <comment><![CDATA[Booking text for debit export]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </booking_text>
                         <hint_iban_field translate="label">
                             <label>Hint for IBAN field</label>
                             <comment><![CDATA[This text will be shown below the IBAN field during the checkout.]]></comment>
                             <frontend_type>textarea</frontend_type>
-                            <sort_order>25</sort_order>
+                            <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -302,7 +311,7 @@
                             <label>Hint for SWIFT-Code field</label>
                             <comment><![CDATA[This text will be shown below the SWIFT-Code field during the checkout.]]></comment>
                             <frontend_type>textarea</frontend_type>
-                            <sort_order>30</sort_order>
+                            <sort_order>35</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>

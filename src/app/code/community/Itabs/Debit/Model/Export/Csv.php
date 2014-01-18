@@ -81,6 +81,12 @@ class Itabs_Debit_Model_Export_Csv
             /* @var $paymentMethod Itabs_Debit_Model_Debit */
             $paymentMethod = $orderModel->getPayment()->getMethodInstance();
 
+            // Get booking text
+            $bookingText = $this->_getDebitHelper()->getBookingText(
+                $orderModel->getStoreId(),
+                $orderModel->getIncrementId()
+            );
+
             // Format order amount
             $amount = number_format($order->getData('grand_total'), 2, ',', '.');
 
@@ -90,7 +96,7 @@ class Itabs_Debit_Model_Export_Csv
                 'account_swift' => $paymentMethod->getAccountSwift(),
                 'account_iban' => $paymentMethod->getAccountIban(),
                 'amount' => $amount.' '.$order->getData('order_currency_code'),
-                'purpose' => 'Bestellung '.$order->getData('increment_id'),
+                'booking_text' => $bookingText,
                 'order_date' => $orderModel->getCreatedAtStoreDate(),
                 'mandate_reference' => '',
                 'mandate_city' => '',

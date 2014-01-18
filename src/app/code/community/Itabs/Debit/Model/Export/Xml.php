@@ -89,12 +89,18 @@ class Itabs_Debit_Model_Export_Xml
                 /* @var $paymentMethod Itabs_Debit_Model_Debit */
                 $paymentMethod = $orderModel->getPayment()->getMethodInstance();
 
+                // Get the booking text
+                $bookingText = $this->_getDebitHelper()->getBookingText(
+                    $orderModel->getStoreId(),
+                    $mandate->getData('increment_id')
+                );
+
                 $booking = new Itabs_Debit_Model_Xml_Booking();
                 $booking->setAccountOwner($paymentMethod->getAccountName());
                 $booking->setIban($paymentMethod->getAccountIban());
                 $booking->setSwift($paymentMethod->getAccountSwift());
                 $booking->setAmount($order->getData('grand_total'));
-                $booking->setBookingText('Bestellung '.$mandate->getData('increment_id'));
+                $booking->setBookingText($bookingText);
                 $booking->setMandateId($mandate->getData('mandate_reference'));
 
                 $payment->addBooking($booking);
