@@ -34,8 +34,8 @@
     {{pdf_row_separator}}
 <?php echo $this->__('Account holder: %s', $_info->getAccountName()) ?>
     {{pdf_row_separator}}
-<?php echo $this->__('SWIFT Code: %s', $_info->getAccountSwift()) ?>
+<?php echo $this->__('Account number: %s', $_info->getAccountNumber()) ?>
     {{pdf_row_separator}}
-<?php echo $this->__('IBAN: %s', $_info->getAccountIban()) ?>
+<?php echo $this->__('Bank code: %s', $_info->getAccountBLZ()) ?>
     {{pdf_row_separator}}
 <?php endif; ?>

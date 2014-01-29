@@ -29,13 +29,22 @@
  * @var $_info Itabs_Debit_Model_Debit
  */
 ?>
-<?php if($_info = $this->getMethod()): ?>
-<?php echo $this->escapeHtml($_info->getTitle()) ?>
-    {{pdf_row_separator}}
-<?php echo $this->__('Account holder: %s', $_info->getAccountName()) ?>
-    {{pdf_row_separator}}
-<?php echo $this->__('SWIFT Code: %s', $_info->getAccountSwift()) ?>
-    {{pdf_row_separator}}
-<?php echo $this->__('IBAN: %s', $_info->getAccountIban()) ?>
-    {{pdf_row_separator}}
+<?php if ($_info = $this->getMethod()): ?>
+    <?php echo $this->escapeHtml($_info->getTitle()) ?><br /><br />
+
+	<?php if ($this->isEmailContext()): ?>
+		<?php if ($this->sendDataInEmail()): ?>
+            <?php $_data = $this->getEmailData() ?>
+            <?php echo $this->__('Account holder: %s', $this->escapeHtml($_data['account_name'])) ?><br />
+            <?php echo $this->__('Account number: %s', $this->escapeHtml($_data['account_number'])) ?><br />
+            <?php echo $this->__('Bank code: %s', $this->escapeHtml($_data['account_blz'])) ?><br />
+        <?php endif; ?>
+
+    <?php else: ?>
+        <?php echo $this->__('Account holder: %s', $this->escapeHtml($_info->getAccountName())) ?><br />
+        <?php echo $this->__('Account number: %s', $this->escapeHtml($_info->getAccountNumber())) ?><br />
+        <?php echo $this->__('Bank code: %s', $this->escapeHtml($_info->getAccountBLZ())) ?><br />
+    <?php endif; ?>
+
+    <br />
 <?php endif; ?>

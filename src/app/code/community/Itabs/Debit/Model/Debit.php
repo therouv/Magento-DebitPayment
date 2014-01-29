@@ -217,6 +217,41 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     }
 
     /**
+     * Returns the account number from the payment info instance
+     *
+     * @return string Number
+     */
+    public function getAccountNumber()
+    {
+        $info = $this->getInfoInstance();
+        $data = $info->getCcNumberEnc();
+        if (!is_numeric($data)) {
+            $data = $info->decrypt($data);
+        }
+        if (!is_numeric($data)) {
+            $data = $info->decrypt($data);
+        }
+
+        return $data;
+    }
+
+    /**
+     * Returns the account blz from the payment info instance
+     *
+     * @return string BLZ
+     */
+    public function getAccountBLZ()
+    {
+        $info = $this->getInfoInstance();
+        $data = $info->getCcType();
+        if (!is_numeric($data)) {
+            $data = $info->decrypt($data);
+        }
+
+        return $data;
+    }
+
+    /**
      * Returns the encrypted data for mail
      *
      * @param  string $data Data to crypt

@@ -39,7 +39,12 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('debit/info.phtml');
+
+        if (Mage::helper('debit')->getDebitType() == 'bank') {
+            $this->setTemplate('debit/bank/info.phtml');
+        } else {
+            $this->setTemplate('debit/info.phtml');
+        }
     }
 
     /**
@@ -49,7 +54,12 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
      */
     public function toPdf()
     {
-        $this->setTemplate('debit/debit.phtml');
+        if (Mage::helper('debit')->getDebitType() == 'bank') {
+            $this->setTemplate('debit/bank/debit.phtml');
+        } else {
+            $this->setTemplate('debit/debit.phtml');
+        }
+
         return $this->toHtml();
     }
 
@@ -97,11 +107,20 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
         /* @var $payment Itabs_Debit_Model_Debit */
         $payment = $this->getMethod();
         $method  = $this->getMethod()->getCode();
-        $data = array(
-            'account_name' => $payment->getAccountName(),
-            'account_swift' => $payment->getAccountSwift(),
-            'account_iban' => $payment->getAccountIban()
-        );
+
+        if (Mage::helper('debit')->getDebitType() == 'bank') {
+            $data = array(
+                'account_name' => $payment->getAccountName(),
+                'account_blz' => $payment->getAccountBLZ(),
+                'account_number' => $payment->getAccountNumber()
+            );
+        } else {
+            $data = array(
+                'account_name' => $payment->getAccountName(),
+                'account_swift' => $payment->getAccountSwift(),
+                'account_iban' => $payment->getAccountIban()
+            );
+        }
 
         // mask bank data
         if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')) {
