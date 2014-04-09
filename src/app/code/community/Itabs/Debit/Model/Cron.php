@@ -139,7 +139,7 @@ class Itabs_Debit_Model_Cron
         /* @var $helper Itabs_Debit_Helper_Data */
         $helper = Mage::helper('debit');
 
-        $fileDir = Mage::getBaseDir('media') . DS . 'debit' . DS;
+        $fileDir = Mage::getBaseDir('var') . DS . 'debit' . DS;
         $fileName = $mandate->getData('mandate_reference').'.pdf';
         $filePath = $fileDir.$fileName;
 
