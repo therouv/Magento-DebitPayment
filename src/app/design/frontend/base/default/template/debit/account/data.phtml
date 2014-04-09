@@ -27,6 +27,11 @@
  * @var $this Itabs_Debit_Block_Account_Data
  */
 ?>
+<script type="text/javascript">
+//<![CDATA[
+blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>', '0');
+//]]>
+</script>
 <div class="page-title">
     <h1><?php echo $this->__('Edit Debit Account Data') ?></h1>
 </div>
@@ -45,13 +50,13 @@
             <li>
                 <div class="input-box">
                     <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?></label><br />
-                    <input type="text" id="swiftcode" name="account_swift" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry" value="<?php echo $this->getAccountSwift() ?>" />
+                    <input type="text" id="swiftcode" name="account_swift" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry validate-debit-swift" value="<?php echo $this->getAccountSwift() ?>" />
                 </div>
             </li>
             <li>
                 <div class="input-box">
                     <label for="iban"><?php echo $this->__('IBAN') ?></label><br />
-                    <input type="text" id="iban" name="account_iban" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry" value="<?php echo $this->getAccountIban() ?>" />
+                    <input type="text" id="iban" name="account_iban" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry validate-debit-iban" value="<?php echo $this->getAccountIban() ?>" />
                 </div>
             </li>
         </ul>

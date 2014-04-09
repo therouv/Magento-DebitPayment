@@ -78,3 +78,5 @@
 "This text will be shown below the SWIFT-Code field during the checkout.","Dieser Text wird unter dem SWIFT-Code Feld während des Bezahlvorgangs angezeigt."
 "Generate SEPA Mandate?","Erstelle SEPA-Mandat?"
 "Debit Payment Mandates","Lastschrift-Mandate"
+"Please enter a valid international bank account number.","Bitte geben Sie eine gültige IBAN an."
+"Please enter a valid swift code.","Bitte geben Sie einen gültigen BIC an."

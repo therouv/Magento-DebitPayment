@@ -53,3 +53,5 @@
 "Routing Number","Routing Number"
 "Please enter bankaccount credentials of the store owner in the system configuration.","Please enter bankaccount credentials of the store owner in the system configuration. Otherwise you will not be able to generate a valid export file."
 "Please note: SEPA Debit Payment orders can only be exported as CSV for now.","Please note: SEPA Debit Payment orders can only be exported as CSV for now."
+"Please enter a valid international bank account number.","Please enter a valid international bank account number."
+"Please enter a valid swift code.","Please enter a valid swift code."
