@@ -58,6 +58,11 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     protected $_canCapture = true;
 
     /**
+     * @var bool Allow partial capturing for this payment method
+     */
+    protected $_canCapturePartial = true;
+
+    /**
      * Assigns data to the payment info instance
      *
      * @param  Varien_Object|array $data Payment Data from checkout
