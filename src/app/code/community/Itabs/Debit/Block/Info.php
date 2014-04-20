@@ -120,9 +120,10 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     /**
      * Returns email data and mask the data if necessary
      *
+     * @param  bool|string Crypt field name to check in system configuration
      * @return array Bank data
      */
-    public function getEmailData()
+    public function getDebitData($cryptField=false)
     {
         $debitType = $this->getDebitType();
 
@@ -139,28 +140,37 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
             'debit_type'     => $debitType
         );
 
-        // mask bank data
-        if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')
-            && $debitType == 'bank'
-        ) {
-            $number  = $payment->maskBankData($payment->getAccountNumber());
-            $routing = $payment->maskBankData($payment->getAccountBLZ());
-            $data['account_number'] = $number;
-            $data['account_blz']    = $routing;
-            $data['bank_name']      = '';
-        }
+        // Crypt data if configured
+        if ($cryptField && Mage::getStoreConfigFlag('payment/'.$method.'/'.$cryptField)) {
+            $data['bank_name'] = '';
 
-        // mask sepa data
-        if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')
-            && $debitType == 'sepa'
-        ) {
-            $swift = $payment->maskSepaData($payment->getAccountSwift(), 4, 'X');
-            $iban  = $payment->maskSepaData($payment->getAccountIban(), 4, 'X');
-            $data['account_swift'] = $swift;
-            $data['account_iban']  = $iban;
-            $data['bank_name']     = '';
+            if ($debitType == 'bank') {
+                $number  = $payment->maskBankData($payment->getAccountNumber());
+                $routing = $payment->maskBankData($payment->getAccountBLZ());
+                $data['account_number'] = $number;
+                $data['account_blz']    = $routing;
+            }
+
+            // mask sepa data
+            if ($debitType == 'sepa') {
+                $swift = $payment->maskSepaData($payment->getAccountSwift());
+                $iban  = $payment->maskSepaData($payment->getAccountIban());
+                $data['account_swift'] = $swift;
+                $data['account_iban']  = $iban;
+            }
         }
 
         return $data;
+    }
+
+    /**
+     * Returns email data and mask the data if necessary
+     *
+     * @deprecated since 1.1.0
+     * @return array Bank data
+     */
+    public function getEmailData()
+    {
+        return $this->getDebitData('sendmail_crypt');
     }
 }

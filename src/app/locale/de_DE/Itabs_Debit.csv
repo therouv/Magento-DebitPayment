@@ -1,6 +1,7 @@
 "Debit Payment","Bankeinzug / Lastschrift"
 "Send bank data via mail","Bankdaten in der E-Mail mitsenden"
 "Encrypt bank data in mail","Bankdaten in der E-Mail verschlüsseln"
+"Encrypt bank data in checkout","Bankdaten im Bezahlvorgang verschlüsseln"
 "Custom text for checkout page","Benutzerdefinierter Text"
 "Kontoinhaber","Kontoinhaber"
 "Account holder","Kontoinhaber"

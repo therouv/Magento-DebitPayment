@@ -121,6 +121,7 @@
                 <sort_order>10</sort_order>
                 <sendmail>0</sendmail>
                 <sendmail_crypt>1</sendmail_crypt>
+                <checkout_crypt>0</checkout_crypt>
                 <order_status>1</order_status>
                 <allowspecific>0</allowspecific>
                 <save_account_data>0</save_account_data>
