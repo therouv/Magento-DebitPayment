@@ -49,6 +49,14 @@
                             </config>
                         </children>
                     </system>
+                    <sales>
+                        <children>
+                            <debitpayment translate="title" module="debit">
+                                <title>Debit Payment</title>
+                                <sort_order>11</sort_order>
+                            </debitpayment>
+                        </children>
+                    </sales>
                 </children>
             </admin>
         </resources>
