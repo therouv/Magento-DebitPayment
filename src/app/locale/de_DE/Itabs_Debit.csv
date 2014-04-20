@@ -57,3 +57,5 @@
 "SEPA","SEPA"
 "Bank Account & Routing Number","Bankverbindung"
 "Total of %d record(s) have been updated.","Insgesamt %d Einträge wurden erfolgreich aktualisiert."
+"Please enter a valid international bank account number.","Bitte geben Sie eine gültige IBAN an."
+"Please enter a valid swift code.","Bitte geben Sie einen gültigen BIC an."

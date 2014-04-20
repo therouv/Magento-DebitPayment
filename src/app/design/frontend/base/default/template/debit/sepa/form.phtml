@@ -27,6 +27,11 @@
  * @var $this Itabs_Debit_Block_Form
  */
 ?>
+<script type="text/javascript">
+//<![CDATA[
+blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>', '0');
+//]]>
+</script>
 <fieldset class="form-list">
     <ul id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none">
         <?php if ($this->getMethod()->getCustomText()): ?>
@@ -36,7 +41,6 @@
             </div>
         </li>
         <?php endif; ?>
-
         <li>
             <div class="input-box">
                 <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?> <span class="required">*</span></label><br />
@@ -45,14 +49,14 @@
         </li>
         <li>
             <div class="input-box">
-                <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?> <span class="required">*</span></label><br />
-                <input type="text" id="swiftcode" name="payment[debit_swift]" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry" value="<?php echo $this->getAccountSwift() ?>" />
+                <label for="iban"><?php echo $this->__('IBAN') ?> <span class="required">*</span></label><br />
+                <input type="text" id="iban" name="payment[debit_iban]" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry validate-debit-iban" value="<?php echo $this->getAccountIban() ?>" />
             </div>
         </li>
         <li>
             <div class="input-box">
-                <label for="iban"><?php echo $this->__('IBAN') ?> <span class="required">*</span></label><br />
-                <input type="text" id="iban" name="payment[debit_iban]" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry" value="<?php echo $this->getAccountIban() ?>" />
+                <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?> <span class="required">*</span></label><br />
+                <input type="text" id="swiftcode" name="payment[debit_swift]" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry validate-debit-swift" value="<?php echo $this->getAccountSwift() ?>" />
             </div>
         </li>
     </ul>
