@@ -1,5 +1,6 @@
 src/app/code/community/Itabs/Debit                          app/code/community/Itabs/Debit
 src/app/etc/modules/Itabs_Debit.xml                         app/etc/modules/Itabs_Debit.xml
+src/app/etc/modules/Mage_Debit.xml                          app/etc/modules/Mage_Debit.xml
 src/app/locale/de_DE/Itabs_Debit.csv                        app/locale/de_DE/Itabs_Debit.csv
 src/app/locale/en_US/Itabs_Debit.csv                        app/locale/en_US/Itabs_Debit.csv
 src/app/design/adminhtml/default/default/layout/debit.xml   app/design/adminhtml/default/default/layout/debit.xml
