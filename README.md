@@ -40,13 +40,18 @@ Uninstallation
 --------------
 To uninstall this extension you need to run the following SQL after removing the extension files:
 ```sql
+  DELETE FROM `core_config_data` WHERE path LIKE 'payment/debit/%';
+  DELETE FROM `core_config_data` WHERE path LIKE 'debitpayment/%';
   DELETE FROM `core_resource` WHERE code = 'debit_setup';
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_update';
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_name';
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_number';
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_blz';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_account_swift';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_account_iban';
   DROP TABLE `debit_order_grid`;
 ```
+
 
 Support & Feature-Wishes
 ------------------------
