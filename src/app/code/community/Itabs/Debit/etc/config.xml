@@ -145,22 +145,40 @@
         </routers>
 	</admin>
     <adminhtml>
-	    <layout>
-	        <updates>
-	            <debit>
-	                <file>debit.xml</file>
-	            </debit>
-	        </updates>
-	    </layout>
-	    <translate>
-	        <modules>
-	            <Itabs_Debit>
-	                <files>
-	                    <default>Itabs_Debit.csv</default>
-	                </files>
-	            </Itabs_Debit>
-	        </modules>
-	    </translate>
+        <layout>
+            <updates>
+                <debit>
+                    <file>debit.xml</file>
+                </debit>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Itabs_Debit>
+                    <files>
+                        <default>Itabs_Debit.csv</default>
+                    </files>
+                </Itabs_Debit>
+            </modules>
+        </translate>
+        <events>
+            <sales_quote_payment_save_before>
+                <observers>
+                    <debit_observer>
+                        <class>debit/observer</class>
+                        <method>encryptBankDataInAdminhtmlQuote</method>
+                    </debit_observer>
+                </observers>
+            </sales_quote_payment_save_before>
+            <sales_order_payment_save_before>
+                <observers>
+                    <debit_observer>
+                        <class>debit/observer</class>
+                        <method>encryptBankDataInAdminhtmlOrder</method>
+                    </debit_observer>
+                </observers>
+            </sales_order_payment_save_before>
+        </events>
     </adminhtml>
     <frontend>
         <secure_url>

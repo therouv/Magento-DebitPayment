@@ -110,4 +110,71 @@ class Itabs_Debit_Model_Observer
 
         return false;
     }
+
+    /**
+     * Encrypt bank data in the adminhtml
+     *
+     * @param  Varien_Event_Observer $observer Observer
+     * @return Itabs_Debit_Model_Observer
+     */
+    public function encryptBankDataInAdminhtmlQuote(Varien_Event_Observer $observer)
+    {
+        // Check if the payment data has already been processed
+        if (!Mage::registry('debit_payment_data_processed')) {
+            /* @var $payment Mage_Sales_Model_Quote_Payment */
+            $payment = $observer->getEvent()->getPayment();
+            $this->_encryptPaymentData($payment);
+
+            Mage::register('debit_payment_data_processed', true, true);
+        }
+    }
+
+    /**
+     * Decrypt bank data in the adminhtml
+     *
+     * @param  Varien_Event_Observer $observer Observer
+     * @return Itabs_Debit_Model_Observer
+     */
+    public function encryptBankDataInAdminhtmlOrder(Varien_Event_Observer $observer)
+    {
+        $request = Mage::app()->getRequest();
+        if (!$request) {
+            return $this;
+        }
+
+        // Skip all order save processes except the sales_order_create_save process in the backend
+        $controller = $request->getControllerName();
+        $action     = $request->getActionName();
+        if ($controller != 'sales_order_create' || $action != 'save') {
+            return $this;
+        }
+
+        // Check if the payment data has already been processed
+        if (!Mage::registry('debit_payment_data_processed')) {
+            /* @var $payment Mage_Sales_Model_Order_Payment */
+            $payment = $observer->getEvent()->getPayment();
+            $this->_encryptPaymentData($payment);
+
+            Mage::register('debit_payment_data_processed', true, true);
+        }
+    }
+
+    /**
+     * Encrypt the payment data for the given payment model
+     *
+     * @param Mage_Sales_Model_Quote_Payment|Mage_Sales_Model_Order_Payment $payment Payment Model
+     */
+    protected function _encryptPaymentData($payment)
+    {
+        $method = $payment->getMethodInstance();
+        if ($method instanceof Itabs_Debit_Model_Debit) {
+            $info = $method->getInfoInstance();
+            if ($payment->getData('debit_swift') != '') {
+                $payment->setData('debit_swift', $info->encrypt($payment->getData('debit_swift')));
+            }
+            if ($payment->getData('debit_iban') != '') {
+                $payment->setData('debit_iban', $info->encrypt($payment->getData('debit_iban')));
+            }
+        }
+    }
 }
