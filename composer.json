@@ -11,6 +11,74 @@
         }
     ],
     "require":{
-        "magento-hackathon/magento-composer-installer":"*"
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "extra":{
+        "magento_connect": {
+            "name": "DebitPayment",
+            "real_module_name": "Itabs_Debit",
+            "license_uri": "http://opensource.org/licenses/osl-3.0.php",
+            "channel": "community",
+            "php_min": "5.3.0",
+            "php_max": "6.0.0",
+            "stability": "stable",
+            "content":[
+                {
+                    "type": "magecommunity",
+                    "structure": "dir",
+                    "path": "/Itabs/Debit"
+                },
+                {
+                    "type": "mageetc",
+                    "structure": "file",
+                    "path": "/modules/Itabs_Debit.xml"
+                },
+                {
+                    "type": "magedesign",
+                    "structure": "file",
+                    "path": "/adminhtml/default/default/layout/debit.xml"
+                },
+                {
+                    "type": "magedesign",
+                    "structure": "dir",
+                    "path": "/adminhtml/default/default/template/debit/"
+                },
+                {
+                    "type": "magedesign",
+                    "structure": "file",
+                    "path": "/frontend/base/default/layout/debit.xml"
+                },
+                {
+                    "type": "magedesign",
+                    "structure": "dir",
+                    "path": "/frontend/base/default/template/debit/"
+                },
+                {
+                    "type": "magelocale",
+                    "structure": "file",
+                    "path": "/de_DE/Itabs_Debit.csv"
+                },
+                {
+                    "type": "magelocale",
+                    "structure": "file",
+                    "path": "/en_US/Itabs_Debit.csv"
+                },
+                {
+                    "type": "mage",
+                    "structure": "file",
+                    "path": "/js/itabs/debit/blzcheck.js"
+                },
+                {
+                    "type": "magelib",
+                    "structure": "dir",
+                    "path": "/DTA"
+                },
+                {
+                    "type": "mageskin",
+                    "structure": "file",
+                    "path": "/frontend/base/default/css/debit.css"
+                }
+            ]
+        }
     }
 }
