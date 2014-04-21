@@ -75,7 +75,9 @@ class Itabs_Debit_Model_Observer
      */
     public function saveAccountInfo($observer)
     {
+        /* @var $order Mage_Sales_Model_Order */
         $order = $observer->getEvent()->getOrder();
+        /* @var $methodInstance Itabs_Debit_Model_Debit */
         $methodInstance = $order->getPayment()->getMethodInstance();
         if ($methodInstance->getCode() != 'debit') {
             return;
@@ -120,12 +122,12 @@ class Itabs_Debit_Model_Observer
     public function encryptBankDataInAdminhtmlQuote(Varien_Event_Observer $observer)
     {
         // Check if the payment data has already been processed
-        if (!Mage::registry('debit_payment_data_processed')) {
+        if (!Mage::registry('debit_payment_quote_data_processed')) {
             /* @var $payment Mage_Sales_Model_Quote_Payment */
             $payment = $observer->getEvent()->getPayment();
             $this->_encryptPaymentData($payment);
 
-            Mage::register('debit_payment_data_processed', true, true);
+            Mage::register('debit_payment_quote_data_processed', true, true);
         }
     }
 
@@ -150,12 +152,12 @@ class Itabs_Debit_Model_Observer
         }
 
         // Check if the payment data has already been processed
-        if (!Mage::registry('debit_payment_data_processed')) {
+        if (!Mage::registry('debit_payment_order_data_processed')) {
             /* @var $payment Mage_Sales_Model_Order_Payment */
             $payment = $observer->getEvent()->getPayment();
             $this->_encryptPaymentData($payment);
 
-            Mage::register('debit_payment_data_processed', true, true);
+            Mage::register('debit_payment_order_data_processed', true, true);
         }
     }
 
