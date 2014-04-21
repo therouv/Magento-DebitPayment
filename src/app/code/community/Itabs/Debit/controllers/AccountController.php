@@ -67,7 +67,9 @@ class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
     public function editAction()
     {
         $this->loadLayout();
-        $this->getLayout()->getBlock('head')->setTitle($this->__('Debit Account Data'));
+        if ($headBlock = $this->getLayout()->getBlock('head')) {
+            $headBlock->setTitle($this->__('Debit Account Data'));
+        }
         $this->renderLayout();
     }
 

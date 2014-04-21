@@ -179,4 +179,24 @@ class Itabs_Debit_Model_Observer
             }
         }
     }
+
+    /**
+     * Dynamically add layout handle if the customer calls the sepa page via customer account
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    public function controllerActionLayoutLoadBefore(Varien_Event_Observer $observer)
+    {
+        /* @var $action Itabs_Debit_MandateController */
+        $action = $observer->getEvent()->getAction();
+
+        $fullActionName = $action->getFullActionName();
+        if ($fullActionName == 'debit_mandate_index') {
+            if ($action->getRequest()->getParam('account', false)) {
+                /* @var $layout Mage_Core_Model_Layout */
+                $layout = $observer->getEvent()->getLayout();
+                $layout->getUpdate()->addHandle('debit_dynamic_layout_handle');
+            }
+        }
+    }
 }

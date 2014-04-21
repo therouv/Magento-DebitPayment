@@ -26,20 +26,42 @@
     <customer_account translate="label">
         <reference name="customer_account_navigation">
             <action method="addLink" translate="label" module="debit" ifconfig="payment/debit/save_account_data"><name>debit_data</name><path>debit/account/edit</path><label>Debit Account Data</label></action>
+            <action method="addLink" translate="label" module="debit" ifconfig="debitpayment/sepa/mandate_form"><name>debit_mandate</name><path>debit/mandate/</path><label>SEPA Mandate</label><urlParams><account>1</account></urlParams></action>
         </reference>
     </customer_account>
 
     <debit_account_edit translate="label">
+        <label>Debit Account Data</label>
         <reference name="head">
             <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
             <action method="addCss"><stylesheet>css/debit.css</stylesheet></action>
         </reference>
-        <label>Debit Account Data</label>
         <update handle="customer_account"/>
         <reference name="content">
             <block type="debit/account_data" name="debit.account.data" />
         </reference>
     </debit_account_edit>
+
+    <debit_mandate_index translate="label">
+        <label>SEPA Debit</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>itabs/debit/blzcheck.js</script></action>
+            <action method="addCss"><stylesheet>css/debit.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="debit/mandate" name="debit.sepa.mandate" template="debit/sepa/mandate.phtml" />
+        </reference>
+    </debit_mandate_index>
+
+    <debit_dynamic_layout_handle>
+        <reference name="customer_account_navigation">
+           <action method="setActive"><path>debit/mandate/</path></action>
+       </reference>
+        <update handle="customer_account"/>
+    </debit_dynamic_layout_handle>
 
     <checkout_onepage_index>
         <reference name="head">

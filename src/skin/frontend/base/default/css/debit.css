@@ -20,8 +20,10 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 
+.debit-mandate-index .debit-hint,
 .debit-account-edit .debit-hint,
 .opc .debit-hint{font-size:11px;line-height:14px;padding:10px 0 0;}
 
+.debit-mandate-index .debit-cin,
 .debit-account-edit .debit-cin,
 .opc .debit-cin { font-weight: bold; padding-bottom: 10px;}

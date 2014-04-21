@@ -25,7 +25,7 @@
 <config>
     <modules>
         <Itabs_Debit>
-            <version>1.0.5</version>
+            <version>1.0.6</version>
         </Itabs_Debit>
     </modules>
     <global>
@@ -131,7 +131,12 @@
                 <orderscount>0</orderscount>
                 <customer_order_amount>0</customer_order_amount>
             </debit>
-         </payment>
+        </payment>
+        <debitpayment>
+            <sepa>
+                <mandate_form>0</mandate_form>
+            </sepa>
+        </debitpayment>
     </default>
 	<admin>
         <routers>
@@ -210,6 +215,16 @@
                 </args>
             </debit>
         </routers>
+        <events>
+            <controller_action_layout_load_before>
+                <observers>
+                    <debit_observer>
+                        <class>debit/observer</class>
+                        <method>controllerActionLayoutLoadBefore</method>
+                    </debit_observer>
+                </observers>
+            </controller_action_layout_load_before>
+        </events>
     </frontend>
     <phpunit>
         <suite>
