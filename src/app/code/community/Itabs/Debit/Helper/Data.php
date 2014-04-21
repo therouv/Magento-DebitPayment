@@ -175,4 +175,47 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
 
         return $sanitized;
     }
+
+    /**
+     * Retrieve the creditor identification number
+     *
+     * @param  null|int $storeId Store ID
+     * @return string
+     */
+    public function getCreditorIdentificationNumber($storeId = null)
+    {
+        return Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number', $storeId);
+    }
+
+    /**
+     * Retrieve the hint for the IBAN field
+     *
+     * @param  null|int $storeId Store ID
+     * @return string|bool
+     */
+    public function getHintForIbanField($storeId = null)
+    {
+        $field = Mage::getStoreConfig('debitpayment/sepa/hint_iban_field', $storeId);
+        if (null === $field || $field == '') {
+            return false;
+        }
+
+        return $field;
+    }
+
+    /**
+     * Retrieve the hint for the BIC field
+     *
+     * @param  null|int $storeId Store ID
+     * @return string|bool
+     */
+    public function getHintForBicField($storeId = null)
+    {
+        $field = Mage::getStoreConfig('debitpayment/sepa/hint_bic_field', $storeId);
+        if (null === $field || $field == '') {
+            return false;
+        }
+
+        return $field;
+    }
 }

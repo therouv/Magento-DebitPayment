@@ -36,23 +36,33 @@
 class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
 {
     /**
+     * @var Itabs_Debit_Helper_Data
+     */
+    protected $_helper;
+
+    /**
+     * Set up test class
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->_helper = Mage::helper('debit');
+    }
+
+    /**
      * Test if the getBankByBlz method returns a bank name
      *
-     * @param array $data
      * @dataProvider dataProvider
      */
     public function testGetBankByBlz($data)
     {
-        /* @var $helper Itabs_Debit_Helper_Data */
-        $helper = Mage::helper('debit');
-
         // Load all expectations
         $dataSet = $this->readAttribute($this, 'dataName');
 
         for ($i = 0; $i < count($data); $i++) {
             $this->assertEquals(
                 $this->expected($dataSet)->getData('name_'.$i),
-                $helper->getBankByBlz($data[$i])
+                $this->_helper->getBankByBlz($data[$i])
             );
         }
     }
@@ -61,22 +71,63 @@ class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
      * Test if the customer enters a faulty string that it
      * gets sanitized correctly
      *
-     * @param array $data
      * @dataProvider dataProvider
      */
     public function testSanitizeData($data)
     {
-        /* @var $helper Itabs_Debit_Helper_Data */
-        $helper = Mage::helper('debit');
-
         // Load all expectations
         $dataSet = $this->readAttribute($this, 'dataName');
 
         foreach ($data as $key => $value) {
             $this->assertEquals(
                 $this->expected($dataSet)->getData($key),
-                $helper->sanitizeData($value)
+                $this->_helper->sanitizeData($value)
             );
         }
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetCreditorIdentificationNumber()
+    {
+        $this->assertEquals('DE98ZZZ09999999999', $this->_helper->getCreditorIdentificationNumber());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function getHintForIbanField()
+    {
+        $this->assertEquals('Lorem Ipsum Iban', $this->_helper->getHintForIbanField());
+    }
+
+    /**
+     * @test
+     * @loadFixture emptyHintFields
+     */
+    public function getHintForIbanFieldEmpty()
+    {
+        $this->assertFalse($this->_helper->getHintForIbanField());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function getHintForBicField()
+    {
+        $this->assertEquals('Lorem Ipsum Bic', $this->_helper->getHintForBicField());
+    }
+
+    /**
+     * @test
+     * @loadFixture emptyHintFields
+     */
+    public function getHintForBicFieldEmpty()
+    {
+        $this->assertFalse($this->_helper->getHintForBicField());
     }
 }

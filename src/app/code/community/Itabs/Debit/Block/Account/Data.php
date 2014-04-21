@@ -134,15 +134,9 @@ class Itabs_Debit_Block_Account_Data
         if (!Mage::getStoreConfigFlag('payment/debit/save_account_data')) {
             return '';
         }
+
         $data = $this->getCustomer()->getData($field);
         if (strlen($data) == 0) {
-            return '';
-        }
-        if ($field != 'debit_payment_acount_name'
-            && $field != 'debit_payment_account_swift'
-            && $field != 'debit_payment_account_iban'
-            && !is_numeric($data)
-        ) {
             return '';
         }
 
@@ -156,7 +150,7 @@ class Itabs_Debit_Block_Account_Data
      */
     public function getCreditorIdentificationNumber()
     {
-        return Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number');
+        return Mage::helper('debit')->getCreditorIdentificationNumber();
     }
 
     /**
@@ -166,12 +160,7 @@ class Itabs_Debit_Block_Account_Data
      */
     public function getHintForIbanField()
     {
-        $field = Mage::getStoreConfig('debitpayment/sepa/hint_iban_field');
-        if ($field == '') {
-            return false;
-        }
-
-        return $field;
+        return Mage::helper('debit')->getHintForIbanField();
     }
 
     /**
@@ -181,11 +170,6 @@ class Itabs_Debit_Block_Account_Data
      */
     public function getHintForBicField()
     {
-        $field = Mage::getStoreConfig('debitpayment/sepa/hint_bic_field');
-        if ($field == '') {
-            return false;
-        }
-
-        return $field;
+        return Mage::helper('debit')->getHintForBicField();
     }
 }

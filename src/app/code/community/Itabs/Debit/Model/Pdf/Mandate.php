@@ -222,7 +222,7 @@ class Itabs_Debit_Model_Pdf_Mandate extends Mage_Sales_Model_Order_Pdf_Abstract
      */
     public function getCreditorIdentificationNumber($storeId=null)
     {
-        return Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number', $storeId);
+        return Mage::helper('debit')->getCreditorIdentificationNumber($storeId);
     }
 
     /**

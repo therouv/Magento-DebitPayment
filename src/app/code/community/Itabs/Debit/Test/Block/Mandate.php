@@ -23,7 +23,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * AjaxController
+ * Block/Mandate.php Test Class
  *
  * @category  Itabs
  * @package   Itabs_Debit
@@ -33,29 +33,44 @@
  * @version   1.0.2
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_AjaxController extends Mage_Core_Controller_Front_Action
+class Itabs_Debit_Test_Block_Mandate extends EcomDev_PHPUnit_Test_Case_Controller
 {
     /**
-     * Checks the BLZ if it exists and returns the bankname or an error message
-     *
-     * @return void
+     * @var Itabs_Debit_Block_Mandate
      */
-    public function checkblzAction()
+    protected $_block;
+
+    /**
+     * Set up test class
+     */
+    protected function setUp()
     {
-        $result = array();
+        parent::setUp();
+        $this->_block = self::app()->getLayout()->createBlock('debit/mandate');
+    }
 
-        $blz = $this->getRequest()->getPost('blz');
-        $blz = Mage::helper('debit')->sanitizeData($blz);
-        if ($bank = Mage::helper('debit')->getBankByBlz($blz)) {
-            $result['found'] = 1;
-            $result['blz'] = $blz;
-            $result['bank'] = $bank;
-        } else {
-            $result['found'] = 0;
-            $result['blz'] = $blz;
-            $result['bank'] = $this->__('Bank not found');
-        }
+    /**
+     * @test
+     */
+    public function testGetFormAction()
+    {
+        $this->assertContains('debit/mandate/print', $this->_block->getFormAction());
+    }
 
-        $this->getResponse()->setBody(Zend_Json::encode($result));
+    /**
+     * @test
+     */
+    public function testGetSession()
+    {
+        $this->assertInstanceOf('Mage_Customer_Model_Session', $this->_block->getSession());
+    }
+
+    /**
+     * @test
+     * @depends testGetSession
+     */
+    public function testGetCustomer()
+    {
+        $this->assertInstanceOf('Mage_Customer_Model_Customer', $this->_block->getCustomer());
     }
 }

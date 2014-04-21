@@ -1,0 +1,5 @@
+bankaccount:
+  result:
+    name: Musterfirma GmbH
+    bank_code: 99999999
+    account_number: 9999999999

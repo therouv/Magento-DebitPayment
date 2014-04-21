@@ -1,0 +1,3 @@
+config:
+  default/debitpayment/sepa/hint_iban_field:
+  default/debitpayment/sepa/hint_bic_field:

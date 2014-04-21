@@ -37,8 +37,6 @@ class Itabs_Debit_Block_Adminhtml_Order extends Mage_Adminhtml_Block_Widget_Grid
 {
     /**
      * Class constructor
-     *
-     * @return void
      */
     public function __construct()
     {

@@ -1,17 +1,40 @@
 <?php
-
+/**
+ * This file is part of the Itabs_Debit module.
+ *
+ * PHP version 5
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category  Itabs
+ * @package   Itabs_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.2
+ * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
+ */
+/**
+ * Debit Mandate Block
+ *
+ * @category  Itabs
+ * @package   Itabs_Debit
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version   1.0.2
+ * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
+ */
 class Itabs_Debit_Block_Mandate extends Mage_Core_Block_Template
 {
-    /**
-     * Retruns the current customer from customer session
-     *
-     * @return Mage_Customer_Model_Customer
-     */
-    public function getCustomer()
-    {
-        return $this->_getSession()->getCustomer();
-    }
-
     /**
      * Returns the from action url
      *
@@ -27,9 +50,19 @@ class Itabs_Debit_Block_Mandate extends Mage_Core_Block_Template
      *
      * @return Mage_Customer_Model_Session
      */
-    protected function _getSession()
+    public function getSession()
     {
         return Mage::getSingleton('customer/session');
+    }
+
+    /**
+     * Retruns the current customer from customer session
+     *
+     * @return Mage_Customer_Model_Customer
+     */
+    public function getCustomer()
+    {
+        return $this->getSession()->getCustomer();
     }
 
     /**
@@ -39,12 +72,7 @@ class Itabs_Debit_Block_Mandate extends Mage_Core_Block_Template
      */
     public function getHintForIbanField()
     {
-        $field = Mage::getStoreConfig('debitpayment/sepa/hint_iban_field');
-        if ($field == '') {
-            return false;
-        }
-
-        return $field;
+        return Mage::helper('debit')->getHintForIbanField();
     }
 
     /**
@@ -54,11 +82,6 @@ class Itabs_Debit_Block_Mandate extends Mage_Core_Block_Template
      */
     public function getHintForBicField()
     {
-        $field = Mage::getStoreConfig('debitpayment/sepa/hint_bic_field');
-        if ($field == '') {
-            return false;
-        }
-
-        return $field;
+        return Mage::helper('debit')->getHintForBicField();
     }
 }

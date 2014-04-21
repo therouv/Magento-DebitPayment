@@ -23,7 +23,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * AjaxController
+ * Model/Pdf/Mandate.php Test Class
  *
  * @category  Itabs
  * @package   Itabs_Debit
@@ -33,29 +33,58 @@
  * @version   1.0.2
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_AjaxController extends Mage_Core_Controller_Front_Action
+class Itabs_Debit_Test_Model_Pdf_Mandate extends EcomDev_PHPUnit_Test_Case
 {
     /**
-     * Checks the BLZ if it exists and returns the bankname or an error message
-     *
-     * @return void
+     * @var Itabs_Debit_Model_Pdf_Mandate
      */
-    public function checkblzAction()
+    protected $_model;
+
+    /**
+     * Set up test class
+     */
+    protected function setUp()
     {
-        $result = array();
+        parent::setUp();
+        $this->_model = Mage::getModel('debit/pdf_mandate');
+    }
 
-        $blz = $this->getRequest()->getPost('blz');
-        $blz = Mage::helper('debit')->sanitizeData($blz);
-        if ($bank = Mage::helper('debit')->getBankByBlz($blz)) {
-            $result['found'] = 1;
-            $result['blz'] = $blz;
-            $result['bank'] = $bank;
-        } else {
-            $result['found'] = 0;
-            $result['blz'] = $blz;
-            $result['bank'] = $this->__('Bank not found');
-        }
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function getCreditorAddress()
+    {
+        $expected = array(
+            'Musterfirma GmbH',
+            'Musterstraße 99',
+            '99999 Musterstadt'
+        );
 
-        $this->getResponse()->setBody(Zend_Json::encode($result));
+        $this->assertEquals($expected, $this->_model->getCreditorAddress());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function getMandatePdfHeadline()
+    {
+        $this->assertEquals('Headline', $this->_model->getMandatePdfHeadline());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function getMandatePdfText()
+    {
+        $expected = array(
+            'Mandate',
+            'Text',
+            'For PDF'
+        );
+
+        $this->assertEquals($expected, $this->_model->getMandatePdfText());
     }
 }
