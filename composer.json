@@ -1,16 +1,16 @@
 {
-   "name": "therouv/debitpayment",
-   "license": "OSL-3.0",
-   "type": "magento-module",
-   "description": "Provides the payment method DebitPayment",
-   "homepage": "https://github.com/therouv/Magento-DebitPayment",
-   "authors": [
+    "name": "therouv/debitpayment",
+    "license": "OSL-3.0",
+    "type": "magento-module",
+    "description": "Provides the payment method DebitPayment",
+    "homepage": "https://github.com/therouv/Magento-DebitPayment",
+    "authors": [
         {
             "name": "Rouven Alexander Rieker",
             "email": "therouv@googlemail.com"
         }
-   ],
-   "require":{
+    ],
+    "require":{
         "magento-hackathon/magento-composer-installer":"*"
     }
 }

@@ -16,29 +16,19 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.0.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Export Order Controller
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Action
 {
     /**
      * Loads the grid layout with the debit payment orders..
-     *
-     * @return void
      */
     public function indexAction()
     {
@@ -190,7 +180,9 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     }
 
     /**
-     * @param string $type
+     * Export the given data
+     *
+     * @param  string $type Export Type
      * @return Mage_Core_Controller_Varien_Action
      */
     protected function _export($type)

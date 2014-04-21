@@ -16,29 +16,19 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.0.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Debit Info Block
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
 {
     /**
      * Construct payment info block and set template
-     *
-     * @return void
      */
     protected function _construct()
     {
@@ -120,7 +110,7 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     /**
      * Returns email data and mask the data if necessary
      *
-     * @param  bool|string Crypt field name to check in system configuration
+     * @param  bool|string $cryptField Crypt field name to check in system configuration
      * @return array Bank data
      */
     public function getDebitData($cryptField=false)

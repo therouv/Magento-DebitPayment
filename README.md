@@ -1,10 +1,10 @@
 DebitPayment
-=====================
+============
 This extension allows shop owners to provide the payment method "DebitPayment" to their customers.
 
 Facts
 -----
-- version: 1.0.5
+- version: 1.0.6
 - extension key: DebitPayment
 - [extension on Magento Connect](http://www.magentocommerce.com/magento-connect/debitpayment.html)
 - Magento Connect 1.0 extension key: magento-community/DebitPayment
@@ -20,6 +20,7 @@ This includes:
 - Find the correct German bank name given by the entered routing number
 - Save account data encrypted in database to pre-fill checkout fields on further checkouts
 - Export all DebitPayment orders as CSV file or DTAUS file
+- SEPA Mandate PDF generation
 
 Requirements
 ------------
@@ -73,4 +74,4 @@ Licence
 
 Copyright
 ---------
-(c) 2008-2013 Rouven Alexander Rieker
+(c) 2008-2014 Rouven Alexander Rieker / ITABS GmbH
