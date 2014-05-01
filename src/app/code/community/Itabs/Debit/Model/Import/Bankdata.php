@@ -32,21 +32,8 @@ class Itabs_Debit_Model_Import_Bankdata
      */
     public function run()
     {
-        $import = $this->loadData();
-
-        foreach ($import as $country => $importData) {
-            /* @var $model Itabs_Debit_Model_Bankdata */
-            $model = Mage::getModel('debit/bankdata');
-            $model->deleteByCountryId($country);
-
-            foreach ($importData as $data) {
-                /* @var $model Itabs_Debit_Model_Bankdata */
-                $model = Mage::getModel('debit/bankdata');
-                $model->addData($data);
-                $model->setData('country_id', $country);
-                $model->save();
-            }
-        }
+        $data = $this->loadData();
+        $this->importData($data);
     }
 
     /**
@@ -95,6 +82,28 @@ class Itabs_Debit_Model_Import_Bankdata
         }
 
         return $import;
+    }
+
+    /**
+     * Import the given bank data
+     *
+     * @param array $data Import Data
+     */
+    public function importData($data)
+    {
+        foreach ($data as $country => $importData) {
+            /* @var $model Itabs_Debit_Model_Bankdata */
+            $model = Mage::getModel('debit/bankdata');
+            $model->deleteByCountryId($country);
+
+            foreach ($importData as $data) {
+                /* @var $model Itabs_Debit_Model_Bankdata */
+                $model = Mage::getModel('debit/bankdata');
+                $model->addData($data);
+                $model->setData('country_id', $country);
+                $model->save();
+            }
+        }
     }
 
     /**

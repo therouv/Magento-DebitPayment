@@ -105,20 +105,13 @@ class Itabs_Debit_Adminhtml_BankdataController extends Mage_Adminhtml_Controller
                         'bank_name' => trim($line[1])
                     );
                 }
-                $ioHandler->streamClose();
+                $file->streamClose();
 
-                // Delete all banks by the given country_id
-                /* @var $model Itabs_Debit_Model_Bankdata */
-                $model = Mage::getModel('debit/bankdata');
-                $model->deleteByCountryId($country);
+                $importData = array($country => $import);
 
-                foreach ($import as $data) {
-                    /* @var $model Itabs_Debit_Model_Bankdata */
-                    $model = Mage::getModel('debit/bankdata');
-                    $model->addData($data);
-                    $model->setData('country_id', $country);
-                    $model->save();
-                }
+                /* @var $model Itabs_Debit_Model_Import_Bankdata */
+                $model = Mage::getModel('debit/import_bankdata');
+                $model->importData($importData);
 
                 unlink($path.$filename);
                 $this->_getSession()->addSuccess($this->_getDebitHelper()->__('Upload successful!'));
