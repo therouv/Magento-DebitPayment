@@ -16,22 +16,14 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.0.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Helper class for different helper functionalities..
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
 {
@@ -74,7 +66,7 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
     }
 
     /**
-     * Retrieve the bank by the given data
+     * Loads the blz data from cache
      *
      * @param  string $country
      * @param  string $identifier (Routing or Swift)
@@ -105,5 +97,48 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
         $sanitized = str_replace($bad, '', $data);
 
         return $sanitized;
+    }
+
+    /**
+     * Retrieve the creditor identification number
+     *
+     * @param  null|int $storeId Store ID
+     * @return string
+     */
+    public function getCreditorIdentificationNumber($storeId = null)
+    {
+        return Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number', $storeId);
+    }
+
+    /**
+     * Retrieve the hint for the IBAN field
+     *
+     * @param  null|int $storeId Store ID
+     * @return string|bool
+     */
+    public function getHintForIbanField($storeId = null)
+    {
+        $field = Mage::getStoreConfig('debitpayment/sepa/hint_iban_field', $storeId);
+        if (null === $field || $field == '') {
+            return false;
+        }
+
+        return $field;
+    }
+
+    /**
+     * Retrieve the hint for the BIC field
+     *
+     * @param  null|int $storeId Store ID
+     * @return string|bool
+     */
+    public function getHintForBicField($storeId = null)
+    {
+        $field = Mage::getStoreConfig('debitpayment/sepa/hint_bic_field', $storeId);
+        if (null === $field || $field == '') {
+            return false;
+        }
+
+        return $field;
     }
 }

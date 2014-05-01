@@ -16,22 +16,14 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.0.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * AccountController
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
 {
@@ -67,7 +59,9 @@ class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
     public function editAction()
     {
         $this->loadLayout();
-        $this->getLayout()->getBlock('head')->setTitle($this->__('Debit Account Data'));
+        if ($headBlock = $this->getLayout()->getBlock('head')) {
+            $headBlock->setTitle($this->__('Debit Account Data'));
+        }
         $this->renderLayout();
     }
 

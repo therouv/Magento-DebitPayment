@@ -16,80 +16,33 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.0.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Setup script
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 
 /* @var $installer Mage_Core_Model_Resource_Setup */
 $installer = $this;
 $installer->startSetup();
 
-$path = Mage::getConfig()->getModuleDir('etc', 'Itabs_Debit') . DS . 'bankdata' . DS;
+/* @var Mage_Core_Model_App_Emulation $emulation */
+$emulation = Mage::getModel('core/app_emulation');
+$oldStore = $emulation->startEnvironmentEmulation(Mage_Core_Model_App::ADMIN_STORE_ID);
 
-$ioHandler = new Varien_Io_File();
-$ioHandler->open(array('path' => $path));
-$debitFiles = $ioHandler->ls(Varien_Io_File::GREP_FILES);
+/* @var $block Mage_Cms_Model_Block */
+$block = Mage::getModel('cms/block')->setStoreId(0)->load('debit_mandate_form');
+$block->setStores(array(0));
+$block->setIdentifier('debit_mandate_form');
+$block->setTitle('Debit Mandate Forme');
+$block->setContent('Statischer Block "debit_mandate_form"');
+$block->setActive(true);
+$block->save();
 
-$import = array();
-foreach ($debitFiles as $debitFile) {
-    if ($debitFile['filetype'] != 'csv') {
-        continue;
-    }
-
-    $country = str_replace('.csv', '', $debitFile['text']);
-    $country = strtoupper($country);
-    $import[$country] = array();
-
-    $i = 1;
-    $ioHandler->streamOpen($debitFile['text'], 'r');
-    while (($line = $ioHandler->streamReadCsv()) !== false) {
-        if ($i == 1) {
-            $i++;
-            continue;
-        }
-
-        // Check if routing number already exists
-        $swiftCode = trim($line[2]);
-        if (array_key_exists($swiftCode, $import[$country]) || empty($swiftCode)) {
-            continue;
-        }
-
-        // Add bank to array
-        $import[$country][$swiftCode] = array(
-            'routing_number' => trim($line[0]),
-            'swift_code' => $swiftCode,
-            'bank_name' => trim($line[1])
-        );
-    }
-    $ioHandler->streamClose();
-}
-
-foreach ($import as $country => $importData) {
-    /* @var $model Itabs_Debit_Model_Bankdata */
-    $model = Mage::getModel('debit/bankdata');
-    $model->deleteByCountryId($country);
-
-    foreach ($importData as $data) {
-        /* @var $model Itabs_Debit_Model_Bankdata */
-        $model = Mage::getModel('debit/bankdata');
-        $model->addData($data);
-        $model->setData('country_id', $country);
-        $model->save();
-    }
-}
+$emulation->stopEnvironmentEmulation($oldStore);
 
 $installer->endSetup();

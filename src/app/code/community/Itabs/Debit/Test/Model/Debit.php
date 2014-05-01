@@ -16,43 +16,116 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.0.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Model/Debit.php Test Class
  *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
+ * @group Itabs_Debit
  */
 class Itabs_Debit_Test_Model_Debit extends EcomDev_PHPUnit_Test_Case
 {
     /**
+     * @var Itabs_Debit_Model_Debit
+     */
+    protected $_model;
+
+    /**
+     * Set up test class
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->_model = Mage::getModel('debit/debit');
+    }
+
+    /**
+     * @test
+     */
+    public function testGetCode()
+    {
+        $this->assertEquals('debit', $this->_model->getCode());
+    }
+
+    /**
+     * @test
+     */
+    public function testGetFormBlockType()
+    {
+        $this->assertEquals('debit/form', $this->_model->getFormBlockType());
+    }
+
+    /**
+     * @test
+     */
+    public function testGetInfoBlockType()
+    {
+        $this->assertEquals('debit/info', $this->_model->getInfoBlockType());
+    }
+
+    /**
+     * @test
+     */
+    public function testCanCapture()
+    {
+        $this->assertTrue($this->_model->canCapture());
+    }
+
+    /**
+     * @test
+     */
+    public function testCanCapturePartial()
+    {
+        $this->assertTrue($this->_model->canCapturePartial());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetCustomText()
+    {
+        $this->assertEquals('Debit Custom Text', $this->_model->getCustomText());
+    }
+
+    /**
      * Test if you mask a string that you get the correct result
      *
-     * @param array $data
      * @dataProvider dataProvider
+     * @loadExpectations
      */
-    public function testMaskString($data)
+    public function testMaskBankData($data)
     {
-        /* @var $model Itabs_Debit_Model_Debit */
-        $model = Mage::getModel('debit/debit');
-
         // Load all expectations
         $dataSet = $this->readAttribute($this, 'dataName');
 
         for ($i = 0; $i < count($data); $i++) {
             $this->assertEquals(
                 $this->expected($dataSet)->getData('string_'.$i),
-                $model->maskString($data[$i])
+                $this->_model->maskBankData($data[$i])
+            );
+        }
+    }
+
+    /**
+     * Test if you mask a string that you get the correct result
+     *
+     * @dataProvider dataProvider
+     * @loadExpectations
+     */
+    public function testMaskSepaData($data)
+    {
+        // Load all expectations
+        $dataSet = $this->readAttribute($this, 'dataName');
+
+        for ($i = 0; $i < count($data); $i++) {
+            $this->assertEquals(
+                $this->expected($dataSet)->getData('string_'.$i),
+                $this->_model->maskSepaData($data[$i])
             );
         }
     }

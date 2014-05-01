@@ -16,29 +16,19 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.0.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Debit Info Block
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
 {
     /**
      * Construct payment info block and set template
-     *
-     * @return void
      */
     protected function _construct()
     {
@@ -120,9 +110,10 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     /**
      * Returns email data and mask the data if necessary
      *
+     * @param  bool|string $cryptField Crypt field name to check in system configuration
      * @return array Bank data
      */
-    public function getEmailData()
+    public function getDebitData($cryptField=false)
     {
         $debitType = $this->getDebitType();
 
@@ -139,17 +130,37 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
             'debit_type'     => $debitType
         );
 
-        // mask bank data
-        if (Mage::getStoreConfigFlag('payment/'.$method.'/sendmail_crypt')
-            && $debitType == 'bank'
-        ) {
-            $number  = $payment->maskString($payment->getAccountNumber());
-            $routing = $payment->maskString($payment->getAccountBLZ());
-            $data['account_number'] = $number;
-            $data['account_blz']    = $routing;
-            $data['bank_name']      = '';
+        // Crypt data if configured
+        if ($cryptField && Mage::getStoreConfigFlag('payment/'.$method.'/'.$cryptField)) {
+            $data['bank_name'] = '';
+
+            if ($debitType == 'bank') {
+                $number  = $payment->maskBankData($payment->getAccountNumber());
+                $routing = $payment->maskBankData($payment->getAccountBLZ());
+                $data['account_number'] = $number;
+                $data['account_blz']    = $routing;
+            }
+
+            // mask sepa data
+            if ($debitType == 'sepa') {
+                $swift = $payment->maskSepaData($payment->getAccountSwift());
+                $iban  = $payment->maskSepaData($payment->getAccountIban());
+                $data['account_swift'] = $swift;
+                $data['account_iban']  = $iban;
+            }
         }
 
         return $data;
+    }
+
+    /**
+     * Returns email data and mask the data if necessary
+     *
+     * @deprecated since 1.1.0
+     * @return array Bank data
+     */
+    public function getEmailData()
+    {
+        return $this->getDebitData('sendmail_crypt');
     }
 }

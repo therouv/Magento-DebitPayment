@@ -1,10 +1,10 @@
 DebitPayment
-=====================
+============
 This extension allows shop owners to provide the payment method "DebitPayment" to their customers.
 
 Facts
 -----
-- version: 1.0.2
+- version: 1.0.6
 - extension key: DebitPayment
 - [extension on Magento Connect](http://www.magentocommerce.com/magento-connect/debitpayment.html)
 - Magento Connect 1.0 extension key: magento-community/DebitPayment
@@ -20,6 +20,7 @@ This includes:
 - Find the correct German bank name given by the entered routing number
 - Save account data encrypted in database to pre-fill checkout fields on further checkouts
 - Export all DebitPayment orders as CSV file or DTAUS file
+- SEPA Mandate PDF generation
 
 Requirements
 ------------
@@ -40,13 +41,18 @@ Uninstallation
 --------------
 To uninstall this extension you need to run the following SQL after removing the extension files:
 ```sql
+  DELETE FROM `core_config_data` WHERE path LIKE 'payment/debit/%';
+  DELETE FROM `core_config_data` WHERE path LIKE 'debitpayment/%';
   DELETE FROM `core_resource` WHERE code = 'debit_setup';
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_update';
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_name';
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_number';
   DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_acount_blz';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_account_swift';
+  DELETE FROM `eav_attribute` WHERE attribute_code = 'debit_payment_account_iban';
   DROP TABLE `debit_order_grid`;
 ```
+
 
 Support & Feature-Wishes
 ------------------------
@@ -68,4 +74,4 @@ Licence
 
 Copyright
 ---------
-(c) 2008-2013 Rouven Alexander Rieker
+(c) 2008-2014 Rouven Alexander Rieker / ITABS GmbH

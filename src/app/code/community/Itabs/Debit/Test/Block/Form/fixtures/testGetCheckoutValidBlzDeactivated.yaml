@@ -1,0 +1,2 @@
+config:
+  default/payment/debit/checkout_valid_blz: 0

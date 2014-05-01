@@ -16,22 +16,14 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.0.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Debit Form Block
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
 {
@@ -155,6 +147,7 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
         if (!Mage::getStoreConfigFlag('payment/debit/save_account_data')) {
             return '';
         }
+
         $data = $this->getCustomer()->getData($field);
         if (strlen($data) == 0) {
             return '';
@@ -185,5 +178,35 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
     public function getCheckoutValidBlz()
     {
         return Mage::getStoreConfigFlag('payment/debit/checkout_valid_blz');
+    }
+
+    /**
+     * Retrieve the creditor identification number
+     *
+     * @return string
+     */
+    public function getCreditorIdentificationNumber()
+    {
+        return Mage::helper('debit')->getCreditorIdentificationNumber();
+    }
+
+    /**
+     * Retrieve the hint for the IBAN field
+     *
+     * @return string|bool
+     */
+    public function getHintForIbanField()
+    {
+        return Mage::helper('debit')->getHintForIbanField();
+    }
+
+    /**
+     * Retrieve the hint for the BIC field
+     *
+     * @return string|bool
+     */
+    public function getHintForBicField()
+    {
+        return Mage::helper('debit')->getHintForBicField();
     }
 }
