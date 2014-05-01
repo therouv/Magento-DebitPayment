@@ -44,24 +44,6 @@ class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
     }
 
     /**
-     * Test if the getBankByBlz method returns a bank name
-     *
-     * @dataProvider dataProvider
-     */
-    public function testGetBankByBlz($data)
-    {
-        // Load all expectations
-        $dataSet = $this->readAttribute($this, 'dataName');
-
-        for ($i = 0; $i < count($data); $i++) {
-            $this->assertEquals(
-                $this->expected($dataSet)->getData('name_'.$i),
-                $this->_helper->getBankByBlz($data[$i])
-            );
-        }
-    }
-
-    /**
      * Test if the customer enters a faulty string that it
      * gets sanitized correctly
      *

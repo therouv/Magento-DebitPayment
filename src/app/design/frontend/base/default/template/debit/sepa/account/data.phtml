@@ -27,11 +27,6 @@
  * @var $this Itabs_Debit_Block_Account_Data
  */
 ?>
-<script type="text/javascript">
-//<![CDATA[
-blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>', '0');
-//]]>
-</script>
 <div class="page-title">
     <h1><?php echo $this->__('Edit Debit Account Data') ?></h1>
 </div>
@@ -45,14 +40,14 @@ blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>'
         <?php endif; ?>
         <ul class="form-list">
             <li>
-                <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?></label><br />
+                <label for="kontoinhaber" class="required"><em>*</em><?php echo $this->__('Kontoinhaber') ?></label><br />
                 <div class="input-box">
                     <input type="text" id="kontoinhaber" name="account_name" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
                 </div>
             </li>
             <li class="fields">
                 <div class="field">
-                    <label for="iban"><?php echo $this->__('IBAN') ?></label><br />
+                    <label for="iban" class="required"><em>*</em><?php echo $this->__('IBAN') ?></label><br />
                     <div class="input-box">
                         <input type="text" id="iban" name="account_iban" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry validate-debit-iban" value="<?php echo $this->getAccountIban() ?>" />
                         <?php if ($hint = $this->getHintForIbanField()): ?>
@@ -61,13 +56,19 @@ blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>'
                     </div>
                 </div>
                 <div class="field">
-                    <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?></label><br />
+                    <label for="swiftcode" class="required"><em>*</em><?php echo $this->__('SWIFT Code') ?></label><br />
                     <div class="input-box">
-                        <input type="text" id="swiftcode" name="account_swift" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry validate-debit-swift"  value="<?php echo $this->getAccountSwift() ?>" />
+                        <input type="text" id="swiftcode" name="account_swift" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry validate-debit-swift" onblur="blzCheck.checkBlz(this);" value="<?php echo $this->getAccountSwift() ?>" />
                         <?php if ($hint = $this->getHintForBicField()): ?>
                             <p class="debit-hint"><?php echo $hint?></p>
                         <?php endif; ?>
                     </div>
+                </div>
+            </li>
+            <li>
+                <label for="bank_name" class="required"><em>*</em><?php echo $this->__('Bank name') ?></label>
+                <div class="input-box">
+                    <input type="text" id="bank_name" name="bank_name" value="<?php echo $this->getBankName()?>" class="input-text required-entry">
                 </div>
             </li>
         </ul>
@@ -81,6 +82,7 @@ blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>'
 
 <script type="text/javascript">
 //<![CDATA[
+    blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>', '0');
     var dataForm = new VarienForm('form-validate', true);
 //]]>
 </script>

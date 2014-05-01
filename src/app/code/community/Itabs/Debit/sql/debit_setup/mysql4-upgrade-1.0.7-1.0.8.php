@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?php
 /**
  * This file is part of the Itabs_Debit module.
+ *
+ * PHP version 5
  *
  * NOTICE OF LICENSE
  *
@@ -21,23 +22,16 @@
  * @version   1.0.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
- -->
-<layout version="0.1.0">
-	<debit_adminhtml_order_index>
-        <reference name="content">
-            <block type="debit/adminhtml_order" name="debit.adminhtml.order" />
-        </reference>
-	</debit_adminhtml_order_index>
+/**
+ * Setup script
+ */
 
-    <debit_adminhtml_bankdata_index>
-        <reference name="content">
-            <block type="debit/adminhtml_bankdata" name="debit.adminhtml.bankdata" />
-        </reference>
-	</debit_adminhtml_bankdata_index>
+/* @var $installer Mage_Core_Model_Resource_Setup */
+$installer = $this;
+$installer->startSetup();
 
-    <debit_adminhtml_bankdata_upload>
-        <reference name="content">
-            <block type="debit/adminhtml_bankdata_upload" name="debit.adminhtml.bankdata.upload" />
-        </reference>
-	</debit_adminhtml_bankdata_upload>
-</layout>
+/* @var $model Itabs_Debit_Model_Import_Bankdata */
+$model = Mage::getModel('debit/import_bankdata');
+$model->run();
+
+$installer->endSetup();

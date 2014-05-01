@@ -106,12 +106,15 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
             $iban = $info->encrypt($iban);
         }
 
+        $bankName = $data->getDebitBankname();
+
         // Set account data in payment info model
         $info->setCcType($ccType)                     // BLZ
              ->setCcOwner($ccOwner)                   // Kontoinhaber
              ->setCcNumberEnc($ccNumber)              // Kontonummer
              ->setDebitSwift($swift)                  // SWIFT Code
              ->setDebitIban($iban)                    // IBAN
+             ->setDebitBankname($bankName)                    // IBAN
              ->setDebitType(Mage::helper('debit')->getDebitType());
 
         return $this;
@@ -181,12 +184,10 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
      */
     public function getAccountBankname()
     {
-        $bankName = Mage::helper('debit')->getBankByBlz($this->getAccountBLZ());
-        if ($bankName == null) {
-            $bankName = Mage::helper('debit')->__('not available');
-        }
+        $info = $this->getInfoInstance();
+        $data = $info->getDebitBankname();
 
-        return $bankName;
+        return $data;
     }
 
     /**

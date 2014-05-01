@@ -52,16 +52,7 @@ class Itabs_Debit_Block_Account_Data
      */
     public function getBankName()
     {
-        $blz = $this->getAccountBLZ();
-        if (empty($blz)) {
-            return $this->__('-- will be filled in automatically --');
-        }
-        $bankName = Mage::helper('debit')->getBankByBlz($blz);
-        if ($bankName == null) {
-            $bankName = $this->__('not available');
-        }
-
-        return $bankName;
+        return $this->_getAccountData('debit_payment_account_bankname');
     }
 
     /**

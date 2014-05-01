@@ -58,6 +58,8 @@ class Itabs_Debit_Test_Block_Form extends EcomDev_PHPUnit_Test_Case_Controller
      */
     public function testGetBankName()
     {
+        $this->markTestIncomplete();
+
         // Mock customer session; it's necessary because attribute value is encrypted
         $customerMock = $this->getModelMock('customer/customer', array());
         $customerMock->expects($this->any())
@@ -77,6 +79,8 @@ class Itabs_Debit_Test_Block_Form extends EcomDev_PHPUnit_Test_Case_Controller
      */
     public function testGetBankNameUnavailable()
     {
+        $this->markTestIncomplete();
+
         // Mock customer session; it's necessary because attribute value is encrypted
         $customerMock = $this->getModelMock('customer/customer', array());
         $customerMock->expects($this->any())
