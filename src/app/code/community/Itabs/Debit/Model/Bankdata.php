@@ -62,13 +62,13 @@ class Itabs_Debit_Model_Bankdata extends Mage_Core_Model_Abstract
     /**
      * Retrieve the bank by the given data
      *
-     * @param  string $country
-     * @param  string $identifier (Routing or Swift)
-     * @param  string $value
+     * @param  string      $identifier (Routing or Swift)
+     * @param  string      $value
+     * @param  null|string $country
      * @return bool|string
      */
-    public function loadByIdentifier($country, $identifier, $value)
+    public function loadByIdentifier($identifier, $value, $country=null)
     {
-        return $this->_getResource()->loadByIdentifier($country, $identifier, $value);
+        return $this->_getResource()->loadByIdentifier($identifier, $value, $country);
     }
 }

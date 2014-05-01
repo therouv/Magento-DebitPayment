@@ -59,12 +59,12 @@ class Itabs_Debit_Model_Mysql4_Bankdata extends Mage_Core_Model_Mysql4_Abstract
     /**
      * Retrieve the bank by the given data
      *
-     * @param  string $country
-     * @param  string $identifier (Routing or Swift)
-     * @param  string $value
+     * @param  string      $identifier (Routing or Swift)
+     * @param  string      $value
+     * @param  null|string $country
      * @return bool|string
      */
-    public function loadByIdentifier($country, $identifier, $value)
+    public function loadByIdentifier($identifier, $value, $country=null)
     {
         /* @var $adapter Varien_Db_Adapter_Pdo_Mysql */
         $adapter = $this->_getReadAdapter();
@@ -77,9 +77,15 @@ class Itabs_Debit_Model_Mysql4_Bankdata extends Mage_Core_Model_Mysql4_Abstract
 
         $select = $adapter->select()
             ->from($this->getMainTable(), 'bank_name')
-            ->where('country_id=?', $country)
-            ->where($field.'=?', $value)
-            ->limit(1);
+            ->where($field.'=?', $value);
+
+        // Limit by country if param is given
+        if (null !== $country) {
+            $select->where('country_id=?', $country);
+        }
+
+        // Allow only one result
+        $select->limit(1);
 
         $result = $adapter->fetchOne($select);
         if (!$result) {

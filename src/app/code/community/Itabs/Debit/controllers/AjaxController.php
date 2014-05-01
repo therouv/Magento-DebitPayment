@@ -36,15 +36,17 @@ class Itabs_Debit_AjaxController extends Mage_Core_Controller_Front_Action
     {
         $result = array();
 
-        $blz = $this->getRequest()->getPost('blz');
-        $blz = Mage::helper('debit')->sanitizeData($blz);
-        if ($bank = Mage::helper('debit')->getBankByBlz($blz)) {
+        $bankparam = $this->getRequest()->getPost('bankparam');
+        $identifer = $this->getRequest()->getPost('identifier');
+
+        $bankparam = Mage::helper('debit')->sanitizeData($bankparam);
+        if ($bank = Mage::helper('debit')->getBankByIdentifier($identifer, $bankparam)) {
             $result['found'] = 1;
-            $result['blz'] = $blz;
+            $result['blz'] = $bankparam;
             $result['bank'] = $bank;
         } else {
             $result['found'] = 0;
-            $result['blz'] = $blz;
+            $result['blz'] = $bankparam;
             $result['bank'] = $this->__('Bank not found');
         }
 

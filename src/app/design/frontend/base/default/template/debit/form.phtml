@@ -32,7 +32,6 @@
 blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>','<?php echo $this->getCheckoutValidBlz() ?>');
 //]]>
 </script>
-
 <fieldset class="form-list">
     <ul id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none">
         <?php if ($this->getMethod()->getCustomText()): ?>
@@ -42,29 +41,32 @@ blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>'
             </div>
         </li>
         <?php endif; ?>
-
-        <li>
-            <div class="input-box">
-                <label for="kreditinstitut"><?php echo $this->__('Kreditinstitut') ?></label><br />
-                <span id="kreditinstitut"><?php echo $this->getBankName(); ?></span>
-            </div>
-        </li>
-        <li>
-            <div class="input-box">
-                <label for="bankleitzahl"><?php echo $this->__('Bankleitzahl') ?> <span class="required">*</span></label><br />
-                <input type="text" id="bankleitzahl" name="payment[debit_cc_type]" title="<?php echo $this->__('Bankleitzahl') ?>" class="input-text required-entry validate-number validate-debit-blz" style="display: block; float: left;" value="<?php echo $this->getAccountBLZ() ?>" onchange="blzCheck.checkBlz(this); return false;"/>
-            </div>
-        </li>
-        <li>
-            <div class="input-box">
+        <li class="fields">
+            <div class="field">
                 <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?> <span class="required">*</span></label><br />
-                <input type="text" id="kontoinhaber" name="payment[debit_cc_owner]" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
+                <div class="input-box">
+                    <input type="text" id="kontoinhaber" name="payment[debit_cc_owner]" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
+                </div>
+            </div>
+            <div class="field">
+                <label for="kontonummer"><?php echo $this->__('Konto-Nummer') ?> <span class="required">*</span></label><br />
+                <div class="input-box">
+                    <input type="text" id="kontonummer" name="payment[debit_cc_number]" title="<?php echo $this->__('Konto-Nummer') ?>" maxlength="11" class="input-text required-entry validate-number validate-debit-number" value="<?php echo $this->getAccountNumber() ?>" />
+                </div>
             </div>
         </li>
-        <li>
-            <div class="input-box">
-                <label for="kontonummer"><?php echo $this->__('Konto-Nummer') ?> <span class="required">*</span></label><br />
-                <input type="text" id="kontonummer" name="payment[debit_cc_number]" title="<?php echo $this->__('Konto-Nummer') ?>" maxlength="11" class="input-text required-entry validate-number validate-debit-number" value="<?php echo $this->getAccountNumber() ?>" />
+        <li class="fields">
+            <div class="field">
+                <label for="bankleitzahl"><?php echo $this->__('Bankleitzahl') ?> <span class="required">*</span></label><br />
+                <div class="input-box">
+                    <input type="text" id="bankleitzahl" name="payment[debit_cc_type]" title="<?php echo $this->__('Bankleitzahl') ?>" class="input-text required-entry validate-number validate-debit-blz" style="display: block; float: left;" value="<?php echo $this->getAccountBLZ() ?>" onchange="blzCheck.checkBlz(this); return false;"/>
+                </div>
+            </div>
+            <div class="field">
+                <label for="bank_name" class="required"><em>*</em><?php echo $this->__('Bank name') ?></label>
+                <div class="input-box">
+                    <input type="text" id="bank_name" name="payment[debit_bankname]" value="<?php echo $this->getBankName()?>" class="input-text required-entry">
+                </div>
             </div>
         </li>
     </ul>

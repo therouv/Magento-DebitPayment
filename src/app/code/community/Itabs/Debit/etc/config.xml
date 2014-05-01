@@ -25,7 +25,7 @@
 <config>
     <modules>
         <Itabs_Debit>
-            <version>1.0.8</version>
+            <version>1.0.9</version>
         </Itabs_Debit>
     </modules>
     <global>
@@ -101,6 +101,9 @@
                 <debit_type>
                     <to_order_payment>*</to_order_payment>
                 </debit_type>
+                <debit_bankname>
+                    <to_order_payment>*</to_order_payment>
+                </debit_bankname>
             </sales_convert_quote_payment>
             <sales_convert_order_payment>
                 <debit_swift>
@@ -112,6 +115,9 @@
                 <debit_type>
                     <to_quote_payment>*</to_quote_payment>
                 </debit_type>
+                <debit_bankname>
+                    <to_quote_payment>*</to_quote_payment>
+                </debit_bankname>
             </sales_convert_order_payment>
         </fieldsets>
     </global>

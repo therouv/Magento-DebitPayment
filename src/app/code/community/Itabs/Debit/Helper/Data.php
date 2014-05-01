@@ -68,16 +68,16 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
     /**
      * Loads the blz data from cache
      *
-     * @param  string $country
-     * @param  string $identifier (Routing or Swift)
-     * @param  string $value
+     * @param  string      $identifier (Routing or Swift)
+     * @param  string      $value
+     * @param  null|string $country
      * @return null|string
      */
-    public function getBankByIdentifier($country, $identifier, $value)
+    public function getBankByIdentifier($identifier, $value, $country=null)
     {
         /* @var $model Itabs_Debit_Model_Bankdata */
         $model = Mage::getModel('debit/bankdata');
-        $bankName = $model->loadByIdentifier($country, $identifier, $value);
+        $bankName = $model->loadByIdentifier($identifier, $value, $country);
         if (!$bankName) {
             return null;
         }

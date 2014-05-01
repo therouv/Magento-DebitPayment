@@ -28,19 +28,29 @@ blzAjaxCheck.prototype = {
         this.checkoutValidBlz = checkoutValidBlz;
     },
     checkBlz: function() {
+        var param = '';
+        var identifier = '';
+        if ($('bankleitzahl')) {
+            param = $('bankleitzahl').value;
+            identifier = 'routing';
+        } else {
+            param = $('swiftcode').value;
+            identifier = 'swift';
+        }
+
         new Ajax.Request(
             this.checkBlzUrl,
             {
                 method:'post',
                 asynchronous: false,
                 onSuccess: this.setStatus.bind(this),
-                parameters: {blz:$('bankleitzahl').value}
+                parameters: {bankparam:param,identifier:identifier}
             }
         );
     },
     setStatus: function(transport) {
         if (transport && transport.responseText) {
-            $('kreditinstitut').update('');
+            $('bank_name').value = '';
             try {
                 response = eval('(' + transport.responseText + ')');
             } catch (e) {
@@ -50,12 +60,11 @@ blzAjaxCheck.prototype = {
 
         if (response.found && response.found == 1) {
             this.isBlzValid = true;
+            $('bank_name').value = response.bank;
         } else {
             this.isBlzValid = false;
+            $('bank_name').value = '';
         }
-
-        $('kreditinstitut').update(response.bank);
-        $('bankleitzahl').value = response.blz;
     },
     validateIban: function(iban){
         if (iban != $('iban').value){

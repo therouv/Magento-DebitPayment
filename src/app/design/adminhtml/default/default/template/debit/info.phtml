@@ -45,12 +45,7 @@
 
     <?php else: ?>
 
-        <?php if ($_info->getAccountBankname() == Mage::helper('debit')->__('not available')): ?>
-        	<span style="color: #cc0000;font-weight:bold;"><?php echo $this->__('Fehler! Die eingegebenen Bankdaten können fehlerhaft sein!<br />Bitte setzen Sie sich mit dem Kunden in Verbindung!') ?></span><br /><br />
-        <?php else: ?>
-            <?php echo $this->__('Bank name: %s', $this->escapeHtml($_info->getAccountBankname())) ?><br />
-        <?php endif; ?>
-
+        <?php echo $this->__('Bank name: %s', $this->escapeHtml($_info->getAccountBankname())) ?><br />
         <?php echo $this->__('Bank code: %s', $this->escapeHtml($_info->getAccountBLZ())) ?><br />
         <?php echo $this->__('Account holder: %s', $this->escapeHtml($_info->getAccountName())) ?><br />
         <?php echo $this->__('Account number: %s', $this->escapeHtml($_info->getAccountNumber())) ?><br />
