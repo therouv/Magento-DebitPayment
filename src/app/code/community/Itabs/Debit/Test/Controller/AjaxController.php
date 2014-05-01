@@ -37,6 +37,8 @@ class Itabs_Debit_Test_Controller_AjaxController
      */
     public function checkblzValid()
     {
+        $this->markTestIncomplete();
+
         $this->setCurrentStore(1);
 
         $this->getRequest()->setPost('blz', '61150020');
@@ -55,6 +57,8 @@ class Itabs_Debit_Test_Controller_AjaxController
      */
     public function checkblzInvalid()
     {
+        $this->markTestIncomplete();
+
         $this->setCurrentStore(1);
 
         $this->getRequest()->setPost('blz', '99999999');
