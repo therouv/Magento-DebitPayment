@@ -30,7 +30,7 @@
 class Itabs_Debit_Test_Block_Account_Data extends EcomDev_PHPUnit_Test_Case_Controller
 {
     /**
-     * @var Itabs_Debit_Block_Form
+     * @var Itabs_Debit_Block_Account_Data
      */
     protected $_block;
 
@@ -50,39 +50,16 @@ class Itabs_Debit_Test_Block_Account_Data extends EcomDev_PHPUnit_Test_Case_Cont
      */
     public function testGetBankName()
     {
-        $this->markTestIncomplete();
-
         // Mock customer session; it's necessary because attribute value is encrypted
         $customerMock = $this->getModelMock('customer/customer', array());
         $customerMock->expects($this->any())
             ->method('getData')
-            ->with($this->equalTo('debit_payment_acount_blz'))
-            ->will($this->returnValue('61150020'));
+            ->with($this->equalTo('debit_payment_account_bankname'))
+            ->will($this->returnValue('Kr Spk Esslingen-Nürtingen'));
         $this->replaceByMock('model', 'customer/customer', $customerMock);
         Mage::getSingleton('customer/session')->setCustomer($customerMock);
 
         $this->assertEquals('Kr Spk Esslingen-Nürtingen', $this->_block->getBankName());
-    }
-
-    /**
-     * @test
-     * @loadFixture ~Itabs_Debit/default
-     * @loadExpectation ~Itabs_Debit/accountData
-     */
-    public function testGetBankNameUnavailable()
-    {
-        $this->markTestIncomplete();
-
-        // Mock customer session; it's necessary because attribute value is encrypted
-        $customerMock = $this->getModelMock('customer/customer', array());
-        $customerMock->expects($this->any())
-            ->method('getData')
-            ->with($this->equalTo('debit_payment_acount_blz'))
-            ->will($this->returnValue('99999999'));
-        $this->replaceByMock('model', 'customer/customer', $customerMock);
-        Mage::getSingleton('customer/session')->setCustomer($customerMock);
-
-        $this->assertEquals('not available', $this->_block->getBankName());
     }
 
     /**

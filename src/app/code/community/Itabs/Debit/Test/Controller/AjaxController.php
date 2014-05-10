@@ -35,13 +35,12 @@ class Itabs_Debit_Test_Controller_AjaxController
      * @loadFixture ~Itabs_Debit/default
      * @doNotIndexAll
      */
-    public function checkblzValid()
+    public function testCheckBlzValid()
     {
-        $this->markTestIncomplete();
-
         $this->setCurrentStore(1);
 
-        $this->getRequest()->setPost('blz', '61150020');
+        $this->getRequest()->setPost('bankparam', '61150020');
+        $this->getRequest()->setPost('identifier', 'routing');
         $this->dispatch('debit/ajax/checkblz', array('_store' => 'default'));
 
         $this->assertResponseBodyJson();
@@ -55,13 +54,12 @@ class Itabs_Debit_Test_Controller_AjaxController
      * @loadFixture ~Itabs_Debit/default
      * @doNotIndexAll
      */
-    public function checkblzInvalid()
+    public function testCheckBlzInvalid()
     {
-        $this->markTestIncomplete();
-
         $this->setCurrentStore(1);
 
-        $this->getRequest()->setPost('blz', '99999999');
+        $this->getRequest()->setPost('bankparam', '99999999');
+        $this->getRequest()->setPost('identifier', 'routing');
         $this->dispatch('debit/ajax/checkblz', array('_store' => 'default'));
 
         $this->assertResponseBodyJson();
@@ -70,4 +68,41 @@ class Itabs_Debit_Test_Controller_AjaxController
         $this->reset();
     }
 
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     * @doNotIndexAll
+     */
+    public function testCheckSwiftCodeValid()
+    {
+        $this->setCurrentStore(1);
+
+        $this->getRequest()->setPost('bankparam', 'ESSLDE66XXX');
+        $this->getRequest()->setPost('identifier', 'swift');
+        $this->dispatch('debit/ajax/checkblz', array('_store' => 'default'));
+
+        $this->assertResponseBodyJson();
+        $this->assertResponseBodyContains('ESSLDE66XXX');
+
+        $this->reset();
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     * @doNotIndexAll
+     */
+    public function testCheckSwiftCodeInvalid()
+    {
+        $this->setCurrentStore(1);
+
+        $this->getRequest()->setPost('bankparam', 'XXXXXXXXXXX');
+        $this->getRequest()->setPost('identifier', 'swift');
+        $this->dispatch('debit/ajax/checkblz', array('_store' => 'default'));
+
+        $this->assertResponseBodyJson();
+        $this->assertResponseBodyContains('Bank not found');
+
+        $this->reset();
+    }
 }
