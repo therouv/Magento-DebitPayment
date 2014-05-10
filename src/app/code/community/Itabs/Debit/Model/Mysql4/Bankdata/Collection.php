@@ -34,14 +34,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Model_Mysql4_Bankdata_Collection
-    extends Mage_Core_Model_Mysql4_Collection_Abstract
+    extends Itabs_Debit_Model_Resource_Bankdata_Collection
 {
-    /**
-     * (non-PHPdoc)
-     * @see Mage_Core_Model_Resource_Db_Collection_Abstract::_construct()
-     */
-    protected function _construct()
-    {
-        $this->_init('debit/bankdata');
-    }
+
 }

@@ -25,7 +25,14 @@
 /**
  * Resource Model for Export Orders
  */
-class Itabs_Debit_Model_Mysql4_Orders extends Itabs_Debit_Model_Resource_Orders
+class Itabs_Debit_Model_Resource_Orders
+    extends Mage_Core_Model_Resource_Db_Abstract
 {
-
+    /**
+     * Init the main table and id field name
+     */
+    protected function _construct()
+    {
+        $this->_init('debit/order_grid', 'id');
+    }
 }

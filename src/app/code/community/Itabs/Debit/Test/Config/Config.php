@@ -73,6 +73,10 @@ class Itabs_Debit_Test_Config_Config extends EcomDev_PHPUnit_Test_Case_Config
 
         $this->assertModelAlias('debit/mysql4_orders_collection', 'Itabs_Debit_Model_Mysql4_Orders_Collection');
         $this->assertModelAlias('debit/mysql4_orders', 'Itabs_Debit_Model_Mysql4_Orders');
+
+        $this->assertModelAlias('debit/resource_orders_collection', 'Itabs_Debit_Model_Resource_Orders_Collection');
+        $this->assertModelAlias('debit/resource_orders', 'Itabs_Debit_Model_Resource_Orders');
+
         $this->assertModelAlias('debit/pdf_mandate', 'Itabs_Debit_Model_Pdf_Mandate');
 
         $this->assertModelAlias(

@@ -23,9 +23,16 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Resource Model for Export Orders
+ * Resource Model Collection for Export Orders
  */
-class Itabs_Debit_Model_Mysql4_Orders extends Itabs_Debit_Model_Resource_Orders
+class Itabs_Debit_Model_Resource_Orders_Collection
+    extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
-
+    /**
+     * Init the collection item model
+     */
+    protected function _construct()
+    {
+        $this->_init('debit/orders');
+    }
 }
