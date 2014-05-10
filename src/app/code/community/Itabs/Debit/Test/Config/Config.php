@@ -49,7 +49,10 @@ class Itabs_Debit_Test_Config_Config extends EcomDev_PHPUnit_Test_Case_Config
     public function testClassAliases()
     {
         $this->assertBlockAlias('debit/account_data', 'Itabs_Debit_Block_Account_Data');
+        $this->assertBlockAlias('debit/adminhtml_bankdata_grid', 'Itabs_Debit_Block_Adminhtml_Bankdata_Grid');
+        $this->assertBlockAlias('debit/adminhtml_bankdata_upload', 'Itabs_Debit_Block_Adminhtml_Bankdata_Upload');
         $this->assertBlockAlias('debit/adminhtml_order_grid', 'Itabs_Debit_Block_Adminhtml_Order_Grid');
+        $this->assertBlockAlias('debit/adminhtml_bankdata', 'Itabs_Debit_Block_Adminhtml_Bankdata');
         $this->assertBlockAlias('debit/adminhtml_order', 'Itabs_Debit_Block_Adminhtml_Order');
         $this->assertBlockAlias('debit/form', 'Itabs_Debit_Block_Form');
         $this->assertBlockAlias('debit/info', 'Itabs_Debit_Block_Info');
@@ -65,6 +68,8 @@ class Itabs_Debit_Test_Config_Config extends EcomDev_PHPUnit_Test_Case_Config
         $this->assertModelAlias('debit/export_abstract', 'Itabs_Debit_Model_Export_Abstract');
         $this->assertModelAlias('debit/export_csv', 'Itabs_Debit_Model_Export_Csv');
         $this->assertModelAlias('debit/export_dtaus', 'Itabs_Debit_Model_Export_Dtaus');
+
+        $this->assertModelAlias('debit/import_bankdata', 'Itabs_Debit_Model_Import_Bankdata');
 
         $this->assertModelAlias('debit/mysql4_orders_collection', 'Itabs_Debit_Model_Mysql4_Orders_Collection');
         $this->assertModelAlias('debit/mysql4_orders', 'Itabs_Debit_Model_Mysql4_Orders');
@@ -82,6 +87,7 @@ class Itabs_Debit_Test_Config_Config extends EcomDev_PHPUnit_Test_Case_Config
             'debit/system_config_source_debit_type',
             'Itabs_Debit_Model_System_Config_Source_Debit_Type'
         );
+        $this->assertModelAlias('debit/bankdata', 'Itabs_Debit_Model_Bankdata');
         $this->assertModelAlias('debit/debit', 'Itabs_Debit_Model_Debit');
         $this->assertModelAlias('debit/observer', 'Itabs_Debit_Model_Observer');
         $this->assertModelAlias('debit/orders', 'Itabs_Debit_Model_Orders');
@@ -95,6 +101,7 @@ class Itabs_Debit_Test_Config_Config extends EcomDev_PHPUnit_Test_Case_Config
     {
         $this->assertSetupResourceDefined('Itabs_Debit', 'debit_setup');
         $this->assertSetupResourceExists('Itabs_Debit', 'debit_setup');
+        $this->assertSetupScriptVersions();
     }
 
     /**

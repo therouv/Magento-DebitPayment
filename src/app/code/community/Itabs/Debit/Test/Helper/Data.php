@@ -44,9 +44,18 @@ class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
     }
 
     /**
-     * Test if the customer enters a faulty string that it
-     * gets sanitized correctly
-     *
+     * @test
+     */
+    public function testGetBankByIdentifier()
+    {
+        $this->assertEquals('Kreissparkasse Esslingen-Nürtingen', $this->_helper->getBankByIdentifier('routing', '61150020'));
+        $this->assertNull($this->_helper->getBankByIdentifier('routing', '99999999'));
+        $this->assertEquals('Kreissparkasse Esslingen-Nürtingen', $this->_helper->getBankByIdentifier('swift', 'ESSLDE66XXX'));
+        $this->assertNull($this->_helper->getBankByIdentifier('swift', 'XXXXXXXXXX'));
+    }
+
+    /**
+     * @test
      * @dataProvider dataProvider
      */
     public function testSanitizeData($data)
