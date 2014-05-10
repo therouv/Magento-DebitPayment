@@ -44,10 +44,18 @@ class Itabs_Debit_Model_Validation
      */
     public function isValid()
     {
-        return $this->hasSpecificCustomerGroup()
+        $result = $this->hasSpecificCustomerGroup()
             && $this->hasMinimumOrderCount()
             && $this->hasMinimumOrderAmount()
-            ;
+        ;
+
+        // StdClass for observer
+        $debitIsValid = new StdClass;
+        $debitIsValid->isValid = $result;
+
+        Mage::dispatchEvent('itabs_debit_validation_result', array('result' => $debitIsValid));
+
+        return $debitIsValid;
     }
 
     /**
