@@ -1,0 +1,4 @@
+config:
+  default/payment/debit/specificgroup_all: 0
+  default/payment/debit/specificgroup: 1
+

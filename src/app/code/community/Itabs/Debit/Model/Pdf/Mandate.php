@@ -201,7 +201,7 @@ class Itabs_Debit_Model_Pdf_Mandate extends Mage_Sales_Model_Order_Pdf_Abstract
      *
      * @param int $ln Line Spacing
      */
-    protected function ln($ln = 16)
+    public function ln($ln = 16)
     {
         $this->y -= $ln;
     }

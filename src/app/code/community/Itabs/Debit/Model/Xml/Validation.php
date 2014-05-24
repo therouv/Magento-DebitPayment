@@ -61,7 +61,7 @@ class Itabs_Debit_Model_Xml_Validation
 
         // Check if the validation file exists
         $dataDir = Mage::getConfig()->getModuleDir('etc', 'Itabs_Debit') . DS . 'data' . DS;
-        $filePath = $dataDir . $this->schema;
+        $filePath = $dataDir . $this->getSchema();
         if (!file_exists($filePath)) {
             $this->addError('XSD for validation does not exist.');
             return false;
@@ -72,7 +72,7 @@ class Itabs_Debit_Model_Xml_Validation
         $dom = new DOMDocument();
 
         // Check if the xml document is well formed
-        $result = $dom->loadXML($this->xml);
+        $result = $dom->loadXML($this->getXml());
         if ($result === false) {
             $this->addError('Document is not well formed.');
             return false;
@@ -143,5 +143,27 @@ class Itabs_Debit_Model_Xml_Validation
     public function getErrors()
     {
         return $this->errors;
+    }
+
+    /**
+     * Set the schema name
+     *
+     * @param  string $schema Schema
+     * @return Itabs_Debit_Model_Xml_Validation
+     */
+    public function setSchema($schema)
+    {
+        $this->schema = $schema;
+        return $this;
+    }
+
+    /**
+     * Retrieve the schema name
+     *
+     * @return string
+     */
+    public function getSchema()
+    {
+        return $this->schema;
     }
 }

@@ -46,6 +46,14 @@ class Itabs_Debit_Test_Helper_Adminhtml extends EcomDev_PHPUnit_Test_Case_Contro
     /**
      * @test
      */
+    public function testInstance()
+    {
+        $this->assertInstanceOf('Itabs_Debit_Helper_Adminhtml', $this->_helper);
+    }
+
+    /**
+     * @test
+     */
     public function hasNotExportRequirements()
     {
         $this->assertFalse($this->_helper->hasExportRequirements());
@@ -74,13 +82,71 @@ class Itabs_Debit_Test_Helper_Adminhtml extends EcomDev_PHPUnit_Test_Case_Contro
     /**
      * @test
      * @loadFixture ~Itabs_Debit/default
-     * @loadFixture
+     * @loadExpectations
      */
-    public function getSyncedOrders()
+    public function testGetSyncedOrders()
     {
         $this->assertEquals(
             $this->expected('orders')->getResult(),
             $this->_helper->getSyncedOrders()
         );
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testSetStatusAsExported()
+    {
+        $result = $this->_helper->setStatusAsExported(1);
+
+        $this->assertTrue($result);
+        $model = Mage::getModel('debit/orders')->load(1);
+        $this->assertEquals(1, $model->getData('status'));
+    }
+
+    /**
+     * @test
+     * @loadFixture testGetBookingText
+     */
+    public function testGetBookingText()
+    {
+        $this->assertEquals('Bestellung 999999999', $this->_helper->getBookingText(0, '999999999'));
+    }
+
+    /**
+     * @test
+     * @loadFixture getCountryOptions
+     * @loadExpectations
+     */
+    public function testGetCountryOptionsHash()
+    {
+        $this->assertEquals(
+            $this->expected('countryoptions')->getResult(),
+            $this->_helper->getCountryOptionsHash()
+        );
+    }
+
+    /**
+     * @test
+     * @loadFixture getCountryOptions
+     */
+    public function testGetCountryOptions()
+    {
+        $this->assertEquals(
+            $this->expected('countryoptions')->getResult(),
+            $this->_helper->getCountryOptions()
+        );
+    }
+
+    /**
+     * @test
+     * @loadFixture getCountryOptions
+     */
+    public function testGetCountryCollection()
+    {
+        $collection = $this->_helper->getCountryCollection();
+        $this->assertInstanceOf('Mage_Directory_Model_Resource_Country_Collection', $collection);
+        $this->assertEquals(2, $collection->count());
     }
 }

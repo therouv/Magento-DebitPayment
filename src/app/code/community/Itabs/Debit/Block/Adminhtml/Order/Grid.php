@@ -134,9 +134,7 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
         $this->setMassactionIdField('id');
         $this->getMassactionBlock()->setFormFieldName('orders');
 
-        $values = Mage::getSingleton('debit/system_config_source_debit_status')
-            ->toOptionArray();
-
+        $values = Mage::getSingleton('debit/system_config_source_debit_status')->toOptionArray();
         $this->getMassactionBlock()->addItem(
             'status',
             array(

@@ -46,6 +46,14 @@ class Itabs_Debit_Test_Block_Mandate extends EcomDev_PHPUnit_Test_Case_Controlle
     /**
      * @test
      */
+    public function testInstance()
+    {
+        $this->assertInstanceOf('Itabs_Debit_Block_Mandate', $this->_block);
+    }
+
+    /**
+     * @test
+     */
     public function testGetFormAction()
     {
         $this->assertContains('debit/mandate/print', $this->_block->getFormAction());
@@ -66,5 +74,23 @@ class Itabs_Debit_Test_Block_Mandate extends EcomDev_PHPUnit_Test_Case_Controlle
     public function testGetCustomer()
     {
         $this->assertInstanceOf('Mage_Customer_Model_Customer', $this->_block->getCustomer());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetHintForIbanField()
+    {
+        $this->assertEquals('Lorem Ipsum Iban', $this->_block->getHintForIbanField());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetHintForBicField()
+    {
+        $this->assertEquals('Lorem Ipsum Bic', $this->_block->getHintForBicField());
     }
 }

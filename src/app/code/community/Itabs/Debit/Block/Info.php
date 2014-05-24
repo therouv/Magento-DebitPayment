@@ -69,9 +69,7 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     public function isEmailContext()
     {
         $info = $this->getInfo();
-        if ($info instanceof Mage_Sales_Model_Quote_Payment) {
-            return false;
-        } elseif ($info instanceof Mage_Sales_Model_Order_Payment) {
+        if ($info instanceof Mage_Sales_Model_Order_Payment) {
             if (Mage::app()->getStore()->isAdmin()) {
                 $action = Mage::app()->getRequest()->getActionName();
                 if ($action == 'email' || $action == 'save') {
@@ -83,6 +81,8 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
                 return true; // Frontend
             }
         }
+
+        return false;
     }
 
     /**

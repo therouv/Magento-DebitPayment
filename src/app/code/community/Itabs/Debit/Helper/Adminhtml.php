@@ -77,7 +77,7 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
     public function getSyncedOrders()
     {
         $entityIds = array();
-        $collection = Mage::getModel('debit/orders')->getCollection();
+        $collection = Mage::getResourceModel('debit/orders_collection');
         if ($collection->count() > 0) {
             foreach ($collection as $item) {
                 $entityIds[] = $item->getData('entity_id');
@@ -128,7 +128,6 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
         $options = array();
 
         $allOptions = $this->getCountryOptions();
-        array_shift($allOptions);
         foreach ($allOptions as $option) {
             $options[$option['value']] = $option['label'];
         }
@@ -143,18 +142,19 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
      */
     public function getCountryOptions()
     {
-        $options = false;
+        $options  = false;
         $useCache = Mage::app()->useCache('config');
+        $cacheId  = 'DIRECTORY_COUNTRY_SELECT_STORE_' . Mage::app()->getStore()->getCode();
+        $cacheTags = array('config');
+
         if ($useCache) {
-            $cacheId = 'DIRECTORY_COUNTRY_SELECT_STORE_' . Mage::app()->getStore()->getCode();
-            $cacheTags = array('config');
             if ($optionsCache = Mage::app()->loadCache($cacheId)) {
                 $options = unserialize($optionsCache);
             }
         }
 
         if ($options == false) {
-            $options = $this->getCountryCollection()->toOptionArray();
+            $options = $this->getCountryCollection()->toOptionArray(false);
             if ($useCache) {
                 Mage::app()->saveCache(serialize($options), $cacheId, $cacheTags);
             }
@@ -164,6 +164,8 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
     }
 
     /**
+     * Retrieve the country collection
+     *
      * @return Mage_Directory_Model_Resource_Country_Collection
      */
     public function getCountryCollection()

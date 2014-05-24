@@ -1,0 +1,3 @@
+config:
+  default/payment/debit/customer_order_amount: 250.000
+

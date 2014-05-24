@@ -46,6 +46,14 @@ class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
     /**
      * @test
      */
+    public function testInstance()
+    {
+        $this->assertInstanceOf('Itabs_Debit_Helper_Data', $this->_helper);
+    }
+
+    /**
+     * @test
+     */
     public function testGetBankByIdentifier()
     {
         $this->assertEquals('Kreissparkasse Esslingen-Nürtingen', $this->_helper->getBankByIdentifier('routing', '61150020'));

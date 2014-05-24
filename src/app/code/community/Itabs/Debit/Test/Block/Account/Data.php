@@ -35,12 +35,20 @@ class Itabs_Debit_Test_Block_Account_Data extends EcomDev_PHPUnit_Test_Case_Cont
     protected $_block;
 
     /**
-     * Instantiate the object
+     * Set up the test class
      */
     protected function setUp()
     {
         parent::setUp();
         $this->_block = self::app()->getLayout()->createBlock('debit/account_data');
+    }
+
+    /**
+     * @test
+     */
+    public function testInstance()
+    {
+        $this->assertInstanceOf('Itabs_Debit_Block_Account_Data', $this->_block);
     }
 
     /**
@@ -176,5 +184,32 @@ class Itabs_Debit_Test_Block_Account_Data extends EcomDev_PHPUnit_Test_Case_Cont
             $this->expected('account')->getData('debit_payment_acount_number'),
             $this->_block->getAccountNumber()
         );
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetCreditorIdentificationNumber()
+    {
+        $this->assertEquals('DE98ZZZ09999999999', $this->_block->getCreditorIdentificationNumber());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetHintForIbanField()
+    {
+        $this->assertEquals('Lorem Ipsum Iban', $this->_block->getHintForIbanField());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetHintForBicField()
+    {
+        $this->assertEquals('Lorem Ipsum Bic', $this->_block->getHintForBicField());
     }
 }

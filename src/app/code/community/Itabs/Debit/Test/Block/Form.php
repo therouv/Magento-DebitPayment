@@ -35,7 +35,7 @@ class Itabs_Debit_Test_Block_Form extends EcomDev_PHPUnit_Test_Case_Controller
     protected $_block;
 
     /**
-     * Instantiate the object
+     * Set up the test class
      */
     protected function setUp()
     {
@@ -49,6 +49,14 @@ class Itabs_Debit_Test_Block_Form extends EcomDev_PHPUnit_Test_Case_Controller
         $infoInstance->setMethodInstance($method);
         $method->setData('info_instance', $infoInstance);
         $this->_block->setData('method', $method);
+    }
+
+    /**
+     * @test
+     */
+    public function testInstance()
+    {
+        $this->assertInstanceOf('Itabs_Debit_Block_Form', $this->_block);
     }
 
     /**
@@ -209,8 +217,50 @@ class Itabs_Debit_Test_Block_Form extends EcomDev_PHPUnit_Test_Case_Controller
     /**
      * @test
      */
-    public function testGetCustomer()
+    public function testGetCustomerFrontend()
     {
         $this->assertInstanceOf('Mage_Customer_Model_Customer', $this->_block->getCustomer());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetCustomerBackend()
+    {
+        $this->setCurrentStore(0);
+        $customer = Mage::getModel('customer/customer')->load(1);
+        $sessionMock = $this->getModelMock('adminhtml/session_quote', array('renewSession'));
+        $sessionMock->setCustomer($customer);
+        $this->replaceByMock('singleton', 'adminhtml/session_quote', $sessionMock);
+        $this->assertInstanceOf('Mage_Customer_Model_Customer', $this->_block->getCustomer());
+        $this->reset();
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetCreditorIdentificationNumber()
+    {
+        $this->assertEquals('DE98ZZZ09999999999', $this->_block->getCreditorIdentificationNumber());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetHintForIbanField()
+    {
+        $this->assertEquals('Lorem Ipsum Iban', $this->_block->getHintForIbanField());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetHintForBicField()
+    {
+        $this->assertEquals('Lorem Ipsum Bic', $this->_block->getHintForBicField());
     }
 }

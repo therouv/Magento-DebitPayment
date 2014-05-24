@@ -36,7 +36,8 @@ class Itabs_Debit_Model_Observer
      *
      * Event <payment_method_is_active>
      *
-     * @param Varien_Event_Observer $observer Observer
+     * @param  Varien_Event_Observer $observer Observer
+     * @return bool
      */
     public function paymentMethodIsActive($observer)
     {
@@ -44,12 +45,12 @@ class Itabs_Debit_Model_Observer
 
         // Check if method is DebitPayment
         if ($methodInstance->getCode() != 'debit') {
-            return;
+            return false;
         }
 
         // Check if payment method is active
         if (!Mage::getStoreConfigFlag('payment/debit/active')) {
-            return;
+            return false;
         }
 
         /* @var $validationModel Itabs_Debit_Model_Validation */

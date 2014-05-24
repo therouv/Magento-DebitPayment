@@ -82,16 +82,6 @@ class Itabs_Debit_MandateController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * Returns the current customer from customer session
-     *
-     * @return Mage_Customer_Model_Customer
-     */
-    protected function _getCustomer()
-    {
-        return $this->_getSession()->getCustomer();
-    }
-
-    /**
      * Retrieve customer session model object
      *
      * @return Mage_Customer_Model_Session

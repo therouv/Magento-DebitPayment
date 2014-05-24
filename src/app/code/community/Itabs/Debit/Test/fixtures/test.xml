@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.002.02" xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:pain.008.002.02 pain.008.002.02.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CstmrDrctDbtInitn>
+    <GrpHdr>
+      <MsgId>0020140524144121</MsgId>
+      <CreDtTm>2014-05-24T14:41:21.000Z</CreDtTm>
+      <NbOfTxs>3</NbOfTxs>
+      <CtrlSum>600.00</CtrlSum>
+      <InitgPty>
+        <Nm>Test Company</Nm>
+      </InitgPty>
+    </GrpHdr>
+    <PmtInf>
+      <PmtInfId>PMT-ID0-20140524144121</PmtInfId>
+      <PmtMtd>DD</PmtMtd>
+      <BtchBookg>true</BtchBookg>
+      <NbOfTxs>3</NbOfTxs>
+      <CtrlSum>600.00</CtrlSum>
+      <PmtTpInf>
+        <SvcLvl>
+          <Cd>SEPA</Cd>
+        </SvcLvl>
+        <LclInstrm>
+          <Cd>CORE</Cd>
+        </LclInstrm>
+        <SeqTp>OOFF</SeqTp>
+      </PmtTpInf>
+      <ReqdColltnDt>2014-05-24</ReqdColltnDt>
+      <Cdtr>
+        <Nm>Test Company</Nm>
+      </Cdtr>
+      <CdtrAcct>
+        <Id>
+          <IBAN>DE68210501700012345678</IBAN>
+        </Id>
+      </CdtrAcct>
+      <CdtrAgt>
+        <FinInstnId>
+          <BIC>BELADEBEXXX</BIC>
+        </FinInstnId>
+      </CdtrAgt>
+      <ChrgBr>SLEV</ChrgBr>
+      <CdtrSchmeId>
+        <Id>
+          <PrvtId>
+            <Othr>
+              <Id>DE98ZZZ09999999999</Id>
+              <SchmeNm>
+                <Prtry>SEPA</Prtry>
+              </SchmeNm>
+            </Othr>
+          </PrvtId>
+        </Id>
+      </CdtrSchmeId>
+      <DrctDbtTxInf>
+        <PmtId>
+          <EndToEndId>NOTPROVIDED</EndToEndId>
+        </PmtId>
+        <InstdAmt Ccy="EUR">100.00</InstdAmt>
+        <DrctDbtTx>
+          <MndtRltdInf>
+            <MndtId>1</MndtId>
+            <DtOfSgntr>2014-05-24</DtOfSgntr>
+            <AmdmntInd>false</AmdmntInd>
+          </MndtRltdInf>
+        </DrctDbtTx>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>BELADEBEXXX</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <Dbtr>
+          <Nm>Debitor Name</Nm>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>DE68210501700012345678</IBAN>
+          </Id>
+        </DbtrAcct>
+        <UltmtDbtr>
+          <Nm>Debitor Name</Nm>
+        </UltmtDbtr>
+        <RmtInf>
+          <Ustrd>Order 1</Ustrd>
+        </RmtInf>
+      </DrctDbtTxInf>
+      <DrctDbtTxInf>
+        <PmtId>
+          <EndToEndId>NOTPROVIDED</EndToEndId>
+        </PmtId>
+        <InstdAmt Ccy="EUR">200.00</InstdAmt>
+        <DrctDbtTx>
+          <MndtRltdInf>
+            <MndtId>2</MndtId>
+            <DtOfSgntr>2014-05-24</DtOfSgntr>
+            <AmdmntInd>false</AmdmntInd>
+          </MndtRltdInf>
+        </DrctDbtTx>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>BELADEBEXXX</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <Dbtr>
+          <Nm>Debitor Name</Nm>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>DE68210501700012345678</IBAN>
+          </Id>
+        </DbtrAcct>
+        <UltmtDbtr>
+          <Nm>Debitor Name</Nm>
+        </UltmtDbtr>
+        <RmtInf>
+          <Ustrd>Order 2</Ustrd>
+        </RmtInf>
+      </DrctDbtTxInf>
+      <DrctDbtTxInf>
+        <PmtId>
+          <EndToEndId>NOTPROVIDED</EndToEndId>
+        </PmtId>
+        <InstdAmt Ccy="EUR">300.00</InstdAmt>
+        <DrctDbtTx>
+          <MndtRltdInf>
+            <MndtId>3</MndtId>
+            <DtOfSgntr>2014-05-24</DtOfSgntr>
+            <AmdmntInd>false</AmdmntInd>
+          </MndtRltdInf>
+        </DrctDbtTx>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>BELADEBEXXX</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <Dbtr>
+          <Nm>Debitor Name</Nm>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>DE68210501700012345678</IBAN>
+          </Id>
+        </DbtrAcct>
+        <UltmtDbtr>
+          <Nm>Debitor Name</Nm>
+        </UltmtDbtr>
+        <RmtInf>
+          <Ustrd>Order 3</Ustrd>
+        </RmtInf>
+      </DrctDbtTxInf>
+    </PmtInf>
+  </CstmrDrctDbtInitn>
+</Document>

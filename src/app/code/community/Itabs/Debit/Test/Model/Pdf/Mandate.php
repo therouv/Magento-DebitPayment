@@ -45,6 +45,25 @@ class Itabs_Debit_Test_Model_Pdf_Mandate extends EcomDev_PHPUnit_Test_Case
 
     /**
      * @test
+     */
+    public function testLn()
+    {
+        $this->_model->y = 800;
+        $this->_model->ln(20);
+        $this->assertEquals(780, $this->_model->y);
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetCreditorIdentificationNumber()
+    {
+        $this->assertEquals('DE98ZZZ09999999999', $this->_model->getCreditorIdentificationNumber());
+    }
+
+    /**
+     * @test
      * @loadFixture ~Itabs_Debit/default
      */
     public function getCreditorAddress()

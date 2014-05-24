@@ -71,4 +71,27 @@ class Itabs_Debit_Test_Controller_MandateController
 
         $this->reset();
     }
+
+    /**
+     * @test
+     */
+    public function printAction()
+    {
+        $data = array(
+            'account_holder' => 'Test Tester',
+            'iban' => 'DE68210501700012345678',
+            'swiftcode' => 'BELADEBEXXX',
+            'bank_name' => 'Test Bank',
+            'street' => 'Musterstraße 123',
+            'city' => '99999 Musterstadt'
+        );
+
+        self::app()->getRequest()->setPost($data);
+
+        $this->dispatch('debit/mandate/print', array('_store' => 'default'));
+
+        $this->assertResponseHttpCode(200);
+
+        $this->reset();
+    }
 }

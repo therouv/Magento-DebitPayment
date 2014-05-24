@@ -128,7 +128,7 @@ class Itabs_Debit_Block_Adminhtml_Bankdata_Grid extends Mage_Adminhtml_Block_Wid
      */
     public function getGridUrl()
     {
-        return $this->getUrl('*/*/grid', array('_current' => true));
+        return $this->getUrl('debit/bankdata/grid', array('_current' => true));
     }
 
     /**

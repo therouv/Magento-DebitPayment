@@ -62,9 +62,9 @@ class Itabs_Debit_Model_Xml_Payment
     protected $offset = 0;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $transactionDate;
+    protected $transactionDate = null;
 
     /**
      * @var string
@@ -338,7 +338,7 @@ class Itabs_Debit_Model_Xml_Payment
      */
     public function getTransactionDate()
     {
-        if (isset($this->transactionDate)) {
+        if (null !== $this->transactionDate) {
             $transactionDate = $this->transactionDate;
         } else {
             $transactionDate = time();
