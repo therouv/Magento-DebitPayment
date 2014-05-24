@@ -35,10 +35,6 @@ class Itabs_Debit_Adminhtml_OrderController
     {
         $helper = $this->_getDebitHelper();
 
-        $this->_getSession()->addNotice(
-            $helper->__('Please note: SEPA Debit Payment orders can only be exported as CSV for now.')
-        );
-
         $this->loadLayout();
         $this->_setActiveMenu('sales/debitpayment')
             ->_addBreadcrumb(
@@ -142,9 +138,6 @@ class Itabs_Debit_Adminhtml_OrderController
                     count($orderIds)
                 )
             );
-        }
-        catch (Mage_Core_Model_Exception $e) {
-            $this->_getSession()->addError($e->getMessage());
         } catch (Mage_Core_Exception $e) {
             $this->_getSession()->addError($e->getMessage());
         } catch (Exception $e) {
@@ -176,6 +169,16 @@ class Itabs_Debit_Adminhtml_OrderController
     public function exportcsvAction()
     {
         return $this->_export('csv');
+    }
+
+    /**
+     * Export the order list as XML
+     *
+     * @return void|Mage_Core_Controller_Varien_Action
+     */
+    public function exportxmlAction()
+    {
+        return $this->_export('xml');
     }
 
     /**

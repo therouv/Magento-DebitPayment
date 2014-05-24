@@ -93,9 +93,7 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
             )
         );
 
-        $types = Mage::getModel('debit/system_config_source_debit_type')
-            ->toOptionHash();
-
+        $types = Mage::getModel('debit/system_config_source_debit_type')->toOptionHash();
         $this->addColumn(
             'debit_type',
             array(
@@ -107,9 +105,7 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
             )
         );
 
-        $statuses = Mage::getSingleton('debit/system_config_source_debit_status')
-            ->toOptionHash();
-
+        $statuses = Mage::getSingleton('debit/system_config_source_debit_status')->toOptionHash();
         $this->addColumn(
             'status',
             array(
@@ -120,6 +116,10 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
                 'options' => $statuses
             )
         );
+
+        $this->addExportType('*/*/exportcsv', 'CSV');
+        $this->addExportType('*/*/exportdtaus', 'DTAUS');
+        $this->addExportType('*/*/exportxml', 'SEPA-XML');
 
         return parent::_prepareColumns();
     }

@@ -47,16 +47,6 @@ class Itabs_Debit_Block_Adminhtml_Order extends Mage_Adminhtml_Block_Widget_Grid
                 'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/sync') .'\')',
                 'class'     => 'add',
             ));
-            $this->_addButton('export_dtaus', array(
-                'label'     => $helper->__('Export as DTAUS'),
-                'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/exportdtaus') .'\')',
-                'class'     => '',
-            ));
-            $this->_addButton('export_csv', array(
-                'label'     => $helper->__('Export as CSV'),
-                'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/exportcsv') .'\')',
-                'class'     => '',
-            ));
         } else {
             Mage::getSingleton('adminhtml/session')->addError(
                 $helper->__('Please enter bankaccount credentials of the store owner in the system configuration.')

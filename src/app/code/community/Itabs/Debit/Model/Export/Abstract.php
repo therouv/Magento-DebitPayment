@@ -60,13 +60,13 @@ class Itabs_Debit_Model_Export_Abstract extends Varien_Object
     /**
      * Check if there are orders available for export..
      *
-     * @return Itabs_Debit_Model_Mysql4_Orders_Collection|false
+     * @return Itabs_Debit_Model_Resource_Orders_Collection|false
      */
     protected function _hasOrdersToExport()
     {
-        /* @var $collection Itabs_Debit_Model_Mysql4_Orders_Collection */
-        $collection = Mage::getModel('debit/orders')->getCollection()
-            ->addFieldToFilter('status', 0);
+        /* @var $collection Itabs_Debit_Model_Resource_Orders_Collection */
+        $collection = Mage::getResourceModel('debit/orders_collection');
+        $collection->addFieldToFilter('status', 0);
 
         // Apply custom filters if applicable
         if ($this->_orderFilter) {

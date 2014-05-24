@@ -24,6 +24,27 @@
  */
 /**
  * Model for Export Orders
+ *
+ * @method int getEntityId()
+ * @method Itabs_Debit_Model_Orders setEntityId(int $value)
+ * @method int getStoreId()
+ * @method Itabs_Debit_Model_Orders setStoreId(int $value)
+ * @method int getCustomerId()
+ * @method Itabs_Debit_Model_Orders setCustomerId(int $value)
+ * @method float getGrandTotal()
+ * @method Itabs_Debit_Model_Orders setGrandTotal(float $value)
+ * @method string getIncrementId()
+ * @method Itabs_Debit_Model_Orders setIncrementId(string $value)
+ * @method string getOrderCurrencyCode()
+ * @method Itabs_Debit_Model_Orders setOrderCurrencyCode(string $value)
+ * @method string getBillingName()
+ * @method Itabs_Debit_Model_Orders setBillingName(string $value)
+ * @method string getCreatedAt()
+ * @method Itabs_Debit_Model_Orders setCreatedAt(string $value)
+ * @method int getStatus()
+ * @method Itabs_Debit_Model_Orders setStatus(int $value)
+ * @method string getDebitType()
+ * @method Itabs_Debit_Model_Orders setDebitType(string $value)
  */
 class Itabs_Debit_Model_Orders extends Mage_Core_Model_Abstract
 {
