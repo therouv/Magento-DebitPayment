@@ -2,6 +2,11 @@ DebitPayment
 ============
 This extension allows shop owners to provide the payment method "DebitPayment" to their customers.
 
+Build Status
+------------
+* Latest Release: [![Master Branch](https://travis-ci.org/therouv/Magento-DebitPayment.svg?branch=master)](https://travis-ci.org/therouv/Magento-DebitPayment)
+* Development Branch: [![Develop Branch](https://travis-ci.org/therouv/Magento-DebitPayment.svg?branch=develop)](https://travis-ci.org/therouv/Magento-DebitPayment)
+
 Facts
 -----
 - version: 1.0.9
