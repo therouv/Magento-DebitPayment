@@ -55,7 +55,7 @@ class Itabs_Debit_Model_Validation
 
         Mage::dispatchEvent('itabs_debit_validation_result', array('result' => $debitIsValid));
 
-        return $debitIsValid;
+        return $debitIsValid->isValid;
     }
 
     /**
