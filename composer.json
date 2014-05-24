@@ -27,6 +27,7 @@
         }
     ],
     "extra":{
+        "magento-root-dir": "test/",
         "magento_connect": {
             "name": "DebitPayment",
             "real_module_name": "Itabs_Debit",
