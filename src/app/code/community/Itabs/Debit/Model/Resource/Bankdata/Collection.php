@@ -23,7 +23,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Backend View for Bank Data List
+ * Resource Model Collection for Export Orders
  *
  * @category  Itabs
  * @package   Itabs_Debit
@@ -33,26 +33,15 @@
  * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_Block_Adminhtml_Bankdata extends Mage_Adminhtml_Block_Widget_Grid_Container
+class Itabs_Debit_Model_Resource_Bankdata_Collection
+    extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
     /**
-     * Class constructor
+     * (non-PHPdoc)
+     * @see Mage_Core_Model_Resource_Db_Collection_Abstract::_construct()
      */
-    public function __construct()
+    protected function _construct()
     {
-        /* @var $helper Itabs_Debit_Helper_Data */
-        $helper = Mage::helper('debit');
-
-        $this->_controller = 'adminhtml_bankdata';
-        $this->_blockGroup = 'debit';
-        $this->_headerText = $helper->__('Debit Payment Bank Data');
-        parent::__construct();
-        $this->_removeButton('add');
-
-        $this->_addButton('upload', array(
-            'label'     => $helper->__('Upload'),
-            'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/upload') .'\')',
-            'class'     => 'add',
-        ));
+        $this->_init('debit/bankdata');
     }
 }

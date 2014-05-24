@@ -23,10 +23,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Model for Bank Data
- *
- * @method Itabs_Debit_Model_Mysql4_Bankdata getResource()
- * @method Itabs_Debit_Model_Mysql4_Bankdata _getResource()
+ * Resource Model for Export Orders
  *
  * @category  Itabs
  * @package   Itabs_Debit
@@ -36,15 +33,16 @@
  * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_Model_Bankdata extends Mage_Core_Model_Abstract
+class Itabs_Debit_Model_Resource_Bankdata
+    extends Mage_Core_Model_Resource_Db_Abstract
 {
     /**
      * (non-PHPdoc)
-     * @see Varien_Object::_construct()
+     * @see Mage_Core_Model_Resource_Abstract::_construct()
      */
     protected function _construct()
     {
-        $this->_init('debit/bankdata');
+        $this->_init('debit/bankdata', 'id');
     }
 
     /**
@@ -55,8 +53,8 @@ class Itabs_Debit_Model_Bankdata extends Mage_Core_Model_Abstract
      */
     public function deleteByCountryId($countryId)
     {
-        $this->_getResource()->deleteByCountryId($countryId);
-        return $this;
+        $condition = $this->_getWriteAdapter()->quoteInto('country_id = ?', $countryId);
+        $this->_getWriteAdapter()->delete($this->getMainTable(), $condition);
     }
 
     /**
@@ -69,6 +67,32 @@ class Itabs_Debit_Model_Bankdata extends Mage_Core_Model_Abstract
      */
     public function loadByIdentifier($identifier, $value, $country=null)
     {
-        return $this->_getResource()->loadByIdentifier($identifier, $value, $country);
+        /* @var $adapter Varien_Db_Adapter_Pdo_Mysql */
+        $adapter = $this->_getReadAdapter();
+
+        if ($identifier == 'routing') {
+            $field = 'routing_number';
+        } else {
+            $field = 'swift_code';
+        }
+
+        $select = $adapter->select()
+            ->from($this->getMainTable(), 'bank_name')
+            ->where($field.'=?', $value);
+
+        // Limit by country if param is given
+        if (null !== $country) {
+            $select->where('country_id=?', $country);
+        }
+
+        // Allow only one result
+        $select->limit(1);
+
+        $result = $adapter->fetchOne($select);
+        if (!$result) {
+            return false;
+        }
+
+        return $result;
     }
 }

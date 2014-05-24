@@ -19,7 +19,7 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.0.6
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -44,9 +44,18 @@ class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
     }
 
     /**
-     * Test if the customer enters a faulty string that it
-     * gets sanitized correctly
-     *
+     * @test
+     */
+    public function testGetBankByIdentifier()
+    {
+        $this->assertEquals('Kreissparkasse Esslingen-Nürtingen', $this->_helper->getBankByIdentifier('routing', '61150020'));
+        $this->assertNull($this->_helper->getBankByIdentifier('routing', '99999999'));
+        $this->assertEquals('Kreissparkasse Esslingen-Nürtingen', $this->_helper->getBankByIdentifier('swift', 'ESSLDE66XXX'));
+        $this->assertNull($this->_helper->getBankByIdentifier('swift', 'XXXXXXXXXX'));
+    }
+
+    /**
+     * @test
      * @dataProvider dataProvider
      */
     public function testSanitizeData($data)

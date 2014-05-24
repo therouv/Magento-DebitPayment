@@ -19,7 +19,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -30,18 +30,11 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Model_Mysql4_Bankdata_Collection
-    extends Mage_Core_Model_Mysql4_Collection_Abstract
+    extends Itabs_Debit_Model_Resource_Bankdata_Collection
 {
-    /**
-     * (non-PHPdoc)
-     * @see Mage_Core_Model_Resource_Db_Collection_Abstract::_construct()
-     */
-    protected function _construct()
-    {
-        $this->_init('debit/bankdata');
-    }
+
 }

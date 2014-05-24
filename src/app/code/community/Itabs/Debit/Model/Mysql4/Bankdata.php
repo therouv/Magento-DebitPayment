@@ -19,7 +19,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -30,68 +30,11 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_Model_Mysql4_Bankdata extends Mage_Core_Model_Mysql4_Abstract
+class Itabs_Debit_Model_Mysql4_Bankdata
+    extends Itabs_Debit_Model_Resource_Bankdata
 {
-    /**
-     * (non-PHPdoc)
-     * @see Mage_Core_Model_Resource_Abstract::_construct()
-     */
-    protected function _construct()
-    {
-        $this->_init('debit/bankdata', 'id');
-    }
 
-    /**
-     * Delete all entries by the given country id
-     *
-     * @param  string $countryId
-     * @return Itabs_Debit_Model_Bankdata
-     */
-    public function deleteByCountryId($countryId)
-    {
-        $condition = $this->_getWriteAdapter()->quoteInto('country_id = ?', $countryId);
-        $this->_getWriteAdapter()->delete($this->getMainTable(), $condition);
-    }
-
-    /**
-     * Retrieve the bank by the given data
-     *
-     * @param  string      $identifier (Routing or Swift)
-     * @param  string      $value
-     * @param  null|string $country
-     * @return bool|string
-     */
-    public function loadByIdentifier($identifier, $value, $country=null)
-    {
-        /* @var $adapter Varien_Db_Adapter_Pdo_Mysql */
-        $adapter = $this->_getReadAdapter();
-
-        if ($identifier == 'routing') {
-            $field = 'routing_number';
-        } else {
-            $field = 'swift_code';
-        }
-
-        $select = $adapter->select()
-            ->from($this->getMainTable(), 'bank_name')
-            ->where($field.'=?', $value);
-
-        // Limit by country if param is given
-        if (null !== $country) {
-            $select->where('country_id=?', $country);
-        }
-
-        // Allow only one result
-        $select->limit(1);
-
-        $result = $adapter->fetchOne($select);
-        if (!$result) {
-            return false;
-        }
-
-        return $result;
-    }
 }
