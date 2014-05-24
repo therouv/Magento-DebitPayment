@@ -10,9 +10,22 @@
             "email": "therouv@googlemail.com"
         }
     ],
-    "require":{
+    "require": {
         "magento-hackathon/magento-composer-installer": "*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*@dev",
+        "firegento/mage-ci": "master-dev"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.firegento.com"
+        }
+    ],
     "extra":{
         "magento_connect": {
             "name": "DebitPayment",
