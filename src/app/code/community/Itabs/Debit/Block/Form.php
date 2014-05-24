@@ -29,8 +29,6 @@ class Itabs_Debit_Block_Form extends Mage_Payment_Block_Form
 {
     /**
      * Construct payment form block and set template
-     *
-     * @return void
      */
     protected function _construct()
     {

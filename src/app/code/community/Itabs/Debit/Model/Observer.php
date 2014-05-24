@@ -36,8 +36,7 @@ class Itabs_Debit_Model_Observer
      *
      * Event <payment_method_is_active>
      *
-     * @param  Varien_Event_Observer $observer Observer
-     * @return void
+     * @param Varien_Event_Observer $observer Observer
      */
     public function paymentMethodIsActive($observer)
     {
@@ -64,8 +63,7 @@ class Itabs_Debit_Model_Observer
      *
      * Event <sales_order_save_after>
      *
-     * @param  Varien_Event_Observer $observer Observer
-     * @return void
+     * @param Varien_Event_Observer $observer Observer
      */
     public function saveAccountInfo($observer)
     {

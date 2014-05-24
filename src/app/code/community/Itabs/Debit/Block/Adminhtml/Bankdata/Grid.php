@@ -16,22 +16,14 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Bank Data Grid
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.1.0
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Block_Adminhtml_Bankdata_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
@@ -49,20 +41,22 @@ class Itabs_Debit_Block_Adminhtml_Bankdata_Grid extends Mage_Adminhtml_Block_Wid
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Mage_Adminhtml_Block_Widget_Grid::_prepareCollection()
+     * Prepare the grid collection
+     *
+     * @return Itabs_Debit_Block_Adminhtml_Bankdata_Grid
      */
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('debit/bankdata')->getCollection();
+        $collection = Mage::getResourceModel('debit/bankdata_collection');
         $this->setCollection($collection);
 
         return parent::_prepareCollection();
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Mage_Adminhtml_Block_Widget_Grid::_prepareColumns()
+     * Prepare the grid columns
+     *
+     * @return Itabs_Debit_Block_Adminhtml_Bankdata_Grid
      */
     protected function _prepareColumns()
     {
@@ -119,7 +113,7 @@ class Itabs_Debit_Block_Adminhtml_Bankdata_Grid extends Mage_Adminhtml_Block_Wid
     /**
      * Retrieve the row url
      *
-     * @param  Varien_Object $row
+     * @param  Varien_Object $row Model
      * @return bool|string
      */
     public function getRowUrl($row)
@@ -140,7 +134,7 @@ class Itabs_Debit_Block_Adminhtml_Bankdata_Grid extends Mage_Adminhtml_Block_Wid
     /**
      * Retrieve the helper class
      *
-     * @return Itabs_Debit_Helper_Adminhtml Helper
+     * @return Itabs_Debit_Helper_Adminhtml
      */
     protected function _getHelper()
     {

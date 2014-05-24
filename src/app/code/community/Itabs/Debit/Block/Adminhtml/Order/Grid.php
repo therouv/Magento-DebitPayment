@@ -46,7 +46,7 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
      */
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('debit/orders')->getCollection();
+        $collection = Mage::getResourceModel('debit/orders_collection');
         $this->setCollection($collection);
 
         return parent::_prepareCollection();

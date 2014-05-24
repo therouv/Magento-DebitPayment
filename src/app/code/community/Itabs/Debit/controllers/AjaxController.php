@@ -28,9 +28,7 @@
 class Itabs_Debit_AjaxController extends Mage_Core_Controller_Front_Action
 {
     /**
-     * Checks the BLZ if it exists and returns the bankname or an error message
-     *
-     * @return void
+     * Checks the given BLZ/BIC if it exists and returns the bankname or an error message
      */
     public function checkblzAction()
     {

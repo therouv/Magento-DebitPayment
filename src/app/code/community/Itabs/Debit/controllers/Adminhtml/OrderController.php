@@ -25,15 +25,18 @@
 /**
  * Export Order Controller
  */
-class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Action
+class Itabs_Debit_Adminhtml_OrderController
+    extends Mage_Adminhtml_Controller_Action
 {
     /**
      * Loads the grid layout with the debit payment orders..
      */
     public function indexAction()
     {
+        $helper = $this->_getDebitHelper();
+
         $this->_getSession()->addNotice(
-            $this->_getDebitHelper()->__('Please note: SEPA Debit Payment orders can only be exported as CSV for now.')
+            $helper->__('Please note: SEPA Debit Payment orders can only be exported as CSV for now.')
         );
 
         $this->loadLayout();
@@ -43,11 +46,11 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
                 $this->_getHelper()->__('Sales')
             )
             ->_addBreadcrumb(
-                $this->_getDebitHelper()->__('Debit Payment Orders'),
-                $this->_getDebitHelper()->__('Debit Payment Orders')
+                $helper->__('Debit Payment Orders'),
+                $helper->__('Debit Payment Orders')
             )
             ->_title($this->_getHelper()->__('Sales'))
-            ->_title($this->_getDebitHelper()->__('Debit Payment Orders'));
+            ->_title($helper->__('Debit Payment Orders'));
 
         $this->renderLayout();
     }
@@ -55,8 +58,6 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     /**
      * Fetch all orders with the payment method "Debit Payment" and import them
      * into the export list (table: debit_order_grid)
-     *
-     * @return void
      */
     public function syncAction()
     {
@@ -122,8 +123,6 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
 
     /**
      * Update order status action
-     *
-     * @return void
      */
     public function massStatusAction()
     {

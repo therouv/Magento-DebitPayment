@@ -23,7 +23,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * AccountController
+ * Account Controller
  */
 class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
 {
@@ -38,9 +38,7 @@ class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * preDispatch
-     *
-     * @return void
+     * Check if the customer is authenticated
      */
     public function preDispatch()
     {
@@ -52,9 +50,7 @@ class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * editAction
-     *
-     * @return void
+     * Edit bank data
      */
     public function editAction()
     {
@@ -66,7 +62,7 @@ class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * saveAction
+     * Save the bank data
      *
      * @throws Mage_Core_Exception
      * @throws Exception

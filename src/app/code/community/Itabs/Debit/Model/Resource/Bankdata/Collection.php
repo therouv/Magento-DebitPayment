@@ -16,29 +16,20 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Resource Model Collection for Export Orders
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.1.0
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Model_Resource_Bankdata_Collection
     extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
     /**
-     * (non-PHPdoc)
-     * @see Mage_Core_Model_Resource_Db_Collection_Abstract::_construct()
+     * Init the collection item model
      */
     protected function _construct()
     {

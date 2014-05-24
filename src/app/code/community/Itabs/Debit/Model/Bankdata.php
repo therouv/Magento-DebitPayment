@@ -16,9 +16,9 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
@@ -27,20 +27,11 @@
  *
  * @method Itabs_Debit_Model_Mysql4_Bankdata getResource()
  * @method Itabs_Debit_Model_Mysql4_Bankdata _getResource()
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.1.0
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Model_Bankdata extends Mage_Core_Model_Abstract
 {
     /**
-     * (non-PHPdoc)
-     * @see Varien_Object::_construct()
+     * Init model and resource model
      */
     protected function _construct()
     {
@@ -50,7 +41,7 @@ class Itabs_Debit_Model_Bankdata extends Mage_Core_Model_Abstract
     /**
      * Delete all entries by the given country id
      *
-     * @param  string $countryId
+     * @param  string $countryId Country ID
      * @return Itabs_Debit_Model_Bankdata
      */
     public function deleteByCountryId($countryId)
@@ -62,9 +53,9 @@ class Itabs_Debit_Model_Bankdata extends Mage_Core_Model_Abstract
     /**
      * Retrieve the bank by the given data
      *
-     * @param  string      $identifier (Routing or Swift)
-     * @param  string      $value
-     * @param  null|string $country
+     * @param  string      $identifier Routing or Swift
+     * @param  string      $value      Value
+     * @param  null|string $country    Country ID
      * @return bool|string
      */
     public function loadByIdentifier($identifier, $value, $country=null)

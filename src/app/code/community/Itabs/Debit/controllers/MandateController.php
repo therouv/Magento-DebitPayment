@@ -23,7 +23,7 @@
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * MandateController
+ * Mandate Controller
  */
 class Itabs_Debit_MandateController extends Mage_Core_Controller_Front_Action
 {
@@ -49,7 +49,7 @@ class Itabs_Debit_MandateController extends Mage_Core_Controller_Front_Action
     }
 
     /**
-     * Index action
+     * Shows the sepa mandate generation form
      */
     public function indexAction()
     {
