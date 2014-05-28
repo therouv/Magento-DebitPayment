@@ -122,32 +122,6 @@
             </sales_convert_order_payment>
         </fieldsets>
     </global>
-    <default>
-        <payment>
-            <debit>
-                <active>0</active>
-                <model>debit/debit</model>
-                <title>Debit Payment</title>
-                <sort_order>10</sort_order>
-                <sendmail>0</sendmail>
-                <sendmail_crypt>1</sendmail_crypt>
-                <checkout_crypt>0</checkout_crypt>
-                <order_status>1</order_status>
-                <allowspecific>0</allowspecific>
-                <save_account_data>0</save_account_data>
-                <checkout_valid_blz>0</checkout_valid_blz>
-                <specificgroup_all>1</specificgroup_all>
-                <specificgroup>0</specificgroup>
-                <orderscount>0</orderscount>
-                <customer_order_amount>0</customer_order_amount>
-            </debit>
-        </payment>
-        <debitpayment>
-            <sepa>
-                <mandate_form>0</mandate_form>
-            </sepa>
-        </debitpayment>
-    </default>
 	<admin>
         <routers>
             <debit>
@@ -236,6 +210,34 @@
             </controller_action_layout_load_before>
         </events>
     </frontend>
+    <default>
+        <payment>
+            <debit>
+                <active>0</active>
+                <model>debit/debit</model>
+                <title>Debit Payment</title>
+                <sort_order>10</sort_order>
+                <sendmail>0</sendmail>
+                <sendmail_crypt>1</sendmail_crypt>
+                <checkout_crypt>0</checkout_crypt>
+                <order_status>1</order_status>
+                <allowspecific>0</allowspecific>
+                <save_account_data>0</save_account_data>
+                <checkout_valid_blz>0</checkout_valid_blz>
+                <specificgroup_all>1</specificgroup_all>
+                <specificgroup>0</specificgroup>
+                <orderscount>0</orderscount>
+                <customer_order_amount>0</customer_order_amount>
+                <print_debit_message_pdf>0</print_debit_message_pdf>
+                <print_debit_message_text><![CDATA[Wir werden den Rechnungsbetrag von {{amount}} als SEPA-Lastschrift zum Mandat {{mandate}} zu der Gläubiger-Identifikationsnummer {{creditor_identification_number}} zum Fälligkeitstag am {{debit_day}} von folgendem Konto abbuchen:]]></print_debit_message_text>
+            </debit>
+        </payment>
+        <debitpayment>
+            <sepa>
+                <mandate_form>0</mandate_form>
+            </sepa>
+        </debitpayment>
+    </default>
     <phpunit>
         <suite>
             <modules>

@@ -163,4 +163,59 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     {
         return $this->getDebitData('sendmail_crypt');
     }
+
+    /**
+     * Retrieve the debit pdf message
+     *
+     * @return bool|string
+     */
+    public function getPdfMessage()
+    {
+        // Check if we already have an order
+        if (!($this->getInfo() instanceof Mage_Sales_Model_Order_Payment)) {
+            return false;
+        }
+
+        /* @var $_coreHelper Mage_Core_Helper_Data */
+        $_coreHelper = Mage::helper('core');
+        /* @var $info Mage_Sales_Model_Order_Payment */
+        $info = $this->getInfo();
+        /* @var $order Mage_Sales_Model_Order */
+        $order = $info->getOrder();
+
+        $storeId = $order->getStoreId();
+
+        // Check if we can print this message
+        if (!Mage::getStoreConfigFlag('payment/debit/print_debit_message_pdf', $storeId)) {
+            return false;
+        }
+
+        $message    = Mage::getStoreConfig('payment/debit/print_debit_message_text', $storeId);
+        $offsetDays = Mage::helper('debit')->getOffset($storeId);
+
+        /* @var $info Mage_Sales_Model_Order_Payment */
+        $info = $this->getInfo();
+
+        // Get values for placeholders
+        $amount              = $_coreHelper->formatCurrency($info->getOrder()->getGrandTotal(), false);
+        $mandate             = $order->getIncrementId();
+        $creditorIdentNumber = Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number', $storeId);
+
+        $debitDayObj = $order->getCreatedAtStoreDate();
+        $debitDayObj->addDay($offsetDays);
+        $debitDay = $_coreHelper->formatDate($debitDayObj, Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
+
+        // Replace placeholders
+        $message = str_replace(
+            array('{{amount}}', '{{mandate}}', '{{creditor_identification_number}}', '{{debit_day}}'),
+            array($amount, $mandate, $creditorIdentNumber, $debitDay),
+            $message
+        );
+
+        $transportObject = new Varien_Object();
+        $transportObject->setData('message', $message);
+        Mage::dispatchEvent('itabs_debit_pdf_message', array('message' => $message));
+
+        return $transportObject->getData('message');
+    }
 }

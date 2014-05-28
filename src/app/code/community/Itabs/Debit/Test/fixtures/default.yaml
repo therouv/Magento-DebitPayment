@@ -17,6 +17,7 @@ config:
   default/debitpayment/sepa/hint_iban_field: Lorem Ipsum Iban
   default/debitpayment/sepa/hint_bic_field: Lorem Ipsum Bic
   default/debitpayment/sepa/mandate_form: 1
+  default/debitpayment/sepa/offset_days: 4
   default/debitpayment/sepa/creditor_address: |
       Musterfirma GmbH
       Musterstraße 99
@@ -26,6 +27,7 @@ config:
       Mandate
       Text
       For PDF
+  default/payment/debit/print_debit_message_text: Amount {{amount}} Mandate {{mandate}} CIN {{creditor_identification_number}} Date {{debit_day}}
 
 eav:
   customer:
@@ -115,6 +117,7 @@ tables:
       state: complete
       status: complete
       grand_total: 400.00
+      created_at: 2014-04-01 10:00:00
     - entity_id: 2
       store_id: 1
       customer_id: 1
@@ -122,6 +125,7 @@ tables:
       state: new
       status: processing
       grand_total: 500.00
+      created_at: 2014-04-01 10:00:00
     - entity_id: 3
       store_id: 1
       customer_id: 1
@@ -129,6 +133,7 @@ tables:
       state: complete
       status: complete
       grand_total: 500.00
+      created_at: 2014-04-01 10:00:00
 
   debit/order_grid:
     - id: 1

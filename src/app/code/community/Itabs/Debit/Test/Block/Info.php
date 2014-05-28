@@ -254,11 +254,43 @@ class Itabs_Debit_Test_Block_Info extends EcomDev_PHPUnit_Test_Case_Controller
     }
 
     /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     * @loadFixture testGetPdfMessage
+     * @loadExpectations
+     */
+    public function testGetPdfMessage()
+    {
+        $block = $this->_getOrderPaymentBlock(1);
+        $this->assertEquals($this->expected('pdfmessage')->getResult(), $block->getPdfMessage());
+    }
+
+    /**
+     * @test
+     */
+    public function testGetPdfMessagePaymentInfo()
+    {
+        $this->assertFalse($this->_block->getPdfMessage());
+    }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     * @loadFixture testGetPdfMessageNotAllowed
+     */
+    public function testGetPdfMessageNotAllowed()
+    {
+        $block = $this->_getOrderPaymentBlock(2);
+        $this->assertFalse($block->getPdfMessage());
+    }
+
+    /**
      * Retrieve the order payment info block
      *
+     * @param  null|int $orderId Order Id
      * @return Itabs_Debit_Block_Info
      */
-    protected function _getOrderPaymentBlock()
+    protected function _getOrderPaymentBlock($orderId=null)
     {
         /* @var $block Itabs_Debit_Block_Info */
         $block = self::app()->getLayout()->createBlock('debit/info');
@@ -266,6 +298,12 @@ class Itabs_Debit_Test_Block_Info extends EcomDev_PHPUnit_Test_Case_Controller
         $infoInstance = Mage::getModel('sales/order_payment');
         $infoInstance->setMethod($method->getCode());
         $infoInstance->setMethodInstance($method);
+
+        if (null !== $orderId) {
+            $order = Mage::getModel('sales/order')->load($orderId);
+            $infoInstance->setOrder($order);
+        }
+
         $method->setData('info_instance', $infoInstance);
         $block->setData('method', $method);
         $block->setData('info', $infoInstance);

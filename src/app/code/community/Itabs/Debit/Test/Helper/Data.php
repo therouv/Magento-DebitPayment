@@ -123,4 +123,22 @@ class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
     {
         $this->assertFalse($this->_helper->getHintForBicField());
     }
+
+    /**
+     * @test
+     * @loadFixture ~Itabs_Debit/default
+     */
+    public function testGetOffset()
+    {
+        $this->assertEquals(4, $this->_helper->getOffset());
+    }
+
+    /**
+     * @test
+     * @loadFixture testGetOffsetSmallerThanTwo
+     */
+    public function testGetOffsetSmallerThanTwo()
+    {
+        $this->assertEquals(2, $this->_helper->getOffset());
+    }
 }

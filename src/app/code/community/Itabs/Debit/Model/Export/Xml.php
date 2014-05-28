@@ -76,7 +76,7 @@ class Itabs_Debit_Model_Export_Xml
             $xml = new Itabs_Debit_Model_Xml_XmlCreator($creditorName);
 
             $payment = new Itabs_Debit_Model_Xml_Payment($creditorId, $creditorName, $creditorIban, $creditorSwift);
-            $payment->setOffset($this->getOffset());
+            $payment->setOffset($this->_getDebitHelper()->getOffset());
             $payment->setOneTimePayment(true);
 
             foreach ($collection as $order) {
@@ -148,17 +148,5 @@ class Itabs_Debit_Model_Export_Xml
         );
 
         return $response;
-    }
-
-    /**
-     * Get the offset in days
-     *
-     * @return int
-     */
-    public function getOffset()
-    {
-        $offset = (int) Mage::getStoreConfig('debitpayment/sepa/offset_days');
-
-        return max($offset, 2);
     }
 }

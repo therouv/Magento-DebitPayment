@@ -28,6 +28,11 @@
 ?>
 <?php if($_info = $this->getMethod()): ?>
 <?php echo $this->escapeHtml($_info->getTitle()) ?>
+<?php if ($pdfMessage = $this->getPdfMessage()): ?>
+    {{pdf_row_separator}}
+    <?php echo $pdfMessage?>
+    {{pdf_row_separator}}
+<?php endif; ?>
     {{pdf_row_separator}}
 <?php echo $this->__('Account holder: %s', $_info->getAccountName()) ?>
     {{pdf_row_separator}}

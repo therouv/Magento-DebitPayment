@@ -141,4 +141,17 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
 
         return $field;
     }
+
+    /**
+     * Get the offset in days
+     *
+     * @param  null|int $storeId Store ID
+     * @return int
+     */
+    public function getOffset($storeId = null)
+    {
+        $offset = (int) Mage::getStoreConfig('debitpayment/sepa/offset_days', $storeId);
+
+        return max($offset, 2);
+    }
 }
