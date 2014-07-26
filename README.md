@@ -30,6 +30,7 @@ This includes:
 Requirements
 ------------
 - PHP >= 5.3.0
+- PHP class [ZipArchive](http://php.net/manual/en/class.ziparchive.php)
 
 Compatibility
 -------------
