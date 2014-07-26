@@ -16,44 +16,38 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * AjaxController
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_AjaxController extends Mage_Core_Controller_Front_Action
 {
     /**
-     * Checks the BLZ if it exists and returns the bankname or an error message
-     *
-     * @return void
+     * Checks the given BLZ/BIC if it exists and returns the bankname or an error message
      */
     public function checkblzAction()
     {
         $result = array();
-        $blz = $this->getRequest()->getPost('blz');
-        $blz = Mage::helper('debit')->sanitizeData($blz);
-        if ($bank = Mage::helper('debit')->getBankByBlz($blz)) {
+
+        $bankparam = $this->getRequest()->getPost('bankparam');
+        $identifer = $this->getRequest()->getPost('identifier');
+
+        $bankparam = Mage::helper('debit')->sanitizeData($bankparam);
+        if ($bank = Mage::helper('debit')->getBankByIdentifier($identifer, $bankparam)) {
             $result['found'] = 1;
-            $result['blz'] = $blz;
+            $result['blz'] = $bankparam;
             $result['bank'] = $bank;
         } else {
             $result['found'] = 0;
-            $result['blz'] = $blz;
+            $result['blz'] = $bankparam;
             $result['bank'] = $this->__('Bank not found');
         }
+
         $this->getResponse()->setBody(Zend_Json::encode($result));
     }
 }

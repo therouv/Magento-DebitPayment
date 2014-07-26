@@ -16,22 +16,14 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Debit Form Block for customer account page
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Block_Account_Data
     extends Mage_Customer_Block_Account_Dashboard
@@ -60,16 +52,7 @@ class Itabs_Debit_Block_Account_Data
      */
     public function getBankName()
     {
-        $blz = $this->getAccountBLZ();
-        if (empty($blz)) {
-            return $this->__('-- will be filled in automatically --');
-        }
-        $bankName = Mage::helper('debit')->getBankByBlz($blz);
-        if ($bankName == null) {
-            $bankName = $this->__('not available');
-        }
-
-        return $bankName;
+        return $this->_getAccountData('debit_payment_account_bankname');
     }
 
     /**
@@ -134,18 +117,42 @@ class Itabs_Debit_Block_Account_Data
         if (!Mage::getStoreConfigFlag('payment/debit/save_account_data')) {
             return '';
         }
+
         $data = $this->getCustomer()->getData($field);
         if (strlen($data) == 0) {
             return '';
         }
-        if ($field != 'debit_payment_acount_name'
-            && $field != 'debit_payment_account_swift'
-            && $field != 'debit_payment_account_iban'
-            && !is_numeric($data)
-        ) {
-            return '';
-        }
 
         return $this->escapeHtml($data);
+    }
+
+    /**
+     * Retrieve the creditor identification number
+     *
+     * @return string
+     */
+    public function getCreditorIdentificationNumber()
+    {
+        return Mage::helper('debit')->getCreditorIdentificationNumber();
+    }
+
+    /**
+     * Retrieve the hint for the IBAN field
+     *
+     * @return string|bool
+     */
+    public function getHintForIbanField()
+    {
+        return Mage::helper('debit')->getHintForIbanField();
+    }
+
+    /**
+     * Retrieve the hint for the BIC field
+     *
+     * @return string|bool
+     */
+    public function getHintForBicField()
+    {
+        return Mage::helper('debit')->getHintForBicField();
     }
 }

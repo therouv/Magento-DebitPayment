@@ -1,0 +1,9 @@
+debitdata:
+  result:
+    account_name: Test Tester
+    account_number: "12345678"
+    account_blz: "21050170"
+    bank_name: Test Bank
+    account_swift: BELADEBEXXX
+    account_iban: DE68210501700012345678
+    debit_type: bank

@@ -13,10 +13,10 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 
@@ -28,19 +28,29 @@ blzAjaxCheck.prototype = {
         this.checkoutValidBlz = checkoutValidBlz;
     },
     checkBlz: function() {
+        var param = '';
+        var identifier = '';
+        if ($('bankleitzahl')) {
+            param = $('bankleitzahl').value;
+            identifier = 'routing';
+        } else {
+            param = $('swiftcode').value;
+            identifier = 'swift';
+        }
+
         new Ajax.Request(
             this.checkBlzUrl,
             {
                 method:'post',
                 asynchronous: false,
                 onSuccess: this.setStatus.bind(this),
-                parameters: {blz:$('bankleitzahl').value}
+                parameters: {bankparam:param,identifier:identifier}
             }
         );
     },
     setStatus: function(transport) {
         if (transport && transport.responseText) {
-            $('kreditinstitut').update('');
+            $('bank_name').value = '';
             try {
                 response = eval('(' + transport.responseText + ')');
             } catch (e) {
@@ -50,18 +60,42 @@ blzAjaxCheck.prototype = {
 
         if (response.found && response.found == 1) {
             this.isBlzValid = true;
+            $('bank_name').value = response.bank;
         } else {
             this.isBlzValid = false;
+            $('bank_name').value = '';
+        }
+    },
+    validateIban: function(iban){
+        if (iban != $('iban').value){
+            iban = $('iban').value
         }
 
-        $('kreditinstitut').update(response.bank);
-        $('bankleitzahl').value = response.blz;
+        iban = iban.replace(/\s/g, "");
+        var newIban = iban.toUpperCase(),
+
+        modulo = function(divident, divisor) {
+            var m = 0;
+            for (var i = 0; i < divident.length; ++i) {
+                m = (m * 10 + parseInt(divident.charAt(i))) % divisor;
+            }
+            return m;
+        };
+
+        if (newIban.search(/^[A-Z]{2}/gi) < 0) {
+            return false;
+        }
+
+        newIban = newIban.substring(4) + newIban.substring(0, 4);
+        newIban = newIban.replace(/[A-Z]/g, function (match) {
+            return match.charCodeAt(0) - 55;
+        });
+        return (parseInt(modulo(newIban, 97)) === 1);
     }
 }
 
 Event.observe(window, 'load', function() {
     Validation.add('validate-debit-blz', Translator.translate('Please enter a valid bank code.'), function(v) {
-
         blzCheck.checkBlz();
         if (blzCheck.checkoutValidBlz == 1) {
             if (!blzCheck.isBlzValid) {
@@ -80,5 +114,20 @@ Event.observe(window, 'load', function() {
             return true;
         }
         return false;
+    });
+
+    Validation.add('validate-debit-iban',  Translator.translate('Please enter a valid international bank account number.'), function(v) {
+        if (blzCheck.validateIban()) {
+            return true;
+        }
+        return false;
+    });
+
+    Validation.add('validate-debit-swift',  Translator.translate('Please enter a valid swift code.'), function(v) {
+        if (v.length < 11 || v.length > 11) {
+            return false;
+        }
+        var regex = /[a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}[a-zA-Z0-9]{3}/;
+        return regex.test(v);
     });
 });

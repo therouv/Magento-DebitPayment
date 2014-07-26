@@ -16,23 +16,16 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Setup script
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 // load id for customer entity
 $read = Mage::getSingleton('core/resource')->getConnection('core_read');
 $eid = $read->fetchRow(
@@ -88,7 +81,7 @@ $installer->getConnection()->addColumn(
     'debit_swift',
     array(
         'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 255,
+        'length' => 255,
         'comment' => 'Debit Swift Code'
     )
 );
@@ -98,7 +91,7 @@ $installer->getConnection()->addColumn(
     'debit_iban',
     array(
         'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 255,
+        'length' => 255,
         'comment' => 'Debit IBAN'
     )
 );
@@ -108,7 +101,7 @@ $installer->getConnection()->addColumn(
     'debit_type',
     array(
         'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 4,
+        'length' => 4,
         'comment' => 'Debit Type'
     )
 );
@@ -118,7 +111,7 @@ $installer->getConnection()->addColumn(
     'debit_swift',
     array(
         'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 255,
+        'length' => 255,
         'comment' => 'Debit Swift Code'
     )
 );
@@ -128,7 +121,7 @@ $installer->getConnection()->addColumn(
     'debit_iban',
     array(
         'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 255,
+        'length' => 255,
         'comment' => 'Debit IBAN'
     )
 );
@@ -138,7 +131,7 @@ $installer->getConnection()->addColumn(
     'debit_type',
     array(
         'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 4,
+        'length' => 4,
         'comment' => 'Debit Type'
     )
 );
@@ -149,7 +142,7 @@ $installer->getConnection()->addColumn(
     'debit_type',
     array(
         'type' => Varien_Db_Ddl_Table::TYPE_TEXT,
-        'lenght' => 4,
+        'length' => 4,
         'comment' => 'Debit Type'
     )
 );

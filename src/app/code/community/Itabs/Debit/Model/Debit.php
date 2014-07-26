@@ -16,22 +16,14 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Debit Model
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
 {
@@ -62,9 +54,14 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
     protected $_canCapture = true;
 
     /**
+     * @var bool Allow partial capturing for this payment method
+     */
+    protected $_canCapturePartial = true;
+
+    /**
      * Assigns data to the payment info instance
      *
-     * @param  Varien_Object|array    $data Payment Data from checkout
+     * @param  Varien_Object|array $data Payment Data from checkout
      * @return Itabs_Debit_Model_Debit Self.
      */
     public function assignData($data)
@@ -109,12 +106,15 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
             $iban = $info->encrypt($iban);
         }
 
+        $bankName = $data->getDebitBankname();
+
         // Set account data in payment info model
         $info->setCcType($ccType)                     // BLZ
              ->setCcOwner($ccOwner)                   // Kontoinhaber
              ->setCcNumberEnc($ccNumber)              // Kontonummer
              ->setDebitSwift($swift)                  // SWIFT Code
              ->setDebitIban($iban)                    // IBAN
+             ->setDebitBankname($bankName)                    // IBAN
              ->setDebitType(Mage::helper('debit')->getDebitType());
 
         return $this;
@@ -184,12 +184,10 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
      */
     public function getAccountBankname()
     {
-        $bankName = Mage::helper('debit')->getBankByBlz($this->getAccountBLZ());
-        if ($bankName == null) {
-            $bankName = Mage::helper('debit')->__('not available');
-        }
+        $info = $this->getInfoInstance();
+        $data = $info->getDebitBankname();
 
-        return $bankName;
+        return $data;
     }
 
     /**
@@ -224,9 +222,22 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
      * @param  string $data Data to crypt
      * @return string Crypted data
      */
-    public function maskString($data)
+    public function maskBankData($data)
     {
         $crypt = str_repeat('*', strlen($data)-3) . substr($data, -3);
+
+        return $crypt;
+    }
+
+    /**
+     * Returns the encrypted data for mail
+     *
+     * @param  string $data Data to crypt
+     * @return string Crypted data
+     */
+    public function maskSepaData($data)
+    {
+        $crypt = substr($data, 0, 3) . str_repeat('X', strlen($data)-7) . substr($data, -4);
 
         return $crypt;
     }

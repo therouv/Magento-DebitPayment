@@ -1,0 +1,160 @@
+config:
+  default/web/browser_capabilities/cookies: 0
+  stores/default/web/browser_capabilities/cookies: 0
+  stores/admin/web/browser_capabilities/cookies: 0
+  #default/payment/debit/debit_type: sepa
+  default/payment/debit/save_account_data: 1
+  default/payment/debit/sendmail: 1
+  default/payment/debit/checkout_crypt: 1
+  default/payment/debit/sendmail_crypt: 1
+  default/payment/debit/customtext: Debit Custom Text
+  default/debitpayment/bankaccount/account_owner: Musterfirma GmbH
+  default/debitpayment/bankaccount/account_number: 9999999999
+  default/debitpayment/bankaccount/routing_number: 99999999
+  default/debitpayment/bankaccount/account_swift: XXXXXXXXXXX
+  default/debitpayment/bankaccount/account_iban: DE99999999999999999999
+  default/debitpayment/sepa/creditor_identification_number: DE98ZZZ09999999999
+  default/debitpayment/sepa/hint_iban_field: Lorem Ipsum Iban
+  default/debitpayment/sepa/hint_bic_field: Lorem Ipsum Bic
+  default/debitpayment/sepa/mandate_form: 1
+  default/debitpayment/sepa/offset_days: 4
+  default/debitpayment/sepa/creditor_address: |
+      Musterfirma GmbH
+      Musterstraße 99
+      99999 Musterstadt
+  default/debitpayment/sepa/mandate_pdf_headline: Headline
+  default/debitpayment/sepa/mandate_pdf_text: |
+      Mandate
+      Text
+      For PDF
+  default/payment/debit/print_debit_message_text: Amount {{amount}} Mandate {{mandate}} CIN {{creditor_identification_number}} Date {{debit_day}}
+
+eav:
+  customer:
+    - entity_id: 1
+      website_id: 1
+      email: test@example.org
+      firstname: Test
+      lastname: Tester
+      group_id: 1
+      store_id: 1
+      is_active: 1
+      attribute_set_id: 0
+      default_billing: 1
+      default_shipping: 1
+      debit_payment_acount_name: Test Tester
+      debit_payment_account_swift: XXXXXXXXXXX
+      debit_payment_account_iban: DE99999999999999999999
+      debit_payment_account_bankname: Kr Spk Esslingen-Nürtingen
+
+  customer_address:
+    - entity_id: 1
+      attribute_set_id: 0
+      parent_id: 1
+      firstname: Test
+      lastname: Tester
+      city: Teststadt
+      postcode: 99999
+      street: Teststraße 99
+      company: Testcompany
+      country_id: DE
+
+tables:
+  sales/quote:
+    - entity_id: 1
+      store_id: 1
+      customer_id: 1
+      base_currency_code: EUR
+      is_virtual: 0
+      customer_email: test@example.org
+      customer_firstname: Test
+      customer_lastname: Tester
+      customer_group_id: 1
+      created_at: "2013-12-11 10:09:08"
+
+    - entity_id: 2
+      store_id: 1
+      customer_id: 0
+      base_currency_code: EUR
+      is_virtual: 0
+      customer_email: test2@example.org
+      customer_firstname: Test
+      customer_lastname: Tester
+      created_at: "2013-12-11 10:09:08"
+
+  sales/quote_address:
+    - address_id: 1
+      quote_id: 1
+      customer_id: 1
+      firstname: Test
+      lastname: Tester
+      city: Teststadt
+      postcode: 99999
+      street: Teststraße 99
+      company: Testcompany
+      country_id: DE
+      email: test@example.org
+      address_type: billing
+
+    - address_id: 2
+      quote_id: 1
+      customer_id: 1
+      firstname: Test
+      lastname: Tester
+      city: Teststadt
+      postcode: 99999
+      street: Teststraße 99
+      company: Testcompany
+      country_id: DE
+      email: test@example.org
+      address_type: shipping
+
+  sales/order:
+    - entity_id: 1
+      store_id: 1
+      customer_id: 1
+      increment_id: 100000001
+      state: complete
+      status: complete
+      grand_total: 400.00
+      created_at: 2014-04-01 10:00:00
+    - entity_id: 2
+      store_id: 1
+      customer_id: 1
+      increment_id: 100000002
+      state: new
+      status: processing
+      grand_total: 500.00
+      created_at: 2014-04-01 10:00:00
+    - entity_id: 3
+      store_id: 1
+      customer_id: 1
+      increment_id: 100000003
+      state: complete
+      status: complete
+      grand_total: 500.00
+      created_at: 2014-04-01 10:00:00
+
+  debit/order_grid:
+    - id: 1
+      entity_id: 1
+      store_id: 1
+      customer_id: 1
+      grand_total: 600.00
+      increment_id: 100000001
+      order_currency_code: EUR
+      billing_name: Test Tester
+      created_at: 2014-05-01 06:00:00
+      status: 0
+      debit_type: sepa
+    - id: 2
+      entity_id: 2
+      store_id: 1
+      customer_id: 1
+      grand_total: 600.00
+      increment_id: 100000002
+      order_currency_code: EUR
+      billing_name: Test Tester
+      created_at: 2014-05-01 06:00:00
+      status: 0
+      debit_type: sepa

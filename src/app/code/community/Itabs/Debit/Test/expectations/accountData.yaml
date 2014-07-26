@@ -1,0 +1,7 @@
+account:
+  debit_payment_acount_name: Test Tester
+  debit_payment_account_swift: XXXXXXXXXXX
+  debit_payment_account_iban: DE99999999999999999999
+  debit_payment_acount_blz: 99999999
+  debit_payment_acount_number: 9999999999
+  debit_payment_account_bankname: Kr Spk Esslingen-Nürtingen

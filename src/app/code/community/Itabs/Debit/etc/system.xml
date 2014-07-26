@@ -15,10 +15,10 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
  -->
@@ -46,7 +46,7 @@
                         <title translate="label" module="payment">
                             <label>Title</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>2</sort_order>
+                            <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -54,7 +54,7 @@
                         <sort_order translate="label" module="payment">
                             <label>Sort Order</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>3</sort_order>
+                            <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -63,7 +63,7 @@
                             <label>New Order Status</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_order_status</source_model>
-                            <sort_order>4</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -72,24 +72,36 @@
                             <label>Send bank data via mail</label>
                             <frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>5</sort_order>
+                            <sort_order>25</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </sendmail>
-						<sendmail_crypt translate="label">
+                        <sendmail_crypt translate="label">
                             <label>Encrypt bank data in mail</label>
                             <frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>6</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends>
+                                <sendmail>1</sendmail>
+                            </depends>
                         </sendmail_crypt>
+                        <checkout_crypt translate="label">
+                            <label>Encrypt bank data in checkout</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </checkout_crypt>
                         <allowspecific translate="label" module="payment">
                             <label>Payment from Applicable Countries</label>
                             <frontend_type>allowspecific</frontend_type>
-                            <sort_order>7</sort_order>
+                            <sort_order>40</sort_order>
                             <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -98,7 +110,7 @@
                         <specificcountry translate="label" module="payment">
                             <label>Payment from Specific Countries</label>
                             <frontend_type>multiselect</frontend_type>
-                            <sort_order>8</sort_order>
+                            <sort_order>45</sort_order>
                             <source_model>adminhtml/system_config_source_country</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -107,7 +119,7 @@
                         <customtext translate="label">
                             <label>Custom text for checkout page</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>9</sort_order>
+                            <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -116,7 +128,7 @@
                             <label>Save account data</label>
                             <frontend_type>select</frontend_type>
 							<source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>10</sort_order>
+                            <sort_order>55</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -124,7 +136,7 @@
                         <min_order_total translate="label" module="payment">
                             <label>Minimum Order Total</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>11</sort_order>
+                            <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -132,7 +144,7 @@
                         <max_order_total translate="label" module="payment">
                             <label>Maximum Order Total</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>12</sort_order>
+                            <sort_order>65</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -141,7 +153,7 @@
                             <label>Enabled for all customer groups</label>
                             <comment>Set to "no" if you want to enable DebitPayment only for specific customer groups defined below.</comment>
                             <frontend_type>select</frontend_type>
-                            <sort_order>13</sort_order>
+                            <sort_order>70</sort_order>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -150,7 +162,7 @@
                         <specificgroup translate="label">
                             <label>Enabled only for specific customer groups</label>
                             <frontend_type>multiselect</frontend_type>
-                            <sort_order>14</sort_order>
+                            <sort_order>75</sort_order>
                             <source_model>debit/system_config_source_customer_group</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -162,7 +174,7 @@
                         <orderscount translate="label comment">
                             <label>Minimum Order Count</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>15</sort_order>
+                            <sort_order>80</sort_order>
                             <comment>Default: "0" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.</comment>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -171,7 +183,7 @@
                         <customer_order_amount translate="label comment">
                             <label>Minimum Order Amount</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>16</sort_order>
+                            <sort_order>85</sort_order>
                             <comment>Default: "0" for disabled check | Minimum order amount (in the past) needed for the customer to use this payment method.</comment>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -181,7 +193,7 @@
                             <label>Debit Type</label>
                             <frontend_type>select</frontend_type>
                             <source_model>debit/system_config_source_debit_type</source_model>
-                            <sort_order>17</sort_order>
+                            <sort_order>90</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -190,7 +202,7 @@
                             <label>Checkout only with valid BLZ</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>18</sort_order>
+                            <sort_order>95</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -198,6 +210,27 @@
                                 <debit_type>bank</debit_type>
                             </depends>
                         </checkout_valid_blz>
+                        <print_debit_message_pdf translate="label">
+                            <label>Print Debit Message on PDF</label>
+                            <comment>If yes, when printing an invoice, the module will add a text when the debit payment will be charged. This will use the offset days (see other configuration section) to calculate the </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </print_debit_message_pdf>
+                        <print_debit_message_text>
+                            <label>Debit Message on PDF</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>101</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <print_debit_message_pdf>1</print_debit_message_pdf>
+                            </depends>
+                        </print_debit_message_text>
                     </fields>
                 </debit>
             </groups>
@@ -259,9 +292,113 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </swift_bic>
-					</fields>
-				</bankaccount>
-			</groups>
-		</debitpayment>
+                    </fields>
+                </bankaccount>
+                <sepa translate="label">
+                    <label>SEPA</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <creditor_identification_number translate="label comment">
+                            <label>Creditor Identification Number</label>
+                            <comment><![CDATA[This text will be shown during the checkout to the customer.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </creditor_identification_number>
+                        <hint_iban_field translate="label comment">
+                            <label>Hint for IBAN field</label>
+                            <comment><![CDATA[This text will be shown below the IBAN field during the checkout.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hint_iban_field>
+                        <hint_bic_field translate="label comment">
+                            <label>Hint for BIC field</label>
+                            <comment><![CDATA[This text will be shown below the BIC field during the checkout.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hint_bic_field>
+                        <booking_text translate="label">
+                            <label>Booking Text</label>
+                            <comment><![CDATA[Booking text for debit export]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </booking_text>
+                        <offset_days translate="label comment">
+                            <label>Offset in days</label>
+                            <comment><![CDATA[Offset in days, minimum 2.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <generate_mandate>1</generate_mandate>
+                            </depends>
+                        </offset_days>
+                        <mandate_form translate="label comment">
+                            <label>Show Mandate Form</label>
+                            <comment><![CDATA[Flag wheter to allow generating a mandate pdf in the frontend.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mandate_form>
+                        <creditor_address translate="label comment">
+                            <label>Creditor Address</label>
+                            <comment><![CDATA[Address will be exploded by the newline char for printing. Empty lines will be removed.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <mandate_form>1</mandate_form>
+                            </depends>
+                        </creditor_address>
+                        <mandate_pdf_headline translate="label comment">
+                            <label>PDF: Headline</label>
+                            <comment><![CDATA[Headline for the mandate pdf.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>27</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <mandate_form>1</mandate_form>
+                            </depends>
+                        </mandate_pdf_headline>
+                        <mandate_pdf_text translate="label comment">
+                            <label>PDF: Text</label>
+                            <comment><![CDATA[Text with mandate information for the mandate pdf. Text will be exploded by the newline char for printing. Empty lines will be removed.]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>28</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <mandate_form>1</mandate_form>
+                            </depends>
+                        </mandate_pdf_text>
+                    </fields>
+                </sepa>
+            </groups>
+        </debitpayment>
     </sections>
 </config>

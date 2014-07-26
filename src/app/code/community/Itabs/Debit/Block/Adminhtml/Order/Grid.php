@@ -16,29 +16,19 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Order Export Grid
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     /**
      * Class Constructor
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -50,20 +40,22 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Mage_Adminhtml_Block_Widget_Grid::_prepareCollection()
+     * Prepare the grid collection
+     *
+     * @return Itabs_Debit_Block_Adminhtml_Order_Grid
      */
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('debit/orders')->getCollection();
+        $collection = Mage::getResourceModel('debit/orders_collection');
         $this->setCollection($collection);
 
         return parent::_prepareCollection();
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Mage_Adminhtml_Block_Widget_Grid::_prepareColumns()
+     * Prepare the grid columns
+     *
+     * @return Itabs_Debit_Block_Adminhtml_Order_Grid
      */
     protected function _prepareColumns()
     {
@@ -101,9 +93,7 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
             )
         );
 
-        $types = Mage::getModel('debit/system_config_source_debit_type')
-            ->toOptionHash();
-
+        $types = Mage::getModel('debit/system_config_source_debit_type')->toOptionHash();
         $this->addColumn(
             'debit_type',
             array(
@@ -115,9 +105,7 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
             )
         );
 
-        $statuses = Mage::getSingleton('debit/system_config_source_debit_status')
-            ->toOptionHash();
-
+        $statuses = Mage::getSingleton('debit/system_config_source_debit_status')->toOptionHash();
         $this->addColumn(
             'status',
             array(
@@ -129,17 +117,24 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
             )
         );
 
+        $this->addExportType('*/*/exportcsv', 'CSV');
+        $this->addExportType('*/*/exportdtaus', 'DTAUS');
+        $this->addExportType('*/*/exportxml', 'SEPA-XML');
+
         return parent::_prepareColumns();
     }
 
+    /**
+     * Prepare the massaction fields
+     *
+     * @return Itabs_Debit_Block_Adminhtml_Order_Grid
+     */
     protected function _prepareMassaction()
     {
         $this->setMassactionIdField('id');
         $this->getMassactionBlock()->setFormFieldName('orders');
 
-        $values = Mage::getSingleton('debit/system_config_source_debit_status')
-            ->toOptionArray();
-
+        $values = Mage::getSingleton('debit/system_config_source_debit_status')->toOptionArray();
         $this->getMassactionBlock()->addItem(
             'status',
             array(
@@ -161,8 +156,10 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Mage_Adminhtml_Block_Widget_Grid::getRowUrl()
+     * Retrieve the row url
+     *
+     * @param  Varien_Object $row Model
+     * @return bool|string
      */
     public function getRowUrl($row)
     {
@@ -172,7 +169,7 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
     /**
      * Retrieve the helper class
      *
-     * @return Itabs_Debit_Helper_Adminhtml Helper
+     * @return Itabs_Debit_Helper_Adminhtml
      */
     protected function _getHelper()
     {

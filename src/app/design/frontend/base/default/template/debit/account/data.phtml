@@ -14,11 +14,16 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
+ */
+?>
+<?php
+/**
+ * @var $this Itabs_Debit_Block_Account_Data
  */
 ?>
 <div class="page-title">
@@ -27,31 +32,35 @@
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <form action="<?php echo $this->getUrl('debit/account/save') ?>" method="post" id="form-validate">
     <div class="fieldset">
-    <?php echo $this->getBlockHtml('formkey')?>
+        <?php echo $this->getBlockHtml('formkey')?>
         <h2 class="legend"><?php echo $this->__('Debit Account Data') ?></h2>
         <ul class="form-list">
-            <li>
-                <div class="input-box">
-                    <label for="kreditinstitut"><?php echo $this->__('Kreditinstitut') ?></label><br />
-                    <span id="kreditinstitut" style="display: block; padding : 0 0 0 10px; float:left;"><?php echo $this->getBankName(); ?></span>
-                </div>
-            </li>
-            <li>
-                <div class="input-box">
-                    <label for="bankleitzahl"><?php echo $this->__('Bankleitzahl') ?></label><br />
-                    <input type="text" id="bankleitzahl" name="account_blz" title="<?php echo $this->__('Bankleitzahl') ?>" class="input-text required-entry validate-number validate-debit-blz" value="<?php echo $this->getAccountBLZ() ?>" onchange="blzCheck.checkBlz(this); return false;" />
-                </div>
-            </li>
-            <li>
-                <div class="input-box">
+            <li class="fields">
+                <div class="field">
                     <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?></label><br />
-                    <input type="text" id="kontoinhaber" name="account_name" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
+                    <div class="input-box">
+                        <input type="text" id="kontoinhaber" name="account_name" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="kontonummer"><?php echo $this->__('Konto-Nummer') ?></label><br />
+                    <div class="input-box">
+                        <input type="text" id="kontonummer" name="account_number" title="<?php echo $this->__('Konto-Nummer') ?>" class="input-text required-entry validate-number validate-debit-number" value="<?php echo $this->getAccountNumber() ?>" />
+                    </div>
                 </div>
             </li>
-            <li>
-                <div class="input-box">
-                    <label for="kontonummer"><?php echo $this->__('Konto-Nummer') ?></label><br />
-                    <input type="text" id="kontonummer" name="account_number" title="<?php echo $this->__('Konto-Nummer') ?>" class="input-text required-entry validate-number validate-debit-number" value="<?php echo $this->getAccountNumber() ?>" />
+            <li class="fields">
+                <div class="field">
+                    <label for="bankleitzahl"><?php echo $this->__('Bankleitzahl') ?></label><br />
+                    <div class="input-box">
+                        <input type="text" id="bankleitzahl" name="account_blz" title="<?php echo $this->__('Bankleitzahl') ?>" class="input-text required-entry validate-number validate-debit-blz" value="<?php echo $this->getAccountBLZ() ?>" onchange="blzCheck.checkBlz(this); return false;" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="bank_name" class="required"><em>*</em><?php echo $this->__('Bank name') ?></label>
+                    <div class="input-box">
+                        <input type="text" id="bank_name" name="bank_name" value="<?php echo $this->getBankName()?>" class="input-text required-entry">
+                    </div>
                 </div>
             </li>
         </ul>

@@ -1,0 +1,68 @@
+<?php
+/**
+ * This file is part of the Itabs_Debit module.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category  Itabs
+ * @package   Itabs_Debit
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
+ * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
+ */
+?>
+<?php
+/**
+ * @var $this Itabs_Debit_Block_Adminhtml_Bankdata_Upload
+ */
+?>
+<div class="content-header">
+    <h3><?php echo $this->__('Bank Data') ?></h3>
+    <p class="form-buttons">
+        <?php echo $this->getButtonHtml($this->__('Start Import'), 'uploadForm.submit();', 'save'); ?>
+    </p>
+</div>
+
+<div class="entry-edit">
+    <form action="<?php echo $this->getUrl('*/*/save') ?>" method="post" id="upload_form" enctype="multipart/form-data">
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Upload') ?></h4>
+            <div class="form-buttons"></div>
+        </div>
+
+        <div class="fieldset fieldset-wide" id="group_fields7">
+            <div class="hor-scroll">
+                <table cellspacing="0" class="form-list">
+                    <tbody>
+                        <tr>
+                            <td class="label"><label for="country_id"><?php echo $this->__('Country') ?></label></td>
+                            <td class="value">
+                                <?php echo $this->getCountryHtmlSelect() ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label"><label for="upload_file"><?php echo $this->__('Upload File') ?></label></td>
+                            <td class="value">
+                                <input type="file" name="upload_file" id="upload_file" value="" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    uploadForm = new varienForm('upload_form', '');
+</script>

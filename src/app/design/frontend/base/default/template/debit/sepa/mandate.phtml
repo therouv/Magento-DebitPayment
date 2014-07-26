@@ -1,0 +1,110 @@
+<?php
+/**
+ * This file is part of the Itabs_Debit module.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category  Itabs
+ * @package   Itabs_Debit
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
+ * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
+ */
+?>
+<?php
+/**
+ * @var $this Itabs_Debit_Block_Mandate
+ */
+$customer = $this->getCustomer()
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<script type="text/javascript">
+//<![CDATA[
+blzCheck = new blzAjaxCheck('<?php echo $this->getUrl('debit/ajax/checkblz');?>', '0');
+//]]>
+</script>
+
+<div class="page-title">
+    <h1><?php echo $this->__('SEPA Mandate') ?></h1>
+</div>
+
+<div class="mandate-text">
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('debit_mandate_form')->toHtml(); ?>
+</div>
+
+<form action="<?php echo $this->getFormAction() ?>" method="post" id="form-validate">
+<div class="fieldset">
+    <ul class="form-list">
+        <li>
+            <label for="account_holder" class="required"><em>*</em><?php echo $this->__('Account owner') ?></label>
+            <div class="input-box">
+                <input type="text" id="account_holder" name="account_holder" value="" class="input-text required-entry">
+            </div>
+        </li>
+        <li class="fields">
+            <div class="field">
+                <label for="iban" class="required"><em>*</em><?php echo $this->__('IBAN') ?></label>
+                <div class="input-box">
+                    <input type="text" id="iban" name="iban" value="" class="input-text required-entry validate-debit-iban">
+                </div>
+                <?php if ($hint = $this->getHintForIbanField()): ?>
+                    <p class="debit-hint"><?php echo $hint?></p>
+                <?php endif; ?>
+            </div>
+            <div class="field">
+                <label for="swiftcode" class="required"><em>*</em><?php echo $this->__('BIC') ?></label>
+                <div class="input-box">
+                    <input type="text" id="swiftcode" name="swiftcode" value="" class="input-text required-entry validate-debit-swift">
+                </div>
+                <?php if ($hint = $this->getHintForBicField()): ?>
+                    <p class="debit-hint"><?php echo $hint?></p>
+                <?php endif; ?>
+            </div>
+        </li>
+        <li>
+            <label for="bank_name" class="required"><em>*</em><?php echo $this->__('Bank name') ?></label>
+            <div class="input-box">
+                <input type="text" id="bank_name" name="bank_name" value="" class="input-text required-entry">
+            </div>
+        </li>
+        <li class="fields">
+            <div class="field">
+                <label for="street"><?php echo $this->__('Street and Housenumber') ?></label>
+                <div class="input-box">
+                    <input type="text" id="street" name="street" value="" class="input-text">
+                </div>
+            </div>
+            <div class="field">
+                <label for="city"><?php echo $this->__('Postcode and City') ?></label>
+                <div class="input-box">
+                    <input type="text" id="city" name="city" value="" class="input-text">
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="buttons-set">
+    <button type="submit" class="button save" title="<?php echo $this->__('Create SEPA Mandate Form') ?>">
+        <span>
+            <span><?php echo $this->__('Create SEPA Mandate Form') ?></span>
+        </span>
+    </button>
+</div>
+</form>
+
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>
+

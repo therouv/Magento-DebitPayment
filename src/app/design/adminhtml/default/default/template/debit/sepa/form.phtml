@@ -14,16 +14,15 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 ?>
 <?php
 /**
- * @see Itabs_Debit_Block_Form
  * @var $this Itabs_Debit_Block_Form
  */
 ?>
@@ -36,21 +35,27 @@
         </div>
     </li>
     <li>
+        <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?> <span class="required">*</span></label><br />
         <div class="input-box">
-            <label for="kontoinhaber"><?php echo $this->__('Kontoinhaber') ?> <span class="required">*</span></label><br />
             <input type="text" id="kontoinhaber" name="payment[debit_cc_owner]" title="<?php echo $this->__('Kontoinhaber') ?>" class="input-text required-entry" value="<?php echo $this->getAccountName() ?>" />
         </div>
     </li>
-    <li>
+  	<li>
+        <label for="iban"><?php echo $this->__('IBAN') ?> <span class="required">*</span></label><br />
         <div class="input-box">
-            <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?> <span class="required">*</span></label><br />
+            <input type="text" id="iban" name="payment[debit_iban]" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry" value="<?php echo $this->getAccountIban() ?>" />
+        </div>
+    </li>
+    <li>
+        <label for="swiftcode"><?php echo $this->__('SWIFT Code') ?> <span class="required">*</span></label><br />
+        <div class="input-box">
             <input type="text" id="swiftcode" name="payment[debit_swift]" title="<?php echo $this->__('SWIFT Code') ?>" class="input-text required-entry" value="<?php echo $this->getAccountSwift() ?>" />
         </div>
     </li>
-  	<li>
+    <li>
+        <label for="bank_name"><?php echo $this->__('Bank name') ?> <span class="required">*</span></label></label>
         <div class="input-box">
-            <label for="iban"><?php echo $this->__('IBAN') ?> <span class="required">*</span></label><br />
-            <input type="text" id="iban" name="payment[debit_iban]" title="<?php echo $this->__('IBAN') ?>" class="input-text required-entry" value="<?php echo $this->getAccountIban() ?>" />
+            <input type="text" id="bank_name" name="payment[debit_bankname]" value="<?php echo $this->getBankName()?>" class="input-text required-entry">
         </div>
     </li>
 </ul>

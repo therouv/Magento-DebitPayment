@@ -16,35 +16,24 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Export Order Controller
- *
- * @category  Itabs
- * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2008-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.2
- * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Action
+class Itabs_Debit_Adminhtml_OrderController
+    extends Mage_Adminhtml_Controller_Action
 {
     /**
      * Loads the grid layout with the debit payment orders..
-     *
-     * @return void
      */
     public function indexAction()
     {
-        $this->_getSession()->addNotice(
-            $this->_getDebitHelper()->__('Please note: SEPA Debit Payment orders can only be exported as CSV for now.')
-        );
+        $helper = $this->_getDebitHelper();
 
         $this->loadLayout();
         $this->_setActiveMenu('sales/debitpayment')
@@ -53,11 +42,11 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
                 $this->_getHelper()->__('Sales')
             )
             ->_addBreadcrumb(
-                $this->_getDebitHelper()->__('Debit Payment Orders'),
-                $this->_getDebitHelper()->__('Debit Payment Orders')
+                $helper->__('Debit Payment Orders'),
+                $helper->__('Debit Payment Orders')
             )
             ->_title($this->_getHelper()->__('Sales'))
-            ->_title($this->_getDebitHelper()->__('Debit Payment Orders'));
+            ->_title($helper->__('Debit Payment Orders'));
 
         $this->renderLayout();
     }
@@ -65,8 +54,6 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     /**
      * Fetch all orders with the payment method "Debit Payment" and import them
      * into the export list (table: debit_order_grid)
-     *
-     * @return void
      */
     public function syncAction()
     {
@@ -132,8 +119,6 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
 
     /**
      * Update order status action
-     *
-     * @return void
      */
     public function massStatusAction()
     {
@@ -153,9 +138,6 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
                     count($orderIds)
                 )
             );
-        }
-        catch (Mage_Core_Model_Exception $e) {
-            $this->_getSession()->addError($e->getMessage());
         } catch (Mage_Core_Exception $e) {
             $this->_getSession()->addError($e->getMessage());
         } catch (Exception $e) {
@@ -190,7 +172,19 @@ class Itabs_Debit_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Ac
     }
 
     /**
-     * @param string $type
+     * Export the order list as XML
+     *
+     * @return void|Mage_Core_Controller_Varien_Action
+     */
+    public function exportxmlAction()
+    {
+        return $this->_export('xml');
+    }
+
+    /**
+     * Export the given data
+     *
+     * @param  string $type Export Type
      * @return Mage_Core_Controller_Varien_Action
      */
     protected function _export($type)

@@ -1,0 +1,8 @@
+countryoptions:
+  result:
+    -
+      value: DE
+      label: Germany
+    -
+      value: SE
+      label: Sweden

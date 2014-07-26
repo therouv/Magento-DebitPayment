@@ -1,0 +1,7 @@
+module:
+  version: 1.1.0
+  code_pool: community
+  depends:
+    - Mage_Payment
+
+
