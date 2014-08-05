@@ -106,6 +106,12 @@ class Itabs_Debit_Model_Export_Xml
                 $booking->setBookingText($bookingText);
                 $booking->setMandateId($order->getData('increment_id'));
 
+                // Dispatch event to create possibility to modify the booking object
+                $transportObject = new Varien_Object();
+                $transportObject->setData('booking', $booking);
+                Mage::dispatchEvent('itabs_debit_export_xml_booking', array('transport' => $transportObject));
+                $booking = $transportObject->getData('booking');
+
                 $payment->addBooking($booking);
 
                 $this->_getDebitHelper()->setStatusAsExported($order->getId());
