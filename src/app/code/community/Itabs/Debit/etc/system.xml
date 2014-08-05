@@ -346,9 +346,6 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends>
-                                <generate_mandate>1</generate_mandate>
-                            </depends>
                         </offset_days>
                         <mandate_form translate="label comment">
                             <label>Show Mandate Form</label>
