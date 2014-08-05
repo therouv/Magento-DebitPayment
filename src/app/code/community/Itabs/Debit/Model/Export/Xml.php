@@ -122,6 +122,12 @@ class Itabs_Debit_Model_Export_Xml
                 continue;
             }
 
+            // Dispatch event to create possibility to modify the payment object
+            $transportObject = new Varien_Object();
+            $transportObject->setData('payment', $payment);
+            Mage::dispatchEvent('itabs_debit_export_xml_payment', array('transport' => $transportObject));
+            $payment = $transportObject->getData('payment');
+
             // Add the payment info
             $xml->addPayment($payment);
 
