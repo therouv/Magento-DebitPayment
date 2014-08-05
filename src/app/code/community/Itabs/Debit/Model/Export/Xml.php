@@ -108,7 +108,7 @@ class Itabs_Debit_Model_Export_Xml
 
                 $payment->addBooking($booking);
 
-                //$this->_getDebitHelper()->setStatusAsExported($order->getId());
+                $this->_getDebitHelper()->setStatusAsExported($order->getId());
             }
 
             // Check if the payment contains bookings
