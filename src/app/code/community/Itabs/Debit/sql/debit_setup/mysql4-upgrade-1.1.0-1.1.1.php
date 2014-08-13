@@ -19,20 +19,16 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.1
+ * @version   1.0.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
- * Export Model Interface
+ * Setup script
  */
-interface Itabs_Debit_Model_Export_Interface
-{
-    /**
-     * Export function:
-     * - Returns false, if an error occured or if there are no orders to export
-     * - Returns array, containing the filename and the file contents
-     *
-     * @return bool|array
-     */
-    public function export();
-}
+
+/* @var $installer Mage_Eav_Model_Entity_Setup */
+$installer = $this;
+$installer->startSetup();
+
+
+$installer->endSetup();
