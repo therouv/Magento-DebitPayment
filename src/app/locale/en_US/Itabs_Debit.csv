@@ -85,3 +85,5 @@
 "SEPA Mandate,"SEPA Mandate"
 "Create SEPA Mandate Form","Create SEPA Mandate Form"
 "Error while generating the mandate pdf. Please try again.","Error while generating the mandate pdf. Please try again."
+"Order: %s","Order: %s"
+"Invoice(s): %s","Invoice(s): %s"

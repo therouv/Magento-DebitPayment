@@ -115,7 +115,7 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
             Mage::getStoreConfig('debitpayment/sepa/booking_text', $storeId),
             $incrementId
         );
-        return implode(' ', $bookingText);
+        return implode(' ', array_filter($bookingText));
     }
 
     /**

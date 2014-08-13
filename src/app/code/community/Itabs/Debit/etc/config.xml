@@ -235,6 +235,7 @@
         <debitpayment>
             <sepa>
                 <mandate_form>0</mandate_form>
+                <booking_invoice_id>0</booking_invoice_id>
             </sepa>
         </debitpayment>
     </default>

@@ -93,10 +93,26 @@ class Itabs_Debit_Model_Export_Xml
                 $paymentMethod = $orderModel->getPayment()->getMethodInstance();
 
                 // Get the booking text
-                $bookingText = $this->_getDebitHelper()->getBookingText(
-                    $orderModel->getStoreId(),
-                    $order->getData('increment_id')
-                );
+                $addInvoiceIdToBooking = Mage::getStoreConfig('debitpayment/sepa/booking_invoice_id', $store->getId());
+                // only add invoice id(s) if config is activated and order has invoices
+                if ($addInvoiceIdToBooking && $orderModel->hasInvoices()) {
+                    $invoiceIncrementIds = array();
+                    foreach ($orderModel->getInvoiceCollection() as $invoiceModel) {
+                        /* @var $invoiceModel Mage_Sales_Model_Order_Invoice */
+                        $invoiceIncrementIds[] = $invoiceModel->getIncrementId();
+                    }
+
+                    $bookingText = $this->_getDebitHelper()->getBookingText(
+                        $orderModel->getStoreId(),
+                        Mage::helper('debit')->__('Order: %s',$order->getData('increment_id'))  . ' ' . Mage::helper('debit')->__('Invoice(s): %s', implode(',', $invoiceIncrementIds))
+                    );
+
+                } else {
+                    $bookingText = $this->_getDebitHelper()->getBookingText(
+                        $orderModel->getStoreId(),
+                        Mage::helper('debit')->__('Order: %s',$order->getData('increment_id'))
+                    );
+                }
 
                 $booking = new Itabs_Debit_Model_Xml_Booking();
                 $booking->setAccountOwner($paymentMethod->getAccountName());
