@@ -1,0 +1,5 @@
+sanitize_strings:
+  -
+    umlaut: "Max Müller"
+    and: "Max & Moritz"
+    at: "test@test.de"

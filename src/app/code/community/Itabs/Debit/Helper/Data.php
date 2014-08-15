@@ -102,15 +102,17 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
     /**
      * normalizeString
      *
-     * @param $string
-     * @return mixed
+     * @param  string $string String to normalize
+     * @return string The normalized string
      */
     public function normalizeString($string)
     {
+        // Replace german accents
         $search = array('Ä', 'ä', 'Ü', 'ü', 'Ö', 'ö', 'ß', '&');
         $replace = array('Ae', 'ae', 'Ue', 'ue', 'Oe', 'oe', 'ss', '+');
-        $normalized =  str_replace($search, $replace, $string); // replace
+        $normalized =  str_replace($search, $replace, $string);
 
+        // Replace all other chars
         $normalized = Mage::helper('catalog/product_url')->format($normalized);
 
         return $normalized;

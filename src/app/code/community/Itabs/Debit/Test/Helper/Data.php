@@ -81,6 +81,23 @@ class Itabs_Debit_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
 
     /**
      * @test
+     * @dataProvider dataProvider
+     */
+    public function testNormalizeString($data)
+    {
+        // Load all expectations
+        $dataSet = $this->readAttribute($this, 'dataName');
+
+        foreach ($data as $key => $value) {
+            $this->assertEquals(
+                $this->expected($dataSet)->getData($key),
+                $this->_helper->normalizeString($value)
+            );
+        }
+    }
+
+    /**
+     * @test
      * @loadFixture ~Itabs_Debit/default
      */
     public function testGetCreditorIdentificationNumber()
