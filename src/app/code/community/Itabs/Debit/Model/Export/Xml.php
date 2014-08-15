@@ -69,12 +69,13 @@ class Itabs_Debit_Model_Export_Xml
             /* @var $store Mage_Core_Model_Store */
 
             $creditorId    = Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number', $store->getId());
-            $creditorName  = Mage::getStoreConfig('debitpayment/bankaccount/account_owner', $store->getId());
+            $creditorName  = $this->_getDebitHelper()->normalizeString(Mage::getStoreConfig('debitpayment/bankaccount/account_owner', $store->getId()));
             $creditorIban  = Mage::getStoreConfig('debitpayment/bankaccount/account_iban', $store->getId());
             $creditorSwift = Mage::getStoreConfig('debitpayment/bankaccount/swift_bic', $store->getId());
 
             $xml = new Itabs_Debit_Model_Xml_XmlCreator($creditorName);
 
+            /* @var $payment Itabs_Debit_Model_Xml_Payment*/
             $payment = new Itabs_Debit_Model_Xml_Payment($creditorId, $creditorName, $creditorIban, $creditorSwift);
             $payment->setOffset($this->_getDebitHelper()->getOffset());
             $payment->setOneTimePayment(true);
@@ -113,9 +114,10 @@ class Itabs_Debit_Model_Export_Xml
                         Mage::helper('debit')->__('Order: %s',$order->getData('increment_id'))
                     );
                 }
+                $bookingText = $this->_getDebitHelper()->normalizeString($bookingText);
 
                 $booking = new Itabs_Debit_Model_Xml_Booking();
-                $booking->setAccountOwner($paymentMethod->getAccountName());
+                $booking->setAccountOwner($this->_getDebitHelper()->normalizeString($paymentMethod->getAccountName()));
                 $booking->setIban($paymentMethod->getAccountIban());
                 $booking->setSwift($paymentMethod->getAccountSwift());
                 $booking->setAmount($order->getData('grand_total'));

@@ -100,6 +100,23 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
     }
 
     /**
+     * normalizeString
+     *
+     * @param $string
+     * @return mixed
+     */
+    public function normalizeString($string)
+    {
+        $search = array('Ä', 'ä', 'Ü', 'ü', 'Ö', 'ö', 'ß', '&');
+        $replace = array('Ae', 'ae', 'Ue', 'ue', 'Oe', 'oe', 'ss', '+');
+        $normalized =  str_replace($search, $replace, $string); // replace
+
+        $normalized = Mage::helper('catalog/product_url')->format($normalized);
+
+        return $normalized;
+    }
+
+    /**
      * Retrieve the creditor identification number
      *
      * @param  null|int $storeId Store ID
