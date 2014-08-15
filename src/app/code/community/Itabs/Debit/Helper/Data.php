@@ -19,7 +19,7 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.1
+ * @version   1.1.2
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -97,6 +97,25 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
         $sanitized = str_replace($bad, '', $data);
 
         return $sanitized;
+    }
+
+    /**
+     * normalizeString
+     *
+     * @param  string $string String to normalize
+     * @return string The normalized string
+     */
+    public function normalizeString($string)
+    {
+        // Replace german accents
+        $search = array('Ä', 'ä', 'Ü', 'ü', 'Ö', 'ö', 'ß', '&');
+        $replace = array('Ae', 'ae', 'Ue', 'ue', 'Oe', 'oe', 'ss', '+');
+        $normalized =  str_replace($search, $replace, $string);
+
+        // Replace all other chars
+        $normalized = Mage::helper('catalog/product_url')->format($normalized);
+
+        return $normalized;
     }
 
     /**
