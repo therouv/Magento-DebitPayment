@@ -115,6 +115,9 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
         // Replace all other chars
         $normalized = Mage::helper('catalog/product_url')->format($normalized);
 
+        // Strip out every char which is not allowed in sepa xml charset
+        $normalized = preg_replace('/[^a-zA-Z0-9\/\?\:\(\)\.\,\'\+\- ]/', '', $normalized);
+
         return $normalized;
     }
 
