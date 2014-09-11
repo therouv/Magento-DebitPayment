@@ -70,8 +70,8 @@ class Itabs_Debit_Model_Export_Xml
 
             $creditorId    = Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number', $store->getId());
             $creditorName  = $this->_getDebitHelper()->normalizeString(Mage::getStoreConfig('debitpayment/bankaccount/account_owner', $store->getId()));
-            $creditorIban  = Mage::getStoreConfig('debitpayment/bankaccount/account_iban', $store->getId());
-            $creditorSwift = Mage::getStoreConfig('debitpayment/bankaccount/swift_bic', $store->getId());
+            $creditorIban  = $this->_getDebitHelper()->normalizeString(Mage::getStoreConfig('debitpayment/bankaccount/account_iban', $store->getId()));
+            $creditorSwift = $this->_getDebitHelper()->normalizeString(Mage::getStoreConfig('debitpayment/bankaccount/swift_bic', $store->getId()));
 
             $xml = new Itabs_Debit_Model_Xml_XmlCreator($creditorName);
 
@@ -114,14 +114,13 @@ class Itabs_Debit_Model_Export_Xml
                         Mage::helper('debit')->__('Order: %s',$order->getData('increment_id'))
                     );
                 }
-                $bookingText = $this->_getDebitHelper()->normalizeString($bookingText);
 
                 $booking = new Itabs_Debit_Model_Xml_Booking();
                 $booking->setAccountOwner($this->_getDebitHelper()->normalizeString($paymentMethod->getAccountName()));
-                $booking->setIban($paymentMethod->getAccountIban());
-                $booking->setSwift($paymentMethod->getAccountSwift());
+                $booking->setIban($this->_getDebitHelper()->normalizeString($paymentMethod->getAccountIban()));
+                $booking->setSwift($this->_getDebitHelper()->normalizeString($paymentMethod->getAccountSwift()));
                 $booking->setAmount($order->getData('grand_total'));
-                $booking->setBookingText($bookingText);
+                $booking->setBookingText($this->_getDebitHelper()->normalizeString($bookingText));
                 $booking->setMandateId($order->getData('increment_id'));
 
                 // Dispatch event to create possibility to modify the booking object
