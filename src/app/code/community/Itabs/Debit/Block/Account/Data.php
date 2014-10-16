@@ -62,7 +62,17 @@ class Itabs_Debit_Block_Account_Data
      */
     public function getAccountBLZ()
     {
-        return $this->_getAccountData('debit_payment_acount_blz');
+              if ($data = $this->getInfoData('cc_type')) {
+            if (!is_numeric($data)) {
+                $data = Mage::helper('core')->decrypt($data);
+            }
+
+            return $data;
+        } elseif ($data = $this->_getAccountData('debit_payment_acount_blz')) {
+            return $data;
+        } else {
+            return '';
+        }
     }
 
     /**
@@ -92,7 +102,12 @@ class Itabs_Debit_Block_Account_Data
      */
     public function getAccountSwift()
     {
+      if (Mage::getStoreConfigFlag('payment/debit/save_account_data')) {
+        return Mage::helper('core')->decrypt($this->_getAccountData('debit_payment_account_swift'));
+      } else {
+        echo "Hello World";die;
         return $this->_getAccountData('debit_payment_account_swift');
+      }
     }
 
     /**
@@ -101,8 +116,11 @@ class Itabs_Debit_Block_Account_Data
      * @return string
      */
     public function getAccountIban()
-    {
+    {       if (Mage::getStoreConfigFlag('payment/debit/save_account_data')) {
+        return Mage::helper('core')->decrypt($this->_getAccountData('debit_payment_account_iban'));
+      } else {
         return $this->_getAccountData('debit_payment_account_iban');
+      }
     }
 
     /**
