@@ -105,7 +105,6 @@ class Itabs_Debit_Block_Account_Data
       if (Mage::getStoreConfigFlag('payment/debit/save_account_data')) {
         return Mage::helper('core')->decrypt($this->_getAccountData('debit_payment_account_swift'));
       } else {
-        echo "Hello World";die;
         return $this->_getAccountData('debit_payment_account_swift');
       }
     }
