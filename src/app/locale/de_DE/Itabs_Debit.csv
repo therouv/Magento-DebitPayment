@@ -53,6 +53,7 @@
 "Export as CSV","CSV-Export"
 "Store Owner Bank Account","Bankverbindung des Shop-Betreibers"
 "Account Owner","Kontoinhaber"
+"Account owner","Kontoinhaber"
 "Routing Number","Bankleitzahl"
 "Please enter bankaccount credentials of the store owner in the system configuration.","Bitte geben Sie in der System-Konfiguration die Bankverbindung des Shopbetreibers ein. Anderenfalls können Sie keine gültige Export-Datei erzeugen."
 "Please note: SEPA Debit Payment orders can only be exported as CSV for now.","Bitte beachten Sie: SEPA-Lastschrift Bestellungen können vorerst nur als CSV-Datei exportiert werden."
