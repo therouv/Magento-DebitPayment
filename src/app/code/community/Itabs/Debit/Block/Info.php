@@ -212,14 +212,16 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
             $message
         );
 
+        // Dispatch event
         $transportObject = new Varien_Object();
         $transportObject->setData('message', $message);
         Mage::dispatchEvent('itabs_debit_pdf_message', array('message' => $message));
+        $message = $transportObject->getData('message');
 
-        $lineLength = Mage::getStoreConfig('payment/debit/print_debit_message_line_length', $storeId);
+        // Split lines for pdf
+        $lineLength = (int)Mage::getStoreConfig('payment/debit/print_debit_message_line_length', $storeId);
         $lineLength = max($lineLength, 40);
-
-        $lines = Mage::helper('core/string')->str_split(trim($message), $lineLength, true);
+        $lines = Mage::helper('core/string')->str_split($message, $lineLength, true);
 
         return $lines;
     }
