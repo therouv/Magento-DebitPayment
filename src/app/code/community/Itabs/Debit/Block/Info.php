@@ -19,7 +19,7 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.3
+ * @version   1.1.4
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -167,7 +167,7 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     /**
      * Retrieve the debit pdf message
      *
-     * @return bool|string
+     * @return bool|array
      */
     public function getPdfMessage()
     {
@@ -212,10 +212,17 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
             $message
         );
 
+        // Dispatch event
         $transportObject = new Varien_Object();
         $transportObject->setData('message', $message);
         Mage::dispatchEvent('itabs_debit_pdf_message', array('message' => $message));
+        $message = $transportObject->getData('message');
 
-        return $transportObject->getData('message');
+        // Split lines for pdf
+        $lineLength = (int)Mage::getStoreConfig('payment/debit/print_debit_message_line_length', $storeId);
+        $lineLength = max($lineLength, 40);
+        $lines = Mage::helper('core/string')->str_split($message, $lineLength, true);
+
+        return $lines;
     }
 }
