@@ -230,6 +230,7 @@
                 <customer_order_amount>0</customer_order_amount>
                 <print_debit_message_pdf>0</print_debit_message_pdf>
                 <print_debit_message_text><![CDATA[Wir werden den Rechnungsbetrag von {{amount}} als SEPA-Lastschrift zum Mandat {{mandate}} zu der Gläubiger-Identifikationsnummer {{creditor_identification_number}} zum Fälligkeitstag am {{debit_day}} von folgendem Konto abbuchen:]]></print_debit_message_text>
+                <print_debit_message_line_length>40</print_debit_message_line_length>
             </debit>
         </payment>
         <debitpayment>

@@ -167,7 +167,7 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     /**
      * Retrieve the debit pdf message
      *
-     * @return bool|string
+     * @return bool|array
      */
     public function getPdfMessage()
     {
@@ -216,6 +216,11 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
         $transportObject->setData('message', $message);
         Mage::dispatchEvent('itabs_debit_pdf_message', array('message' => $message));
 
-        return $transportObject->getData('message');
+        $lineLength = Mage::getStoreConfig('payment/debit/print_debit_message_line_length', $storeId);
+        $lineLength = max($lineLength, 40);
+
+        $lines = Mage::helper('core/string')->str_split(trim($message), $lineLength, true);
+
+        return $lines;
     }
 }
