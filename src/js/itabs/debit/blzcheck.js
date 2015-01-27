@@ -36,6 +36,11 @@ blzAjaxCheck.prototype = {
         } else {
             param = $('swiftcode').value;
             identifier = 'swift';
+
+            if (8 == param.length) {
+                param = param + 'XXX';
+                $('swiftcode').setValue(param);
+            }
         }
 
         new Ajax.Request(
