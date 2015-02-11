@@ -167,7 +167,11 @@ class Itabs_Debit_Model_Observer
      */
     protected function _encryptPaymentData($payment)
     {
-        $method = $payment->getMethodInstance();
+        try {
+            $method = $payment->getMethodInstance();
+        } catch (Exception $e) {
+            return $this;
+        }
         if ($method instanceof Itabs_Debit_Model_Debit) {
             $info = $method->getInfoInstance();
             if ($payment->getData('debit_swift') != '') {
