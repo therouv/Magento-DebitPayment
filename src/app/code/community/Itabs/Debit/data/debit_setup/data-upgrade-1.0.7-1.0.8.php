@@ -26,8 +26,12 @@
  * Setup script
  */
 
-/* @var $installer Mage_Eav_Model_Entity_Setup */
+/* @var $installer Mage_Core_Model_Resource_Setup */
 $installer = $this;
 $installer->startSetup();
+
+/* @var $model Itabs_Debit_Model_Import_Bankdata */
+$model = Mage::getModel('debit/import_bankdata');
+$model->run();
 
 $installer->endSetup();
