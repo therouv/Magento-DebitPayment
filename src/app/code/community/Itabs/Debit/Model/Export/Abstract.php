@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Abstract Export Model
  */
@@ -54,7 +55,7 @@ class Itabs_Debit_Model_Export_Abstract extends Varien_Object
      */
     public function getFileName()
     {
-        return 'EXPORT'.date('YmdHis') . $this->_fileExt;
+        return 'EXPORT' . date('YmdHis') . $this->_fileExt;
     }
 
     /**

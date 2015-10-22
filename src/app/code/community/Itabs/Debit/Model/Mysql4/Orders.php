@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Resource Model for Export Orders
  */

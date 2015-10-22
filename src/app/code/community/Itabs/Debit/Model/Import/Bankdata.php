@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Class Itabs_Debit_Model_Import_Bankdata
  */
@@ -74,8 +75,8 @@ class Itabs_Debit_Model_Import_Bankdata
                 // Add bank to array
                 $import[$country][$swiftCode] = array(
                     'routing_number' => trim($line[0]),
-                    'swift_code' => $swiftCode,
-                    'bank_name' => trim($line[1])
+                    'swift_code'     => $swiftCode,
+                    'bank_name'      => trim($line[1])
                 );
             }
             $ioHandler->streamClose();

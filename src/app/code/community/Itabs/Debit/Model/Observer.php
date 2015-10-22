@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Class Itabs_Debit_Model_Observer
  */
@@ -145,7 +146,7 @@ class Itabs_Debit_Model_Observer
 
         // Skip all order save processes except the sales_order_create_save process in the backend
         $controller = $request->getControllerName();
-        $action     = $request->getActionName();
+        $action = $request->getActionName();
         if ($controller != 'sales_order_create' || $action != 'save') {
             return $this;
         }

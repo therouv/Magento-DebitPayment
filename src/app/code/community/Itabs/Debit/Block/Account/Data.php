@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Debit Form Block for customer account page
  */
@@ -45,6 +46,7 @@ class Itabs_Debit_Block_Account_Data
             $this->setTemplate('debit/account/data.phtml');
         }
     }
+
     /**
      * Returns the bank name
      *

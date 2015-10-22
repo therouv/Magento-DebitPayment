@@ -41,11 +41,11 @@ if ($installer->getConnection()->isTableExists($tableName)) {
 // Set the table structure and create the table
 $table = $installer->getConnection()->newTable($tableName)
     ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
-            'unsigned' => true,
-            'nullable' => false,
-            'primary'  => true,
-            'identity' => true,
-        ), 'ID')
+        'unsigned' => true,
+        'nullable' => false,
+        'primary'  => true,
+        'identity' => true,
+    ), 'ID')
     ->addColumn('country_id', Varien_Db_Ddl_Table::TYPE_TEXT, 3, array(), 'Country ID')
     ->addColumn('routing_number', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(), 'Routing Number')
     ->addColumn('swift_code', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(), 'SWIFT Code')

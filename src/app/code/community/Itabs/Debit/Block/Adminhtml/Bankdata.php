@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Backend View for Bank Data List
  */
@@ -42,9 +43,9 @@ class Itabs_Debit_Block_Adminhtml_Bankdata extends Mage_Adminhtml_Block_Widget_G
         $this->_removeButton('add');
 
         $this->_addButton('upload', array(
-            'label'     => $helper->__('Upload'),
-            'onclick'   => 'setLocation(\'' . $this->getUrl('*/*/upload') .'\')',
-            'class'     => 'add',
+            'label'   => $helper->__('Upload'),
+            'onclick' => 'setLocation(\'' . $this->getUrl('*/*/upload') . '\')',
+            'class'   => 'add',
         ));
     }
 }

@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Helper class for different helper functionalities..
  */
@@ -73,7 +74,7 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
      * @param  null|string $country
      * @return null|string
      */
-    public function getBankByIdentifier($identifier, $value, $country=null)
+    public function getBankByIdentifier($identifier, $value, $country = null)
     {
         /* @var $model Itabs_Debit_Model_Bankdata */
         $model = Mage::getModel('debit/bankdata');
@@ -110,7 +111,7 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
         // Replace german accents
         $search = array('Ä', 'ä', 'Ü', 'ü', 'Ö', 'ö', 'ß', '&');
         $replace = array('Ae', 'ae', 'Ue', 'ue', 'Oe', 'oe', 'ss', '+');
-        $normalized =  str_replace($search, $replace, $string);
+        $normalized = str_replace($search, $replace, $string);
 
         // Replace all other chars
         $normalized = Mage::helper('catalog/product_url')->format($normalized);
@@ -172,7 +173,7 @@ class Itabs_Debit_Helper_Data extends Mage_Payment_Helper_Data
      */
     public function getOffset($storeId = null)
     {
-        $offset = (int) Mage::getStoreConfig('debitpayment/sepa/offset_days', $storeId);
+        $offset = (int)Mage::getStoreConfig('debitpayment/sepa/offset_days', $storeId);
 
         return max($offset, 2);
     }

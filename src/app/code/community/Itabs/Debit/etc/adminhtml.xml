@@ -28,7 +28,7 @@
 			<children>
 				<debitpayment translate="title" module="debit">
 					<title>Debit Payment Orders</title>
-					<action>debit/adminhtml_order</action>
+					<action>adminhtml/debit</action>
 					<sort_order>11</sort_order>
 				</debitpayment>
 			</children>
@@ -39,7 +39,7 @@
                     <children>
                         <debitpayment translate="title" module="debit">
                             <title>Debit Payment Bank Data</title>
-                            <action>debit/adminhtml_bankdata</action>
+                            <action>adminhtml/debit_bankdata</action>
                             <sort_order>1500</sort_order>
                         </debitpayment>
                     </children>

@@ -22,7 +22,8 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
-require_once (Mage::getBaseDir().'/lib/DTA/DTA.php');
+require_once(Mage::getBaseDir() . '/lib/DTA/DTA.php');
+
 /**
  * DTAUS Export Model
  */
@@ -70,7 +71,7 @@ class Itabs_Debit_Model_Export_Dtaus
                 ),
                 round($order->getData('grand_total'), 2),
                 array(
-                    'Bestellung Nr. '.$order->getData('increment_id')
+                    'Bestellung Nr. ' . $order->getData('increment_id')
                 )
             );
 
@@ -78,9 +79,10 @@ class Itabs_Debit_Model_Export_Dtaus
         }
 
         $response = array(
-            'file_name' => $this->getFileName(),
+            'file_name'    => $this->getFileName(),
             'file_content' => $file->getFileContent()
         );
+
         return $response;
     }
 }

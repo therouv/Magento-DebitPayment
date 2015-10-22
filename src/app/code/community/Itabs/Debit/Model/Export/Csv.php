@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * CSV Export Model
  */
@@ -83,8 +84,8 @@ class Itabs_Debit_Model_Export_Csv
                 'account_number' => $paymentMethod->getAccountNumber(),
                 'account_swift'  => $paymentMethod->getAccountSwift(),
                 'account_iban'   => $paymentMethod->getAccountIban(),
-                'amount'         => $amount.' '.$order->getData('order_currency_code'),
-                'purpose'        => 'Bestellung Nr. '.$order->getData('increment_id')
+                'amount'         => $amount . ' ' . $order->getData('order_currency_code'),
+                'purpose'        => 'Bestellung Nr. ' . $order->getData('increment_id')
             );
             $file->streamWriteCsv($row);
 
@@ -98,9 +99,10 @@ class Itabs_Debit_Model_Export_Csv
         $file->rm($fileName);
 
         $response = array(
-            'file_name' => $fileName,
+            'file_name'    => $fileName,
             'file_content' => $fileContents
         );
+
         return $response;
     }
 }

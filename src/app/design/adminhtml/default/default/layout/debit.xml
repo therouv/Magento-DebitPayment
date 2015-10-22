@@ -23,21 +23,21 @@
  */
  -->
 <layout version="0.1.0">
-	<debit_adminhtml_order_index>
+    <adminhtml_debit_index>
         <reference name="content">
-            <block type="debit/adminhtml_order" name="debit.adminhtml.order" />
+            <block type="debit/adminhtml_order" name="debit.adminhtml.order"/>
         </reference>
-	</debit_adminhtml_order_index>
+    </adminhtml_debit_index>
 
-    <debit_adminhtml_bankdata_index>
+    <adminhtml_debit_bankdata_index>
         <reference name="content">
-            <block type="debit/adminhtml_bankdata" name="debit.adminhtml.bankdata" />
+            <block type="debit/adminhtml_bankdata" name="debit.adminhtml.bankdata"/>
         </reference>
-	</debit_adminhtml_bankdata_index>
+    </adminhtml_debit_bankdata_index>
 
-    <debit_adminhtml_bankdata_upload>
+    <adminhtml_debit_bankdata_upload>
         <reference name="content">
-            <block type="debit/adminhtml_bankdata_upload" name="debit.adminhtml.bankdata.upload" />
+            <block type="debit/adminhtml_bankdata_upload" name="debit.adminhtml.bankdata.upload"/>
         </reference>
-	</debit_adminhtml_bankdata_upload>
+    </adminhtml_debit_bankdata_upload>
 </layout>

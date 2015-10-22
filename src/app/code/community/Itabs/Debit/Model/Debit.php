@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Debit Model
  */
@@ -109,13 +110,13 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
         $bankName = $data->getDebitBankname();
 
         // Set account data in payment info model
-        $info->setCcType($ccType)                     // BLZ
-             ->setCcOwner($ccOwner)                   // Kontoinhaber
-             ->setCcNumberEnc($ccNumber)              // Kontonummer
-             ->setDebitSwift($swift)                  // SWIFT Code
-             ->setDebitIban($iban)                    // IBAN
-             ->setDebitBankname($bankName)                    // IBAN
-             ->setDebitType(Mage::helper('debit')->getDebitType());
+        $info->setCcType($ccType)// BLZ
+        ->setCcOwner($ccOwner)// Kontoinhaber
+        ->setCcNumberEnc($ccNumber)// Kontonummer
+        ->setDebitSwift($swift)// SWIFT Code
+        ->setDebitIban($iban)// IBAN
+        ->setDebitBankname($bankName)// IBAN
+        ->setDebitType(Mage::helper('debit')->getDebitType());
 
         return $this;
     }
@@ -224,7 +225,7 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
      */
     public function maskBankData($data)
     {
-        $crypt = str_repeat('*', strlen($data)-3) . substr($data, -3);
+        $crypt = str_repeat('*', strlen($data) - 3) . substr($data, -3);
 
         return $crypt;
     }
@@ -237,7 +238,7 @@ class Itabs_Debit_Model_Debit extends Mage_Payment_Model_Method_Abstract
      */
     public function maskSepaData($data)
     {
-        $crypt = substr($data, 0, 3) . str_repeat('X', strlen($data)-7) . substr($data, -4);
+        $crypt = substr($data, 0, 3) . str_repeat('X', strlen($data) - 7) . substr($data, -4);
 
         return $crypt;
     }

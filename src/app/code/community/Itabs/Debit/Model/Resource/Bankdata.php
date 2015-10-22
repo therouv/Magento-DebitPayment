@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Resource Model for Export Orders
  */
@@ -56,7 +57,7 @@ class Itabs_Debit_Model_Resource_Bankdata
      * @param  null|string $country    Country ID
      * @return bool|string
      */
-    public function loadByIdentifier($identifier, $value, $country=null)
+    public function loadByIdentifier($identifier, $value, $country = null)
     {
         /* @var $adapter Varien_Db_Adapter_Pdo_Mysql */
         $adapter = $this->_getReadAdapter();
@@ -69,7 +70,7 @@ class Itabs_Debit_Model_Resource_Bankdata
 
         $select = $adapter->select()
             ->from($this->getMainTable(), 'bank_name')
-            ->where($field.'=?', $value);
+            ->where($field . '=?', $value);
 
         // Limit by country if param is given
         if (null !== $country) {

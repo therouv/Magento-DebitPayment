@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Validation model
  */
@@ -46,8 +47,7 @@ class Itabs_Debit_Model_Validation
     {
         $result = $this->hasSpecificCustomerGroup()
             && $this->hasMinimumOrderCount()
-            && $this->hasMinimumOrderAmount()
-        ;
+            && $this->hasMinimumOrderAmount();
 
         // StdClass for observer
         $debitIsValid = new StdClass;

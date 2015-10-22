@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Model for Bank Data
  *
@@ -47,6 +48,7 @@ class Itabs_Debit_Model_Bankdata extends Mage_Core_Model_Abstract
     public function deleteByCountryId($countryId)
     {
         $this->_getResource()->deleteByCountryId($countryId);
+
         return $this;
     }
 
@@ -58,7 +60,7 @@ class Itabs_Debit_Model_Bankdata extends Mage_Core_Model_Abstract
      * @param  null|string $country    Country ID
      * @return bool|string
      */
-    public function loadByIdentifier($identifier, $value, $country=null)
+    public function loadByIdentifier($identifier, $value, $country = null)
     {
         return $this->_getResource()->loadByIdentifier($identifier, $value, $country);
     }

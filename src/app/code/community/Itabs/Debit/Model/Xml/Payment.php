@@ -16,18 +16,15 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.7
+ * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Class Itabs_Debit_Model_Xml_Payment
- *
- * @category Itabs
- * @package  Itabs_Debit
- * @author   Rouven Alexander Rieker <rouven.rieker@itabs.de>
  */
 class Itabs_Debit_Model_Xml_Payment
 {
@@ -127,6 +124,7 @@ class Itabs_Debit_Model_Xml_Payment
     public function addBooking(Itabs_Debit_Model_Xml_Booking $booking)
     {
         $this->bookings[] = $booking;
+
         return $this;
     }
 
@@ -152,6 +150,7 @@ class Itabs_Debit_Model_Xml_Payment
         $creditorIban = str_replace(' ', '', $creditorIban);
 
         $this->creditorIban = $creditorIban;
+
         return $this;
     }
 
@@ -174,6 +173,7 @@ class Itabs_Debit_Model_Xml_Payment
     public function setCreditorId($creditorId)
     {
         $this->creditorId = $creditorId;
+
         return $this;
     }
 
@@ -196,6 +196,7 @@ class Itabs_Debit_Model_Xml_Payment
     public function setCreditorName($creditorName)
     {
         $this->creditorName = $creditorName;
+
         return $this;
     }
 
@@ -218,6 +219,7 @@ class Itabs_Debit_Model_Xml_Payment
     public function setCreditorSwift($creditorSwift)
     {
         $this->creditorSwift = $creditorSwift;
+
         return $this;
     }
 
@@ -240,6 +242,7 @@ class Itabs_Debit_Model_Xml_Payment
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+
         return $this;
     }
 
@@ -262,6 +265,7 @@ class Itabs_Debit_Model_Xml_Payment
     public function setOffset($offset)
     {
         $this->offset = $offset;
+
         return $this;
     }
 
@@ -284,6 +288,7 @@ class Itabs_Debit_Model_Xml_Payment
     public function setRecurringSequence($recurringSequence)
     {
         $this->recurringSequence = $recurringSequence;
+
         return $this;
     }
 
@@ -306,6 +311,7 @@ class Itabs_Debit_Model_Xml_Payment
     public function setOneTimePayment($oneTimePayment)
     {
         $this->oneTimePayment = $oneTimePayment;
+
         return $this;
     }
 
@@ -328,6 +334,7 @@ class Itabs_Debit_Model_Xml_Payment
     public function setTransactionDate($transactionDate)
     {
         $this->transactionDate = $transactionDate;
+
         return $this;
     }
 

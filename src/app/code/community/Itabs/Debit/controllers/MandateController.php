@@ -22,6 +22,7 @@
  * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Mandate Controller
  */
@@ -77,6 +78,7 @@ class Itabs_Debit_MandateController extends Mage_Core_Controller_Front_Action
             $this->_prepareDownloadResponse($filename, $pdf->render(), 'application/pdf');
         } catch (Exception $e) {
             $this->_getSession()->addError('Error while generating the mandate pdf. Please try again.');
+
             return $this->_redirect('*/*/index');
         }
     }

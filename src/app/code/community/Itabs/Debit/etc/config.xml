@@ -124,13 +124,13 @@
     </global>
 	<admin>
         <routers>
-            <debit>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>Itabs_Debit</module>
-                    <frontName>debit</frontName>
+                    <modules>
+                        <debit after="Mage_Adminhtml">Itabs_Debit_Adminhtml</debit>
+                    </modules>
                 </args>
-            </debit>
+            </adminhtml>
         </routers>
 	</admin>
     <adminhtml>
