@@ -16,18 +16,15 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.7
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Class Itabs_Debit_Model_Xml_XmlCreator
- *
- * @category Itabs
- * @package  Itabs_Debit
- * @author   Rouven Alexander Rieker <rouven.rieker@itabs.de>
  */
 class Itabs_Debit_Model_Xml_XmlCreator
 {
@@ -98,7 +95,7 @@ class Itabs_Debit_Model_Xml_XmlCreator
             $paymentInfo = $dom->createElement('PmtInf');
             $content->appendChild($paymentInfo);
 
-            $paymentInfo->appendChild($dom->createElement('PmtInfId', 'PMT-ID'.$paymentIterator.'-'.date('YmdHis', $creationTime)));
+            $paymentInfo->appendChild($dom->createElement('PmtInfId', 'PMT-ID' . $paymentIterator . '-' . date('YmdHis', $creationTime)));
             $paymentInfo->appendChild($dom->createElement('PmtMtd', 'DD'));
             $paymentInfo->appendChild($dom->createElement('BtchBookg', 'true'));
             $paymentInfo->appendChild($dom->createElement('NbOfTxs', count($payment->getBookings())));
@@ -296,6 +293,7 @@ class Itabs_Debit_Model_Xml_XmlCreator
     public function addPayment(Itabs_Debit_Model_Xml_Payment $payment)
     {
         $this->payments[] = $payment;
+
         return $this;
     }
 
@@ -318,6 +316,7 @@ class Itabs_Debit_Model_Xml_XmlCreator
     public function setCreditorName($creditorName)
     {
         $this->creditorName = $creditorName;
+
         return $this;
     }
 
@@ -340,6 +339,7 @@ class Itabs_Debit_Model_Xml_XmlCreator
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+
         return $this;
     }
 

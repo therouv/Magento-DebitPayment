@@ -16,18 +16,15 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.7
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * SEPA XML Export Model
- *
- * @category Itabs
- * @package  Itabs_Debit
- * @author   Rouven Alexander Rieker <rouven.rieker@itabs.de>
  */
 class Itabs_Debit_Model_Export_Xml
     extends Itabs_Debit_Model_Export_Abstract
@@ -61,6 +58,7 @@ class Itabs_Debit_Model_Export_Xml
         $zipRes = $zip->open($filePath, ZipArchive::CREATE);
         if (true !== $zipRes) {
             Mage::getSingleton('adminhtml/session')->addError('An error occured.');
+
             return false;
         }
 
@@ -68,14 +66,14 @@ class Itabs_Debit_Model_Export_Xml
         foreach ($stores as $store) {
             /* @var $store Mage_Core_Model_Store */
 
-            $creditorId    = Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number', $store->getId());
-            $creditorName  = $this->_getDebitHelper()->normalizeString(Mage::getStoreConfig('debitpayment/bankaccount/account_owner', $store->getId()));
-            $creditorIban  = $this->_getDebitHelper()->normalizeString(Mage::getStoreConfig('debitpayment/bankaccount/account_iban', $store->getId()));
+            $creditorId = Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number', $store->getId());
+            $creditorName = $this->_getDebitHelper()->normalizeString(Mage::getStoreConfig('debitpayment/bankaccount/account_owner', $store->getId()));
+            $creditorIban = $this->_getDebitHelper()->normalizeString(Mage::getStoreConfig('debitpayment/bankaccount/account_iban', $store->getId()));
             $creditorSwift = $this->_getDebitHelper()->normalizeString(Mage::getStoreConfig('debitpayment/bankaccount/swift_bic', $store->getId()));
 
             $xml = new Itabs_Debit_Model_Xml_XmlCreator($creditorName);
 
-            /* @var $payment Itabs_Debit_Model_Xml_Payment*/
+            /* @var $payment Itabs_Debit_Model_Xml_Payment */
             $payment = new Itabs_Debit_Model_Xml_Payment($creditorId, $creditorName, $creditorIban, $creditorSwift);
             $payment->setOffset($this->_getDebitHelper()->getOffset());
             $payment->setOneTimePayment(true);
@@ -105,13 +103,13 @@ class Itabs_Debit_Model_Export_Xml
 
                     $bookingText = $this->_getDebitHelper()->getBookingText(
                         $orderModel->getStoreId(),
-                        Mage::helper('debit')->__('Order: %s',$order->getData('increment_id'))  . ' ' . Mage::helper('debit')->__('Invoice(s): %s', implode(',', $invoiceIncrementIds))
+                        Mage::helper('debit')->__('Order: %s', $order->getData('increment_id')) . ' ' . Mage::helper('debit')->__('Invoice(s): %s', implode(',', $invoiceIncrementIds))
                     );
 
                 } else {
                     $bookingText = $this->_getDebitHelper()->getBookingText(
                         $orderModel->getStoreId(),
-                        Mage::helper('debit')->__('Order: %s',$order->getData('increment_id'))
+                        Mage::helper('debit')->__('Order: %s', $order->getData('increment_id'))
                     );
                 }
 
@@ -164,7 +162,7 @@ class Itabs_Debit_Model_Export_Xml
                 return false;
             }
 
-            $zip->addFromString($fileName.'-'.$store->getId().'.xml', $sepaXml);
+            $zip->addFromString($fileName . '-' . $store->getId() . '.xml', $sepaXml);
         }
 
         $zip->close();
@@ -172,7 +170,7 @@ class Itabs_Debit_Model_Export_Xml
         unlink($filePath);
 
         $response = array(
-            'file_name' => $fileName . '.zip',
+            'file_name'    => $fileName . '.zip',
             'file_content' => $fileContent
         );
 

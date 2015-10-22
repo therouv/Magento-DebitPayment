@@ -19,19 +19,20 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.5
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Bankdata Controller
  */
-class Itabs_Debit_Adminhtml_BankdataController
+class Itabs_Debit_Adminhtml_Debit_BankdataController
     extends Mage_Adminhtml_Controller_Action
 {
     /**
      * Init the layout
      *
-     * @return Itabs_Debit_Adminhtml_BankdataController
+     * @return Itabs_Debit_Adminhtml_Debit_BankdataController
      */
     protected function _initLayout()
     {
@@ -70,8 +71,8 @@ class Itabs_Debit_Adminhtml_BankdataController
      */
     public function gridAction()
     {
-        $block = $this->getLayout()->createBlock('debit/adminhtml_bankdata_grid')->toHtml();
-        $this->getResponse()->setBody($block);
+        $block = $this->getLayout()->createBlock('debit/adminhtml_bankdata_grid');
+        $this->getResponse()->setBody($block->toHtml());
     }
 
     /**
@@ -96,6 +97,7 @@ class Itabs_Debit_Adminhtml_BankdataController
             ) {
                 $this->_getSession()->addError($this->_getDebitHelper()->__('Please fill in all required fields.'));
                 $this->_redirect('*/*/upload');
+
                 return;
             }
 
@@ -132,8 +134,8 @@ class Itabs_Debit_Adminhtml_BankdataController
                     // Add bank to array
                     $import[$swiftCode] = array(
                         'routing_number' => trim($line[0]),
-                        'swift_code' => $swiftCode,
-                        'bank_name' => trim($line[1])
+                        'swift_code'     => $swiftCode,
+                        'bank_name'      => trim($line[1])
                     );
                 }
                 $file->streamClose();
@@ -144,11 +146,12 @@ class Itabs_Debit_Adminhtml_BankdataController
                 $model = Mage::getModel('debit/import_bankdata');
                 $model->importData($importData);
 
-                unlink($path.$filename);
+                unlink($path . $filename);
                 $this->_getSession()->addSuccess($this->_getDebitHelper()->__('Upload successful!'));
             } catch (Exception $e) {
                 $this->_getSession()->addError($e->getMessage());
                 $this->_redirect('*/*/upload');
+
                 return;
             }
         }
@@ -164,5 +167,15 @@ class Itabs_Debit_Adminhtml_BankdataController
     protected function _getDebitHelper()
     {
         return Mage::helper('debit/adminhtml');
+    }
+
+    /**
+     * Check if controller is allowed
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('sales/debitpayment');
     }
 }

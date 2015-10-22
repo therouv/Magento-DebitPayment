@@ -19,7 +19,7 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.5
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
@@ -34,44 +34,44 @@ $eid = $read->fetchRow(
 $customerTypeId = $eid['entity_type_id'];
 
 $attrDate = array(
-    'type' => 'datetime',
-    'input' => 'label',
-    'label' => 'Account update date',
-    'global' => 1,
+    'type'     => 'datetime',
+    'input'    => 'label',
+    'label'    => 'Account update date',
+    'global'   => 1,
     'required' => 0,
-    'default' => '',
+    'default'  => '',
     'position' => '100'
 );
 
 $attrName = array(
-    'type' => 'varchar',
-    'input' => 'text',
-    'label' => 'Account Name',
-    'global' => 1,
+    'type'     => 'varchar',
+    'input'    => 'text',
+    'label'    => 'Account Name',
+    'global'   => 1,
     'required' => 0,
-    'default' => '',
+    'default'  => '',
     'position' => '100'
 );
 
 $attrNumber = array(
-    'type' => 'varchar',
-    'input' => 'text',
-    'label' => 'Account number',
-    'backend' => 'debit/entity_customer_attribute_backend_encrypted',
-    'global' => 1,
+    'type'     => 'varchar',
+    'input'    => 'text',
+    'label'    => 'Account number',
+    'backend'  => 'debit/entity_customer_attribute_backend_encrypted',
+    'global'   => 1,
     'required' => 0,
-    'default' => '',
+    'default'  => '',
     'position' => '100'
 );
 
 $attrBlz = array(
-    'type' => 'varchar',
-    'input' => 'text',
-    'label' => 'Bank code',
-    'backend' => 'debit/entity_customer_attribute_backend_encrypted',
-    'global' => 1,
+    'type'     => 'varchar',
+    'input'    => 'text',
+    'label'    => 'Bank code',
+    'backend'  => 'debit/entity_customer_attribute_backend_encrypted',
+    'global'   => 1,
     'required' => 0,
-    'default' => '',
+    'default'  => '',
     'position' => '100'
 );
 

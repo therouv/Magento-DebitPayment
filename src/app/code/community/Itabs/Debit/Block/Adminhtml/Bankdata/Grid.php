@@ -19,9 +19,10 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.5
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Bank Data Grid
  */
@@ -60,52 +61,37 @@ class Itabs_Debit_Block_Adminhtml_Bankdata_Grid extends Mage_Adminhtml_Block_Wid
      */
     protected function _prepareColumns()
     {
-        $this->addColumn(
-            'id',
-            array(
-                'header' => $this->_getHelper()->__('ID'),
-                'width'  => '60px',
-                'index'  => 'id'
-            )
-        );
+        $this->addColumn('id', array(
+            'header' => $this->_getHelper()->__('ID'),
+            'width'  => '60px',
+            'index'  => 'id'
+        ));
 
         $options = $this->helper('debit/adminhtml')->getCountryOptionsHash();
-        $this->addColumn(
-            'country_id',
-            array(
-                'header' => $this->_getHelper()->__('Country'),
-                'width'  => '150px',
-                'index'  => 'country_id',
-                'type' => 'options',
-                'options' => $options
-            )
-        );
+        $this->addColumn('country_id', array(
+            'header'  => $this->_getHelper()->__('Country'),
+            'width'   => '150px',
+            'index'   => 'country_id',
+            'type'    => 'options',
+            'options' => $options
+        ));
 
-        $this->addColumn(
-            'routing_number',
-            array(
-                'header' => $this->_getHelper()->__('Routing Number'),
-                'width'  => '150px',
-                'index'  => 'routing_number'
-            )
-        );
+        $this->addColumn('routing_number', array(
+            'header' => $this->_getHelper()->__('Routing Number'),
+            'width'  => '150px',
+            'index'  => 'routing_number'
+        ));
 
-        $this->addColumn(
-            'swift_code',
-            array(
-                'header' => $this->_getHelper()->__('BIC/SWIFT-Code'),
-                'width'  => '150px',
-                'index'  => 'swift_code'
-            )
-        );
+        $this->addColumn('swift_code', array(
+            'header' => $this->_getHelper()->__('BIC/SWIFT-Code'),
+            'width'  => '150px',
+            'index'  => 'swift_code'
+        ));
 
-        $this->addColumn(
-            'bank_name',
-            array(
-                'header' => $this->_getHelper()->__('Bank Name'),
-                'index'  => 'bank_name'
-            )
-        );
+        $this->addColumn('bank_name', array(
+            'header' => $this->_getHelper()->__('Bank Name'),
+            'index'  => 'bank_name'
+        ));
 
         return parent::_prepareColumns();
     }
@@ -128,7 +114,7 @@ class Itabs_Debit_Block_Adminhtml_Bankdata_Grid extends Mage_Adminhtml_Block_Wid
      */
     public function getGridUrl()
     {
-        return $this->getUrl('debit/bankdata/grid', array('_current' => true));
+        return $this->getUrl('*/*/grid', array('_current' => true));
     }
 
     /**

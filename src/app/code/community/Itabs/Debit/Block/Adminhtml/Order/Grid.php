@@ -19,9 +19,10 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.5
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Order Export Grid
  */
@@ -37,6 +38,7 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
         $this->setDefaultSort('increment_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
+        $this->setUseAjax(true);
     }
 
     /**
@@ -97,9 +99,9 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
         $this->addColumn(
             'debit_type',
             array(
-                'header' => $this->_getHelper()->__('Debit Type'),
-                'index'  => 'debit_type',
-                'type'   => 'options',
+                'header'  => $this->_getHelper()->__('Debit Type'),
+                'index'   => 'debit_type',
+                'type'    => 'options',
                 'options' => $types,
                 'width'   => '100px',
             )
@@ -138,8 +140,8 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
         $this->getMassactionBlock()->addItem(
             'status',
             array(
-                'label' => Mage::helper('catalog')->__('Change status'),
-                'url'   => $this->getUrl('*/*/massStatus', array('_current'=>true)),
+                'label'      => Mage::helper('catalog')->__('Change status'),
+                'url'        => $this->getUrl('*/*/massStatus', array('_current' => true)),
                 'additional' => array(
                     'visibility' => array(
                         'name'   => 'status',
@@ -164,6 +166,16 @@ class Itabs_Debit_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget
     public function getRowUrl($row)
     {
         return false;
+    }
+
+    /**
+     * Retrieve the grid url
+     *
+     * @return string
+     */
+    public function getGridUrl()
+    {
+        return $this->getUrl('*/*/grid', array('_current' => true));
     }
 
     /**
