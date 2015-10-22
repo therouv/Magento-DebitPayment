@@ -79,14 +79,6 @@ class Itabs_Debit_Test_Block_Adminhtml_Bankdata_Grid extends EcomDev_PHPUnit_Tes
     /**
      * @test
      */
-    public function testGetGridUrl()
-    {
-        $this->assertContains('debit/bankdata/grid', $this->_block->getGridUrl());
-    }
-
-    /**
-     * @test
-     */
     public function testGetHelper()
     {
         $this->assertInstanceOf('Itabs_Debit_Helper_Adminhtml', EcomDev_Utils_Reflection::invokeRestrictedMethod($this->_block, '_getHelper'));
