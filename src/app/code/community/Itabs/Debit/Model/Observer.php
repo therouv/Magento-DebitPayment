@@ -89,6 +89,12 @@ class Itabs_Debit_Model_Observer
                 ->setData('debit_payment_account_swift', $methodInstance->getAccountSwift())
                 ->setData('debit_payment_account_iban', $methodInstance->getAccountIban())
                 ->save();
+            $customer->unsetData('debit_payment_acount_update');
+            $customer->unsetData('debit_payment_acount_name');
+            $customer->unsetData('debit_payment_acount_number');
+            $customer->unsetData('debit_payment_acount_blz');
+            $customer->unsetData('debit_payment_account_swift');
+            $customer->unsetData('debit_payment_account_iban');
         }
     }
 
