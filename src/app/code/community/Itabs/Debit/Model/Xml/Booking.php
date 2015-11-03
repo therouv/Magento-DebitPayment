@@ -16,18 +16,15 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.7
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Class Itabs_Debit_Model_Xml_Booking
- *
- * @category Itabs
- * @package  Itabs_Debit
- * @author   Rouven Alexander Rieker <rouven.rieker@itabs.de>
  */
 class Itabs_Debit_Model_Xml_Booking
 {
@@ -95,6 +92,7 @@ class Itabs_Debit_Model_Xml_Booking
     public function setAccountOwner($accountOwner)
     {
         $this->accountOwner = $this->_helper()->removeAccents($accountOwner);
+
         return $this;
     }
 
@@ -117,6 +115,7 @@ class Itabs_Debit_Model_Xml_Booking
     public function setAmount($amount)
     {
         $this->amount = $amount;
+
         return $this;
     }
 
@@ -139,6 +138,7 @@ class Itabs_Debit_Model_Xml_Booking
     public function setBookingText($bookingText)
     {
         $this->bookingText = $this->_helper()->removeAccents($bookingText);
+
         return $this;
     }
 
@@ -161,6 +161,7 @@ class Itabs_Debit_Model_Xml_Booking
     public function setEndToEnd($endToEnd)
     {
         $this->endToEnd = $this->_helper()->removeAccents($endToEnd);
+
         return $this;
     }
 
@@ -186,6 +187,7 @@ class Itabs_Debit_Model_Xml_Booking
         $iban = str_replace(' ', '', $iban);
 
         $this->iban = $iban;
+
         return $this;
     }
 
@@ -208,6 +210,7 @@ class Itabs_Debit_Model_Xml_Booking
     public function setMandateChange($mandateChange)
     {
         $this->mandateChange = $mandateChange;
+
         return $this;
     }
 
@@ -230,6 +233,7 @@ class Itabs_Debit_Model_Xml_Booking
     public function setMandateDate($mandateDate)
     {
         $this->mandateDate = $mandateDate;
+
         return $this;
     }
 
@@ -252,6 +256,7 @@ class Itabs_Debit_Model_Xml_Booking
     public function setMandateId($mandateId)
     {
         $this->mandateId = $mandateId;
+
         return $this;
     }
 
@@ -274,6 +279,7 @@ class Itabs_Debit_Model_Xml_Booking
     public function setSwift($swift)
     {
         $this->swift = $swift;
+
         return $this;
     }
 

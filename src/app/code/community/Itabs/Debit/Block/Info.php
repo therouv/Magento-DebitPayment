@@ -19,9 +19,10 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.5
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Debit Info Block
  */
@@ -94,7 +95,7 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
     {
         $method = $this->getMethod()->getCode();
 
-        return Mage::getStoreConfigFlag('payment/'.$method.'/sendmail');
+        return Mage::getStoreConfigFlag('payment/' . $method . '/sendmail');
     }
 
     /**
@@ -113,13 +114,13 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
      * @param  bool|string $cryptField Crypt field name to check in system configuration
      * @return array Bank data
      */
-    public function getDebitData($cryptField=false)
+    public function getDebitData($cryptField = false)
     {
         $debitType = $this->getDebitType();
 
         /* @var $payment Itabs_Debit_Model_Debit */
         $payment = $this->getMethod();
-        $method  = $this->getMethod()->getCode();
+        $method = $this->getMethod()->getCode();
         $data = array(
             'account_name'   => $payment->getAccountName(),
             'account_number' => $payment->getAccountNumber(),
@@ -131,22 +132,22 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
         );
 
         // Crypt data if configured
-        if ($cryptField && Mage::getStoreConfigFlag('payment/'.$method.'/'.$cryptField)) {
+        if ($cryptField && Mage::getStoreConfigFlag('payment/' . $method . '/' . $cryptField)) {
             $data['bank_name'] = '';
 
             if ($debitType == 'bank') {
-                $number  = $payment->maskBankData($payment->getAccountNumber());
+                $number = $payment->maskBankData($payment->getAccountNumber());
                 $routing = $payment->maskBankData($payment->getAccountBLZ());
                 $data['account_number'] = $number;
-                $data['account_blz']    = $routing;
+                $data['account_blz'] = $routing;
             }
 
             // mask sepa data
             if ($debitType == 'sepa') {
                 $swift = $payment->maskSepaData($payment->getAccountSwift());
-                $iban  = $payment->maskSepaData($payment->getAccountIban());
+                $iban = $payment->maskSepaData($payment->getAccountIban());
                 $data['account_swift'] = $swift;
-                $data['account_iban']  = $iban;
+                $data['account_iban'] = $iban;
             }
         }
 
@@ -190,15 +191,15 @@ class Itabs_Debit_Block_Info extends Mage_Payment_Block_Info
             return false;
         }
 
-        $message    = Mage::getStoreConfig('payment/debit/print_debit_message_text', $storeId);
+        $message = Mage::getStoreConfig('payment/debit/print_debit_message_text', $storeId);
         $offsetDays = Mage::helper('debit')->getOffset($storeId);
 
         /* @var $info Mage_Sales_Model_Order_Payment */
         $info = $this->getInfo();
 
         // Get values for placeholders
-        $amount              = $_coreHelper->formatCurrency($info->getOrder()->getGrandTotal(), false);
-        $mandate             = $order->getIncrementId();
+        $amount = $_coreHelper->formatCurrency($info->getOrder()->getGrandTotal(), false);
+        $mandate = $order->getIncrementId();
         $creditorIdentNumber = Mage::getStoreConfig('debitpayment/sepa/creditor_identification_number', $storeId);
 
         $debitDayObj = $order->getCreatedAtStoreDate();

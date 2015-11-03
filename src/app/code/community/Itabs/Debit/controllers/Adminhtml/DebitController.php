@@ -19,13 +19,14 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.5
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Export Order Controller
  */
-class Itabs_Debit_Adminhtml_OrderController
+class Itabs_Debit_Adminhtml_DebitController
     extends Mage_Adminhtml_Controller_Action
 {
     /**
@@ -74,12 +75,12 @@ class Itabs_Debit_Adminhtml_OrderController
 
         $collection->getSelect()->joinLeft(
             $orderTable,
-            $orderTable.'.entity_id = main_table.entity_id',
+            $orderTable . '.entity_id = main_table.entity_id',
             array('customer_id')
         );
         $collection->getSelect()->joinLeft(
             $orderPaymentTable,
-            $orderPaymentTable.'.parent_id = main_table.entity_id',
+            $orderPaymentTable . '.parent_id = main_table.entity_id',
             array('method', 'debit_type')
         );
         $collection->getSelect()->where('method = ?', 'debit');
@@ -114,6 +115,7 @@ class Itabs_Debit_Adminhtml_OrderController
                 $this->_getDebitHelper()->__('No orders available for sync.')
             );
         }
+
         $this->_redirect('*/*');
     }
 
@@ -122,8 +124,8 @@ class Itabs_Debit_Adminhtml_OrderController
      */
     public function massStatusAction()
     {
-        $orderIds = (array) $this->getRequest()->getParam('orders');
-        $status   = (int) $this->getRequest()->getParam('status');
+        $orderIds = (array)$this->getRequest()->getParam('orders');
+        $status = (int)$this->getRequest()->getParam('status');
 
         try {
             foreach ($orderIds as $orderId) {
@@ -189,16 +191,23 @@ class Itabs_Debit_Adminhtml_OrderController
      */
     protected function _export($type)
     {
-        $response = Mage::getModel('debit/export_'.$type)->export();
+        $response = Mage::getModel('debit/export_' . $type)->export();
         if (!$response) {
             $this->_redirect('*/*');
+
             return;
         }
 
-        return $this->_prepareDownloadResponse(
-            $response['file_name'],
-            $response['file_content']
-        );
+        return $this->_prepareDownloadResponse($response['file_name'], $response['file_content']);
+    }
+
+    /**
+     * Retrieve the grid html for ajax calls
+     */
+    public function gridAction()
+    {
+        $block = $this->getLayout()->createBlock('debit/adminhtml_order_grid');
+        $this->getResponse()->setBody($block->toHtml());
     }
 
     /**
@@ -209,5 +218,15 @@ class Itabs_Debit_Adminhtml_OrderController
     protected function _getDebitHelper()
     {
         return Mage::helper('debit/adminhtml');
+    }
+
+    /**
+     * Check if controller is allowed
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('system/convert/debitpayment');
     }
 }

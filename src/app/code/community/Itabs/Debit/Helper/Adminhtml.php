@@ -19,15 +19,16 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.5
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Helper class for helper functionalities especially in the adminhtml area..
  */
 class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
 {
-    const XML_PATH_BANKACCOUNT_ACCOUNTOWNER  = 'debitpayment/bankaccount/account_owner';
+    const XML_PATH_BANKACCOUNT_ACCOUNTOWNER = 'debitpayment/bankaccount/account_owner';
     const XML_PATH_BANKACCOUNT_ROUTINGNUMBER = 'debitpayment/bankaccount/routing_number';
     const XML_PATH_BANKACCOUNT_ACCOUNTNUMBER = 'debitpayment/bankaccount/account_number';
 
@@ -115,6 +116,7 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
             Mage::getStoreConfig('debitpayment/sepa/booking_text', $storeId),
             $incrementId
         );
+
         return implode(' ', array_filter($bookingText));
     }
 
@@ -142,9 +144,9 @@ class Itabs_Debit_Helper_Adminhtml extends Itabs_Debit_Helper_Data
      */
     public function getCountryOptions()
     {
-        $options  = false;
+        $options = false;
         $useCache = Mage::app()->useCache('config');
-        $cacheId  = 'DIRECTORY_COUNTRY_SELECT_STORE_' . Mage::app()->getStore()->getCode();
+        $cacheId = 'DIRECTORY_COUNTRY_SELECT_STORE_' . Mage::app()->getStore()->getCode();
         $cacheTags = array('config');
 
         if ($useCache) {

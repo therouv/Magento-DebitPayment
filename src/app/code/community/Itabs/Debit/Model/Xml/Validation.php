@@ -16,18 +16,15 @@
  *
  * @category  Itabs
  * @package   Itabs_Debit
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @version   1.0.7
+ * @version   1.1.6
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
+
 /**
  * Class Itabs_Debit_Model_Xml_Validation
- *
- * @category Itabs
- * @package  Itabs_Debit
- * @author   Rouven Alexander Rieker <rouven.rieker@itabs.de>
  */
 class Itabs_Debit_Model_Xml_Validation
 {
@@ -56,6 +53,7 @@ class Itabs_Debit_Model_Xml_Validation
         // Check if a valid xml is given.
         if (null === $this->xml) {
             $this->addError('No valid xml given.');
+
             return false;
         }
 
@@ -64,6 +62,7 @@ class Itabs_Debit_Model_Xml_Validation
         $filePath = $dataDir . $this->getSchema();
         if (!file_exists($filePath)) {
             $this->addError('XSD for validation does not exist.');
+
             return false;
         }
 
@@ -75,6 +74,7 @@ class Itabs_Debit_Model_Xml_Validation
         $result = $dom->loadXML($this->getXml());
         if ($result === false) {
             $this->addError('Document is not well formed.');
+
             return false;
         }
 
@@ -87,16 +87,17 @@ class Itabs_Debit_Model_Xml_Validation
                 /* @var $error LibXMLError */
 
                 $documentErrors .= "---\n" . sprintf("file: %s, line: %s, column: %s, level: %s, code: %s\nError: %s",
-                    basename($error->file),
-                    $error->line,
-                    $error->column,
-                    $error->level,
-                    $error->code,
-                    $error->message
-                );
+                        basename($error->file),
+                        $error->line,
+                        $error->column,
+                        $error->level,
+                        $error->code,
+                        $error->message
+                    );
             }
 
             $this->addError($documentErrors);
+
             return false;
         }
 
@@ -112,6 +113,7 @@ class Itabs_Debit_Model_Xml_Validation
     public function setXml($xml)
     {
         $this->xml = $xml;
+
         return $this;
     }
 
@@ -154,6 +156,7 @@ class Itabs_Debit_Model_Xml_Validation
     public function setSchema($schema)
     {
         $this->schema = $schema;
+
         return $this;
     }
 
