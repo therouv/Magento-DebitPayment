@@ -19,15 +19,30 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.6
+ * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Setup script
  */
 
-/* @var $installer Mage_Eav_Model_Entity_Setup */
+/* @var $installer Mage_Core_Model_Resource_Setup */
 $installer = $this;
 $installer->startSetup();
+
+/* @var Mage_Core_Model_App_Emulation $emulation */
+$emulation = Mage::getModel('core/app_emulation');
+$oldStore = $emulation->startEnvironmentEmulation(Mage_Core_Model_App::ADMIN_STORE_ID);
+
+/* @var $block Mage_Cms_Model_Block */
+$block = Mage::getModel('cms/block')->setStoreId(0)->load('debit_mandate_form');
+$block->setStores(array(0));
+$block->setIdentifier('debit_mandate_form');
+$block->setTitle('Debit Mandate Forme');
+$block->setContent('Statischer Block "debit_mandate_form"');
+$block->setActive(true);
+$block->save();
+
+$emulation->stopEnvironmentEmulation($oldStore);
 
 $installer->endSetup();

@@ -19,15 +19,19 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2008-2014 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.6
+ * @version   1.1.5
  * @link      http://www.magentocommerce.com/magento-connect/debitpayment.html
  */
 /**
  * Setup script
  */
 
-/* @var $installer Mage_Eav_Model_Entity_Setup */
+/* @var $installer Mage_Core_Model_Resource_Setup */
 $installer = $this;
 $installer->startSetup();
+
+/* @var $model Itabs_Debit_Model_Import_Bankdata */
+$model = Mage::getModel('debit/import_bankdata');
+$model->run();
 
 $installer->endSetup();
