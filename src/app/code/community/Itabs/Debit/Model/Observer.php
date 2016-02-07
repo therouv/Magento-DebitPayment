@@ -88,6 +88,7 @@ class Itabs_Debit_Model_Observer
                 ->setData('debit_payment_acount_blz', $methodInstance->getAccountBLZ())
                 ->setData('debit_payment_account_swift', $methodInstance->getAccountSwift())
                 ->setData('debit_payment_account_iban', $methodInstance->getAccountIban())
+                ->setData('debit_payment_account_bankname', $methodInstance->getAccountBankname())
                 ->save();
         }
     }

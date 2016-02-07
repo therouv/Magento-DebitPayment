@@ -92,7 +92,7 @@ class Itabs_Debit_AccountController extends Mage_Core_Controller_Front_Action
             $customer->setData('debit_payment_account_iban', $accountIban);
         }
         if ($bankName = $this->getRequest()->getPost('bank_name')) {
-            $customer->setdata('debit_payment_account_bankname', $bankName);
+            $customer->setData('debit_payment_account_bankname', $bankName);
         }
 
         try {
